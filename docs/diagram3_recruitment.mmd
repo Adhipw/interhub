@@ -1,0 +1,40 @@
+sequenceDiagram
+    autonumber
+    actor Candidate
+    actor HR
+    participant Frontend as Vue/Inertia App
+    participant Backend as Laravel API
+    participant Storage as Cloudflare R2 / MinIO
+    participant DB as PostgreSQL
+    participant Reverb as Laravel Reverb
+    
+    %% Application Submission Phase
+    Candidate->>Frontend: Browse Vacancies & Click Apply
+    Candidate->>Frontend: Upload CV & Portfolio
+    Frontend->>Backend: POST /api/v1/applications (Files attached)
+    Backend->>Storage: Store Document Files
+    Storage-->>Backend: Return Secure File URLs
+    Backend->>DB: Save Application (Status: 'Screening')
+    Backend->>Reverb: Broadcast 'NewApplication' Event
+    Backend-->>Frontend: Return Success Response
+    Reverb-->>HR: Push Real-time Notification
+    Frontend-->>Candidate: Redirect to 'My Applications' Page
+    
+    %% HR Review Process
+    HR->>Frontend: View Applicants & Open CV
+    Frontend->>Storage: Fetch File from Storage
+    Storage-->>Frontend: Serve Document
+    HR->>Frontend: Change Status to 'Interview'
+    Frontend->>Backend: PATCH /api/v1/applications/{id}/status
+    Backend->>DB: Update Application Status
+    Backend->>Reverb: Broadcast 'ApplicationStatusUpdated'
+    Backend-->>Frontend: Acknowledge Update
+    Reverb-->>Candidate: Push Real-time Notification
+    
+    %% Final Decision
+    HR->>Frontend: Approve & Assign Mentor
+    Frontend->>Backend: POST /api/v1/applications/{id}/approve
+    Backend->>DB: Update Status to 'Accepted' & Link Mentor
+    Backend->>Reverb: Broadcast 'ApplicationAccepted' Event
+    Backend-->>Frontend: Success Confirmation
+    Reverb-->>Candidate: Push Real-time "Accepted" Notification

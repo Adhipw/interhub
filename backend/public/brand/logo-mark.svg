@@ -1,0 +1,17 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- InternHub High-Fidelity Brand Logo -->
+
+  <!-- Left Column (Vertical Arrow) -->
+  <path d="M28 48 L42 34 L56 48 V92 H42 V48 L28 48 Z" fill="#0a2540" />
+  <path d="M42 48 V92 H56 V48 L42 48 Z" fill="#64748b" />
+  <path d="M25 58 L42 42 L59 58 L42 50 L25 58 Z" fill="#0a2540" />
+
+  <!-- Middle Structural Column -->
+  <path d="M62 36 V92 H76 V36 Z" fill="#64748b" />
+
+  <!-- Main Growth Arrow (Diagonal) -->
+  <path d="M62 92 C62 58 88 48 118 36 L110 24 L128 24 L128 42 L118 32" fill="#0a2540" />
+
+  <!-- Bottom Right Structural Curve -->
+  <path d="M92 92 V68 C92 60 102 56 118 56" stroke="#0a2540" stroke-width="14" fill="none" stroke-linecap="round" />
+</svg>

@@ -1,0 +1,108 @@
+<script setup lang="ts">
+import logger from '@/Lib/logger';
+import DashboardLayout from '@/Layouts/DashboardLayout.vue';
+import ActivityTimeline from '@/Components/Audits/ActivityTimeline.vue';
+import ActivityFilters from '@/Components/Audits/ActivityFilters.vue';
+import Pagination from '@/Components/Pagination.vue';
+import Card from '@/Components/Card.vue';
+import EmptyState from '@/Components/EmptyState.vue';
+import { ShieldCheck, Activity, Terminal, Loader2 } from 'lucide-vue-next';
+import { ref, onMounted } from 'vue';
+import api from '@/Services/api';
+import { useLangStore } from '@/Stores/lang';
+
+const langStore = useLangStore();
+const t = (key: string) => langStore.t(key);
+
+const logs = ref({
+    data: [] as any[],
+    links: [] as any[]
+});
+const loading = ref(true);
+const filters = ref<any>({});
+
+const fetchLogs = async (page = 1, extraFilters = {}) => {
+    loading.value = true;
+    try {
+        const response = await api.get('/admin/audit-logs', {
+            params: {
+                page,
+                ...filters.value,
+                ...extraFilters
+            }
+        });
+        logs.value = response.data.data;
+    } catch (error) {
+        logger.error('Failed to fetch activity logs:', error);
+    } finally {
+        loading.value = false;
+    }
+};
+
+const handleFilter = (newFilters: any) => {
+    filters.value = newFilters;
+    fetchLogs(1);
+};
+
+const handleReset = () => {
+    filters.value = {};
+    fetchLogs(1);
+};
+
+onMounted(() => {
+    fetchLogs();
+});
+</script>
+
+<template>
+    <DashboardLayout>
+        <template #header>
+            <div class="flex items-center justify-between">
+                <div>
+                    <h2 class="text-3xl font-black text-slate-900 dark:text-white tracking-tight">{{ t('admin.audit.title') }}</h2>
+                    <div class="flex items-center gap-3 mt-2">
+                        <span class="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest text-slate-400">
+                            <Activity class="w-3 h-3 text-primary-500" /> {{ t('admin.audit.operational_history') }}
+                        </span>
+                        <span class="w-1 h-1 rounded-full bg-slate-300"></span>
+                        <span class="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest text-slate-400">
+                            <ShieldCheck class="w-3 h-3 text-emerald-500" /> {{ t('admin.audit.compliance_ready') }}
+                        </span>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="flex items-center gap-2 bg-slate-900 text-white px-4 py-2 rounded-xl text-xs font-bold shadow-xl">
+                        <Terminal class="w-4 h-4 text-primary-400" />
+                        <span>{{ t('admin.audit.live_stream') }}</span>
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse ml-2"></span>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <div class="py-6 max-w-5xl mx-auto">
+            <ActivityFilters :filters="filters" @filter="handleFilter" @reset="handleReset" />
+
+            <div v-if="loading" class="flex justify-center py-20">
+                <Loader2 class="w-12 h-12 text-primary-600 animate-spin" />
+            </div>
+
+            <Card v-else class="mt-6 p-8 overflow-hidden">
+                <div v-if="logs.data.length > 0">
+                    <ActivityTimeline :activities="logs.data" />
+                    
+                    <div class="mt-12 flex justify-center border-t border-slate-100 dark:border-slate-800 pt-8">
+                        <Pagination :links="logs.links" @page-changed="fetchLogs" />
+                    </div>
+                </div>
+
+                <EmptyState 
+                    v-else
+                    type="search"
+                    :title="t('admin.audit.no_logs_title')"
+                    :description="t('admin.audit.no_logs_desc')"
+                />
+            </Card>
+        </div>
+    </DashboardLayout>
+</template>

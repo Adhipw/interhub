@@ -1,0 +1,14 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+
+parameters:
+    paths:
+        - app/
+    
+    # Level 5 is moderate analysis
+    level: 5
+
+    ignoreErrors:
+        - '#Undefined variable: \$this#'
+    
+    # checkMissingIterableValueType: false

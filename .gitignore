@@ -1,0 +1,55 @@
+# Environment and local secrets
+.env
+.env.*
+!.env.example
+backend/.env
+backend/.env.*
+!backend/.env.example
+auth.json
+
+# Dependencies
+vendor/
+backend/vendor/
+frontend/node_modules/
+scratch/node_modules/
+node_modules/
+
+# Build output and runtime files
+backend/public/build/
+backend/public/hot
+backend/public/storage
+frontend/dist/
+frontend/test-results/
+frontend/playwright-report/
+storage/
+backend/storage/*.key
+backend/storage/logs/
+backend/storage/framework/cache/
+backend/storage/framework/sessions/
+backend/storage/framework/testing/
+backend/storage/framework/views/
+
+# Local scratch, audit output, and unused nested scaffolds
+scratch/
+backend/scratch/
+frontend/internhub/
+
+# Logs, caches, and editor files
+*.log
+.DS_Store
+Thumbs.db
+.phpunit.result.cache
+.phpunit.cache/
+.phpactor.json
+.idea/
+.vscode/
+.zed/
+.cursor/
+.codex/
+
+# Local debug helpers and generated status dumps
+git_status.txt
+create_audit_user.php
+backend/debug_users.php
+backend/update_cv.php
+backend/test.php

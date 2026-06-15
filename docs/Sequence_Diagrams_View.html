@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InternHub 2026 - Sequence Diagrams</title>
+    <style>
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            padding: 40px; 
+            background-color: #f4f7f6; 
+            color: #333;
+        }
+        h1 { text-align: center; margin-bottom: 40px; color: #1f2937; }
+        .diagram-container { 
+            background: #fff; 
+            border-radius: 12px; 
+            padding: 30px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+            margin-bottom: 40px; 
+            overflow-x: auto;
+        }
+        h2 { color: #4b5563; border-bottom: 2px solid #e5e7eb; padding-bottom: 10px; }
+        .mermaid { display: flex; justify-content: center; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>InternHub 2026 - Sequence Diagrams</h1>
+    
+    <div class="diagram-container">
+        <h2>1. Recruitment & Document Management Workflow (Core)</h2>
+        <p>Alur ketika mahasiswa mendaftar magang, mengunggah CV, dan proses review oleh HR secara real-time.</p>
+        <div class="mermaid">
+sequenceDiagram
+    autonumber
+    actor Candidate
+    actor HR
+    participant Frontend as Vue/Inertia App
+    participant Backend as Laravel API
+    participant Storage as Cloudflare R2 / MinIO
+    participant DB as PostgreSQL
+    participant Reverb as Laravel Reverb
+    
+    %% Application Submission Phase
+    Candidate->>Frontend: Browse Vacancies & Click Apply
+    Candidate->>Frontend: Upload CV & Portfolio
+    Frontend->>Backend: POST /api/v1/applications (Files attached)
+    Backend->>Storage: Store Document Files
+    Storage-->>Backend: Return Secure File URLs
+    Backend->>DB: Save Application (Status: 'Screening')
+    Backend->>Reverb: Broadcast 'NewApplication' Event
+    Backend-->>Frontend: Return Success Response
+    Reverb-->>HR: Push Real-time Notification
+    Frontend-->>Candidate: Redirect to 'My Applications' Page
+    
+    %% HR Review Process
+    HR->>Frontend: View Applicants & Open CV
+    Frontend->>Storage: Fetch File from Storage
+    Storage-->>Frontend: Serve Document
+    HR->>Frontend: Change Status to 'Interview'
+    Frontend->>Backend: PATCH /api/v1/applications/{id}/status
+    Backend->>DB: Update Application Status
+    Backend->>Reverb: Broadcast 'ApplicationStatusUpdated'
+    Backend-->>Frontend: Acknowledge Update
+    Reverb-->>Candidate: Push Real-time Notification
+    
+    %% Final Decision
+    HR->>Frontend: Approve & Assign Mentor
+    Frontend->>Backend: POST /api/v1/applications/{id}/approve
+    Backend->>DB: Update Status to 'Accepted' & Link Mentor
+    Backend->>Reverb: Broadcast 'ApplicationAccepted' Event
+    Backend-->>Frontend: Success Confirmation
+    Reverb-->>Candidate: Push Real-time "Accepted" Notification
+        </div>
+    </div>
+
+    <div class="diagram-container">
+        <h2>2. Authentication & Registration Workflow</h2>
+        <p>Diagram pendaftaran akun dan verifikasi OTP email (menggunakan Resend).</p>
+        <div class="mermaid">
+sequenceDiagram
+    autonumber
+    actor User
+    participant Frontend
+    participant Backend
+    participant Resend as Resend (Email)
+    
+    User->>Frontend: Input Registration Data (Email/Password)
+    Frontend->>Backend: Submit Registration Request
+    Backend->>Backend: Create Inactive Account
+    Backend->>Resend: Trigger 6-digit OTP Email
+    Resend-->>User: Deliver OTP Email
+    User->>Frontend: Input 6-digit OTP
+    Frontend->>Backend: Verify OTP Request
+    Backend->>Backend: Validate OTP & Activate Account
+    Backend-->>Frontend: Verification Success
+    Frontend-->>User: Redirect to Main Dashboard
+    
+    note over User,Resend: Forgot Password Flow
+    User->>Frontend: Request Forgot Password
+    Frontend->>Backend: Send Email for Reset
+    Backend->>Resend: Send Secure Reset Link & OTP
+    Resend-->>User: Deliver Reset Link (Expires 15m)
+        </div>
+    </div>
+
+    <div class="diagram-container">
+        <h2>3. Geofencing & Real-time Tracking Workflow</h2>
+        <p>Fitur check-in berbasis jarak (geofencing) dan pelacakan koordinat GPS real-time.</p>
+        <div class="mermaid">
+sequenceDiagram
+    autonumber
+    actor HR
+    actor User as Mahasiswa
+    participant App as Mobile/Web App
+    participant Backend
+    participant Reverb as Laravel Reverb (WebSocket)
+    participant DB as Database (PostgreSQL)
+
+    HR->>Backend: Set Geofencing Radius for Location
+    Backend->>DB: Save Geofence Data
+    
+    User->>App: Click Check-in
+    App->>Backend: Request Check-in with Current Location
+    Backend->>DB: Validate Distance (Haversine Formula)
+    alt Within Radius
+        Backend->>DB: Save Check-in Status
+        Backend-->>App: Check-in Success
+        loop Realtime Tracking
+            App->>Reverb: Send GPS Coordinates (Realtime)
+            Reverb->>Backend: Broadcast Coordinates
+            Backend->>DB: Save Temporary Path
+        end
+    else Outside Radius
+        Backend-->>App: Check-in Failed (Out of Zone)
+    end
+
+    User->>App: Click Check-out
+    App->>Backend: Request Check-out
+    Backend->>DB: End Tracking Session
+    Backend->>DB: Anonymize/Round off old location history
+    Backend-->>App: Check-out Success
+        </div>
+    </div>
+
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    </script>
+</body>
+</html>
