@@ -10,7 +10,7 @@ COPY frontend ./frontend
 RUN cd frontend && npm run build
 
 
-FROM php:8.4-apache-bookworm AS app
+FROM php:8.4-cli-bookworm AS app
 
 WORKDIR /var/www/html
 
@@ -43,16 +43,6 @@ RUN apt-get update \
         posix \
         xml \
         zip \
-    && rm -f \
-        /etc/apache2/mods-enabled/mpm_event.load \
-        /etc/apache2/mods-enabled/mpm_event.conf \
-        /etc/apache2/mods-enabled/mpm_worker.load \
-        /etc/apache2/mods-enabled/mpm_worker.conf \
-    && a2enmod mpm_prefork rewrite headers \
-    && sed -ri -e 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/*.conf \
-    && sed -ri -e 's!/var/www/!/var/www/html/public!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf \
-    && printf '<Directory /var/www/html/public>\n    AllowOverride All\n    Require all granted\n</Directory>\n' > /etc/apache2/conf-available/laravel-public.conf \
-    && a2enconf laravel-public \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
