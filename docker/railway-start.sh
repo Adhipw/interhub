@@ -15,4 +15,7 @@ fi
 
 php artisan config:cache || true
 
-exec php -d variables_order=EGPCS -S "0.0.0.0:${PORT}" -t public public/index.php
+sed -i "s/Listen 80/Listen ${PORT}/" /etc/apache2/ports.conf
+sed -i "s/<VirtualHost \*:80>/<VirtualHost *:${PORT}>/" /etc/apache2/sites-available/000-default.conf
+
+exec apache2-foreground

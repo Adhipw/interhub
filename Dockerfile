@@ -10,7 +10,7 @@ COPY frontend ./frontend
 RUN cd frontend && npm run build
 
 
-FROM php:8.3-cli-bookworm AS app
+FROM php:8.3-apache-bookworm AS app
 
 WORKDIR /var/www/html
 
@@ -18,8 +18,11 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         git \
         unzip \
+        libcurl4-openssl-dev \
         libicu-dev \
+        libonig-dev \
         libpq-dev \
+        libxml2-dev \
         libzip-dev \
         libpng-dev \
         libjpeg-dev \
@@ -27,12 +30,22 @@ RUN apt-get update \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j"$(nproc)" \
         bcmath \
+        curl \
         gd \
         intl \
+        mbstring \
         opcache \
+        pcntl \
         pdo_mysql \
         pdo_pgsql \
+        posix \
+        xml \
         zip \
+    && a2enmod rewrite headers \
+    && sed -ri -e 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/*.conf \
+    && sed -ri -e 's!/var/www/!/var/www/html/public!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf \
+    && printf '<Directory /var/www/html/public>\n    AllowOverride All\n    Require all granted\n</Directory>\n' > /etc/apache2/conf-available/laravel-public.conf \
+    && a2enconf laravel-public \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -51,6 +64,7 @@ RUN composer install --no-dev --no-interaction --prefer-dist --optimize-autoload
         storage/logs \
         bootstrap/cache \
     && chmod -R ug+rw storage bootstrap/cache \
+    && chown -R www-data:www-data storage bootstrap/cache \
     && chmod +x /usr/local/bin/railway-start
 
 ENV APP_ENV=production
