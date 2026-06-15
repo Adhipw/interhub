@@ -43,7 +43,8 @@ RUN apt-get update \
         posix \
         xml \
         zip \
-    && a2enmod rewrite headers \
+    && a2dismod mpm_event mpm_worker || true \
+    && a2enmod mpm_prefork rewrite headers \
     && sed -ri -e 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/*.conf \
     && sed -ri -e 's!/var/www/!/var/www/html/public!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf \
     && printf '<Directory /var/www/html/public>\n    AllowOverride All\n    Require all granted\n</Directory>\n' > /etc/apache2/conf-available/laravel-public.conf \
