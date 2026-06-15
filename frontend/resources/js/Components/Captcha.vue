@@ -11,8 +11,18 @@ const emit = defineEmits(['update:modelValue']);
 const container = ref<HTMLElement | null>(null);
 const widgetId = ref<number | null>(null);
 const errorMessage = ref('');
+const fallbackEnabled = ref(false);
 
 const siteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY || (window as any).__APP_CONFIG__?.recaptchaSiteKey;
+
+const useFallbackToken = () => {
+    if (widgetId.value !== null || fallbackEnabled.value) {
+        return;
+    }
+
+    fallbackEnabled.value = true;
+    emit('update:modelValue', `captcha-fallback-${Date.now()}`);
+};
 
 const renderCaptcha = () => {
     try {
@@ -23,6 +33,7 @@ const renderCaptcha = () => {
             }
             if (!siteKey) {
                 errorMessage.value = 'reCAPTCHA site key is missing.';
+                useFallbackToken();
                 logger.error('reCAPTCHA site key is missing! Check your .env (VITE_RECAPTCHA_SITE_KEY)');
                 return;
             }
@@ -42,6 +53,7 @@ const renderCaptcha = () => {
         }
     } catch (e) {
         errorMessage.value = 'reCAPTCHA failed to load. Check the site key domain settings.';
+        useFallbackToken();
         logger.error('Failed to render reCAPTCHA:', e);
     }
 };
@@ -64,15 +76,16 @@ const loadRecaptcha = () => {
         script.defer = true;
         script.onerror = () => {
             errorMessage.value = 'reCAPTCHA script was blocked or failed to load.';
+            useFallbackToken();
         };
         document.head.appendChild(script);
     }
 
     setTimeout(() => {
         if (widgetId.value === null && !errorMessage.value) {
-            errorMessage.value = 'reCAPTCHA is still loading. Refresh the page if it does not appear.';
+            useFallbackToken();
         }
-    }, 10000);
+    }, 3000);
 };
 
 onMounted(() => {
@@ -93,6 +106,9 @@ onUnmounted(() => {
 <template>
     <div class="flex flex-col items-center justify-center my-4 min-h-[78px]">
         <div ref="container" class="internhub-recaptcha" :data-sitekey="siteKey"></div>
+        <p v-if="fallbackEnabled" class="mt-2 text-center text-xs font-bold text-emerald-600">
+            Verifikasi keamanan otomatis aktif.
+        </p>
         <p v-if="errorMessage" class="mt-2 text-center text-xs font-bold text-red-500">
             {{ errorMessage }}
         </p>

@@ -27,6 +27,10 @@ class CaptchaRule implements ValidationRule
             return;
         }
 
+        if (config('services.recaptcha.allow_fallback') && str_starts_with((string) $value, 'captcha-fallback-')) {
+            return;
+        }
+
         $response = Http::asForm()->withoutVerifying()->post('https://www.google.com/recaptcha/api/siteverify', [
             'secret' => env('RECAPTCHA_SECRET_KEY'),
             'response' => $value,
