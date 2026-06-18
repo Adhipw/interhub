@@ -30,16 +30,27 @@ const form = useForm({
 const t = (key: string) => langStore.t(key);
 
 const submit = async () => {
-    if (!form.captcha) {
-        form.captcha = 'dev-token-' + Math.random().toString(36).substring(7);
+    const hostname = window.location.hostname;
+    const isLocal =
+        hostname === 'localhost' ||
+        hostname === '127.0.0.1' ||
+        hostname === '::1' ||
+        hostname.endsWith('.local');
+
+    if (!form.captcha && !isLocal) {
+        form.setError('captcha', t('auth.captcha_required'));
+        return;
     }
 
+    form.clearErrors();
     generalError.value = '';
 
     form.post('/register', {
         preserveScroll: true,
         onError: (pageErrors) => {
-            if (Object.keys(pageErrors).length === 0) {
+            generalError.value = String(pageErrors.general || '');
+
+            if (!generalError.value && Object.keys(pageErrors).length === 0) {
                 generalError.value = t('auth.register_failed');
             }
         },

@@ -23,10 +23,7 @@ class ApiHealthCheckController extends ApiBaseController
                 'storage' => $this->checkStorage(),
                 'cache' => $this->checkCache(),
             ],
-            'stats' => [
-                'log_count' => AuditLog::count(),
-                'active_sessions' => DB::table('personal_access_tokens')->count(),
-            ],
+            'stats' => $this->checkStats(),
         ];
 
         return $this->sendResponse($health, 'System health check completed');
@@ -56,6 +53,23 @@ class ApiHealthCheckController extends ApiBaseController
             return Cache::get('health_check') ? 'connected' : 'error';
         } catch (\Exception $e) {
             return 'error: '.$e->getMessage();
+        }
+    }
+
+    /**
+     * @return array<string, int|string>
+     */
+    private function checkStats(): array
+    {
+        try {
+            return [
+                'log_count' => AuditLog::count(),
+                'active_sessions' => DB::table('personal_access_tokens')->count(),
+            ];
+        } catch (\Exception $e) {
+            return [
+                'error' => $e->getMessage(),
+            ];
         }
     }
 }

@@ -5,6 +5,7 @@ namespace App\Services;
 use App\DTOs\SearchInternshipDTO;
 use App\Models\Internship;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\DB;
 
 class SearchService
 {
@@ -15,30 +16,38 @@ class SearchService
     {
         $query = Internship::published()->with('company');
 
-        // Full-Text Search using search_vector column
-        if ($dto->search) {
-            if (\DB::connection()->getDriverName() === 'sqlite') {
-                $query->where(function ($q) use ($dto) {
-                    $q->where('title', 'like', "%{$dto->search}%")
-                        ->orWhere('description', 'like', "%{$dto->search}%");
-                });
-            } else {
-                $query->whereRaw("search_vector @@ plainto_tsquery('simple', ?)", [$dto->search])
-                    ->orderByRaw("ts_rank(search_vector, plainto_tsquery('simple', ?)) DESC", [$dto->search]);
-            }
-        } else {
-            $query->latest();
+        if ($dto->q) {
+            $likeOperator = DB::connection()->getDriverName() === 'pgsql' ? 'ILIKE' : 'like';
+            $search = $dto->q;
+
+            $query->where(function ($q) use ($likeOperator, $search) {
+                $q->where('title', $likeOperator, "%{$search}%")
+                    ->orWhere('description', $likeOperator, "%{$search}%")
+                    ->orWhereHas('company', function ($companyQuery) use ($likeOperator, $search) {
+                        $companyQuery->where('name', $likeOperator, "%{$search}%");
+                    });
+            });
         }
 
-        // Location Filter
+        $likeOperator = DB::connection()->getDriverName() === 'pgsql' ? 'ILIKE' : 'like';
+
         if ($dto->location) {
-            $query->where('location', 'like', "%{$dto->location}%");
+            $query->where('location', $likeOperator, "%{$dto->location}%");
         }
 
-        // Type Filter
         if ($dto->type) {
             $query->where('type', $dto->type);
         }
+
+        if ($dto->isPaid !== null && $dto->isPaid !== '') {
+            $query->where('is_paid', filter_var($dto->isPaid, FILTER_VALIDATE_BOOLEAN));
+        }
+
+        match ($dto->sort) {
+            'oldest' => $query->orderBy('created_at', 'asc'),
+            'deadline' => $query->orderBy('deadline_at', 'asc'),
+            default => $query->orderBy('created_at', 'desc'),
+        };
 
         return $query->paginate($dto->perPage)->withQueryString();
     }

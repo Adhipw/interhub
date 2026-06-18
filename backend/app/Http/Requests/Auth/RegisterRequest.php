@@ -24,7 +24,11 @@ class RegisterRequest extends FormRequest
             'role' => 'nullable|string|in:user,hr,mentor,admin,super_admin',
         ];
 
-        $rules['captcha'] = ['required', new CaptchaRule];
+        $isLocalEnvironment = app()->environment(['local', 'testing']);
+
+        if (! $isLocalEnvironment) {
+            $rules['captcha'] = ['required', 'string', new CaptchaRule];
+        }
 
         return $rules;
     }

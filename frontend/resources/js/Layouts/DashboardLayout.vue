@@ -110,8 +110,20 @@ const isSidebarOpen = ref(true);
 const searchQuery = ref('');
 
 const handleSearch = () => {
-    if (!searchQuery.value) return;
-    inertiaRouter.get('/super-admin/users', { search: searchQuery.value });
+    const query = searchQuery.value.trim();
+    if (!query) return;
+
+    if (authStore.isSuperAdmin) {
+        inertiaRouter.get('/super-admin/users', { search: query });
+        return;
+    }
+
+    if (authStore.isAdmin) {
+        inertiaRouter.get('/admin/users', { search: query });
+        return;
+    }
+
+    inertiaRouter.get('/internships', { q: query });
 };
 
 const toggleSidebar = () => {

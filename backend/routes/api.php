@@ -55,6 +55,8 @@ use Illuminate\Support\Facades\Route;
 
 // Public Auth Routes
 Route::prefix('v1')->group(function () {
+    Route::get('/health', [ApiHealthCheckController::class, 'index']);
+
     Route::post('/register', [ApiAuthController::class, 'register']);
     Route::post('/login', [ApiAuthController::class, 'login']);
     Route::post('/auth/email/verify-otp', [ApiAuthController::class, 'verifyOtp'])->middleware('throttle:5,1');
@@ -80,8 +82,7 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
         Route::post('/read-all', [ApiNotificationController::class, 'markAllAsRead']);
     });
 
-    // System Health & Private Files
-    Route::get('/health', [ApiHealthCheckController::class, 'index']);
+    // Private Files
     Route::get('/files/private', [ApiFileController::class, 'showPrivate']);
 
     // User Profile

@@ -30,6 +30,10 @@ class DashboardController extends Controller
             'storage_used' => $storageUsedPercent,
         ];
 
+        $requestStart = defined('LARAVEL_START')
+            ? LARAVEL_START
+            : ($_SERVER['REQUEST_TIME_FLOAT'] ?? microtime(true));
+
         return Inertia::render('SuperAdmin/Dashboard', [
             'stats' => $stats,
             'security_events' => $securityEvents,
@@ -45,7 +49,7 @@ class DashboardController extends Controller
             'system_health' => [
                 'status' => 'healthy',
                 'uptime' => '99.9%',
-                'latency' => round((microtime(true) - LARAVEL_START) * 1000, 2).'ms',
+                'latency' => round((microtime(true) - $requestStart) * 1000, 2).'ms',
                 'database' => 'connected',
                 'storage' => $storageUsedPercent < 90 ? 'optimal' : 'critical',
             ],

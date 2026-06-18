@@ -25,11 +25,10 @@ class LoginRequest extends FormRequest
             'password' => ['required', 'string'],
         ];
 
-        // Temporary hardcode bypass for user login blocker
-        $isLocal = true;
+        $isLocalEnvironment = app()->environment(['local', 'testing']);
 
-        if (! $isLocal) {
-            $rules['captcha'] = ['required', new CaptchaRule];
+        if (! $isLocalEnvironment) {
+            $rules['captcha'] = ['required', 'string', new CaptchaRule];
         }
 
         return $rules;
@@ -46,7 +45,7 @@ class LoginRequest extends FormRequest
             app(LoginAttemptLogger::class)->log($this, null, $this->email, false);
 
             throw ValidationException::withMessages([
-                'email' => __('auth.failed'),
+                'general' => __('auth.login_failed'),
             ]);
         }
 
@@ -64,7 +63,7 @@ class LoginRequest extends FormRequest
         $seconds = RateLimiter::availableIn($this->throttleKey());
 
         throw ValidationException::withMessages([
-            'email' => trans('auth.throttle', [
+            'general' => trans('auth.throttle', [
                 'seconds' => $seconds,
                 'minutes' => ceil($seconds / 60),
             ]),

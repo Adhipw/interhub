@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DTOs\SearchInternshipDTO;
+use App\Http\Resources\Api\InternshipResource;
 use App\Models\Application;
 use App\Models\Company;
 use App\Models\Internship;
@@ -54,7 +55,7 @@ class InternshipController extends Controller
         $internships = $this->searchService->searchInternships($dto);
 
         return Inertia::render('Internships/Index', [
-            'internships' => $internships,
+            'internships' => InternshipResource::collection($internships),
             'filters' => $dto->toArray(),
         ]);
     }

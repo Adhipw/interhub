@@ -16,6 +16,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class ApiAuthController extends ApiBaseController
 {
@@ -62,7 +63,19 @@ class ApiAuthController extends ApiBaseController
         $user = $registerAction->execute($request->validated());
 
         $otp = $otpService->generate($user->email);
-        $user->notify(new EmailVerificationOtpNotification($otp));
+        $otpDeliveryFailed = false;
+
+        try {
+            $user->notify(new EmailVerificationOtpNotification($otp));
+        } catch (\Throwable $e) {
+            $otpDeliveryFailed = true;
+            Log::error('Failed to send API email verification OTP', [
+                'user_id' => $user->id,
+                'email' => $user->email,
+                'exception' => $e::class,
+                'message' => $e->getMessage(),
+            ]);
+        }
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
@@ -70,7 +83,11 @@ class ApiAuthController extends ApiBaseController
             'access_token' => $token,
             'token_type' => 'Bearer',
             'user' => new UserResource($user),
-        ], __('Registration successful. We have sent a verification code to your email.'));
+            'otp_delivery_failed' => $otpDeliveryFailed,
+        ], $otpDeliveryFailed
+            ? __('Registration successful, but the verification code could not be sent. Please try resending it.')
+            : __('Registration successful. We have sent a verification code to your email.')
+        );
     }
 
     /**
@@ -138,7 +155,19 @@ class ApiAuthController extends ApiBaseController
         }
 
         $otp = $otpService->generate($user->email);
-        $user->notify(new EmailVerificationOtpNotification($otp));
+
+        try {
+            $user->notify(new EmailVerificationOtpNotification($otp));
+        } catch (\Throwable $e) {
+            Log::error('Failed to resend API email verification OTP', [
+                'user_id' => $user->id,
+                'email' => $user->email,
+                'exception' => $e::class,
+                'message' => $e->getMessage(),
+            ]);
+
+            return $this->sendError(__('The verification code could not be sent. Please check mail configuration and try again.'), [], 503);
+        }
 
         return $this->sendResponse(null, __('A new verification code has been sent to your email.'));
     }
@@ -153,7 +182,18 @@ class ApiAuthController extends ApiBaseController
         $user = User::where('email', $request->email)->first();
         $otp = $otpService->generate($user->email);
 
-        $user->notify(new PasswordResetOtpNotification($otp));
+        try {
+            $user->notify(new PasswordResetOtpNotification($otp));
+        } catch (\Throwable $e) {
+            Log::error('Failed to send API password reset OTP', [
+                'user_id' => $user->id,
+                'email' => $user->email,
+                'exception' => $e::class,
+                'message' => $e->getMessage(),
+            ]);
+
+            return $this->sendError(__('The password reset code could not be sent. Please check mail configuration and try again.'), [], 503);
+        }
 
         return $this->sendResponse(null, __('Password reset code has been sent to your email.'));
     }

@@ -15,7 +15,7 @@ const langStore = useLangStore();
 
 const processing = ref(false);
 const captchaToken = ref('');
-const requestedRole = ref(new URLSearchParams(window.location.search).get('role') || '');
+const requestedRole = ref(new window.URLSearchParams(window.location.search).get('role') || '');
 
 const errors = reactive({
     email: '',
@@ -41,7 +41,12 @@ const roleLabel = computed(() => {
 });
 
 const submit = async () => {
-    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'; 
+    const hostname = window.location.hostname;
+    const isLocal =
+        hostname === 'localhost' ||
+        hostname === '127.0.0.1' ||
+        hostname === '::1' ||
+        hostname.endsWith('.local');
 
     if (!captchaToken.value && !isLocal) {
         errors.captcha = t('auth.captcha_required');
@@ -63,7 +68,8 @@ const submit = async () => {
             errors.email = String(pageErrors.email || '');
             errors.password = String(pageErrors.password || '');
             errors.captcha = String(pageErrors.captcha || '');
-            errors.general = errors.email || errors.password || errors.captcha || t('auth.login_failed');
+            const hasFieldErrors = errors.email || errors.password || errors.captcha;
+            errors.general = String(pageErrors.general || (!hasFieldErrors ? t('auth.login_failed') : ''));
         },
         onFinish: () => {
             processing.value = false;
@@ -148,4 +154,3 @@ const submit = async () => {
         </div>
     </AuthLayout>
 </template>
-

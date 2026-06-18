@@ -16,6 +16,7 @@ use App\Services\Auth\SuspiciousLoginService;
 use App\Services\Auth\UserSessionService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use OpenApi\Attributes as OA;
@@ -59,11 +60,35 @@ class AuthController extends Controller
         }
 
         $otp = $otpService->generate($user->email);
-        $user->notify(new EmailVerificationOtpNotification($otp));
+        $otpDeliveryError = null;
+
+        try {
+            $user->notify(new EmailVerificationOtpNotification($otp));
+        } catch (\Throwable $e) {
+            Log::error('Failed to send email verification OTP', [
+                'user_id' => $user->id,
+                'email' => $user->email,
+                'exception' => $e::class,
+                'message' => $e->getMessage(),
+            ]);
+
+            $otpDeliveryError = 'Kode OTP gagal dikirim ke email. Periksa konfigurasi mailer atau coba kirim ulang.';
+        }
 
         Auth::login($user);
+        $request->session()->forget('dev_email_verification_otp');
 
-        return redirect()->route('verification.notice');
+        if (app()->environment(['local', 'testing'])) {
+            $request->session()->put('dev_email_verification_otp', $otp);
+        }
+
+        $redirect = redirect()->route('verification.notice');
+
+        if ($otpDeliveryError) {
+            $redirect->with('otp_delivery_error', $otpDeliveryError);
+        }
+
+        return $redirect;
     }
 
     public function login(

@@ -35,7 +35,7 @@ if [ "${RUN_MIGRATIONS:-true}" = "true" ]; then
     until php artisan migrate --force; do
         if [ "$migration_attempt" -ge 5 ]; then
             echo "Migration failed after ${migration_attempt} attempts; check Railway database variables."
-            break
+            exit 1
         fi
 
         echo "Migration attempt ${migration_attempt} failed; retrying in 5 seconds..."
@@ -43,6 +43,8 @@ if [ "${RUN_MIGRATIONS:-true}" = "true" ]; then
         sleep 5
     done
 fi
+
+php artisan db:seed --class=RolesAndPermissionsSeeder --force || true
 
 php artisan config:cache || true
 

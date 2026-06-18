@@ -4,7 +4,9 @@ namespace App\Http\Middleware;
 
 use App\Models\Company;
 use App\Models\User;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
 
@@ -41,21 +43,61 @@ class HandleInertiaRequests extends Middleware
         return [
             ...parent::share($request),
             'auth' => [
-                'user' => $request->user() ? $request->user()->load(['detail', 'roles']) : null,
+                'user' => $this->userProp($request),
                 'session_id' => $request->session()->getId(),
             ],
             'locale' => app()->getLocale(),
             'translations' => file_exists(base_path('lang/'.app()->getLocale().'.json'))
                 ? json_decode(file_get_contents(base_path('lang/'.app()->getLocale().'.json')), true)
                 : [],
-            'stats' => [
-                'applicants_count' => User::where('role', 'user')->count(),
-                'companies_count' => Company::where('is_verified', true)->count(),
-            ],
+            'stats' => fn () => $this->publicStats(),
             'ziggy' => fn () => [
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
             ],
         ];
+    }
+
+    private function userProp(Request $request): ?User
+    {
+        if (! $request->user()) {
+            return null;
+        }
+
+        try {
+            return $request->user()->load(['detail', 'roles']);
+        } catch (QueryException $e) {
+            Log::warning('Failed to load shared authenticated user relations', [
+                'user_id' => $request->user()->id,
+                'message' => $e->getMessage(),
+            ]);
+
+            return $request->user();
+        }
+    }
+
+    /**
+     * Keep public pages renderable even when a fresh Railway database has not
+     * been migrated yet. The actual failing query is still logged server-side.
+     *
+     * @return array{applicants_count: int, companies_count: int}
+     */
+    private function publicStats(): array
+    {
+        try {
+            return [
+                'applicants_count' => User::where('role', 'user')->count(),
+                'companies_count' => Company::where('is_verified', true)->count(),
+            ];
+        } catch (QueryException $e) {
+            Log::warning('Failed to load shared public stats', [
+                'message' => $e->getMessage(),
+            ]);
+
+            return [
+                'applicants_count' => 0,
+                'companies_count' => 0,
+            ];
+        }
     }
 }

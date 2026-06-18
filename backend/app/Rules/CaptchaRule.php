@@ -16,11 +16,6 @@ class CaptchaRule implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        // Bypass for local development
-        if (env('VITE_LOCALHOST_MODE') === true || env('VITE_LOCALHOST_MODE') === 'true') {
-            return;
-        }
-
         if (empty($value)) {
             $fail('Silakan selesaikan verifikasi reCAPTCHA.');
 
@@ -31,13 +26,29 @@ class CaptchaRule implements ValidationRule
             return;
         }
 
-        $response = Http::asForm()->withoutVerifying()->post('https://www.google.com/recaptcha/api/siteverify', [
-            'secret' => env('RECAPTCHA_SECRET_KEY'),
-            'response' => $value,
-            'remoteip' => request()->ip(),
-        ]);
+        $secretKey = (string) config('services.recaptcha.secret_key');
 
-        if (! $response->json('success')) {
+        if ($secretKey === '') {
+            $fail('Konfigurasi reCAPTCHA server belum lengkap. Hubungi administrator.');
+
+            return;
+        }
+
+        try {
+            $response = Http::asForm()
+                ->timeout(5)
+                ->post('https://www.google.com/recaptcha/api/siteverify', [
+                    'secret' => $secretKey,
+                    'response' => $value,
+                    'remoteip' => request()->ip(),
+                ]);
+        } catch (\Throwable) {
+            $fail('Verifikasi reCAPTCHA sedang tidak dapat diproses. Silakan coba lagi.');
+
+            return;
+        }
+
+        if (! $response->ok() || ! $response->json('success')) {
             $fail('Verifikasi reCAPTCHA gagal atau token kadaluwarsa.');
         }
     }

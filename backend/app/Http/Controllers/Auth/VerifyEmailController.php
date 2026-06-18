@@ -8,6 +8,7 @@ use App\Notifications\Auth\EmailVerificationOtpNotification;
 use App\Services\Auth\EmailVerificationOtpService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 
 class VerifyEmailController extends Controller
@@ -28,7 +29,12 @@ class VerifyEmailController extends Controller
             return redirect()->intended(route('dashboard'));
         }
 
-        return Inertia::render('Auth/VerifyEmail');
+        return Inertia::render('Auth/VerifyEmail', [
+            'devOtp' => app()->environment(['local', 'testing'])
+                ? session('dev_email_verification_otp')
+                : null,
+            'deliveryError' => session('otp_delivery_error'),
+        ]);
     }
 
     public function verify(Request $request, EmailVerificationOtpService $otpService)
@@ -38,6 +44,7 @@ class VerifyEmailController extends Controller
         ]);
 
         if ($otpService->verify($request->user()->email, $request->otp)) {
+            $request->session()->forget('dev_email_verification_otp');
             $request->user()->markEmailAsVerified();
 
             return redirect()->intended(route('dashboard').'?verified=1');
@@ -55,8 +62,23 @@ class VerifyEmailController extends Controller
         try {
             $otp = $otpService->generate($request->user()->email);
             $request->user()->notify(new EmailVerificationOtpNotification($otp));
-        } catch (\Exception $e) {
-            return back()->withErrors(['resend' => $e->getMessage()]);
+
+            $request->session()->forget('dev_email_verification_otp');
+
+            if (app()->environment(['local', 'testing'])) {
+                $request->session()->put('dev_email_verification_otp', $otp);
+            }
+        } catch (\Throwable $e) {
+            Log::error('Failed to resend email verification OTP', [
+                'user_id' => $request->user()->id,
+                'email' => $request->user()->email,
+                'exception' => $e::class,
+                'message' => $e->getMessage(),
+            ]);
+
+            return back()->withErrors([
+                'resend' => 'Kode OTP gagal dikirim ke email. Periksa konfigurasi mailer atau coba lagi.',
+            ]);
         }
 
         return back()->with('status', 'verification-link-sent');

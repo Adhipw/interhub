@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useForm, Link } from '@inertiajs/vue3';
 import { route } from 'ziggy-js';
+import { computed } from 'vue';
 import { useLangStore } from '@/Stores/lang';
 import AuthLayout from '@/Layouts/AuthLayout.vue';
 import LoadingButton from '@/Components/LoadingButton.vue';
@@ -8,6 +9,11 @@ import FormError from '@/Components/FormError.vue';
 
 const langStore = useLangStore();
 const t = (key: string) => langStore.t(key);
+
+defineProps<{
+    devOtp?: string | null;
+    deliveryError?: string | null;
+}>();
 
 const form = useForm({
     otp: '',
@@ -20,6 +26,7 @@ const submit = () => {
 };
 
 const resendForm = useForm({});
+const resendError = computed(() => (resendForm.errors as Record<string, string>).resend || '');
 
 const resendOtp = () => {
     resendForm.post(route('verification.send'));
@@ -32,6 +39,15 @@ const resendOtp = () => {
         <template #subtitle>
             {{ t('auth.verify_email_subtitle') }}
         </template>
+
+        <div v-if="devOtp" class="mb-6 rounded-xl border border-blue-100 bg-blue-50 px-4 py-3 text-center">
+            <p class="text-[11px] font-black uppercase tracking-widest text-blue-500">Local OTP</p>
+            <p class="mt-1 text-2xl font-black tracking-[0.4em] text-blue-700">{{ devOtp }}</p>
+        </div>
+
+        <div v-if="deliveryError" class="mb-6 rounded-xl border border-red-100 bg-red-50 px-4 py-3 text-center text-sm font-semibold text-red-600">
+            {{ deliveryError }}
+        </div>
 
         <form @submit.prevent="submit" class="space-y-6">
             <div>
@@ -65,6 +81,7 @@ const resendOtp = () => {
             <p v-if="resendForm.wasSuccessful" class="mt-2 text-xs text-green-600 font-medium">
                 {{ t('auth.new_otp_sent') }}
             </p>
+            <FormError :message="resendError" class="mt-2 text-center" />
 
             <div class="mt-6">
                 <Link :href="route('logout')" method="post" as="button" class="text-xs font-medium text-slate-400 hover:text-red-500 transition-colors">
