@@ -15,6 +15,7 @@ const langStore = useLangStore();
 
 const processing = ref(false);
 const captchaToken = ref('');
+const captchaRef = ref<InstanceType<typeof Captcha> | null>(null);
 const requestedRole = ref(new window.URLSearchParams(window.location.search).get('role') || '');
 
 const errors = reactive({
@@ -70,6 +71,7 @@ const submit = async () => {
             errors.captcha = String(pageErrors.captcha || '');
             const hasFieldErrors = errors.email || errors.password || errors.captcha;
             errors.general = String(pageErrors.general || (!hasFieldErrors ? t('auth.login_failed') : ''));
+            captchaRef.value?.reset();
         },
         onFinish: () => {
             processing.value = false;
@@ -134,7 +136,7 @@ const submit = async () => {
             </div>
 
             <div class="pt-4">
-                <Captcha v-model="captchaToken" />
+                <Captcha ref="captchaRef" v-model="captchaToken" />
             </div>
             <div v-if="errors.captcha" class="text-center text-xs font-bold text-red-500 mb-2 uppercase tracking-widest">
                 {{ errors.captcha }}

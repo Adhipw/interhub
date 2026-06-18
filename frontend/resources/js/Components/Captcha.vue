@@ -2,8 +2,9 @@
 import logger from '@/Lib/logger';
 import { ref, onMounted, onUnmounted } from 'vue';
 
-const props = defineProps<{
+defineProps<{
     modelValue: string;
+    error?: string;
 }>();
 
 const emit = defineEmits(['update:modelValue']);
@@ -14,14 +15,40 @@ const errorMessage = ref('');
 const fallbackEnabled = ref(false);
 
 const siteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY || (window as any).__APP_CONFIG__?.recaptchaSiteKey;
+const hostname = window.location.hostname;
+const fallbackAllowed =
+    import.meta.env.VITE_RECAPTCHA_ALLOW_FALLBACK === 'true' ||
+    (window as any).__APP_CONFIG__?.recaptchaAllowFallback === true ||
+    hostname === 'localhost' ||
+    hostname === '127.0.0.1' ||
+    hostname === '::1' ||
+    hostname.endsWith('.local');
 
 const useFallbackToken = () => {
     if (widgetId.value !== null || fallbackEnabled.value) {
         return;
     }
 
+    if (!fallbackAllowed) {
+        emit('update:modelValue', '');
+        return;
+    }
+
     fallbackEnabled.value = true;
     emit('update:modelValue', `captcha-fallback-${Date.now()}`);
+};
+
+const reset = () => {
+    emit('update:modelValue', '');
+
+    if (fallbackEnabled.value) {
+        fallbackEnabled.value = false;
+    }
+
+    const grecaptcha = (window as any).grecaptcha;
+    if (widgetId.value !== null && grecaptcha?.reset) {
+        grecaptcha.reset(widgetId.value);
+    }
 };
 
 const renderCaptcha = () => {
@@ -101,6 +128,8 @@ onUnmounted(() => {
         // grecaptcha.reset(widgetId.value);
     }
 });
+
+defineExpose({ reset });
 </script>
 
 <template>

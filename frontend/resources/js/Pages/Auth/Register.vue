@@ -16,6 +16,7 @@ import { GraduationCap, Building2 } from 'lucide-vue-next';
 const langStore = useLangStore();
 
 const generalError = ref('');
+const captchaRef = ref<InstanceType<typeof Captcha> | null>(null);
 
 const form = useForm({
     name: '',
@@ -53,6 +54,8 @@ const submit = async () => {
             if (!generalError.value && Object.keys(pageErrors).length === 0) {
                 generalError.value = t('auth.register_failed');
             }
+
+            captchaRef.value?.reset();
         },
     });
 };
@@ -164,7 +167,7 @@ const submit = async () => {
                 required
             />
 
-            <Captcha v-model="form.captcha" :error="form.errors.captcha" />
+            <Captcha ref="captchaRef" v-model="form.captcha" :error="form.errors.captcha" />
 
             <div class="pt-2">
                 <LoadingButton :processing="form.processing">
