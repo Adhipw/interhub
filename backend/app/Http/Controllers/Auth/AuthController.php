@@ -125,11 +125,13 @@ class AuthController extends Controller
         $logger->log($request, $user->id, $request->email, true);
         $eventLogger->log('login', 'User berhasil login');
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        return redirect()->route('dashboard');
     }
 
     public function logout(Request $request)
     {
+        $request->session()->forget('url.intended');
+
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();

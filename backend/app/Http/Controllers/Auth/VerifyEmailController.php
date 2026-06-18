@@ -26,7 +26,7 @@ class VerifyEmailController extends Controller
         ];
 
         if ($user->hasRole($bypassRoles) || $user->hasVerifiedEmail()) {
-            return redirect()->intended(route('dashboard'));
+            return redirect()->route('dashboard');
         }
 
         return Inertia::render('Auth/VerifyEmail', [
@@ -47,7 +47,7 @@ class VerifyEmailController extends Controller
             $request->session()->forget('dev_email_verification_otp');
             $request->user()->markEmailAsVerified();
 
-            return redirect()->intended(route('dashboard').'?verified=1');
+            return redirect()->route('dashboard', ['verified' => 1]);
         }
 
         return back()->withErrors(['otp' => 'Kode OTP tidak valid atau sudah kadaluwarsa.']);
@@ -56,7 +56,7 @@ class VerifyEmailController extends Controller
     public function resend(Request $request, EmailVerificationOtpService $otpService)
     {
         if ($request->user()->hasVerifiedEmail()) {
-            return redirect()->intended(route('dashboard'));
+            return redirect()->route('dashboard');
         }
 
         try {
