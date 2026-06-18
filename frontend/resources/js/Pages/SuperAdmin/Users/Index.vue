@@ -23,14 +23,24 @@ const langStore = useLangStore();
 const t = (key: string) => langStore.t(key);
 const __ = t;
 
-const loading = ref(true);
+const props = defineProps<{
+    users?: PaginatedResponse<User>;
+    roles?: string[];
+    filters?: {
+        search?: string;
+        role?: string;
+        status?: string;
+    };
+}>();
+
+const loading = ref(false);
 const processing = ref(false);
-const users = ref<PaginatedResponse<User>>({
+const users = ref<PaginatedResponse<User>>(props.users || {
     data: [],
     links: [],
     meta: {} as any
 });
-const roles = ref(['admin', 'hr', 'mentor', 'user']);
+const roles = ref(props.roles || ['admin', 'hr', 'mentor', 'user']);
 
 // Batch Import
 const showImportModal = ref(false);
@@ -44,9 +54,9 @@ const exportUsers = () => {
 };
 
 // Filters
-const search = ref('');
-const roleFilter = ref('');
-const statusFilter = ref('');
+const search = ref(props.filters?.search || '');
+const roleFilter = ref(props.filters?.role || '');
+const statusFilter = ref(props.filters?.status || '');
 
 const fetchUsers = async (page = 1) => {
     loading.value = true;
@@ -254,7 +264,9 @@ const getObjectURL = (file: File | null) => {
 };
 
 onMounted(() => {
-    fetchUsers();
+    if (users.value.data.length === 0) {
+        fetchUsers();
+    }
 });
 </script>
 

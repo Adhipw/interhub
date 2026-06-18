@@ -14,12 +14,22 @@ import { useLangStore } from '@/Stores/lang';
 const langStore = useLangStore();
 const t = (key: string) => langStore.t(key);
 
-const logs = ref({
+const props = defineProps<{
+    logs?: {
+        data: any[];
+        links: any[];
+    };
+    filters?: {
+        search?: string;
+    };
+}>();
+
+const logs = ref(props.logs || {
     data: [] as any[],
     links: [] as any[]
 });
-const loading = ref(true);
-const searchQuery = ref('');
+const loading = ref(false);
+const searchQuery = ref(props.filters?.search || '');
 let refreshInterval: any = null;
 
 const fetchLogs = async (page = 1) => {
@@ -54,7 +64,9 @@ watch(searchQuery, () => {
 });
 
 onMounted(() => {
-    fetchLogs();
+    if (logs.value.data.length === 0) {
+        fetchLogs();
+    }
     // Auto-refresh every 30 seconds
     refreshInterval = setInterval(() => {
         fetchLogs(logs.value.links.find(l => l.active)?.label || 1);

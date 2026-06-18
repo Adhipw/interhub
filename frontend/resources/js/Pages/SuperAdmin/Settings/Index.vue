@@ -12,9 +12,15 @@ import api from '@/Services/api';
 import { useToastStore } from '@/Stores/toast';
 
 const toast = useToastStore();
-const settings = ref<any[]>([]);
-const featureFlags = ref<any[]>([]);
-const loading = ref(true);
+
+const props = defineProps<{
+    settings?: any[];
+    featureFlags?: any[];
+}>();
+
+const settings = ref<any[]>(props.settings || []);
+const featureFlags = ref<any[]>(props.featureFlags || []);
+const loading = ref(false);
 const processing = ref<number | null>(null);
 
 const fetchData = async () => {
@@ -60,7 +66,11 @@ const toggleFeature = async (flag: any) => {
     }
 };
 
-onMounted(fetchData);
+onMounted(() => {
+    if (settings.value.length === 0 && featureFlags.value.length === 0) {
+        fetchData();
+    }
+});
 </script>
 
 <template>

@@ -15,11 +15,18 @@ import { useLangStore } from '@/Stores/lang';
 const langStore = useLangStore();
 const t = (key: string) => langStore.t(key);
 
-const events = ref({
+const props = defineProps<{
+    events?: {
+        data: any[];
+        links: any[];
+    };
+}>();
+
+const events = ref(props.events || {
     data: [] as any[],
     links: [] as any[]
 });
-const loading = ref(true);
+const loading = ref(false);
 
 const fetchEvents = async (page = 1) => {
     loading.value = true;
@@ -46,7 +53,9 @@ const setupRealtime = () => {
 };
 
 onMounted(() => {
-    fetchEvents();
+    if (events.value.data.length === 0) {
+        fetchEvents();
+    }
     setupRealtime();
 });
 </script>

@@ -15,8 +15,12 @@ import { useLangStore } from '@/Stores/lang';
 const langStore = useLangStore();
 const t = (key: string) => langStore.t(key);
 
-const integrations = ref<any[]>([]);
-const loading = ref(true);
+const props = defineProps<{
+    integrations?: any[];
+}>();
+
+const integrations = ref<any[]>(props.integrations || []);
+const loading = ref(false);
 const processing = ref<number | null | boolean>(null);
 
 const fetchData = async () => {
@@ -107,7 +111,9 @@ const syncIntegration = async (id: number) => {
 const getProviderIcon = (provider: string) => ShieldCheck;
 
 onMounted(() => {
-    fetchData();
+    if (integrations.value.length === 0) {
+        fetchData();
+    }
 });
 </script>
 
