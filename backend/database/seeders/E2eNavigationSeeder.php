@@ -24,6 +24,10 @@ class E2eNavigationSeeder extends Seeder
 
     public function run(): void
     {
+        if (! app()->environment(['local', 'testing'])) {
+            throw new \RuntimeException('E2eNavigationSeeder is only allowed in local/testing environments.');
+        }
+
         $this->call(RolesAndPermissionsSeeder::class);
         $this->clearLoginRateLimits();
 

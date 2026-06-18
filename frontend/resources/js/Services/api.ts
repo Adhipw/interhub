@@ -4,8 +4,38 @@ import { useToastStore } from '@/Stores/toast';
 
 let authRedirectInProgress = false;
 
+const protectedPathPrefixes = [
+    '/dashboard',
+    '/profile',
+    '/settings',
+    '/sessions',
+    '/applications',
+    '/attendance',
+    '/saved-internships',
+    '/admin',
+    '/super-admin',
+    '/hr',
+    '/mentor',
+];
+
+const isAuthenticatedPage = () => Boolean((window as any).pageData?.props?.auth?.user);
+
+const shouldRedirectToLogin = () => {
+    if (window.location.pathname === '/login') {
+        return false;
+    }
+
+    if (isAuthenticatedPage()) {
+        return true;
+    }
+
+    return protectedPathPrefixes.some((prefix) => (
+        window.location.pathname === prefix || window.location.pathname.startsWith(`${prefix}/`)
+    ));
+};
+
 const redirectToLogin = () => {
-    if (authRedirectInProgress || window.location.pathname === '/login') {
+    if (authRedirectInProgress || !shouldRedirectToLogin()) {
         return;
     }
 
@@ -42,7 +72,13 @@ api.interceptors.response.use(
             const message = error.response.data?.message || 'Terjadi kesalahan pada server.';
 
             if (status === 401 || status === 419) {
-                redirectToLogin();
+                if (shouldRedirectToLogin()) {
+                    redirectToLogin();
+                } else {
+                    toastStore.error(status === 419
+                        ? 'Sesi halaman sudah kedaluwarsa. Muat ulang halaman lalu coba lagi.'
+                        : message);
+                }
             } else if (status === 422) {
                 // Validation errors are usually handled by forms, but we can show a general toast
                 toastStore.error('Mohon periksa kembali input Anda.');

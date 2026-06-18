@@ -24,6 +24,28 @@ else
     echo "Database host: ${DB_HOST:-not-set}:${DB_PORT:-not-set}"
 fi
 
+if [ "${APP_ENV:-}" = "production" ]; then
+    if [ -z "${APP_KEY:-}" ]; then
+        echo "APP_KEY is missing. Set a stable APP_KEY in Railway before deploying."
+        exit 1
+    fi
+
+    if [ -z "${APP_URL:-}" ]; then
+        echo "APP_URL is missing. Set it to the exact Railway/custom HTTPS domain."
+        exit 1
+    fi
+
+    if [ "${APP_URL#https://}" = "${APP_URL}" ]; then
+        echo "APP_URL must use https:// in production; current value is ${APP_URL}."
+        exit 1
+    fi
+
+    if [ "${DB_CONNECTION:-}" != "pgsql" ]; then
+        echo "DB_CONNECTION should be pgsql on Railway; current value is ${DB_CONNECTION:-not-set}."
+        exit 1
+    fi
+fi
+
 mkdir -p storage/app/public storage/framework/cache storage/framework/sessions storage/framework/views storage/logs bootstrap/cache
 
 php artisan config:clear || true
@@ -44,7 +66,12 @@ if [ "${RUN_MIGRATIONS:-true}" = "true" ]; then
     done
 fi
 
+php artisan db:show --counts --no-interaction || true
 php artisan db:seed --class=RolesAndPermissionsSeeder --force || true
+
+if [ "${SEED_BASELINE_DATA:-false}" = "true" ]; then
+    php artisan db:seed --class=ProductionBaselineSeeder --force
+fi
 
 php artisan config:cache || true
 

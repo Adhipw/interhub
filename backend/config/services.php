@@ -34,6 +34,10 @@ return [
         'allow_fallback' => env('RECAPTCHA_ALLOW_FALLBACK', false),
     ],
 
+    'health' => [
+        'expose_database_name' => env('HEALTH_EXPOSE_DATABASE_NAME', false),
+    ],
+
     'ses' => [
         'key' => env('AWS_ACCESS_KEY_ID'),
         'secret' => env('AWS_SECRET_ACCESS_KEY'),

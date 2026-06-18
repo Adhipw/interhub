@@ -3,6 +3,12 @@ import { defineConfig, devices } from '@playwright/test';
 const port = Number(process.env.E2E_PORT || 8000);
 const host = process.env.E2E_HOST || '127.0.0.1';
 const baseURL = process.env.E2E_BASE_URL || `http://${host}:${port}`;
+const baseUrlHost = new URL(baseURL).hostname;
+const localHosts = new Set(['127.0.0.1', 'localhost', '::1']);
+
+if (!localHosts.has(baseUrlHost) && process.env.E2E_ALLOW_REMOTE !== 'true') {
+    throw new Error('Refusing to run E2E tests against a non-local URL. Set E2E_ALLOW_REMOTE=true only for an isolated test environment.');
+}
 
 export default defineConfig({
     testDir: './e2e',
