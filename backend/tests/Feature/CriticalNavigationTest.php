@@ -70,6 +70,21 @@ test('user can login and open the dashboard directly from the URL', function () 
         ->assertInertia(fn ($page) => $page->component('Dashboard', false));
 });
 
+test('new verified user without profile detail can open the dashboard', function () {
+    $user = User::factory()->create([
+        'email_verified_at' => now(),
+        'role' => 'user',
+    ]);
+
+    $this->actingAs($user)
+        ->get('/dashboard')
+        ->assertOk()
+        ->assertInertia(fn ($page) => $page
+            ->component('Dashboard', false)
+            ->where('stats.profile_completion', 0)
+        );
+});
+
 test('user can apply to an internship and see it in my applications', function () {
     $user = navigationTestUser();
     $internship = navigationTestInternship();

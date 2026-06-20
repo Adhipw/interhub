@@ -51,6 +51,41 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+Route::get('/sw.js', function () {
+    $script = <<<'JS'
+const clearCaches = async () => {
+  if (!self.caches) return;
+  const cacheNames = await caches.keys();
+  await Promise.all(cacheNames.map((cacheName) => caches.delete(cacheName)));
+};
+
+const unregisterAndRefreshClients = async () => {
+  await clearCaches();
+  await self.registration.unregister();
+  const clientsList = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
+  await Promise.all(clientsList.map((client) => client.navigate(client.url)));
+};
+
+self.addEventListener('install', (event) => {
+  self.skipWaiting();
+  event.waitUntil(clearCaches());
+});
+
+self.addEventListener('activate', (event) => {
+  event.waitUntil(unregisterAndRefreshClients());
+});
+
+self.addEventListener('fetch', () => undefined);
+JS;
+
+    return response($script, 200, [
+        'Content-Type' => 'application/javascript; charset=UTF-8',
+        'Cache-Control' => 'no-store, no-cache, must-revalidate, max-age=0',
+        'Pragma' => 'no-cache',
+        'Expires' => '0',
+        'X-InterHub-Service-Worker' => 'service-worker-cleanup',
+    ]);
+})->name('service-worker-cleanup');
 Route::get('/', [InternshipController::class, 'welcome'])->name('welcome');
 
 // Language Switcher (Keep as web route for session-based locale)

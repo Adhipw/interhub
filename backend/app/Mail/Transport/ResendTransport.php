@@ -36,6 +36,7 @@ class ResendTransport extends AbstractTransport
 
         // Use Laravel's Http client with SSL verification disabled for local development
         $response = Http::withToken($this->key)
+            ->timeout((int) config('mail.timeout', 10))
             ->withoutVerifying() // This fixes the cURL error 60 on Windows
             ->post('https://api.resend.com/emails', $params);
 

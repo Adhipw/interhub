@@ -50,6 +50,7 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 COPY backend ./
 COPY --from=frontend-builder /app/backend/public/build ./public/build
+RUN rm -f public/sw.js
 COPY docker/railway-start.sh /usr/local/bin/railway-start
 
 RUN composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader \

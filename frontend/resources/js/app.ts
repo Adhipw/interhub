@@ -167,9 +167,11 @@ createInertiaApp({
             hydrateStores(pinia, event.detail.page);
         });
 
-        langStore.fetchTranslations().catch((err) => {
-            logger.error('Failed to load translations in background:', err);
-        });
+        if (!langStore.translations || Object.keys(langStore.translations).length === 0) {
+            langStore.fetchTranslations().catch((err) => {
+                logger.error('Failed to load translations in background:', err);
+            });
+        }
 
         startDomI18nBridge(langStore).catch((err) => {
             logger.error('Failed to start DOM i18n bridge:', err);

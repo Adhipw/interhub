@@ -74,7 +74,7 @@ class DashboardController extends Controller
 
     private function getRecommendedInternships($user)
     {
-        $skills = $user->detail->skills ?? [];
+        $skills = $user->detail?->skills ?? [];
 
         $query = Internship::with('company')->where('status', 'published');
 

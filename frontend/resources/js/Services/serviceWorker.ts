@@ -3,8 +3,8 @@ import type { useToastStore } from '@/Stores/toast';
 
 type ToastStore = ReturnType<typeof useToastStore>;
 
-const SW_SCRIPT = '/sw.js';
-const serviceWorkerEnabled = import.meta.env.VITE_ENABLE_SERVICE_WORKER === 'true';
+const SW_SCRIPT = '/sw.js?v=interhub-sw-cleanup-v1';
+const serviceWorkerEnabled = false;
 
 const unregisterExistingServiceWorkers = async () => {
     const registrations = await navigator.serviceWorker.getRegistrations();
@@ -16,7 +16,7 @@ const unregisterExistingServiceWorkers = async () => {
     }
 };
 
-export function setupServiceWorker(toastStore: ToastStore) {
+export function setupServiceWorker(_toastStore: ToastStore) {
     if (!import.meta.env.PROD || typeof window === 'undefined' || !('serviceWorker' in navigator)) {
         return;
     }
@@ -29,84 +29,7 @@ export function setupServiceWorker(toastStore: ToastStore) {
         return;
     }
 
-    let registration: ServiceWorkerRegistration | null = null;
-    let updateToastId: number | null = null;
-
-    const clearUpdateToast = () => {
-        if (updateToastId !== null) {
-            toastStore.remove(updateToastId);
-            updateToastId = null;
-        }
-    };
-
-    const applyUpdate = async () => {
-        clearUpdateToast();
-
-        if (registration?.waiting) {
-            registration.waiting.postMessage({ type: 'SKIP_WAITING' });
-        }
-
-        window.location.reload();
-    };
-
-    const resetServiceWorker = async () => {
-        clearUpdateToast();
-        await unregisterExistingServiceWorkers();
-
-        window.location.reload();
-    };
-
-    const showUpdateToast = () => {
-        if (updateToastId !== null) {
-            return;
-        }
-
-        updateToastId = toastStore.add(
-            'Versi baru tersedia. Muat ulang untuk memakai pembaruan terbaru.',
-            'info',
-            null,
-            [
-                {
-                    label: 'Muat ulang',
-                    handler: applyUpdate,
-                    variant: 'primary',
-                },
-                {
-                    label: 'Bersihkan cache',
-                    handler: resetServiceWorker,
-                    variant: 'secondary',
-                },
-            ],
-        );
-    };
-
-    const watchInstallingWorker = (worker: ServiceWorker | null) => {
-        if (!worker) return;
-
-        worker.addEventListener('statechange', () => {
-            if (worker.state === 'installed' && navigator.serviceWorker.controller) {
-                showUpdateToast();
-            }
-        });
-    };
-
-    const register = async () => {
-        registration = await navigator.serviceWorker.register(SW_SCRIPT, { updateViaCache: 'none' });
-
-        if (registration.waiting && navigator.serviceWorker.controller) {
-            showUpdateToast();
-        }
-
-        watchInstallingWorker(registration.installing);
-
-        registration.addEventListener('updatefound', () => {
-            watchInstallingWorker(registration?.installing ?? null);
-        });
-
-        await registration.update();
-    };
-
-    register().catch((error) => {
+    navigator.serviceWorker.register(SW_SCRIPT, { updateViaCache: 'none' }).catch((error) => {
         logger.error('PWA Service Worker Registration Failed:', error);
     });
 }
