@@ -97,7 +97,8 @@ const syncPermissions = async () => {
         toast.success('Izin role berhasil diperbarui');
         await fetchData();
     } catch (e: any) {
-        toast.error('Gagal memperbarui izin');
+        logger.error('Failed to sync permissions:', e);
+        toast.error(e.response?.data?.message || 'Gagal memperbarui izin');
     } finally {
         permissionForm.processing = false;
     }

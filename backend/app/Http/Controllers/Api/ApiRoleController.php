@@ -7,6 +7,7 @@ use App\Enums\UserRole;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\PermissionRegistrar;
@@ -69,20 +70,32 @@ class ApiRoleController extends ApiBaseController
     public function update(Request $request, Role $role): JsonResponse
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:roles,name,'.$role->id,
-            'permissions' => 'array',
+            'name' => [
+                'sometimes',
+                'required',
+                'string',
+                Rule::unique('roles', 'name')->ignore($role->id),
+            ],
+            'permissions' => ['sometimes', 'array'],
+            'permissions.*' => ['string', Rule::exists('permissions', 'name')],
         ]);
 
         if ($validator->fails()) {
-            return $this->sendError('Validation Error', $validator->errors());
+            return $this->sendError('Validation Error', $validator->errors(), 422);
         }
 
-        $role->name = $request->name;
-        $role->save();
+        $validated = $validator->validated();
 
-        if ($request->has('permissions')) {
-            $role->syncPermissions($request->permissions);
+        if (array_key_exists('name', $validated) && $validated['name'] !== $role->name) {
+            $role->name = $validated['name'];
+            $role->save();
         }
+
+        if (array_key_exists('permissions', $validated)) {
+            $role->syncPermissions($validated['permissions']);
+        }
+
+        app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
         return $this->sendResponse($role->load('permissions'), 'Role updated successfully');
     }
