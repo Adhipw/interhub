@@ -205,6 +205,8 @@ const markAllAsRead = async () => {
 };
 
 const logout = async () => {
+    if (authStore.loading) return;
+
     await authStore.logout();
 };
 
@@ -328,7 +330,8 @@ const navigation = computed(() => {
                 </div>
                 
                 <button 
-                    class="w-full flex items-center gap-4 px-4 py-4 rounded-2xl text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-900/10 transition-all group"
+                    class="w-full flex items-center gap-4 px-4 py-4 rounded-2xl text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-900/10 transition-all group disabled:opacity-60 disabled:cursor-wait"
+                    :disabled="authStore.loading"
                     @click="logout"
                 >
                     <LogOut class="w-6 h-6 shrink-0 group-hover:translate-x-1 transition-transform" />

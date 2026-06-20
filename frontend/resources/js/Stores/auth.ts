@@ -1,6 +1,13 @@
 import { defineStore } from 'pinia';
 import { router as inertiaRouter } from '@inertiajs/vue3';
 
+const clearStoredAuth = () => {
+    localStorage.removeItem('auth_token');
+    localStorage.removeItem('user');
+    sessionStorage.removeItem('auth_token');
+    sessionStorage.removeItem('user');
+};
+
 export const useAuthStore = defineStore('auth', {
     state: () => ({
         user: null as any,
@@ -19,23 +26,33 @@ export const useAuthStore = defineStore('auth', {
     actions: {
         syncFromInertiaUser(user: any) {
             this.user = user || null;
-            localStorage.removeItem('auth_token');
-            sessionStorage.removeItem('auth_token');
-            localStorage.removeItem('user');
-            sessionStorage.removeItem('user');
+            clearStoredAuth();
         },
 
         async logout() {
-            return new Promise<void>((resolve) => {
-                this.user = null;
-                localStorage.removeItem('auth_token');
-                localStorage.removeItem('user');
-                sessionStorage.removeItem('auth_token');
-                sessionStorage.removeItem('user');
+            if (this.loading) return;
 
+            this.loading = true;
+
+            return new Promise<void>((resolve) => {
                 inertiaRouter.post('/logout', {}, {
+                    replace: true,
                     preserveScroll: false,
-                    onFinish: () => resolve(),
+                    preserveState: false,
+                    onSuccess: () => {
+                        this.user = null;
+                        clearStoredAuth();
+                        window.location.assign('/');
+                    },
+                    onError: () => {
+                        this.user = null;
+                        clearStoredAuth();
+                        window.location.assign('/login');
+                    },
+                    onFinish: () => {
+                        this.loading = false;
+                        resolve();
+                    },
                 });
             });
         },

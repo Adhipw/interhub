@@ -50,11 +50,19 @@ class ApiSuperAdminUserController extends ApiBaseController
 
     public function store(Request $request)
     {
+        if ($request->has('is_active')) {
+            $request->merge([
+                'is_active' => $this->normalizeBooleanInput($request->input('is_active')),
+            ]);
+        }
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
+            'phone_number' => ['nullable', 'string', 'max:20', Rule::unique('users', 'phone_number')],
             'password' => 'required|string|min:8',
             'role' => ['required', Rule::in(['admin', 'hr', 'mentor', 'user', 'super_admin'])],
+            'is_active' => 'sometimes|boolean',
             'avatar' => 'nullable|image|max:2048',
         ]);
 
@@ -62,9 +70,10 @@ class ApiSuperAdminUserController extends ApiBaseController
         $user = new User;
         $user->name = $validated['name'];
         $user->email = $validated['email'];
+        $user->phone_number = $validated['phone_number'] ?? null;
         $user->password = Hash::make($validated['password']);
         $user->role = $validated['role']; // Column
-        $user->is_active = true;
+        $user->is_active = $validated['is_active'] ?? true;
         $user->email_verified_at = now();
         $user->save();
 
@@ -82,20 +91,45 @@ class ApiSuperAdminUserController extends ApiBaseController
 
     public function update(Request $request, User $user)
     {
+        if ($request->has('is_active')) {
+            $request->merge([
+                'is_active' => $this->normalizeBooleanInput($request->input('is_active')),
+            ]);
+        }
+
         $validated = $request->validate([
             'name' => 'sometimes|string|max:255',
-            'email' => ['sometimes', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
+            'email' => ['sometimes', 'string', 'email', 'max:255', Rule::unique('users', 'email')->ignore($user->id)],
+            'phone_number' => ['nullable', 'string', 'max:20', Rule::unique('users', 'phone_number')->ignore($user->id)],
             'role' => ['sometimes', Rule::in(['admin', 'hr', 'mentor', 'user', 'super_admin'])],
             'is_active' => 'sometimes|boolean',
+            'password' => 'nullable|string|min:8|confirmed',
             'avatar' => 'nullable|image|max:2048',
         ]);
 
+        if ($user->id === auth()->id()) {
+            if (array_key_exists('role', $validated) && $validated['role'] !== $user->getAttributeFromArray('role')) {
+                return $this->sendError('Cannot change your own role', [], 422);
+            }
 
-        if ($request->has('role')) {
-            $user->role = $request->role; // Force update the column
-            $user->syncRoles([$request->role]); // Sync Spatie
+            if (array_key_exists('is_active', $validated) && ! $validated['is_active']) {
+                return $this->sendError('Cannot deactivate your own account', [], 422);
+            }
         }
 
+        if (array_key_exists('role', $validated)) {
+            $user->role = $validated['role']; // Force update the column
+            $user->syncRoles([$validated['role']]); // Sync Spatie
+            unset($validated['role']);
+        }
+
+        if (! empty($validated['password'])) {
+            $validated['password'] = Hash::make($validated['password']);
+        } else {
+            unset($validated['password']);
+        }
+
+        unset($validated['avatar']);
         $user->fill($validated);
 
         if ($request->hasFile('avatar')) {
@@ -110,6 +144,17 @@ class ApiSuperAdminUserController extends ApiBaseController
 
 
         return $this->sendResponse($user->load('roles'), 'User updated successfully');
+    }
+
+    private function normalizeBooleanInput(mixed $value): mixed
+    {
+        if (is_bool($value) || $value === 1 || $value === 0 || $value === '1' || $value === '0') {
+            return $value;
+        }
+
+        $normalized = filter_var($value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+
+        return $normalized ?? $value;
     }
 
     public function ban(Request $request, User $user)

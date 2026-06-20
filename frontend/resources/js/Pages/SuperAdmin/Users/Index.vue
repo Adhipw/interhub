@@ -6,7 +6,7 @@ import Card from '@/Components/Card.vue';
 import Modal from '@/Components/Modal.vue';
 import Pagination from '@/Components/Pagination.vue';
 import { 
-  Users, Search, ShieldCheck, ShieldAlert,
+  Users, Search, ShieldCheck, ShieldAlert, CheckCircle2,
   Trash2, UserCog, Check, X, MoreVertical, Ban, Unlock,
   Plus, Filter, AlertCircle, Phone, Mail, User as UserIcon,
   Lock, Eye, EyeOff, Loader2, Download, Image as ImageIcon
@@ -15,11 +15,13 @@ import {
 import { formatDate } from '@/Lib/utils';
 import { useDebounceFn } from '@vueuse/core';
 import { useLangStore } from '@/Stores/lang';
+import { useToastStore } from '@/Stores/toast';
 import api from '@/Services/api';
 import ImportModal from '@/Components/ImportModal.vue';
 import type { User, PaginatedResponse } from '@/Types/user';
 
 const langStore = useLangStore();
+const toast = useToastStore();
 const t = (key: string) => langStore.t(key);
 const __ = t;
 
@@ -116,6 +118,24 @@ const openCreateModal = () => {
 };
 
 
+const appendFormValue = (formData: FormData, key: string, value: unknown) => {
+    if (value instanceof File) {
+        formData.append(key, value);
+        return;
+    }
+
+    if (typeof value === 'boolean') {
+        formData.append(key, value ? '1' : '0');
+        return;
+    }
+
+    formData.append(key, String(value));
+};
+
+const getApiErrorMessage = (error: any) => {
+    return error.response?.data?.message || t('common.error_occurred');
+};
+
 const submitCreate = async () => {
     processing.value = true;
     createForm.errors = {};
@@ -124,8 +144,8 @@ const submitCreate = async () => {
     Object.keys(createForm).forEach(key => {
         if (key === 'errors') return;
         const val = (createForm as any)[key];
-        if (val !== null && val !== undefined) {
-            formData.append(key, val instanceof File ? val : String(val));
+        if (val !== null && val !== undefined && val !== '') {
+            appendFormValue(formData, key, val);
         }
     });
 
@@ -138,9 +158,9 @@ const submitCreate = async () => {
     } catch (error: any) {
         if (error.response?.data?.errors) {
             createForm.errors = error.response.data.errors;
-        } else {
-            alert(t('common.error_occurred'));
         }
+        logger.error('Failed to create user:', error);
+        toast.error(getApiErrorMessage(error));
     } finally {
         processing.value = false;
     }
@@ -196,8 +216,8 @@ const submitEdit = async () => {
     Object.keys(editForm).forEach(key => {
         if (key === 'errors') return;
         const val = (editForm as any)[key];
-        if (val !== null && val !== '') {
-            formData.append(key, val);
+        if (val !== null && val !== undefined && val !== '') {
+            appendFormValue(formData, key, val);
         }
     });
 
@@ -211,9 +231,9 @@ const submitEdit = async () => {
     } catch (error: any) {
         if (error.response?.data?.errors) {
             editForm.errors = error.response.data.errors;
-        } else {
-            alert(t('common.error_occurred'));
         }
+        logger.error('Failed to update user:', error);
+        toast.error(getApiErrorMessage(error));
     } finally {
         processing.value = false;
     }
