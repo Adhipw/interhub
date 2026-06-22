@@ -73,6 +73,9 @@ if [ "${SEED_BASELINE_DATA:-false}" = "true" ]; then
     php artisan db:seed --class=ProductionBaselineSeeder --force
 fi
 
+echo "Scraping latest internships..."
+php artisan internships:scrape --limit=10 || true
+
 php artisan config:cache || true
 
 php-fpm -D
