@@ -13,6 +13,9 @@ import Skeleton from '@/Components/Skeleton.vue';
 import { formatDate } from '@/Lib/utils';
 import { useAuthStore } from '@/Stores/auth';
 import { useLangStore } from '@/Stores/lang';
+import { router as inertiaRouter } from '@inertiajs/vue3';
+import echo from '@/echo';
+import { onMounted, onUnmounted } from 'vue';
 
 interface AdminDashboardProps {
     stats?: {
@@ -43,7 +46,32 @@ const stats = computed(() => props.stats || {
 });
 const recentLogs = computed(() => props.recentLogs || props.recent_logs || []);
 const pendingCompanies = computed(() => props.pendingCompanies || props.pending_companies || []);
-const loading = computed(() => false);
+const loading = ref(false);
+
+const fetchData = () => {
+    loading.value = true;
+    inertiaRouter.reload({
+        only: ['stats', 'recent_logs', 'pending_companies'],
+        onFinish: () => { loading.value = false; }
+    });
+};
+
+onMounted(() => {
+    if (echo && user.value?.id) {
+        echo.join('admins.online')
+            .listen('DashboardUpdated', (e: any) => {
+                if (e.reload) {
+                    fetchData();
+                }
+            });
+    }
+});
+
+onUnmounted(() => {
+    if (echo) {
+        echo.leave('admins.online');
+    }
+});
 </script>
 
 <template>

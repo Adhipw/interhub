@@ -13,6 +13,8 @@ import {
 import DashboardLayout from '@/Layouts/DashboardLayout.vue';
 import StatusBadge from '@/Components/StatusBadge.vue';
 import { useLangStore } from '@/Stores/lang';
+import echo from '@/echo';
+import { onMounted, onUnmounted, ref } from 'vue';
 
 interface HrApplication {
     id: number;
@@ -55,8 +57,33 @@ const defaultStats: HrStats = {
     scheduled_interviews: 0,
 };
 
-const loading = computed(() => false);
-const error = computed(() => '');
+const loading = ref(false);
+const error = ref('');
+
+const fetchData = () => {
+    loading.value = true;
+    inertiaRouter.reload({
+        only: ['stats', 'recentApplications', 'company'],
+        onFinish: () => { loading.value = false; }
+    });
+};
+
+onMounted(() => {
+    if (echo && company.value?.id) {
+        echo.private(`company.${company.value.id}`)
+            .listen('DashboardUpdated', (e: any) => {
+                if (e.reload) {
+                    fetchData();
+                }
+            });
+    }
+});
+
+onUnmounted(() => {
+    if (echo && company.value?.id) {
+        echo.leave(`company.${company.value.id}`);
+    }
+});
 
 const stats = computed<HrStats>(() => ({
     ...defaultStats,

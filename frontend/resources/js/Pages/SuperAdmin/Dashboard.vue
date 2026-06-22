@@ -15,9 +15,17 @@ import { useAuthStore } from '@/Stores/auth';
 import { useLangStore } from '@/Stores/lang';
 import api from '@/Services/api';
 import logger from '@/Lib/logger';
+import echo from '@/echo';
+import { onMounted, onUnmounted, ref } from 'vue';
+import VueApexCharts from 'vue3-apexcharts';
 
 interface SuperAdminDashboardProps {
     stats?: Record<string, any>;
+    chart_data?: {
+        dates: string[];
+        users: number[];
+        applications: number[];
+    };
     security_events?: any[];
     audit_logs?: any[];
     system_info?: Record<string, any>;
@@ -49,13 +57,9 @@ import { router as inertiaRouter } from '@inertiajs/vue3';
 
 const fetchData = () => {
     loading.value = true;
-    error.value = null;
-
     inertiaRouter.reload({
-        only: ['stats', 'system_health', 'audit_logs', 'security_events', 'system_info'],
-        onFinish: () => {
-            loading.value = false;
-        },
+        only: ['stats', 'security_events', 'audit_logs', 'system_health', 'chart_data'],
+        onFinish: () => { loading.value = false; },
         onError: (err) => {
             error.value = err;
             logger.error('Failed to refresh super admin dashboard:', err);
@@ -63,7 +67,85 @@ const fetchData = () => {
     });
 };
 
+const chartOptions = computed(() => {
+    const isDark = document.documentElement.classList.contains('dark');
+    return {
+        chart: {
+            type: 'area',
+            height: 350,
+            fontFamily: 'inherit',
+            toolbar: { show: false },
+            zoom: { enabled: false },
+            background: 'transparent'
+        },
+        colors: ['#3b82f6', '#10b981'], 
+        dataLabels: { enabled: false },
+        stroke: { curve: 'smooth', width: 3 },
+        fill: {
+            type: 'gradient',
+            gradient: {
+                shadeIntensity: 1,
+                opacityFrom: 0.4,
+                opacityTo: 0.05,
+                stops: [0, 90, 100]
+            }
+        },
+        xaxis: {
+            categories: props.chart_data?.dates || [],
+            axisBorder: { show: false },
+            axisTicks: { show: false },
+            labels: {
+                style: { colors: isDark ? '#94a3b8' : '#64748b' }
+            }
+        },
+        yaxis: {
+            labels: {
+                style: { colors: isDark ? '#94a3b8' : '#64748b' }
+            }
+        },
+        grid: {
+            borderColor: isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)',
+            strokeDashArray: 4,
+            xaxis: { lines: { show: true } },
+            yaxis: { lines: { show: true } }
+        },
+        theme: { mode: isDark ? 'dark' : 'light' },
+        legend: {
+            position: 'top',
+            horizontalAlign: 'right',
+            labels: { colors: isDark ? '#f1f5f9' : '#0f172a' }
+        },
+        tooltip: { theme: isDark ? 'dark' : 'light' }
+    };
+});
 
+const chartSeries = computed(() => [
+    {
+        name: 'New Users',
+        data: props.chart_data?.users || []
+    },
+    {
+        name: 'New Applications',
+        data: props.chart_data?.applications || []
+    }
+]);
+
+onMounted(() => {
+    if (echo && user.value?.id) {
+        echo.join('admins.online')
+            .listen('DashboardUpdated', (e: any) => {
+                if (e.reload) {
+                    fetchData();
+                }
+            });
+    }
+});
+
+onUnmounted(() => {
+    if (echo) {
+        echo.leave('admins.online');
+    }
+});
 </script>
 
 <template>
@@ -117,7 +199,30 @@ const fetchData = () => {
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
                 <!-- System Health Monitor -->
-                <div class="lg:col-span-2 space-y-10">
+                <div class="lg:col-span-2 space-y-12">
+                    
+                    <!-- System Activity Chart -->
+                    <Card class="!p-8 !rounded-[3rem] border-slate-100 dark:border-white/5 shadow-premium">
+                        <div class="flex items-center justify-between mb-8">
+                            <div>
+                                <h2 class="text-xl font-black text-slate-900 dark:text-white flex items-center gap-2">
+                                    <Activity class="w-5 h-5 text-indigo-600" />
+                                    System Activity Overview
+                                </h2>
+                                <p class="text-xs font-bold text-slate-500 mt-1">Growth & engagement over the last 7 days</p>
+                            </div>
+                        </div>
+                        <div class="h-[350px] w-full">
+                            <VueApexCharts 
+                                v-if="props.chart_data"
+                                type="area" 
+                                height="350" 
+                                :options="chartOptions" 
+                                :series="chartSeries" 
+                            />
+                        </div>
+                    </Card>
+
                     <div class="flex items-center justify-between px-4">
                         <h2 class="text-2xl font-black text-slate-900 dark:text-white flex items-center gap-3">
                             <Activity class="w-6 h-6 text-indigo-600" />

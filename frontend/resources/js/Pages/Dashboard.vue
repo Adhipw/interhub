@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { Link } from '@inertiajs/vue3';
+import { Link, router as inertiaRouter } from '@inertiajs/vue3';
 import DashboardLayout from '@/Layouts/DashboardLayout.vue';
-import { computed } from 'vue';
+import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { 
     Briefcase, Bookmark, FileCheck, CheckCircle2, 
     ArrowUpRight, Clock, MapPin, ChevronRight, User,
@@ -18,6 +18,7 @@ import { useAuthStore } from '@/Stores/auth';
 import { useLangStore } from '@/Stores/lang';
 import type { Application } from '@/Types/application';
 import type { Internship } from '@/Types/internship';
+import echo from '@/echo';
 
 interface DashboardData {
     recent_applications: Application[];
@@ -53,7 +54,32 @@ const stats = computed(() => props.stats || {
 const recent_applications = computed(() => props.recent_applications || []);
 const recommended_internships = computed(() => props.recommended_internships || []);
 const notifications = computed(() => props.notifications || []);
-const loading = computed(() => false);
+const loading = ref(false);
+
+const fetchData = () => {
+    loading.value = true;
+    inertiaRouter.reload({
+        only: ['stats', 'recent_applications', 'recommended_internships', 'notifications', 'saved_internships'],
+        onFinish: () => { loading.value = false; }
+    });
+};
+
+onMounted(() => {
+    if (echo && authStore.user?.id) {
+        echo.private(`App.Models.User.${authStore.user.id}`)
+            .listen('DashboardUpdated', (e: any) => {
+                if (e.reload) {
+                    fetchData();
+                }
+            });
+    }
+});
+
+onUnmounted(() => {
+    if (echo && authStore.user?.id) {
+        echo.leave(`App.Models.User.${authStore.user.id}`);
+    }
+});
 </script>
 
 <template>

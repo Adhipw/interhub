@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\AuditLog;
 use App\Models\SecurityEvent;
 use App\Models\User;
+use App\Models\Application;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 use Inertia\Inertia;
 
 class DashboardController extends Controller
@@ -30,12 +32,32 @@ class DashboardController extends Controller
             'storage_used' => $storageUsedPercent,
         ];
 
+        // Generate Chart Data for the last 7 days
+        $chartDates = [];
+        $usersData = [];
+        $appsData = [];
+        
+        for ($i = 6; $i >= 0; $i--) {
+            $date = Carbon::today()->subDays($i);
+            $chartDates[] = $date->format('M d');
+            
+            $usersData[] = User::whereDate('created_at', $date)->count();
+            $appsData[] = Application::whereDate('created_at', $date)->count();
+        }
+
+        $chartData = [
+            'dates' => $chartDates,
+            'users' => $usersData,
+            'applications' => $appsData,
+        ];
+
         $requestStart = defined('LARAVEL_START')
             ? LARAVEL_START
             : ($_SERVER['REQUEST_TIME_FLOAT'] ?? microtime(true));
 
         return Inertia::render('SuperAdmin/Dashboard', [
             'stats' => $stats,
+            'chart_data' => $chartData,
             'security_events' => $securityEvents,
             'audit_logs' => $auditLogs,
             'system_info' => [

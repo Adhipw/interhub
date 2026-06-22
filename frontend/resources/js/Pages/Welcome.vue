@@ -9,6 +9,7 @@ import { useTheme } from '@/Composables/useTheme';
 import { Head } from '@/Components';
 import Icon from '@/Components/Icon.vue';
 import api from '@/Services/api';
+import echo from '@/echo';
 
 interface WelcomeProps {
     featuredInternships?: any[];
@@ -144,6 +145,16 @@ onMounted(() => {
     }
 
     fetchTestimonials();
+
+    // Listen for realtime stats updates
+    if (echo) {
+        echo.channel('public-stats')
+            .listen('PublicStatsUpdated', (e: any) => {
+                if (e.stats) {
+                    stats.value = e.stats;
+                }
+            });
+    }
 });
 
 // Format numbers based on locale

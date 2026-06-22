@@ -8,8 +8,14 @@ use App\Events\ProfileUpdated;
 use App\Listeners\ProcessLog;
 use App\Mail\Transport\ResendTransport;
 use App\Models\ActivityLog;
+use App\Models\Application;
 use App\Models\AuditLog;
+use App\Models\Company;
+use App\Models\Internship;
 use App\Models\SecurityEvent;
+use App\Models\User;
+use App\Events\PublicStatsUpdated;
+use App\Events\DashboardUpdated;
 use App\Policies\LogPolicy;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Event;
@@ -83,5 +89,42 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('view-notification-channel', function ($user, $id) {
             return (int) $user->id === (int) $id;
         });
+
+        // Broadcast public stats
+        $statsModels = [User::class, Company::class, Internship::class, Application::class];
+        foreach ($statsModels as $model) {
+            $model::saved(fn () => event(new PublicStatsUpdated()));
+            $model::deleted(fn () => event(new PublicStatsUpdated()));
+        }
+
+        // Broadcast role-specific dashboard updates
+        $dispatchDashboardUpdates = function ($model) {
+            $channels = ['admins.online'];
+
+            if ($model instanceof Application) {
+                $channels[] = 'App.Models.User.' . $model->user_id;
+                
+                if ($model->internship) {
+                    $channels[] = 'company.' . $model->internship->company_id;
+                    if ($model->internship->mentor_id) {
+                        $channels[] = 'mentor.' . $model->internship->mentor_id;
+                    }
+                }
+            } elseif ($model instanceof Internship) {
+                $channels[] = 'company.' . $model->company_id;
+                if ($model->mentor_id) {
+                    $channels[] = 'mentor.' . $model->mentor_id;
+                }
+            } elseif ($model instanceof Company) {
+                $channels[] = 'company.' . $model->id;
+            }
+
+            event(new DashboardUpdated(array_unique($channels)));
+        };
+
+        foreach ($statsModels as $model) {
+            $model::saved($dispatchDashboardUpdates);
+            $model::deleted($dispatchDashboardUpdates);
+        }
     }
 }

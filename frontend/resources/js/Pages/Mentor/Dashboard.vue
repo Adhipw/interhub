@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Link } from '@inertiajs/vue3';
-import { computed } from 'vue';
+import { Link, router as inertiaRouter } from '@inertiajs/vue3';
+import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { useAuthStore } from '@/Stores/auth';
 import { useLangStore } from '@/Stores/lang';
 import DashboardLayout from '@/Layouts/DashboardLayout.vue';
@@ -13,6 +13,7 @@ import {
 import { formatDate } from '@/Lib/utils';
 import type { Application } from '@/Types/application';
 import type { Feedback } from '@/Types/feedback';
+import echo from '@/echo';
 
 interface MentorDashboardProps {
     stats?: {
@@ -38,7 +39,32 @@ const stats = computed(() => ({
 }));
 const activeMentees = computed<Application[]>(() => props.activeMentees || []);
 const recentFeedbacks = computed<Feedback[]>(() => props.recentFeedbacks || []);
-const loading = computed(() => false);
+const loading = ref(false);
+
+const fetchData = () => {
+    loading.value = true;
+    inertiaRouter.reload({
+        only: ['stats', 'activeMentees', 'recentFeedbacks'],
+        onFinish: () => { loading.value = false; }
+    });
+};
+
+onMounted(() => {
+    if (echo && authStore.user?.id) {
+        echo.private(`mentor.${authStore.user.id}`)
+            .listen('DashboardUpdated', (e: any) => {
+                if (e.reload) {
+                    fetchData();
+                }
+            });
+    }
+});
+
+onUnmounted(() => {
+    if (echo && authStore.user?.id) {
+        echo.leave(`mentor.${authStore.user.id}`);
+    }
+});
 </script>
 
 <template>
