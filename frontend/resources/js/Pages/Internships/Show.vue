@@ -150,8 +150,7 @@ updateSeo();
                                     <div class="w-1.5 h-8 bg-primary-600 rounded-full"></div>
                                     {{ t('hr.internships.about_role') }}
                                 </h2>
-                                <div class="prose prose-neutral dark:prose-invert max-w-none text-neutral-500 dark:text-neutral-400 font-medium leading-relaxed">
-                                    {{ internship.description }}
+                                <div class="prose prose-neutral dark:prose-invert max-w-none text-neutral-500 dark:text-neutral-400 font-medium leading-relaxed" v-html="internship.description">
                                 </div>
                             </section>
 
@@ -160,10 +159,11 @@ updateSeo();
                                     <div class="w-1.5 h-8 bg-primary-600 rounded-full"></div>
                                     {{ t('hr.internships.requirements') }}
                                 </h2>
-                                <ul class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div v-if="typeof internship.requirements === 'string'" class="prose prose-neutral dark:prose-invert max-w-none text-neutral-500 dark:text-neutral-400 font-medium leading-relaxed" v-html="internship.requirements"></div>
+                                <ul v-else class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <li v-for="(req, index) in internship.requirements" :key="index" class="flex items-start gap-4 p-6 bg-white dark:bg-neutral-900 rounded-3xl border border-neutral-100 dark:border-neutral-800 shadow-sm">
                                         <CheckCircle2 class="w-6 h-6 text-emerald-500 shrink-0" />
-                                        <span class="text-neutral-600 dark:text-neutral-300 font-bold leading-tight">{{ req }}</span>
+                                        <span class="text-neutral-600 dark:text-neutral-300 font-bold leading-tight" v-html="req"></span>
                                     </li>
                                 </ul>
                             </section>
