@@ -80,6 +80,20 @@ const submitApplication = async () => {
     });
 };
 
+const goBack = () => {
+    if (typeof window !== 'undefined' && window.history.length > 1) {
+        window.history.back();
+    } else {
+        inertiaRouter.visit('/internships');
+    }
+};
+
+const cleanHtml = (html?: string | null) => {
+    if (!html) return '';
+    // Hapus tag komentar Google Translate/Kalibrr
+    return html.replace(/<!--TgQPHd\|?\[\]-->/g, '');
+};
+
 updateSeo();
 </script>
 
@@ -88,7 +102,7 @@ updateSeo();
         <div class="bg-neutral-50 dark:bg-neutral-950 min-h-screen pt-32 pb-32">
             <div class="container mx-auto px-6 max-w-6xl">
                 <!-- Back Button -->
-                <button @click="window.history.length > 1 ? window.history.back() : inertiaRouter.visit('/internships')" class="flex items-center gap-2 text-neutral-400 hover:text-primary-600 transition-colors mb-12 group font-bold text-sm uppercase tracking-widest">
+                <button @click="goBack" class="flex items-center gap-2 text-neutral-400 hover:text-primary-600 transition-colors mb-12 group font-bold text-sm uppercase tracking-widest">
                     <ArrowLeft class="w-5 h-5 group-hover:-translate-x-2 transition-transform" />
                     {{ t('common.back') }}
                 </button>
@@ -150,7 +164,7 @@ updateSeo();
                                     <div class="w-1.5 h-8 bg-primary-600 rounded-full"></div>
                                     {{ t('hr.internships.about_role') }}
                                 </h2>
-                                <div class="prose prose-neutral dark:prose-invert max-w-none text-neutral-500 dark:text-neutral-400 font-medium leading-relaxed" v-html="internship.description">
+                                <div class="prose prose-neutral dark:prose-invert max-w-none text-neutral-500 dark:text-neutral-400 font-medium leading-relaxed" v-html="cleanHtml(internship.description)">
                                 </div>
                             </section>
 
@@ -159,11 +173,11 @@ updateSeo();
                                     <div class="w-1.5 h-8 bg-primary-600 rounded-full"></div>
                                     {{ t('hr.internships.requirements') }}
                                 </h2>
-                                <div v-if="typeof internship.requirements === 'string'" class="prose prose-neutral dark:prose-invert max-w-none text-neutral-500 dark:text-neutral-400 font-medium leading-relaxed" v-html="internship.requirements"></div>
+                                <div v-if="typeof internship.requirements === 'string'" class="prose prose-neutral dark:prose-invert max-w-none text-neutral-500 dark:text-neutral-400 font-medium leading-relaxed" v-html="cleanHtml(internship.requirements)"></div>
                                 <ul v-else class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <li v-for="(req, index) in internship.requirements" :key="index" class="flex items-start gap-4 p-6 bg-white dark:bg-neutral-900 rounded-3xl border border-neutral-100 dark:border-neutral-800 shadow-sm">
                                         <CheckCircle2 class="w-6 h-6 text-emerald-500 shrink-0" />
-                                        <span class="text-neutral-600 dark:text-neutral-300 font-bold leading-tight" v-html="req"></span>
+                                        <span class="text-neutral-600 dark:text-neutral-300 font-bold leading-tight" v-html="cleanHtml(req)"></span>
                                     </li>
                                 </ul>
                             </section>
