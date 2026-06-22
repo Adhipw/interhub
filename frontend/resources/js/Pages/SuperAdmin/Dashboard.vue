@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
 import DashboardLayout from '@/Layouts/DashboardLayout.vue';
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { 
     Users, ShieldCheck, Database, Globe, 
     Settings, Activity, AlertCircle, ArrowUpRight,
@@ -12,10 +12,10 @@ import {
 import Card from '@/Components/Card.vue';
 import Skeleton from '@/Components/Skeleton.vue';
 import { useAuthStore } from '@/Stores/auth';
+import { useLangStore } from '@/Stores/lang';
 import api from '@/Services/api';
 import logger from '@/Lib/logger';
 import echo from '@/echo';
-import { onMounted, onUnmounted, ref, computed } from 'vue';
 import VueApexCharts from 'vue3-apexcharts';
 import type { ApexOptions } from 'apexcharts';
 
