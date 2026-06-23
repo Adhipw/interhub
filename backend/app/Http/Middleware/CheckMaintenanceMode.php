@@ -17,6 +17,11 @@ class CheckMaintenanceMode
      */
     public function handle(Request $request, Closure $next): Response
     {
+        // Allow health checks to pass to prevent Railway from killing the container
+        if ($request->is('up') || $request->is('api/v1/health')) {
+            return $next($request);
+        }
+
         // Cache the feature flag for 1 minute to avoid DB hits on every single request
         $isMaintenance = Cache::remember('maintenance_mode_enabled', 60, function () {
             return FeatureFlag::where('key', 'maintenance_mode')->value('is_enabled') ?? false;
