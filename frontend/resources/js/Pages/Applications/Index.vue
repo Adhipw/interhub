@@ -71,7 +71,7 @@ const loading = computed(() => !props.applications);
                         <div class="relative z-10 flex flex-col md:flex-row md:items-center gap-8">
                             <!-- Company Logo -->
                             <div class="w-20 h-20 bg-slate-50 rounded-3xl flex items-center justify-center shrink-0 border border-slate-50 overflow-hidden shadow-inner">
-                                <img v-if="app.internship.company.logo_url" :src="app.internship.company.logo_url" class="w-full h-full object-cover" />
+                                <img loading="lazy" decoding="async" v-if="app.internship.company.logo_url" :src="app.internship.company.logo_url" class="w-full h-full object-cover" />
                                 <Briefcase v-else class="w-10 h-10 text-slate-200" />
                             </div>
 

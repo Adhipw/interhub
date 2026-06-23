@@ -261,7 +261,7 @@ const tabs = [
                 <div class="relative w-28 h-28 mx-auto mb-6">
                     <div class="absolute inset-0 bg-primary-500/10 rounded-full animate-pulse scale-110"></div>
                     <div class="relative w-full h-full bg-slate-100 dark:bg-slate-900 rounded-full flex items-center justify-center text-3xl font-bold text-slate-400 border-4 border-white dark:border-slate-800 shadow-card overflow-hidden transition-transform group-hover:scale-105 duration-500">
-                       <img v-if="application.user.avatar_url" :src="application.user.avatar_url" class="w-full h-full object-cover" />
+                       <img loading="lazy" decoding="async" v-if="application.user.avatar_url" :src="application.user.avatar_url" class="w-full h-full object-cover" />
                        <span v-else>{{ application.user.name.charAt(0) }}</span>
                     </div>
                 </div>

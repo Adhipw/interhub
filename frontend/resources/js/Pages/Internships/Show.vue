@@ -119,7 +119,7 @@ updateSeo();
                                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-8 mb-12">
                                     <div class="flex items-center gap-8">
                                         <div class="w-24 h-24 bg-neutral-50 dark:bg-neutral-950 rounded-[2rem] flex items-center justify-center border border-neutral-100 dark:border-neutral-800 shadow-sm overflow-hidden shrink-0">
-                                            <img v-if="internship.company?.logo_url" :src="internship.company.logo_url" class="w-full h-full object-contain p-4" />
+                                            <img loading="lazy" decoding="async" v-if="internship.company?.logo_url" :src="internship.company.logo_url" class="w-full h-full object-contain p-4" />
                                             <Building2 v-else class="w-12 h-12 text-neutral-300" />
                                         </div>
                                         <div>
@@ -222,7 +222,7 @@ updateSeo();
                             <h3 class="text-xs font-black uppercase tracking-[0.2em] text-neutral-400">{{ t('company.about') }}</h3>
                             <div class="flex items-center gap-6">
                                 <div class="w-16 h-16 bg-neutral-50 dark:bg-neutral-950 rounded-2xl flex items-center justify-center border border-neutral-100 dark:border-neutral-800 shadow-sm overflow-hidden shrink-0">
-                                    <img v-if="internship.company?.logo_url" :src="internship.company.logo_url" class="w-full h-full object-contain p-3" />
+                                    <img loading="lazy" decoding="async" v-if="internship.company?.logo_url" :src="internship.company.logo_url" class="w-full h-full object-contain p-3" />
                                     <Building2 v-else class="w-10 h-10 text-neutral-300" />
                                 </div>
                                 <div>
@@ -261,7 +261,7 @@ updateSeo();
             <div class="space-y-8" v-if="internship">
                 <div class="p-6 bg-neutral-50 dark:bg-neutral-800 rounded-3xl border border-neutral-100 dark:border-neutral-700 flex items-center gap-6">
                     <div class="w-16 h-16 bg-white dark:bg-neutral-900 rounded-2xl flex items-center justify-center border border-neutral-100 dark:border-neutral-800 shadow-sm overflow-hidden shrink-0">
-                        <img v-if="internship.company?.logo_url" :src="internship.company.logo_url" class="w-full h-full object-contain p-3" />
+                        <img loading="lazy" decoding="async" v-if="internship.company?.logo_url" :src="internship.company.logo_url" class="w-full h-full object-contain p-3" />
                         <Building2 v-else class="w-10 h-10 text-neutral-300" />
                     </div>
                     <div>

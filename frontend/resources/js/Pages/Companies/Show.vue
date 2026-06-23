@@ -30,7 +30,7 @@ const internships = computed(() => Array.isArray(props.internships) ? props.inte
                 <div class="bg-white dark:bg-neutral-900 rounded-[3rem] p-10 md:p-16 border border-neutral-100 dark:border-neutral-800 shadow-2xl shadow-neutral-200/50 dark:shadow-none mb-16">
                     <div class="flex flex-col md:flex-row items-center md:items-start gap-12">
                         <div class="w-32 h-32 bg-neutral-50 dark:bg-neutral-950 rounded-[2.5rem] flex items-center justify-center border border-neutral-100 dark:border-neutral-800 shadow-sm shrink-0 overflow-hidden">
-                            <img v-if="company.logo_url" :src="company.logo_url" class="w-full h-full object-contain p-6" />
+                            <img loading="lazy" decoding="async" v-if="company.logo_url" :src="company.logo_url" class="w-full h-full object-contain p-6" />
                             <Building2 v-else class="w-16 h-16 text-neutral-300" />
                         </div>
                         

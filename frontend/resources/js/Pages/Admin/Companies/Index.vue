@@ -120,7 +120,7 @@ const handleConfirmedAction = async (companyId: number) => {
           <Card v-for="company in companies.data" :key="company.id" class="p-8 border-none shadow-sm flex flex-col h-full group">
             <div class="flex items-start justify-between mb-6">
               <div class="w-16 h-16 bg-slate-50 dark:bg-slate-900 rounded-2xl flex items-center justify-center text-slate-300 group-hover:bg-primary-600 group-hover:text-white transition-all overflow-hidden border border-slate-50 dark:border-slate-800">
-                 <img v-if="company.logo_url" :src="company.logo_url" class="w-full h-full object-cover" />
+                 <img loading="lazy" decoding="async" v-if="company.logo_url" :src="company.logo_url" class="w-full h-full object-cover" />
                  <Building2 v-else class="w-8 h-8" />
               </div>
               <div 

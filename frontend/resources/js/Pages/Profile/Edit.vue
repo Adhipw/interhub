@@ -185,7 +185,7 @@ const submit = async () => {
                         <div class="flex flex-col md:flex-row items-center gap-8 bg-slate-50 dark:bg-slate-800/50 p-8 rounded-3xl border border-slate-100 dark:border-slate-700">
                             <div class="relative group">
                                 <div class="w-32 h-32 bg-white dark:bg-slate-800 rounded-full border-4 border-white dark:border-slate-700 shadow-xl overflow-hidden flex items-center justify-center text-slate-200 dark:text-slate-600">
-                                    <img v-if="form.avatar_preview || authStore.user?.avatar_url" :src="form.avatar_preview || authStore.user?.avatar_url" class="w-full h-full object-cover" />
+                                    <img loading="lazy" decoding="async" v-if="form.avatar_preview || authStore.user?.avatar_url" :src="form.avatar_preview || authStore.user?.avatar_url" class="w-full h-full object-cover" />
                                     <User v-else class="w-16 h-16" />
                                 </div>
                                 <label class="absolute inset-0 bg-black/40 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer rounded-full">

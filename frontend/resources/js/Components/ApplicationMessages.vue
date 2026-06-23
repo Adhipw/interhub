@@ -104,7 +104,7 @@ onMounted(() => {
                     :class="msg.user_id === currentUser?.id ? 'flex-row-reverse' : 'flex-row'"
                 >
                     <div class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center shrink-0 overflow-hidden">
-                        <img v-if="msg.user?.profile_photo_url" :src="msg.user.profile_photo_url" class="w-full h-full object-cover" />
+                        <img loading="lazy" decoding="async" v-if="msg.user?.profile_photo_url" :src="msg.user.profile_photo_url" class="w-full h-full object-cover" />
                         <UserIcon v-else class="w-4 h-4 text-slate-400" />
                     </div>
                     <div 

@@ -377,7 +377,7 @@ const getObjectURL = (file: File | null) => {
                 <td class="px-6 py-6">
                   <div class="flex items-center gap-4">
                     <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-primary-500 to-indigo-600 flex items-center justify-center text-white font-black shadow-lg shadow-primary-500/20 shrink-0 overflow-hidden">
-                      <img v-if="user.avatar_url" :src="user.avatar_url" class="w-full h-full object-cover" />
+                      <img loading="lazy" decoding="async" v-if="user.avatar_url" :src="user.avatar_url" class="w-full h-full object-cover" />
                       <span v-else>{{ user.name.charAt(0) }}</span>
                     </div>
                     <div class="flex flex-col min-w-0">
@@ -552,7 +552,7 @@ const getObjectURL = (file: File | null) => {
         <form @submit.prevent="submitCreate" class="space-y-6">
           <div class="flex flex-col items-center gap-4 mb-8">
             <div class="w-24 h-24 rounded-full bg-slate-100 dark:bg-slate-800 border-4 border-white dark:border-slate-900 shadow-xl overflow-hidden group relative">
-               <img v-if="createForm.avatar" :src="getObjectURL(createForm.avatar)" class="w-full h-full object-cover" />
+               <img loading="lazy" decoding="async" v-if="createForm.avatar" :src="getObjectURL(createForm.avatar)" class="w-full h-full object-cover" />
                <div v-else class="w-full h-full flex items-center justify-center text-slate-400">
                   <ImageIcon class="w-10 h-10" />
                </div>
@@ -676,8 +676,8 @@ const getObjectURL = (file: File | null) => {
         <form @submit.prevent="submitEdit" class="space-y-6">
           <div class="flex flex-col items-center gap-4 mb-8">
             <div class="w-24 h-24 rounded-full bg-slate-100 dark:bg-slate-800 border-4 border-white dark:border-slate-900 shadow-xl overflow-hidden group relative">
-               <img v-if="editForm.avatar" :src="getObjectURL(editForm.avatar)" class="w-full h-full object-cover" />
-               <img v-else-if="editingUser?.avatar_url" :src="editingUser.avatar_url" class="w-full h-full object-cover" />
+               <img loading="lazy" decoding="async" v-if="editForm.avatar" :src="getObjectURL(editForm.avatar)" class="w-full h-full object-cover" />
+               <img loading="lazy" decoding="async" v-else-if="editingUser?.avatar_url" :src="editingUser.avatar_url" class="w-full h-full object-cover" />
                <div v-else class="w-full h-full flex items-center justify-center text-slate-400">
                   <ImageIcon class="w-10 h-10" />
                </div>

@@ -168,7 +168,7 @@ if (props.filters) {
                                     <!-- Logo -->
                                     <div class="w-16 h-16 md:w-20 md:h-20 bg-neutral-50 dark:bg-neutral-950 rounded-2xl flex items-center justify-center border border-neutral-100 dark:border-neutral-800 shrink-0 group-hover:scale-105 transition-transform duration-500 shadow-sm relative overflow-hidden">
                                         <div class="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                                        <img v-if="internship.company?.logo_url" :src="internship.company.logo_url" class="w-full h-full object-contain p-3 relative z-10" />
+                                        <img loading="lazy" decoding="async" v-if="internship.company?.logo_url" :src="internship.company.logo_url" class="w-full h-full object-contain p-3 relative z-10" />
                                         <Building2 v-else class="w-8 h-8 md:w-10 md:h-10 text-neutral-300 relative z-10" />
                                     </div>
 

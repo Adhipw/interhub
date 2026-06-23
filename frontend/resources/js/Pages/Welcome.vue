@@ -308,7 +308,7 @@ const faqs = computed(() => [
                     <div v-for="job in featuredInternships" :key="job.id" class="group relative p-6 md:p-8 rounded-[2.5rem] border transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 flex flex-col" :class="isDarkMode ? 'bg-slate-900 border-slate-800 hover:border-blue-900 shadow-slate-950' : 'bg-white border-slate-200 hover:border-blue-100 shadow-slate-100'">
                         <div class="flex items-start justify-between mb-8">
                              <div class="w-14 h-14 rounded-2xl flex items-center justify-center border font-black text-xl overflow-hidden shadow-sm" :class="isDarkMode ? 'bg-slate-800 border-slate-700 text-blue-500' : 'bg-blue-50 border-blue-50 text-blue-600'">
-                                <img v-if="job.company?.logo_url" :src="job.company.logo_url" class="w-full h-full object-cover p-2" />
+                                <img loading="lazy" decoding="async" v-if="job.company?.logo_url" :src="job.company.logo_url" class="w-full h-full object-cover p-2" />
                                 <span v-else>{{ job.company?.name?.charAt(0) }}</span>
                             </div>
                             <span class="px-3 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest" :class="isDarkMode ? 'bg-blue-900/40 text-blue-400' : 'bg-blue-50 text-blue-600'">{{ job.working_type || job.type }}</span>
@@ -392,7 +392,7 @@ const faqs = computed(() => [
                 <div v-else-if="companiesRes.length > 0" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
                     <div v-for="comp in companiesRes" :key="comp.id" class="p-6 rounded-3xl border transition-all duration-300 flex flex-col items-center gap-4 group" :class="isDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-100 shadow-sm'">
                         <div class="w-16 h-16 rounded-2xl flex items-center justify-center border font-black text-xl overflow-hidden grayscale group-hover:grayscale-0 transition-all group-hover:scale-110" :class="isDarkMode ? 'bg-slate-800 border-slate-700 text-blue-500' : 'bg-slate-50 border-slate-200 text-slate-400'">
-                            <img v-if="comp.logo_url" :src="comp.logo_url" class="w-full h-full object-cover" />
+                            <img loading="lazy" decoding="async" v-if="comp.logo_url" :src="comp.logo_url" class="w-full h-full object-cover" />
                             <span v-else>{{ comp.name?.charAt(0) }}</span>
                         </div>
                         <div class="text-center">

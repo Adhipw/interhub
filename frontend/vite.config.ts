@@ -4,6 +4,7 @@ import vue from '@vitejs/plugin-vue';
 import tailwindcss from '@tailwindcss/vite';
 import path from 'path';
 import { transform } from 'esbuild';
+import viteCompression from 'vite-plugin-compression';
 
 const stripConsolePlugin = () => ({
     name: 'strip-console-in-production',
@@ -65,6 +66,8 @@ export default defineConfig(({ mode }) => {
             }),
             ...(mode === 'production' ? [stripConsolePlugin()] : []),
             tailwindcss(),
+            viteCompression({ algorithm: 'brotliCompress' }),
+            viteCompression({ algorithm: 'gzip' }),
         ],
         resolve: {
             alias: {

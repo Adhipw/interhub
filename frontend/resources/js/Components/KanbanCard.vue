@@ -42,7 +42,7 @@ const initials = computed(() => {
       <!-- High-Fidelity Avatar/Logo -->
       <div class="relative shrink-0">
         <div class="w-16 h-16 rounded-2xl overflow-hidden bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 shadow-sm flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
-          <img v-if="image" :src="image" class="w-full h-full object-cover p-1" />
+          <img loading="lazy" decoding="async" v-if="image" :src="image" class="w-full h-full object-cover p-1" />
           <div v-else class="text-lg font-black text-slate-300">{{ initials }}</div>
         </div>
         <!-- Online/Status Indicator -->

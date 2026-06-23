@@ -466,7 +466,7 @@ const navigation = computed(() => {
                             <p class="text-[9px] font-bold text-primary-600 uppercase tracking-widest truncate">{{ roleLabel }}</p>
                         </div>
                         <div class="w-12 h-12 rounded-2xl bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 flex items-center justify-center group-hover:scale-105 transition-transform overflow-hidden">
-                            <img v-if="user.avatar_url" :src="user.avatar_url" class="w-full h-full object-cover" />
+                            <img loading="lazy" decoding="async" v-if="user.avatar_url" :src="user.avatar_url" class="w-full h-full object-cover" />
                             <User v-else class="w-6 h-6 text-neutral-400" />
                         </div>
                     </Link>
