@@ -59,6 +59,7 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => $request->password, // Automatically hashed via model cast if configured, or use Hash::make
+            'role' => $request->role,
             'phone_number' => $request->phone_number,
             'is_active' => $request->is_active,
             'email_verified_at' => now(), // Auto-verify for admin-created accounts
@@ -101,6 +102,7 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->phone_number = $request->phone_number;
         $user->is_active = $request->is_active;
+        $user->role = $request->role;
 
         if ($request->filled('password')) {
             $user->password = $request->password;

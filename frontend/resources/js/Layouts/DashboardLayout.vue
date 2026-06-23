@@ -475,6 +475,9 @@ const navigation = computed(() => {
 
             <!-- Dashboard Content -->
             <div class="p-8 lg:p-12 animate-reveal">
+                <div v-if="$slots.header" class="mb-8">
+                    <slot name="header" />
+                </div>
                 <slot />
             </div>
         </main>

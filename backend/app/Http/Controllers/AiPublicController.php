@@ -8,6 +8,7 @@ use App\Services\AI\DTOs\AiMessage;
 use App\Services\AI\Enums\AiRole;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\RateLimiter;
 
 class AiPublicController extends Controller
 {
@@ -18,6 +19,27 @@ class AiPublicController extends Controller
         $request->validate([
             'prompt' => 'required|string|max:500',
         ]);
+
+        // Rate limiting — applied globally regardless of AI provider
+        $rateLimitKey = 'public-finder:' . $request->ip();
+        $maxRequests  = 20;
+        $executed = RateLimiter::attempt($rateLimitKey, $maxRequests, fn() => true, 3600);
+        if (! $executed) {
+            return response()->json([
+                'error'   => 'RATE_LIMIT_EXCEEDED',
+                'message' => 'Batas penggunaan AI Finder tercapai. Silakan coba lagi dalam 1 jam.',
+            ], 429);
+        }
+
+        // Run safety check on input prompt
+        try {
+            app(\App\Services\AI\Safety\SafetyGuard::class)->validateInput($request->prompt);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'SAFETY_VIOLATION',
+                'message' => 'Input mengandung kata kunci sensitif/terlarang.'
+            ], 422);
+        }
 
         // 1. Fetch published active internships
         $internships = Internship::published()->with('company')->get();
@@ -70,8 +92,8 @@ class AiPublicController extends Controller
 
                 $response = $this->aiService->chat($messages, [
                     'skip_auth'      => true,
-                    'rate_limit_key' => 'public-finder:'.$request->ip(),
-                    'max_requests'   => 20,
+                    'rate_limit_key' => 'public-finder-gemini:'.$request->ip(),
+                    'max_requests'   => 1000, // Rate limiting already enforced above at controller level
                 ]);
 
                 $content = trim($response->content);
