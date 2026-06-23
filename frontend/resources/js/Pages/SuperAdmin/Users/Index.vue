@@ -572,7 +572,7 @@ const getObjectURL = (file: File | null) => {
                 <UserIcon class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-primary-600" />
                 <input v-model="createForm.name" type="text" class="w-full pl-11 pr-6 py-3.5 bg-slate-50 dark:bg-slate-800 dark:text-white border-none rounded-2xl focus:ring-2 focus:ring-primary-500/20" placeholder="Contoh: John Doe" />
               </div>
-              <div v-if="createForm.errors.name" class="text-xs text-red-500 font-bold">{{ createForm.errors.name[0] }}</div>
+              <div v-if="createForm.errors.name" class="text-xs text-red-500 font-bold">{{ createForm.errors.name }}</div>
             </div>
 
             <div class="space-y-2">
@@ -581,7 +581,7 @@ const getObjectURL = (file: File | null) => {
                 <Mail class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-primary-600" />
                 <input v-model="createForm.email" type="email" class="w-full pl-11 pr-6 py-3.5 bg-slate-50 dark:bg-slate-800 dark:text-white border-none rounded-2xl focus:ring-2 focus:ring-primary-500/20" placeholder="email@contoh.com" />
               </div>
-              <div v-if="createForm.errors.email" class="text-xs text-red-500 font-bold">{{ createForm.errors.email[0] }}</div>
+              <div v-if="createForm.errors.email" class="text-xs text-red-500 font-bold">{{ createForm.errors.email }}</div>
             </div>
 
             <div class="space-y-2">
@@ -616,7 +616,7 @@ const getObjectURL = (file: File | null) => {
                   <EyeOff v-else class="w-4 h-4" />
                 </button>
               </div>
-              <div v-if="createForm.errors.password" class="text-xs text-red-500 font-bold">{{ createForm.errors.password[0] }}</div>
+              <div v-if="createForm.errors.password" class="text-xs text-red-500 font-bold">{{ createForm.errors.password }}</div>
             </div>
 
             <div class="space-y-2">
@@ -694,19 +694,19 @@ const getObjectURL = (file: File | null) => {
             <div class="space-y-2">
               <label class="text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-400">Nama Lengkap</label>
               <input v-model="editForm.name" type="text" class="w-full px-6 py-3.5 bg-slate-50 dark:bg-slate-800 dark:text-white border-none rounded-2xl focus:ring-2 focus:ring-primary-500/20" />
-              <div v-if="editForm.errors.name" class="text-xs text-red-500 font-bold mt-1">{{ editForm.errors.name[0] }}</div>
+              <div v-if="editForm.errors.name" class="text-xs text-red-500 font-bold mt-1">{{ editForm.errors.name }}</div>
             </div>
 
             <div class="space-y-2">
               <label class="text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-400">Alamat Email</label>
               <input v-model="editForm.email" type="email" class="w-full px-6 py-3.5 bg-slate-50 dark:bg-slate-800 dark:text-white border-none rounded-2xl focus:ring-2 focus:ring-primary-500/20" />
-              <div v-if="editForm.errors.email" class="text-xs text-red-500 font-bold mt-1">{{ editForm.errors.email[0] }}</div>
+              <div v-if="editForm.errors.email" class="text-xs text-red-500 font-bold mt-1">{{ editForm.errors.email }}</div>
             </div>
 
             <div class="space-y-2">
               <label class="text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-400">Nomor Telepon</label>
               <input v-model="editForm.phone_number" type="text" class="w-full px-6 py-3.5 bg-slate-50 dark:bg-slate-800 dark:text-white border-none rounded-2xl focus:ring-2 focus:ring-primary-500/20" />
-              <div v-if="editForm.errors.phone_number" class="text-xs text-red-500 font-bold mt-1">{{ editForm.errors.phone_number[0] }}</div>
+              <div v-if="editForm.errors.phone_number" class="text-xs text-red-500 font-bold mt-1">{{ editForm.errors.phone_number }}</div>
             </div>
 
             <div class="space-y-2">
@@ -718,7 +718,7 @@ const getObjectURL = (file: File | null) => {
                 <option value="mentor">MENTOR</option>
                 <option value="user">USER (STUDENT)</option>
               </select>
-              <div v-if="editForm.errors.role" class="text-xs text-red-500 font-bold mt-1">{{ editForm.errors.role[0] }}</div>
+              <div v-if="editForm.errors.role" class="text-xs text-red-500 font-bold mt-1">{{ editForm.errors.role }}</div>
             </div>
           </div>
 
@@ -738,7 +738,7 @@ const getObjectURL = (file: File | null) => {
                 <input v-model="editForm.password_confirmation" :type="showPassword ? 'text' : 'password'" class="w-full px-6 py-3.5 bg-white dark:bg-slate-900 dark:text-white border-none rounded-2xl focus:ring-2 focus:ring-primary-500/20" placeholder="Konfirmasi Password" />
               </div>
             </div>
-            <div v-if="editForm.errors.password" class="text-xs text-red-500 font-bold mt-2">{{ editForm.errors.password[0] }}</div>
+            <div v-if="editForm.errors.password" class="text-xs text-red-500 font-bold mt-2">{{ editForm.errors.password }}</div>
           </div>
 
           <div class="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-900 rounded-2xl">
