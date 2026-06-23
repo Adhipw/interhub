@@ -114,6 +114,20 @@ class AuthController extends Controller
         /** @var User $user */
         $user = Auth::user();
 
+        $isMaintenance = \Illuminate\Support\Facades\Cache::remember('maintenance_mode_enabled', 60, function () {
+            return \App\Models\FeatureFlag::where('key', 'maintenance_mode')->value('is_enabled') ?? false;
+        });
+
+        if ($isMaintenance && $user->role !== 'super_admin') {
+            Auth::logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
+            throw ValidationException::withMessages([
+                'email' => __('Mohon maaf, sistem sedang maintenance. Hanya Super Admin yang dapat login.'),
+            ]);
+        }
+
         if ($user->banned_at) {
             Auth::logout();
             $request->session()->invalidate();

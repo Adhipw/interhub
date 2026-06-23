@@ -32,6 +32,18 @@ class ApiAuthController extends ApiBaseController
         /** @var User $user */
         $user = Auth::user();
 
+        $isMaintenance = \Illuminate\Support\Facades\Cache::remember('maintenance_mode_enabled', 60, function () {
+            return \App\Models\FeatureFlag::where('key', 'maintenance_mode')->value('is_enabled') ?? false;
+        });
+
+        if ($isMaintenance && $user->role !== 'super_admin') {
+            Auth::logout();
+            
+            return $this->sendError(__('System Maintenance'), [
+                'email' => __('Mohon maaf, sistem sedang maintenance. Hanya Super Admin yang dapat login.'),
+            ], 503);
+        }
+
         if ($user->banned_at) {
             Auth::logout();
 
