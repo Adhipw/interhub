@@ -19,7 +19,7 @@ const goBack = () => {
 </script>
 
 <template>
-    <Head :title="`${status}: Halaman Tidak Ditemukan`" />
+    <Head :title="status === 503 ? 'Sedang Update Sistem' : `${status}: Halaman Tidak Ditemukan`" />
     
     <PublicLayout>
         <div class="min-h-[80vh] flex items-center justify-center px-6 pt-20">
@@ -37,9 +37,11 @@ const goBack = () => {
                 </div>
 
                 <div class="space-y-4">
-                    <h2 class="text-3xl md:text-5xl font-bold text-slate-900">Ups! Sepertinya Anda Tersesat.</h2>
+                    <h2 class="text-3xl md:text-5xl font-bold text-slate-900">
+                        {{ status === 503 ? 'Sedang Update Sistem' : 'Ups! Sepertinya Anda Tersesat.' }}
+                    </h2>
                     <p class="text-slate-500 text-lg md:text-xl max-w-lg mx-auto">
-                        Halaman yang Anda cari tidak ditemukan atau telah dipindahkan. Jangan khawatir, mari kembali ke jalur yang benar.
+                        {{ status === 503 ? 'Mohon maaf, saat ini sedang dilakukan update/redeploy sistem untuk fitur baru. Silakan coba kembali dalam beberapa saat.' : 'Halaman yang Anda cari tidak ditemukan atau telah dipindahkan. Jangan khawatir, mari kembali ke jalur yang benar.' }}
                     </p>
                 </div>
 
