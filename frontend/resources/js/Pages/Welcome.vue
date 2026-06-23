@@ -2,8 +2,7 @@
 import logger from '@/Lib/logger';
 import { Link, router as inertiaRouter } from '@inertiajs/vue3';
 import PublicLayout from '@/Layouts/PublicLayout.vue';
-import { ref, onMounted, computed, watch } from 'vue';
-import { useAuthStore } from '@/Stores/auth';
+import { ref, onMounted, computed } from 'vue';
 import { useLangStore } from '@/Stores/lang';
 import { useTheme } from '@/Composables/useTheme';
 import { Head } from '@/Components';
@@ -18,7 +17,6 @@ interface WelcomeProps {
 }
 
 const props = defineProps<WelcomeProps>();
-const authStore = useAuthStore();
 const langStore = useLangStore();
 const { isDarkMode } = useTheme();
 
@@ -66,22 +64,24 @@ const submitAiMatcher = async () => {
         } else {
             aiMatches.value = [];
         }
-    } catch (err: any) {
+    } catch (err: unknown) {
         logger.error('AI Matcher failed:', err);
-        const errCode = err.response?.data?.error;
-        const status = err.response?.status;
+        const errorData = (err as any)?.response?.data;
+        const errCode = errorData?.error;
+        const status = (err as any)?.response?.status;
         if (errCode === 'RATE_LIMIT_EXCEEDED' || status === 429) {
             aiError.value = '⏳ Mesin AI sedang sibuk. Batas penggunaan tercapai. Silakan coba lagi dalam 1 jam.';
-        } else if (!err.response || status >= 500) {
+        } else if (!(err as any)?.response || status >= 500) {
             aiError.value = '🔧 Server AI sedang tidak tersedia. Silakan coba beberapa saat lagi.';
         } else {
-            aiError.value = err.response?.data?.message || err.response?.data?.error || 'Gagal terhubung dengan mesin AI. Silakan coba beberapa saat lagi.';
+            aiError.value = errorData?.message || errorData?.error || 'Gagal terhubung dengan mesin AI. Silakan coba beberapa saat lagi.';
         }
     } finally {
         aiLoading.value = false;
     }
 };
 
+// eslint-disable-next-line no-undef
 const handleAiKeydown = (e: KeyboardEvent) => {
     if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
         e.preventDefault();

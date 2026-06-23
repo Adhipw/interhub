@@ -29,7 +29,9 @@ class CheckMaintenanceMode
 
         if ($isMaintenance) {
             // Allow super_admin to bypass
-            if (auth()->check() && auth()->user()->role === 'super_admin') {
+            /** @var \App\Models\User|null $user */
+            $user = \Illuminate\Support\Facades\Auth::user();
+            if (\Illuminate\Support\Facades\Auth::check() && $user && $user->role === 'super_admin') {
                 return $next($request);
             }
             

@@ -120,7 +120,7 @@ class MemberController extends Controller
         }
 
         // Don't allow deleting self?
-        if ($member->user_id === auth()->id()) {
+        if ($member->user_id === \Illuminate\Support\Facades\Auth::id()) {
             return back()->withErrors(['error' => 'Anda tidak bisa menghapus diri sendiri.']);
         }
 
