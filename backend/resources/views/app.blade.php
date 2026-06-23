@@ -50,11 +50,12 @@
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
         <link rel="apple-touch-icon" href="/brand/logo-mark.svg">
         
+        <meta name="app-config" content="{{ json_encode([
+            'recaptchaSiteKey' => config('services.recaptcha.site_key'),
+            'recaptchaAllowFallback' => config('services.recaptcha.allow_fallback'),
+        ]) }}">
         <script>
-            window.__APP_CONFIG__ = @json([
-                'recaptchaSiteKey' => config('services.recaptcha.site_key'),
-                'recaptchaAllowFallback' => config('services.recaptcha.allow_fallback'),
-            ]);
+            window.__APP_CONFIG__ = JSON.parse(document.querySelector('meta[name="app-config"]').getAttribute('content'));
         </script>
         @vite(['resources/js/app.ts', 'resources/css/app.css'], 'build')
 
