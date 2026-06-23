@@ -61,14 +61,22 @@ const submitAiMatcher = async () => {
         const response = await api.post('/ai/public/finder', {
             prompt: aiPrompt.value
         });
-        if (response.data && response.data.matches) {
+        if (response.data && Array.isArray(response.data.matches)) {
             aiMatches.value = response.data.matches;
         } else {
             aiMatches.value = [];
         }
     } catch (err: any) {
         logger.error('AI Matcher failed:', err);
-        aiError.value = err.response?.data?.error || 'Gagal terhubung dengan mesin AI. Silakan coba beberapa saat lagi.';
+        const errCode = err.response?.data?.error;
+        const status = err.response?.status;
+        if (errCode === 'RATE_LIMIT_EXCEEDED' || status === 429) {
+            aiError.value = '⏳ Mesin AI sedang sibuk. Batas penggunaan tercapai. Silakan coba lagi dalam 1 jam.';
+        } else if (!err.response || status >= 500) {
+            aiError.value = '🔧 Server AI sedang tidak tersedia. Silakan coba beberapa saat lagi.';
+        } else {
+            aiError.value = err.response?.data?.message || err.response?.data?.error || 'Gagal terhubung dengan mesin AI. Silakan coba beberapa saat lagi.';
+        }
     } finally {
         aiLoading.value = false;
     }
