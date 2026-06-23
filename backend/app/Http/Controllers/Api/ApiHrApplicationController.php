@@ -245,8 +245,9 @@ class ApiHrApplicationController extends ApiBaseController
         }
 
         // Clean arrays
-        $requiredRequirements = $internship->requirements ?? [];
-        $candidateSkills = $detail->skills ?? [];
+        $requiredRequirements = is_array($internship->requirements) ? $internship->requirements : (is_string($internship->requirements) ? strip_tags($internship->requirements) : '');
+        $requiredRequirements = $requiredRequirements ? (is_array($requiredRequirements) ? $requiredRequirements : explode(',', $requiredRequirements)) : [];
+        $candidateSkills = is_array($detail->skills) ? $detail->skills : (is_string($detail->skills) ? explode(',', $detail->skills) : []);
 
         // Build Gemini prompt
         $prompt = "Anda adalah Asisten Rekrutmen AI profesional untuk InternHub.
@@ -280,7 +281,8 @@ Format keluaran harus persis berupa teks dengan 3 baris poin tersebut, tanpa tam
             $summary = $response->content;
 
             return $this->sendResponse(['summary' => $summary], 'AI Resume summary generated');
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::error('AI Summary Error: ' . $e->getMessage());
             // Local fallback logic
             $matchCount = 0;
             $requiredSkillsLower = array_map('strtolower', $requiredRequirements);
