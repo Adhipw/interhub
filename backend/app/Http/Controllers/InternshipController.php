@@ -41,10 +41,10 @@ class InternshipController extends Controller
                 ->limit(12)
                 ->get(),
             'stats' => [
-                'total_internships' => Internship::count(),
+                'total_internships' => Internship::published()->count(),
                 'total_companies' => Company::count(),
-                'total_placements' => Application::count(),
-                'total_students' => User::count(),
+                'total_placements' => Application::whereIn('status', ['accepted', 'hired'])->count(),
+                'total_students' => User::role('user')->count() ?: User::where('role', 'user')->count(),
             ],
         ]);
     }
