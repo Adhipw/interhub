@@ -31,7 +31,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'is_active',
     ];
 
-    protected $appends = ['role', 'all_roles', 'created_at_human'];
+    protected $appends = ['role', 'all_roles', 'created_at_human', 'all_permissions'];
 
     /**
      * Always return the first role name.
@@ -58,6 +58,18 @@ class User extends Authenticatable implements MustVerifyEmail
         $singleRole = $this->getAttributeFromArray('role');
 
         return $singleRole ? [$singleRole] : [];
+    }
+
+    /**
+     * Get all permission names from Spatie.
+     */
+    public function getAllPermissionsAttribute(): array
+    {
+        if ($this->relationLoaded('permissions') || $this->relationLoaded('roles.permissions')) {
+            return $this->getAllPermissions()->pluck('name')->toArray();
+        }
+
+        return [];
     }
 
     public function getCreatedAtHumanAttribute(): string

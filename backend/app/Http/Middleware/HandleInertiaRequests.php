@@ -76,7 +76,7 @@ class HandleInertiaRequests extends Middleware
         }
 
         try {
-            return $request->user()->load(['detail', 'roles']);
+            return $request->user()->load(['detail', 'roles', 'permissions', 'roles.permissions']);
         } catch (QueryException $e) {
             Log::warning('Failed to load shared authenticated user relations', [
                 'user_id' => $request->user()->id,

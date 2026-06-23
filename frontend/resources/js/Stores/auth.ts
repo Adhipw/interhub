@@ -21,6 +21,9 @@ export const useAuthStore = defineStore('auth', {
         isMentor: (state) => state.user?.role === 'mentor' || state.user?.all_roles?.includes('mentor') || false,
         isAdmin: (state) => state.user?.role === 'admin' || state.user?.all_roles?.includes('admin') || false,
         isSuperAdmin: (state) => state.user?.role === 'super_admin' || state.user?.all_roles?.includes('super_admin') || false,
+        hasPermission: (state) => (permission: string) => {
+            return state.user?.all_permissions?.includes(permission) || false;
+        },
     },
 
     actions: {

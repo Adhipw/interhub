@@ -239,6 +239,14 @@ const navigation = computed(() => {
             { name: t('sidebar.security_events'), icon: Shield, href: '/super-admin/security-events' },
             { name: t('sidebar.system_settings'), icon: Settings, href: '/super-admin/settings' }
         );
+
+        // Dynamically add admin features if Super Admin checked the permissions
+        if (authStore.hasPermission('view_companies')) {
+            baseNav.push({ name: t('sidebar.company_moderation'), icon: Building2, href: '/admin/companies' });
+        }
+        if (authStore.hasPermission('view_internships')) {
+            baseNav.push({ name: t('sidebar.internship_moderation'), icon: Briefcase, href: '/admin/internships' });
+        }
     } else if (isAdmin) {
         baseNav.push(
             { name: t('sidebar.user_moderation'), icon: Users, href: '/admin/users' },
