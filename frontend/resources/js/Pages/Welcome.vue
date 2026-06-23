@@ -82,6 +82,22 @@ const submitAiMatcher = async () => {
     }
 };
 
+const handleAiKeydown = (e: KeyboardEvent) => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+        e.preventDefault();
+        submitAiMatcher();
+    }
+};
+
+// Contoh prompt saran untuk user
+const aiExamples = [
+    'Saya mahasiswa Ilmu Komunikasi, suka marketing digital dan media sosial',
+    'Frontend developer React & Vue, cari magang remote',
+    'Mahasiswa Hukum semester 6, tertarik bidang legal',
+    'Suka desain grafis dan video editing',
+    'Data analyst Python dan Excel',
+];
+
 const submitSearch = () => {
     inertiaRouter.get('/internships', {
         q: searchQuery.value,
@@ -492,6 +508,7 @@ v-for="item in [
                                 class="w-full border-none focus:ring-0 bg-transparent text-base font-bold resize-none h-32 px-6 py-4" 
                                 :class="isDarkMode ? 'text-white placeholder:text-slate-700' : 'text-slate-900 placeholder:text-slate-400'"
                                 :disabled="aiLoading"
+                                @keydown="handleAiKeydown"
                             ></textarea>
                             
                             <div class="flex items-center justify-between p-2">
@@ -508,6 +525,20 @@ v-for="item in [
                                     {{ aiLoading ? 'Menganalisis...' : t('ai.btn') }}
                                 </button>
                             </div>
+                        </div>
+
+                        <!-- AI Example Prompt Chips -->
+                        <div v-if="!aiHasSearched" class="max-w-2xl mx-auto mt-6 flex flex-wrap justify-center gap-2">
+                            <span class="text-[10px] font-black uppercase tracking-widest text-slate-400 w-full text-center mb-1">Contoh:</span>
+                            <button
+                                v-for="ex in aiExamples"
+                                :key="ex"
+                                class="px-4 py-2 rounded-full text-xs font-bold border transition-all hover:scale-105 active:scale-95"
+                                :class="isDarkMode ? 'bg-slate-900 border-slate-700 text-slate-400 hover:border-blue-600 hover:text-blue-400' : 'bg-slate-50 border-slate-200 text-slate-600 hover:border-blue-500 hover:text-blue-600'"
+                                @click="aiPrompt = ex; submitAiMatcher()"
+                            >
+                                {{ ex.length > 40 ? ex.slice(0, 38) + '...' : ex }}
+                            </button>
                         </div>
 
                         <!-- AI Loader State -->
