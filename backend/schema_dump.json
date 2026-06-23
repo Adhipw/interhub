@@ -1,0 +1,2894 @@
+{
+    "migrations": [
+        {
+            "column_name": "id",
+            "data_type": "integer",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "migration",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "batch",
+            "data_type": "integer",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        }
+    ],
+    "password_reset_tokens": [
+        {
+            "column_name": "email",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "token",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "created_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        }
+    ],
+    "sessions": [
+        {
+            "column_name": "id",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "user_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "ip_address",
+            "data_type": "character varying",
+            "character_maximum_length": 45,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "user_agent",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "payload",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "last_activity",
+            "data_type": "integer",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        }
+    ],
+    "cache": [
+        {
+            "column_name": "key",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "value",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "expiration",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        }
+    ],
+    "cache_locks": [
+        {
+            "column_name": "key",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "owner",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "expiration",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        }
+    ],
+    "jobs": [
+        {
+            "column_name": "id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "queue",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "payload",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "attempts",
+            "data_type": "smallint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "reserved_at",
+            "data_type": "integer",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "available_at",
+            "data_type": "integer",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "created_at",
+            "data_type": "integer",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        }
+    ],
+    "job_batches": [
+        {
+            "column_name": "id",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "name",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "total_jobs",
+            "data_type": "integer",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "pending_jobs",
+            "data_type": "integer",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "failed_jobs",
+            "data_type": "integer",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "failed_job_ids",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "options",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "cancelled_at",
+            "data_type": "integer",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "created_at",
+            "data_type": "integer",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "finished_at",
+            "data_type": "integer",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        }
+    ],
+    "failed_jobs": [
+        {
+            "column_name": "id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "uuid",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "connection",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "queue",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "payload",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "exception",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "failed_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        }
+    ],
+    "email_verification_otps": [
+        {
+            "column_name": "id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "email",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "otp",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "expires_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "attempts",
+            "data_type": "integer",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "created_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "updated_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        }
+    ],
+    "password_reset_otps": [
+        {
+            "column_name": "id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "email",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "otp",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "expires_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "attempts",
+            "data_type": "integer",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "created_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "updated_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        }
+    ],
+    "login_attempts": [
+        {
+            "column_name": "id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "user_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "email",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "ip_address",
+            "data_type": "character varying",
+            "character_maximum_length": 45,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "user_agent",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "is_successful",
+            "data_type": "boolean",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "created_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "updated_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        }
+    ],
+    "security_events": [
+        {
+            "column_name": "id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "user_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "event_type",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "description",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "ip_address",
+            "data_type": "character varying",
+            "character_maximum_length": 45,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "user_agent",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "created_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "updated_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "severity",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "payload",
+            "data_type": "json",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        }
+    ],
+    "social_accounts": [
+        {
+            "column_name": "id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "user_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "provider",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "provider_id",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "avatar",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "created_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "updated_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        }
+    ],
+    "users": [
+        {
+            "column_name": "id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "name",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "email",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "email_verified_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "password",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "remember_token",
+            "data_type": "character varying",
+            "character_maximum_length": 100,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "created_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "updated_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "phone_number",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "avatar_url",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "last_login_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "last_login_ip",
+            "data_type": "character varying",
+            "character_maximum_length": 45,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "role",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "is_active",
+            "data_type": "boolean",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        }
+    ],
+    "permissions": [
+        {
+            "column_name": "id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "name",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "guard_name",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "created_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "updated_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        }
+    ],
+    "model_has_permissions": [
+        {
+            "column_name": "permission_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "model_type",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "model_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        }
+    ],
+    "roles": [
+        {
+            "column_name": "id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "name",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "guard_name",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "created_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "updated_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        }
+    ],
+    "model_has_roles": [
+        {
+            "column_name": "role_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "model_type",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "model_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        }
+    ],
+    "role_has_permissions": [
+        {
+            "column_name": "permission_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "role_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        }
+    ],
+    "saved_internships": [
+        {
+            "column_name": "id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "user_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "internship_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "created_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "updated_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        }
+    ],
+    "companies": [
+        {
+            "column_name": "id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "name",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "slug",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "logo_url",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "description",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "website",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "location",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "is_verified",
+            "data_type": "boolean",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "created_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "updated_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "deleted_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "user_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "latitude",
+            "data_type": "numeric",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "longitude",
+            "data_type": "numeric",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "geofence_radius",
+            "data_type": "integer",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "industry_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        }
+    ],
+    "user_details": [
+        {
+            "column_name": "id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "user_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "bio",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "phone_number",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "address",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "education",
+            "data_type": "json",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "skills",
+            "data_type": "json",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "cv_path",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "portfolio_path",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "created_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "updated_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "ai_consent",
+            "data_type": "boolean",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "ai_consent_updated_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        }
+    ],
+    "audit_logs": [
+        {
+            "column_name": "id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "user_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "action",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "auditable_type",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "auditable_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "old_values",
+            "data_type": "json",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "new_values",
+            "data_type": "json",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "ip_address",
+            "data_type": "character varying",
+            "character_maximum_length": 45,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "user_agent",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "created_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "updated_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "description",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        }
+    ],
+    "company_members": [
+        {
+            "column_name": "id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "company_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "user_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "role",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "is_active",
+            "data_type": "boolean",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "created_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "updated_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        }
+    ],
+    "feature_flags": [
+        {
+            "column_name": "id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "name",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "key",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "is_enabled",
+            "data_type": "boolean",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "description",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "created_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "updated_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        }
+    ],
+    "mentor_feedback": [
+        {
+            "column_name": "id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "application_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "mentor_user_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "content",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "assessment",
+            "data_type": "json",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "status",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "created_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "updated_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "deleted_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        }
+    ],
+    "external_integrations": [
+        {
+            "column_name": "id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "name",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "provider",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "credentials",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "settings",
+            "data_type": "json",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "is_active",
+            "data_type": "boolean",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "last_synced_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "created_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "updated_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "deleted_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "is_secret",
+            "data_type": "boolean",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        }
+    ],
+    "mentor_tasks": [
+        {
+            "column_name": "id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "application_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "mentor_user_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "title",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "description",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "due_date",
+            "data_type": "date",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "status",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "priority",
+            "data_type": "integer",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "created_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "updated_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "deleted_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        }
+    ],
+    "mentor_evaluations": [
+        {
+            "column_name": "id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "application_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "mentor_user_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "title",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "summary",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "metrics",
+            "data_type": "json",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "recommendation",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "final_status",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "created_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "updated_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "deleted_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        }
+    ],
+    "locations": [
+        {
+            "column_name": "id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "name",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "type",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "is_active",
+            "data_type": "boolean",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "created_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "updated_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        }
+    ],
+    "system_settings": [
+        {
+            "column_name": "id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "key",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "value",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "group",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "type",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "description",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "is_sensitive",
+            "data_type": "boolean",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "created_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "updated_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        }
+    ],
+    "applications": [
+        {
+            "column_name": "id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "user_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "internship_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "status",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "cover_letter",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "timeline",
+            "data_type": "json",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "cv_snapshot",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "portfolio_snapshot",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "created_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "updated_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "deleted_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "interviewer_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "hr_notes",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "mentor_user_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "current_stage_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        }
+    ],
+    "interview_schedules": [
+        {
+            "column_name": "id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "application_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "interviewer_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "scheduled_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "type",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "meeting_link",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "location",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "notes",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "created_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "updated_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "available_slots",
+            "data_type": "json",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        }
+    ],
+    "internships": [
+        {
+            "column_name": "id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "company_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "title",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "slug",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "description",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "requirements",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "benefits",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "type",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "location",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "deadline_at",
+            "data_type": "date",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "status",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "created_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "updated_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "deleted_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "is_paid",
+            "data_type": "boolean",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "stipend",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "tags",
+            "data_type": "json",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "search_vector",
+            "data_type": "tsvector",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "is_external",
+            "data_type": "boolean",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "external_source",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "external_id",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "external_url",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "external_metadata",
+            "data_type": "json",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "latitude",
+            "data_type": "numeric",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "longitude",
+            "data_type": "numeric",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "industry_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "category",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "YES"
+        }
+    ],
+    "integration_logs": [
+        {
+            "column_name": "id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "external_integration_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "status",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "message",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "items_processed",
+            "data_type": "integer",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "items_imported",
+            "data_type": "integer",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "items_skipped",
+            "data_type": "integer",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "error_details",
+            "data_type": "json",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "created_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "updated_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        }
+    ],
+    "notifications": [
+        {
+            "column_name": "id",
+            "data_type": "uuid",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "type",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "notifiable_type",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "notifiable_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "data",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "read_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "created_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "updated_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        }
+    ],
+    "application_stage_history": [
+        {
+            "column_name": "id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "application_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "from_stage_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "to_stage_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "changed_by",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "notes",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "duration_minutes",
+            "data_type": "integer",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "created_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "updated_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        }
+    ],
+    "ai_usage_logs": [
+        {
+            "column_name": "id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "user_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "provider",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "model",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "prompt_summary",
+            "data_type": "json",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "response_content",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "tokens_used",
+            "data_type": "integer",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "cost",
+            "data_type": "double precision",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "metadata",
+            "data_type": "json",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "created_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "updated_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        }
+    ],
+    "ai_file_access_logs": [
+        {
+            "column_name": "id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "user_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "file_path",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "file_type",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "ai_feature",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "purpose",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "accessed_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "created_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "updated_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        }
+    ],
+    "recruitment_stages": [
+        {
+            "column_name": "id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "internship_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "name",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "order",
+            "data_type": "integer",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "type",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "sla_days",
+            "data_type": "integer",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "created_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "updated_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        }
+    ],
+    "screening_rubrics": [
+        {
+            "column_name": "id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "internship_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "criteria",
+            "data_type": "json",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "created_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "updated_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        }
+    ],
+    "application_scores": [
+        {
+            "column_name": "id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "application_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "score",
+            "data_type": "numeric",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "factors",
+            "data_type": "json",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "is_ai_suggested",
+            "data_type": "boolean",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "human_reviewed",
+            "data_type": "boolean",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "reviewer_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "created_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "updated_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        }
+    ],
+    "activity_logs": [
+        {
+            "column_name": "id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "user_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "action",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "subject_type",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "subject_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "description",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "properties",
+            "data_type": "json",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "ip_address",
+            "data_type": "character varying",
+            "character_maximum_length": 45,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "user_agent",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "created_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "updated_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        }
+    ],
+    "attendances": [
+        {
+            "column_name": "id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "user_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "application_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "check_in_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "check_out_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "check_in_location",
+            "data_type": "json",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "check_out_location",
+            "data_type": "json",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "status",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "notes",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "created_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "updated_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        }
+    ],
+    "attendance_corrections": [
+        {
+            "column_name": "id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "attendance_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "requested_by",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "new_check_in_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "new_check_out_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "reason",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "status",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "reviewed_by",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "reviewer_notes",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "created_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "updated_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        }
+    ],
+    "user_locations": [
+        {
+            "column_name": "id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "user_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "name",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "latitude",
+            "data_type": "numeric",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "longitude",
+            "data_type": "numeric",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "is_primary",
+            "data_type": "boolean",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "created_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "updated_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        }
+    ],
+    "personal_access_tokens": [
+        {
+            "column_name": "id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "tokenable_type",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "tokenable_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "name",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "token",
+            "data_type": "character varying",
+            "character_maximum_length": 64,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "abilities",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "last_used_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "expires_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "created_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "updated_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        }
+    ],
+    "ai_nearby_logs": [
+        {
+            "column_name": "id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "user_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "prompt",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "location_context",
+            "data_type": "json",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "response",
+            "data_type": "json",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "created_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "updated_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        }
+    ],
+    "user_activations": [
+        {
+            "column_name": "id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "created_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "updated_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        }
+    ],
+    "mentoring_sessions": [
+        {
+            "column_name": "id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "application_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "mentor_user_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "title",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "description",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "scheduled_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "duration_minutes",
+            "data_type": "integer",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "status",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "meeting_link",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "created_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "updated_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        }
+    ],
+    "onboarding_documents": [
+        {
+            "column_name": "id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "application_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "user_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "type",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "file_path",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "file_name",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "status",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "notes",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "verified_by",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "verified_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "created_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "updated_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        }
+    ],
+    "industries": [
+        {
+            "column_name": "id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "name",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "slug",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "description",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "icon",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "is_active",
+            "data_type": "boolean",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "created_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "updated_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        }
+    ],
+    "application_messages": [
+        {
+            "column_name": "id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "application_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "user_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "message",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "attachments",
+            "data_type": "json",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "created_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "updated_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        }
+    ],
+    "tickets": [
+        {
+            "column_name": "id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "reported_by",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "reported_against",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "application_id",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "category",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "description",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "status",
+            "data_type": "character varying",
+            "character_maximum_length": 255,
+            "is_nullable": "NO"
+        },
+        {
+            "column_name": "resolution_notes",
+            "data_type": "text",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "resolved_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "resolved_by",
+            "data_type": "bigint",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "created_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "updated_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        },
+        {
+            "column_name": "deleted_at",
+            "data_type": "timestamp without time zone",
+            "character_maximum_length": null,
+            "is_nullable": "YES"
+        }
+    ]
+}

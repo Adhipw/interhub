@@ -110,21 +110,18 @@ onUnmounted(() => {
                             </div>
                         </div>
 
-                        <template v-if="user">
-                            <Link :href="dashboardRoute" class="flex items-center gap-2 text-sm font-bold px-5 py-2.5 rounded-xl border shadow-sm transition-all" :class="isDarkMode ? 'bg-slate-800 border-slate-700 text-white hover:bg-slate-700' : 'bg-white border-slate-200 text-slate-950 hover:bg-slate-50'">
-                                <Icon name="chart" class-name="w-4 h-4" />
-                                {{ t('nav.dashboard') }}
-                            </Link>
-                        </template>
-                        <template v-else>
-                            <Link href="/login" class="text-sm font-bold hover:text-blue-600 transition-colors px-2" :class="isDarkMode ? 'text-slate-300' : 'text-slate-600'">{{ t('nav.login') }}</Link>
-                            <Link href="/register" class="bg-blue-600 text-white px-6 py-2.5 rounded-full text-sm font-bold hover:bg-blue-700 shadow-lg shadow-blue-600/10 transition-all">
-                                {{ t('nav.register') }}
-                            </Link>
-                            <Link href="/login?role=hr" class="text-sm font-bold text-blue-600 border border-blue-600 px-6 py-2.5 rounded-xl hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all">
-                                {{ t('nav.post_job') }}
-                            </Link>
-                        </template>
+                        <!-- Always show public nav buttons (landing page is always fresh) -->
+                        <Link href="/login" class="text-sm font-bold hover:text-blue-600 transition-colors px-2" :class="isDarkMode ? 'text-slate-300' : 'text-slate-600'">{{ t('nav.login') }}</Link>
+                        <Link href="/register" class="bg-blue-600 text-white px-6 py-2.5 rounded-full text-sm font-bold hover:bg-blue-700 shadow-lg shadow-blue-600/10 transition-all">
+                            {{ t('nav.register') }}
+                        </Link>
+                        <Link href="/login?role=hr" class="text-sm font-bold text-blue-600 border border-blue-600 px-6 py-2.5 rounded-xl hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all">
+                            {{ t('nav.post_job') }}
+                        </Link>
+                        <!-- Small subtle dashboard shortcut for already logged-in users -->
+                        <Link v-if="user" :href="dashboardRoute" class="w-9 h-9 rounded-full flex items-center justify-center text-xs font-black shadow-sm border transition-all" :class="isDarkMode ? 'bg-slate-700 border-slate-600 text-white hover:bg-slate-600' : 'bg-slate-100 border-slate-200 text-slate-700 hover:bg-slate-200'" :title="'Masuk ke Dashboard (' + (user?.name || '') + ')'">
+                            <Icon name="user" class-name="w-4 h-4" />
+                        </Link>
                     </div>
                 </div>
 

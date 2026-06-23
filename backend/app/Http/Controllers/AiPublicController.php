@@ -80,12 +80,17 @@ class AiPublicController extends Controller
             if ($data && isset($data['matches'])) {
                 return response()->json($data);
             }
+
+            // If AI response is not parseable (e.g. FakeAiProvider), fall through to keyword engine
         } catch (\Exception $e) {
             if ($e->getMessage() === 'AI rate limit exceeded. Please try again later.') {
                 return response()->json(['error' => 'RATE_LIMIT_EXCEEDED', 'message' => $e->getMessage()], 429);
             }
+        }
 
-            // High-fidelity fallback to local keyword matching engine if Gemini is unavailable
+        // === Local Keyword Matching Fallback Engine ===
+        // Triggered when: AI provider is 'fake', Gemini quota exhausted, or response cannot be parsed
+        {
             $promptLower = strtolower($request->prompt);
             $localMatches = [];
 
@@ -98,10 +103,16 @@ class AiPublicController extends Controller
 
                 // Keyword mapping rules for student majors/skills
                 $keywords = [
-                    'frontend' => ['frontend', 'react', 'vue', 'tailwind', 'css', 'html', 'js', 'javascript'],
-                    'software' => ['software', 'coder', 'developer', 'back', 'php', 'laravel', 'golang', 'node', 'database'],
-                    'ui' => ['ui', 'ux', 'design', 'figma', 'product design', 'visual', 'prototype'],
-                    'marketing' => ['marketing', 'sales', 'social media', 'content', 'copywriter'],
+                    'frontend'   => ['frontend', 'react', 'vue', 'tailwind', 'css', 'html', 'js', 'javascript', 'web design', 'web developer'],
+                    'software'   => ['software', 'coder', 'developer', 'backend', 'back end', 'php', 'laravel', 'golang', 'node', 'database', 'api', 'programmer'],
+                    'ui'         => ['ui', 'ux', 'design', 'figma', 'product design', 'visual', 'prototype', 'graphic', 'adobe', 'illustrator', 'photoshop', 'kreator', 'creative'],
+                    'video'      => ['video', 'edit video', 'editing', 'videografi', 'videography', 'footage', 'premiere', 'after effect', 'davinci', 'konten', 'content creator', 'youtube', 'tiktok', 'film', 'sinema'],
+                    'marketing'  => ['marketing', 'sales', 'social media', 'content', 'copywriter', 'seo', 'ads', 'branding', 'pemasaran', 'promosi', 'digital marketing'],
+                    'data'       => ['data', 'analyst', 'analytics', 'python', 'machine learning', 'ai', 'tableau', 'excel', 'statistik', 'business intelligence', 'data science'],
+                    'finance'    => ['finance', 'akuntansi', 'accounting', 'keuangan', 'audit', 'pajak', 'tax', 'laporan keuangan'],
+                    'hrd'        => ['hrd', 'hr', 'human resource', 'rekrutmen', 'recruitment', 'sdm', 'administrasi', 'admin'],
+                    'writing'    => ['writing', 'penulis', 'journalist', 'jurnalis', 'copywriting', 'artikel', 'blog', 'content writing'],
+                    'business'   => ['bisnis', 'business', 'manajemen', 'management', 'strategy', 'konsultan', 'consultant', 'operasional'],
                 ];
 
                 foreach ($keywords as $key => $syns) {

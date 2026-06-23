@@ -47,11 +47,11 @@ class HandleInertiaRequests extends Middleware
                 'session_id' => $request->session()->getId(),
             ],
             'locale' => app()->getLocale(),
-            'translations' => file_exists(base_path('lang/'.app()->getLocale().'.json'))
-                ? json_decode(file_get_contents(base_path('lang/'.app()->getLocale().'.json')), true)
+            'translations' => file_exists(base_path('lang/' . app()->getLocale() . '.json'))
+                ? json_decode(file_get_contents(base_path('lang/' . app()->getLocale() . '.json')), true)
                 : [],
-            'stats' => fn () => $this->publicStats(),
-            'ziggy' => fn () => [
+            'stats' => fn() => $this->publicStats(),
+            'ziggy' => fn() => [
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
             ],

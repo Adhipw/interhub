@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import logger from '@/Lib/logger';
-import { Link, router as inertiaRouter } from '@inertiajs/vue3';
+import { Link, router as inertiaRouter, usePage } from '@inertiajs/vue3';
 import PublicLayout from '@/Layouts/PublicLayout.vue';
 import { ref, onMounted, computed, watch } from 'vue';
 import { useAuthStore } from '@/Stores/auth';

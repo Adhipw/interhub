@@ -36,7 +36,7 @@ class ApiCertificateController extends ApiBaseController
         $evaluation = MentorEvaluation::where('application_id', $application->id)->first();
 
         $data = [
-            'certificate_id' => 'IH-'.strtoupper(substr(md5($application->id.$application->created_at), 0, 8)),
+            'certificate_id' => 'IH-' . strtoupper(substr(md5($application->id . $application->created_at), 0, 8)),
             'student_name' => $application->user->name,
             'internship_title' => $application->internship->title,
             'company_name' => $application->internship->company->name,

@@ -8,6 +8,7 @@ use App\Http\Middleware\HandleInertiaRequests;
 use App\Http\Middleware\RequestIdMiddleware;
 use App\Http\Middleware\RoleMiddleware;
 use App\Http\Middleware\SetLocale;
+use App\Http\Middleware\CheckMaintenanceMode;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -40,11 +41,13 @@ return Application::configure(basePath: dirname(__DIR__))
             RequestIdMiddleware::class,
             SetLocale::class,
             CheckBanned::class,
+            CheckMaintenanceMode::class,
             HandleInertiaRequests::class,
         ]);
 
         $middleware->api(append: [
             RequestIdMiddleware::class,
+            CheckMaintenanceMode::class,
         ]);
 
         $middleware->validateCsrfTokens(except: [
