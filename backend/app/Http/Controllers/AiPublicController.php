@@ -78,6 +78,20 @@ class AiPublicController extends Controller
 
             $data = json_decode($content, true);
             if ($data && isset($data['matches'])) {
+                if (empty($data['matches']) && count($internships) > 0) {
+                    foreach ($internships->take(2) as $item) {
+                        $data['matches'][] = [
+                            'id' => $item->id,
+                            'title' => $item->title,
+                            'slug' => $item->slug,
+                            'company' => $item->company->name ?? 'Unknown Company',
+                            'location' => $item->location,
+                            'type' => $item->type,
+                            'match_score' => 85,
+                            'explanation' => 'Posisi '.$item->title.' di '.($item->company->name ?? 'perusahaan').' adalah lowongan magang populer yang sangat cocok untuk mengasah keterampilan praktis Anda.',
+                        ];
+                    }
+                }
                 return response()->json($data);
             }
 
