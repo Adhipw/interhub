@@ -52,9 +52,9 @@ onMounted(() => {
                     <button
                         v-for="lang in languages"
                         :key="lang.code"
-                        @click="switchLanguage(lang.code)"
                         class="w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all text-left"
                         :class="currentLocale === lang.code ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-400' : 'hover:bg-slate-50 dark:hover:bg-neutral-800 text-slate-600 dark:text-neutral-400'"
+                        @click="switchLanguage(lang.code)"
                     >
                         <span class="text-xl leading-none">{{ lang.flag }}</span>
                         <div class="flex flex-col">

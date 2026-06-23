@@ -78,7 +78,7 @@ const submitResolution = () => {
 
                     <Card class="p-8 border-none shadow-premium rounded-[2.5rem] bg-indigo-50/50 dark:bg-indigo-900/10">
                         <h2 class="text-xs font-black text-indigo-400 uppercase tracking-widest mb-4">Resolusi Admin</h2>
-                        <form @submit.prevent="submitResolution" class="space-y-6">
+                        <form class="space-y-6" @submit.prevent="submitResolution">
                             <div>
                                 <label class="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1 block mb-2">Ubah Status</label>
                                 <select v-model="form.status" class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl text-sm p-4 outline-none focus:ring-4 focus:ring-indigo-500/20">

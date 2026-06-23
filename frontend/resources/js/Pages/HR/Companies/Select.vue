@@ -36,8 +36,8 @@ const selectCompany = (id: number) => {
         <button 
           v-for="company in companies" 
           :key="company.id" 
-          @click="selectCompany(company.id)"
           class="flex items-center justify-between p-6 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl hover:border-primary-500 hover:ring-1 hover:ring-primary-500 transition-all group text-left shadow-sm"
+          @click="selectCompany(company.id)"
         >
           <div class="flex items-center">
             <div class="h-14 w-14 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-700 flex items-center justify-center text-slate-400 group-hover:text-primary-600 transition-colors">

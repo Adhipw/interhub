@@ -23,7 +23,7 @@ const t = (key: string) => langStore.t(key);
         <div class="w-full max-w-[480px] relative z-10">
             <div class="flex justify-center mb-8">
                 <Link href="/" class="hover:opacity-80 transition-opacity">
-                    <AppLogo variant="full" size="lg" :isDarkMode="false" />
+                    <AppLogo variant="full" size="lg" :is-dark-mode="false" />
                 </Link>
             </div>
 

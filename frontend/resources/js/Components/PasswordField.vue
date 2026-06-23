@@ -20,18 +20,18 @@ const showPassword = ref(false);
 <template>
     <Input
         :type="showPassword ? 'text' : 'password'"
-        :modelValue="modelValue"
-        @update:modelValue="emit('update:modelValue', $event)"
+        :model-value="modelValue"
         :label="label"
         :placeholder="placeholder"
         :error="error"
         :required="required"
+        @update:model-value="emit('update:modelValue', $event)"
     >
         <template #suffix>
             <button
                 type="button"
-                @click="showPassword = !showPassword"
                 class="absolute right-4 top-1/2 -translate-y-1/2 p-1 text-neutral-400 hover:text-primary-600 transition-colors focus:outline-none"
+                @click="showPassword = !showPassword"
             >
                 <Eye v-if="!showPassword" class="w-5 h-5" />
                 <EyeOff v-else class="w-5 h-5" />

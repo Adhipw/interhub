@@ -139,9 +139,9 @@ onMounted(() => {
                     <td class="px-8 py-6 text-center">
                       <div class="flex items-center justify-center">
                         <button 
-                          @click="toggleStatus(loc.id)"
                           class="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all"
                           :class="loc.is_active ? 'bg-green-50 text-green-600 hover:bg-green-100' : 'bg-slate-100 text-slate-400 hover:bg-slate-200'"
+                          @click="toggleStatus(loc.id)"
                         >
                           {{ loc.is_active ? t('admin.locations.status_active') : t('admin.locations.status_inactive') }}
                         </button>
@@ -149,7 +149,7 @@ onMounted(() => {
                     </td>
                     <td class="px-8 py-6 text-right">
                        <div class="flex items-center justify-end gap-2">
-                          <button @click="deleteLocation(loc.id)" class="p-2 text-slate-400 hover:text-red-600 transition-all" :title="t('common.delete')">
+                          <button class="p-2 text-slate-400 hover:text-red-600 transition-all" :title="t('common.delete')" @click="deleteLocation(loc.id)">
                              <Trash2 class="w-4 h-4" />
                           </button>
                        </div>
@@ -177,7 +177,7 @@ onMounted(() => {
             <Plus class="w-4 h-4 mr-2 text-primary-600" />
             {{ t('admin.locations.form_title') }}
           </h3>
-          <form @submit.prevent="submit" class="space-y-6">
+          <form class="space-y-6" @submit.prevent="submit">
             <div class="space-y-1">
                <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest">{{ t('admin.locations.label_name') }}</label>
                <input v-model="form.name" type="text" :placeholder="t('admin.locations.placeholder_name')" class="w-full bg-slate-50 dark:bg-slate-900 dark:text-white border-none rounded-xl text-sm p-4 focus:ring-2 focus:ring-primary-500/20" required />

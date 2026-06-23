@@ -79,8 +79,8 @@ onUnmounted(() => {
         </div>
         
         <button 
-          @click="exportLogs"
           class="flex items-center gap-2 px-6 py-3 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-2xl text-sm font-bold hover:bg-slate-200 transition-all active-press"
+          @click="exportLogs"
         >
           <Download class="w-4 h-4" />
           Export Logs

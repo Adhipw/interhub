@@ -103,7 +103,8 @@ onUnmounted(() => {
 
             <!-- Main Stats Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <Card v-for="(stat, i) in [
+                <Card
+v-for="(stat, i) in [
                     { label: 'Total Pengguna', value: stats.total_users, icon: Users, color: 'text-blue-600', bg: 'bg-blue-500/10' },
                     { label: 'Moderasi Perusahaan', value: stats.pending_companies, icon: Building2, color: 'text-orange-600', bg: 'bg-orange-500/10' },
                     { label: 'Lowongan Aktif', value: stats.active_internships, icon: Briefcase, color: 'text-emerald-600', bg: 'bg-emerald-500/10' },

@@ -67,7 +67,7 @@ const removeSaved = async (slug: string) => {
                     <div>
                         <div class="flex items-start justify-between mb-6">
                             <div class="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center border border-slate-50 overflow-hidden shadow-inner dark:bg-slate-950 dark:border-slate-800">
-                                <img loading="lazy" decoding="async" v-if="item.internship.company?.logo_url" :src="item.internship.company.logo_url" class="w-full h-full object-cover" />
+                                <img v-if="item.internship.company?.logo_url" loading="lazy" decoding="async" :src="item.internship.company.logo_url" class="w-full h-full object-cover" />
                                 <Briefcase v-else class="w-8 h-8 text-slate-200" />
                             </div>
                             <button :disabled="removingSlug === item.internship.slug" class="p-3 text-slate-300 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all disabled:opacity-50 dark:hover:bg-red-950/30" @click="removeSaved(item.internship.slug)">

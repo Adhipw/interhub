@@ -158,7 +158,7 @@ const verifyDocument = async (id: number, status: string) => {
 
 <template>
   <DashboardLayout>
-    <template #header v-if="application">
+    <template v-if="application" #header>
         <div class="flex items-center justify-between pb-6 border-b border-gray-100 dark:border-gray-800">
           <div class="flex items-center">
             <Link href="/hr/applications" class="mr-6 p-2.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-xl transition-all">
@@ -173,15 +173,15 @@ const verifyDocument = async (id: number, status: string) => {
             </div>
           </div>
           <div class="flex items-center space-x-3">
-            <Button variant="secondary" @click="showInterviewModal = true" v-if="application.status !== 'rejected'">
+            <Button v-if="application.status !== 'rejected'" variant="secondary" @click="showInterviewModal = true">
               <CalendarIcon class="w-4 h-4 mr-2" />
               Jadwal Interview
             </Button>
             <div class="h-6 w-px bg-slate-200 dark:bg-slate-700 mx-2"></div>
-            <Button variant="danger" @click="updateStatus('rejected')" v-if="application.status !== 'rejected'">
+            <Button v-if="application.status !== 'rejected'" variant="danger" @click="updateStatus('rejected')">
               Tolak
             </Button>
-            <Button variant="success" @click="updateStatus('accepted')" v-if="application.status !== 'accepted'">
+            <Button v-if="application.status !== 'accepted'" variant="success" @click="updateStatus('accepted')">
               Terima Kandidat
             </Button>
           </div>
@@ -244,9 +244,9 @@ const verifyDocument = async (id: number, status: string) => {
                 </div>
               </div>
               <button 
-                @click="generateAiSummary" 
-                :disabled="aiSummaryLoading"
+                :disabled="aiSummaryLoading" 
                 class="px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:border-primary-200 text-xs font-black rounded-xl transition-all shadow-sm flex items-center gap-2"
+                @click="generateAiSummary"
               >
                 <span v-if="aiSummaryLoading" class="animate-spin rounded-full h-3.5 w-3.5 border-b-2 border-primary-600 shrink-0"></span>
                 <span>{{ aiSummaryLoading ? 'Menganalisis...' : (aiSummary ? 'Analisis Ulang' : 'Mulai Analisis AI') }}</span>
@@ -333,10 +333,10 @@ const verifyDocument = async (id: number, status: string) => {
                             <DocumentArrowDownIcon class="w-5 h-5" />
                         </a>
                         <template v-if="doc.status === 'pending'">
-                            <button @click="verifyDocument(doc.id, 'verified')" class="p-2.5 bg-emerald-50 text-emerald-600 hover:bg-emerald-600 hover:text-white rounded-xl transition-all shadow-sm">
+                            <button class="p-2.5 bg-emerald-50 text-emerald-600 hover:bg-emerald-600 hover:text-white rounded-xl transition-all shadow-sm" @click="verifyDocument(doc.id, 'verified')">
                                 <CheckCircleIcon class="w-5 h-5" />
                             </button>
-                            <button @click="verifyDocument(doc.id, 'rejected')" class="p-2.5 bg-rose-50 text-rose-600 hover:bg-rose-600 hover:text-white rounded-xl transition-all shadow-sm">
+                            <button class="p-2.5 bg-rose-50 text-rose-600 hover:bg-rose-600 hover:text-white rounded-xl transition-all shadow-sm" @click="verifyDocument(doc.id, 'rejected')">
                                 <XCircleIcon class="w-5 h-5" />
                             </button>
                         </template>
@@ -364,10 +364,10 @@ const verifyDocument = async (id: number, status: string) => {
           <div class="p-6 bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800 rounded-2xl">
             <p class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed mb-6">{{ application.hr_notes || 'Belum ada catatan internal.' }}</p>
             <div class="grid grid-cols-1 gap-2">
-              <button @click="updateStatus(application.status)" class="w-full py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-bold rounded-lg hover:bg-slate-50 transition-colors">
+              <button class="w-full py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-bold rounded-lg hover:bg-slate-50 transition-colors" @click="updateStatus(application.status)">
                 Edit Catatan
               </button>
-              <button @click="showMentorModal = true" class="w-full py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-bold rounded-lg hover:bg-slate-50 transition-colors">
+              <button class="w-full py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-bold rounded-lg hover:bg-slate-50 transition-colors" @click="showMentorModal = true">
                 Tugaskan Mentor
               </button>
             </div>
@@ -393,8 +393,8 @@ const verifyDocument = async (id: number, status: string) => {
 
     <template v-if="application">
       <!-- Modals (Decision Style: Serious & Contextual) -->
-      <Modal :show="showStatusModal" @close="showStatusModal = false" :title="selectedStatus === 'accepted' ? 'Terima Kandidat' : 'Konfirmasi Penolakan'">
-      <form @submit.prevent="submitStatus" class="p-10 space-y-8">
+      <Modal :show="showStatusModal" :title="selectedStatus === 'accepted' ? 'Terima Kandidat' : 'Konfirmasi Penolakan'" @close="showStatusModal = false">
+      <form class="p-10 space-y-8" @submit.prevent="submitStatus">
         <div class="flex items-start gap-6 p-6 bg-slate-50 dark:bg-slate-900 rounded-[2rem] border border-slate-100 dark:border-slate-800">
           <div :class="['w-16 h-16 rounded-2xl flex items-center justify-center shrink-0', selectedStatus === 'accepted' ? 'bg-emerald-500/10 text-emerald-600' : 'bg-rose-500/10 text-rose-600']">
             <CheckCircleIcon v-if="selectedStatus === 'accepted'" class="w-8 h-8" />
@@ -414,8 +414,8 @@ const verifyDocument = async (id: number, status: string) => {
               v-for="reason in rejectionReasons" 
               :key="reason.id"
               type="button"
-              @click="statusForm.notes = reason.label"
               :class="['text-left px-5 py-3 rounded-xl text-sm font-medium transition-all border', statusForm.notes === reason.label ? 'bg-primary-50 border-primary-200 text-primary-700' : 'bg-white dark:bg-slate-800 border-slate-100 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:border-primary-200']"
+              @click="statusForm.notes = reason.label"
             >
               {{ reason.label }}
             </button>
@@ -439,7 +439,7 @@ const verifyDocument = async (id: number, status: string) => {
         </div>
 
         <div class="flex justify-end items-center gap-4 pt-4">
-          <button type="button" @click="showStatusModal = false" class="px-8 py-4 text-sm font-black text-slate-400 hover:text-slate-600 transition-colors">Batal</button>
+          <button type="button" class="px-8 py-4 text-sm font-black text-slate-400 hover:text-slate-600 transition-colors" @click="showStatusModal = false">Batal</button>
           <Button type="submit" :variant="selectedStatus === 'rejected' ? 'danger' : 'success'" :loading="statusForm.processing" class="!px-12 !h-14 !rounded-2xl !text-sm !font-black shadow-xl">
             {{ selectedStatus === 'accepted' ? 'Terima Sekarang' : 'Konfirmasi Penolakan' }}
           </Button>
@@ -447,8 +447,8 @@ const verifyDocument = async (id: number, status: string) => {
       </form>
     </Modal>
 
-    <Modal :show="showInterviewModal" @close="showInterviewModal = false" title="Jadwalkan Wawancara">
-      <form @submit.prevent="submitInterview" class="p-8 space-y-8">
+    <Modal :show="showInterviewModal" title="Jadwalkan Wawancara" @close="showInterviewModal = false">
+      <form class="p-8 space-y-8" @submit.prevent="submitInterview">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
           <Input 
             v-model="interviewForm.scheduled_at"
@@ -487,8 +487,8 @@ const verifyDocument = async (id: number, status: string) => {
       </form>
     </Modal>
 
-    <Modal :show="showMentorModal" @close="showMentorModal = false" title="Tugaskan Mentor">
-      <form @submit.prevent="submitMentor" class="p-8 space-y-8">
+    <Modal :show="showMentorModal" title="Tugaskan Mentor" @close="showMentorModal = false">
+      <form class="p-8 space-y-8" @submit.prevent="submitMentor">
         <div>
           <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Pilih Mentor Aktif</label>
           <select v-model="mentorForm.mentor_user_id" class="w-full rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-sm focus:ring-primary-500 focus:border-primary-500 transition-all h-[42px]">

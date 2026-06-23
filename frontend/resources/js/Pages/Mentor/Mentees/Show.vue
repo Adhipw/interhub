@@ -261,7 +261,7 @@ const tabs = [
                 <div class="relative w-28 h-28 mx-auto mb-6">
                     <div class="absolute inset-0 bg-primary-500/10 rounded-full animate-pulse scale-110"></div>
                     <div class="relative w-full h-full bg-slate-100 dark:bg-slate-900 rounded-full flex items-center justify-center text-3xl font-bold text-slate-400 border-4 border-white dark:border-slate-800 shadow-card overflow-hidden transition-transform group-hover:scale-105 duration-500">
-                       <img loading="lazy" decoding="async" v-if="application.user.avatar_url" :src="application.user.avatar_url" class="w-full h-full object-cover" />
+                       <img v-if="application.user.avatar_url" loading="lazy" decoding="async" :src="application.user.avatar_url" class="w-full h-full object-cover" />
                        <span v-else>{{ application.user.name.charAt(0) }}</span>
                     </div>
                 </div>
@@ -311,9 +311,9 @@ const tabs = [
                <button 
                   v-for="tab in tabs" 
                   :key="tab.id"
-                  @click="activeTab = tab.id"
                   class="flex items-center gap-2 px-6 py-3 rounded-2xl text-sm font-bold transition-all whitespace-nowrap active-press"
                   :class="activeTab === tab.id ? 'bg-primary-600 text-white shadow-lg shadow-primary-500/20' : 'text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800'"
+                  @click="activeTab = tab.id"
                >
                   <component :is="tab.icon" class="w-4 h-4" />
                   {{ tab.name }}
@@ -407,9 +407,9 @@ const tabs = [
                       <div class="lg:col-span-2 space-y-4">
                          <div v-for="(task, index) in tasks" :key="task.id" class="bg-white dark:bg-slate-800 p-6 rounded-[2rem] border border-slate-100 dark:border-slate-800 shadow-sm flex items-start gap-5 group hover-lift animate-in fade-in slide-in-from-bottom-2" :style="{ 'animation-delay': (index * 100) + 'ms' }">
                             <button 
-                               @click="updateTaskStatus(task.id, task.status === 'completed' ? 'todo' : 'completed')"
                                class="mt-1 w-8 h-8 rounded-2xl border-2 flex items-center justify-center transition-all shrink-0 active-press"
                                :class="task.status === 'completed' ? 'bg-green-500 border-green-500 text-white shadow-lg shadow-green-500/20' : 'border-slate-200 dark:border-slate-700 hover:border-primary-500'"
+                               @click="updateTaskStatus(task.id, task.status === 'completed' ? 'todo' : 'completed')"
                             >
                                <CheckCircle2 v-if="task.status === 'completed'" class="w-5 h-5" />
                                <div v-else class="w-2 h-2 rounded-full bg-slate-200 dark:bg-slate-700 group-hover:bg-primary-500 transition-colors"></div>
@@ -431,7 +431,7 @@ const tabs = [
                                </div>
                             </div>
     
-                            <button @click="deleteTask(task.id)" class="opacity-0 group-hover:opacity-100 p-2.5 text-slate-300 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl transition-all active-press">
+                            <button class="opacity-0 group-hover:opacity-100 p-2.5 text-slate-300 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl transition-all active-press" @click="deleteTask(task.id)">
                                <Trash2 class="w-5 h-5" />
                             </button>
                          </div>
@@ -455,7 +455,7 @@ const tabs = [
                                 <h3 class="text-sm font-black text-slate-900 dark:text-white uppercase tracking-widest">Tugas Baru</h3>
                            </div>
                            
-                           <form @submit.prevent="submitTask" class="space-y-5">
+                           <form class="space-y-5" @submit.prevent="submitTask">
                               <div class="space-y-2">
                                  <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Judul Penugasan</label>
                                  <input v-model="taskForm.title" type="text" placeholder="Misal: Riset Kompetitor" class="w-full bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl text-sm p-4 focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500 transition-all outline-none" required />
@@ -510,7 +510,8 @@ const tabs = [
                                         </div>
                                     </div>
                                 </div>
-                                <span class="px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest border" :class="{
+                                <span
+class="px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest border" :class="{
                                     'bg-blue-50 text-blue-600 border-blue-100': session.status === 'planned',
                                     'bg-green-50 text-green-600 border-green-100': session.status === 'completed',
                                     'bg-red-50 text-red-600 border-red-100': session.status === 'cancelled',
@@ -529,8 +530,8 @@ const tabs = [
                                 <div v-else class="text-xs font-bold text-slate-400 italic">Link belum tersedia</div>
     
                                 <div v-if="session.status === 'planned'" class="flex items-center gap-2">
-                                    <button @click="updateSessionStatus(session.id, 'completed')" class="px-5 py-2.5 bg-green-500 text-white rounded-xl text-xs font-bold hover:bg-green-600 transition-all shadow-lg shadow-green-500/10 active-press">Selesai</button>
-                                    <button @click="updateSessionStatus(session.id, 'cancelled')" class="px-5 py-2.5 bg-slate-100 dark:bg-slate-700 text-slate-500 rounded-xl text-xs font-bold hover:bg-red-50 hover:text-red-500 transition-all active-press">Batal</button>
+                                    <button class="px-5 py-2.5 bg-green-500 text-white rounded-xl text-xs font-bold hover:bg-green-600 transition-all shadow-lg shadow-green-500/10 active-press" @click="updateSessionStatus(session.id, 'completed')">Selesai</button>
+                                    <button class="px-5 py-2.5 bg-slate-100 dark:bg-slate-700 text-slate-500 rounded-xl text-xs font-bold hover:bg-red-50 hover:text-red-500 transition-all active-press" @click="updateSessionStatus(session.id, 'cancelled')">Batal</button>
                                 </div>
                             </div>
                          </Card>
@@ -553,7 +554,7 @@ const tabs = [
                             <h3 class="text-sm font-black text-slate-900 dark:text-white uppercase tracking-widest">Sesi Baru</h3>
                          </div>
                          
-                         <form @submit.prevent="submitSession" class="space-y-5">
+                         <form class="space-y-5" @submit.prevent="submitSession">
                             <div class="space-y-2">
                                <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Topik Bimbingan</label>
                                <input v-model="sessionForm.title" type="text" class="w-full bg-slate-50 dark:bg-slate-900 border-none rounded-2xl text-sm p-4 focus:ring-4 focus:ring-purple-500/10 transition-all outline-none" placeholder="Misal: Review Sprint 1" required />
@@ -623,7 +624,7 @@ const tabs = [
                                 </div>
                                 <h3 class="text-sm font-black text-slate-900 dark:text-white uppercase tracking-widest">Beri Catatan</h3>
                            </div>
-                           <form @submit.prevent="submitFeedback" class="space-y-8">
+                           <form class="space-y-8" @submit.prevent="submitFeedback">
                               <div class="space-y-2">
                                  <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Pesan Feedback</label>
                                  <textarea v-model="feedbackForm.content" rows="6" class="w-full bg-slate-50 dark:bg-slate-900 border-none rounded-3xl text-sm p-5 focus:ring-4 focus:ring-pink-500/10 transition-all outline-none" placeholder="Tuliskan apresiasi atau poin pengembangan..." required></textarea>
@@ -634,7 +635,7 @@ const tabs = [
                                  <div v-for="(val, key) in feedbackForm.assessment" :key="key" class="flex items-center justify-between bg-slate-50 dark:bg-slate-900 p-3 rounded-2xl">
                                     <span class="text-xs font-bold text-slate-600 dark:text-slate-400 capitalize ml-1">{{ String(key).replace('_', ' ') }}</span>
                                     <div class="flex gap-1.5">
-                                       <button v-for="i in 5" :key="i" type="button" @click="feedbackForm.assessment[key] = i" class="transition-all hover:scale-125 active-press">
+                                       <button v-for="i in 5" :key="i" type="button" class="transition-all hover:scale-125 active-press" @click="feedbackForm.assessment[key] = i">
                                           <Star class="w-5 h-5" :class="i <= val ? 'fill-yellow-400 text-yellow-400' : 'text-slate-200 dark:text-slate-800'" />
                                        </button>
                                     </div>
@@ -716,7 +717,7 @@ const tabs = [
                          <p class="text-base text-slate-500 mt-2 max-w-lg mx-auto">Berikan ulasan menyeluruh untuk menutup periode magang dengan standar profesional tinggi.</p>
                       </div>
     
-                      <form @submit.prevent="submitEvaluation" class="space-y-12">
+                      <form class="space-y-12" @submit.prevent="submitEvaluation">
                          <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
                             <div class="space-y-8">
                                <div class="space-y-2.5">
@@ -752,8 +753,8 @@ const tabs = [
 
                                      <!-- The native slider invisible overlay but active -->
                                      <input 
-                                        type="range" 
                                         v-model="evaluationForm.metrics[key]" 
+                                        type="range" 
                                         min="1" 
                                         max="5" 
                                         step="1" 
@@ -790,17 +791,17 @@ const tabs = [
                             <div class="flex items-center gap-3 bg-slate-100 dark:bg-slate-900 p-2.5 rounded-3xl shadow-inner">
                                <button 
                                   type="button" 
-                                  @click="evaluationForm.final_status = 'recommend'"
                                   class="px-8 py-4 rounded-2xl text-xs font-black transition-all active-press"
                                   :class="evaluationForm.final_status === 'recommend' ? 'bg-white dark:bg-slate-800 text-green-600 shadow-xl' : 'text-slate-500 opacity-60 hover:opacity-100'"
+                                  @click="evaluationForm.final_status = 'recommend'"
                                >
                                   Rekomendasikan
                                </button>
                                <button 
                                   type="button" 
-                                  @click="evaluationForm.final_status = 'not_recommend'"
                                   class="px-8 py-4 rounded-2xl text-xs font-black transition-all active-press"
                                   :class="evaluationForm.final_status === 'not_recommend' ? 'bg-white dark:bg-slate-800 text-red-600 shadow-xl' : 'text-slate-500 opacity-60 hover:opacity-100'"
+                                  @click="evaluationForm.final_status = 'not_recommend'"
                                >
                                   Tinjau Ulang
                                </button>

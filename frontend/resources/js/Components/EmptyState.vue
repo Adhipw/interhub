@@ -57,8 +57,8 @@ const icon = computed(() => {
 
         <button 
             v-if="actionLabel"
-            @click="emit('action')"
             class="inline-flex items-center gap-2 bg-slate-900 dark:bg-neutral-800 text-white px-8 py-3 rounded-full font-bold hover:bg-slate-800 transition-all shadow-lg"
+            @click="emit('action')"
         >
             <component :is="actionIcon" v-if="actionIcon" class="w-4 h-4" />
             {{ actionLabel }}

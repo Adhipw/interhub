@@ -75,8 +75,8 @@ onUnmounted(() => {
              30 Hari Terakhir
            </div>
            <button 
-             @click="downloadPDF"
              class="px-4 py-2 text-xs font-bold text-primary-600 hover:bg-primary-50 dark:hover:bg-primary-900/20 rounded-xl transition-all uppercase tracking-widest"
+             @click="downloadPDF"
            >
              Unduh PDF
            </button>
@@ -193,8 +193,8 @@ onUnmounted(() => {
                 <p class="text-xs text-slate-500 leading-relaxed">Pertumbuhan user stabil di angka 12% MoM. Disarankan untuk menambah kategori lowongan baru untuk menjaga engagement.</p>
               </div>
               <button 
-                @click="goToMasterData"
                 class="bg-primary-600 text-white px-6 py-3 rounded-2xl font-bold text-sm hover:scale-105 active:scale-95 transition-all shadow-lg shadow-primary-500/25"
+                @click="goToMasterData"
               >
                 Kelola Master Data
               </button>

@@ -48,7 +48,7 @@ const submit = () => {
     </template>
 
     <div class="mt-10 max-w-4xl">
-      <form @submit.prevent="submit" class="space-y-10">
+      <form class="space-y-10" @submit.prevent="submit">
         <!-- Section: Basic Info -->
         <section class="space-y-6">
           <div class="pb-2 border-b border-slate-100 dark:border-slate-800">

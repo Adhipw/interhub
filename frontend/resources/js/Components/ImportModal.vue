@@ -68,14 +68,14 @@ const close = () => {
 </script>
 
 <template>
-    <Modal :show="show" @close="close" max-width="md">
+    <Modal :show="show" max-width="md" @close="close">
         <div class="p-8">
             <div class="flex items-center justify-between mb-8">
                 <div>
                     <h3 class="text-xl font-bold text-slate-900 dark:text-white">{{ title }}</h3>
                     <p class="text-sm text-slate-500">{{ t('import.subtitle') }}</p>
                 </div>
-                <button @click="close" class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors">
+                <button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors" @click="close">
                     <XCircle class="w-6 h-6 text-slate-400" />
                 </button>
             </div>
@@ -98,7 +98,7 @@ const close = () => {
                     </div>
                 </div>
 
-                <FileUpload label="Pilih File CSV" @file-selected="handleFileSelected" @clear="selectedFile = null" accept=".csv" :max-size="2" />
+                <FileUpload label="Pilih File CSV" accept=".csv" :max-size="2" @file-selected="handleFileSelected" @clear="selectedFile = null" />
 
                 <div v-if="error" class="flex items-center gap-2 p-4 bg-red-50 dark:bg-red-900/10 text-red-600 rounded-xl text-xs font-bold border border-red-100 dark:border-red-900/20">
                     <AlertCircle class="w-5 h-5 shrink-0" />
@@ -106,12 +106,12 @@ const close = () => {
                 </div>
 
                 <div class="flex justify-end gap-3 pt-4">
-                    <Button variant="ghost" @click="close" :disabled="loading">{{ t('common.cancel') }}</Button>
+                    <Button variant="ghost" :disabled="loading" @click="close">{{ t('common.cancel') }}</Button>
                     <Button 
                         variant="primary" 
-                        @click="handleImport" 
-                        :disabled="!selectedFile || loading"
+                        :disabled="!selectedFile || loading" 
                         class="px-8 shadow-lg shadow-primary-500/20"
+                        @click="handleImport"
                     >
                         <template v-if="loading">
                             <Loader2 class="w-4 h-4 mr-2 animate-spin" />
@@ -153,7 +153,7 @@ const close = () => {
                 </div>
 
                 <div class="pt-6">
-                    <Button variant="primary" @click="close" class="w-full">{{ t('common.done') }}</Button>
+                    <Button variant="primary" class="w-full" @click="close">{{ t('common.done') }}</Button>
                 </div>
             </div>
         </div>

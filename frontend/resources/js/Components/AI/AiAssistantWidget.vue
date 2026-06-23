@@ -103,8 +103,8 @@ const runFeature = async (payload = {}) => {
     <div class="fixed bottom-6 right-6 z-50">
         <!-- Floating Button -->
         <button 
-            @click="togglePanel"
             class="bg-indigo-600 hover:bg-indigo-700 text-white p-4 rounded-full shadow-2xl transition-all hover:scale-110 active:scale-95 group"
+            @click="togglePanel"
         >
             <Sparkles v-if="!isOpen" class="w-6 h-6" />
             <X v-else class="w-6 h-6" />
@@ -117,9 +117,9 @@ const runFeature = async (payload = {}) => {
         <!-- AI Panel Integration -->
         <AiPanel 
             :is-open="isOpen" 
-            @close="togglePanel"
             :loading="isLoading"
             title="AI Career Assistant"
+            @close="togglePanel"
         >
             <!-- Feature Selection List -->
             <div v-if="!activeFeature" class="grid grid-cols-1 gap-3">
@@ -127,8 +127,8 @@ const runFeature = async (payload = {}) => {
                 <button 
                     v-for="feature in features" 
                     :key="feature.id"
-                    @click="selectFeature(feature)"
                     class="flex items-center p-3 rounded-xl border border-gray-100 hover:border-indigo-200 hover:bg-indigo-50 transition-all text-left group"
+                    @click="selectFeature(feature)"
                 >
                     <div class="bg-gray-50 group-hover:bg-white p-2 rounded-lg shadow-sm mr-3 transition-colors">
                         <component :is="feature.icon" class="w-5 h-5 text-indigo-600" />
@@ -142,7 +142,7 @@ const runFeature = async (payload = {}) => {
 
             <!-- Active Feature UI -->
             <div v-else class="space-y-6">
-                <button @click="activeFeature = null" class="text-xs font-bold text-indigo-600 flex items-center hover:underline">
+                <button class="text-xs font-bold text-indigo-600 flex items-center hover:underline" @click="activeFeature = null">
                     <ArrowLeft class="w-3 h-3 mr-1" /> Back to Tools
                 </button>
 
@@ -165,9 +165,9 @@ const runFeature = async (payload = {}) => {
                     ></textarea>
                     
                     <button 
-                        @click="runFeature"
                         :disabled="!userQuestion || isLoading"
                         class="w-full bg-indigo-600 text-white py-3 rounded-xl font-bold hover:bg-indigo-700 disabled:opacity-50 transition-all shadow-lg shadow-indigo-100"
+                        @click="runFeature"
                     >
                         Tanya AI
                     </button>
@@ -182,16 +182,16 @@ const runFeature = async (payload = {}) => {
                     ></textarea>
                     
                     <label class="flex items-start space-x-3 cursor-pointer group">
-                        <input type="checkbox" v-model="hasConsent" class="mt-1 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
+                        <input v-model="hasConsent" type="checkbox" class="mt-1 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
                         <span class="text-xs text-gray-500 leading-relaxed group-hover:text-gray-700">
                             I consent to processing my CV data through an external AI provider (Google Gemini) for analysis.
                         </span>
                     </label>
 
                     <button 
-                        @click="runFeature"
                         :disabled="!cvText || !hasConsent || isLoading"
                         class="w-full bg-indigo-600 text-white py-3 rounded-xl font-bold hover:bg-indigo-700 disabled:opacity-50 transition-all shadow-lg shadow-indigo-100"
+                        @click="runFeature"
                     >
                         Analyze CV
                     </button>
@@ -200,9 +200,9 @@ const runFeature = async (payload = {}) => {
                 <!-- Generic Trigger for other POST features -->
                 <div v-else-if="activeFeature.method === 'post' && activeFeature.id !== 'cv' && activeFeature.id !== 'support'" class="text-center py-4">
                     <button 
-                        @click="runFeature"
                         :disabled="isLoading"
                         class="px-8 bg-indigo-600 text-white py-3 rounded-xl font-bold hover:bg-indigo-700 disabled:opacity-50 transition-all shadow-lg shadow-indigo-100"
+                        @click="runFeature"
                     >
                         Run Analysis
                     </button>

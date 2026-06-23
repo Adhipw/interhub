@@ -49,11 +49,11 @@ const resendOtp = () => {
             {{ deliveryError }}
         </div>
 
-        <form @submit.prevent="submit" class="space-y-6">
+        <form class="space-y-6" @submit.prevent="submit">
             <div>
                 <input
-                    type="text"
                     v-model="form.otp"
+                    type="text"
                     class="w-full text-center tracking-[1em] text-2xl font-bold rounded-xl border border-slate-200 bg-white px-4 py-4 transition-all focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-50"
                     :class="{ 'border-red-500 focus:border-red-500 focus:ring-red-50': form.errors.otp }"
                     placeholder="000000"
@@ -72,9 +72,9 @@ const resendOtp = () => {
         <div class="mt-8 text-center border-t border-slate-100 pt-6">
             <p class="text-xs text-slate-400 mb-2">{{ t('auth.did_not_receive_code') }}</p>
             <button 
-                @click="resendOtp"
                 :disabled="resendForm.processing"
                 class="text-sm font-bold text-blue-600 hover:text-blue-700 disabled:opacity-50"
+                @click="resendOtp"
             >
                 {{ t('auth.resend_otp') }}
             </button>

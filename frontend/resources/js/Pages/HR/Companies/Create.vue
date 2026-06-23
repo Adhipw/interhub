@@ -48,7 +48,7 @@ const submit = async () => {
 
     <div class="max-w-3xl mx-auto">
       <Card class="p-8 bg-white dark:bg-slate-900/50 border-none dark:border dark:border-white/5 shadow-2xl">
-        <form @submit.prevent="submit" class="space-y-6">
+        <form class="space-y-6" @submit.prevent="submit">
           <div class="flex items-center justify-center p-8 bg-primary-50 dark:bg-primary-900/10 rounded-[2rem] mb-10">
             <div class="w-20 h-20 bg-white dark:bg-slate-800 rounded-[1.5rem] flex items-center justify-center shadow-xl">
               <BuildingOfficeIcon class="w-10 h-10 text-primary-600" />

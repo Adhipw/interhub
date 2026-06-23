@@ -38,15 +38,15 @@ const submit = () => {
             </p>
         </div>
 
-        <form @submit.prevent="submit" class="space-y-5">
-            <input type="hidden" v-model="form.email" />
+        <form class="space-y-5" @submit.prevent="submit">
+            <input v-model="form.email" type="hidden" />
 
             <div>
                 <label for="otp" class="block text-sm font-semibold text-slate-700 mb-2 text-center">{{ t('auth.otp_code_label') }}</label>
                 <input
                     id="otp"
-                    type="text"
                     v-model="form.otp"
+                    type="text"
                     class="w-full text-center tracking-[0.5em] text-xl font-bold rounded-xl border border-slate-200 bg-white px-4 py-3 transition-all focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-50"
                     :class="{ 'border-red-500 focus:border-red-500 focus:ring-red-50': form.errors.otp }"
                     placeholder="000000"
@@ -59,8 +59,8 @@ const submit = () => {
             <div class="space-y-1">
                 <PasswordField
                     id="password"
-                    :label="t('auth.new_password_label')"
                     v-model="form.password"
+                    :label="t('auth.new_password_label')"
                     :error="form.errors.password"
                     :placeholder="t('auth.new_password_placeholder')"
                     required
@@ -70,8 +70,8 @@ const submit = () => {
 
             <PasswordField
                 id="password_confirmation"
-                :label="t('auth.confirm_new_password_label')"
                 v-model="form.password_confirmation"
+                :label="t('auth.confirm_new_password_label')"
                 :placeholder="t('auth.confirm_new_password_placeholder')"
                 required
             />

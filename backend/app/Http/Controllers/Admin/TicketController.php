@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class TicketController extends Controller
@@ -44,7 +45,7 @@ class TicketController extends Controller
         if (in_array($validated['status'], ['resolved', 'closed']) && ! $ticket->resolved_at) {
             $ticket->update([
                 'resolved_at' => now(),
-                'resolved_by' => auth()->id(),
+                'resolved_by' => Auth::id(),
             ]);
         }
 

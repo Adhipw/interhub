@@ -210,9 +210,9 @@ const faqs = computed(() => [
 
                 <!-- Professional Search Box (Centered) -->
                 <div class="p-2 rounded-[2.5rem] shadow-2xl border transition-all duration-300 group focus-within:ring-4 focus-within:ring-blue-600/10 mb-12 max-w-4xl mx-auto" :class="isDarkMode ? 'bg-slate-900 border-slate-800 shadow-slate-950' : 'bg-white border-slate-200 shadow-slate-200/50'">
-                    <form @submit.prevent="submitSearch" class="flex flex-col md:flex-row items-center gap-2">
+                    <form class="flex flex-col md:flex-row items-center gap-2" @submit.prevent="submitSearch">
                         <div class="flex-1 w-full flex items-center gap-3 px-6 py-4 border-b md:border-b-0 md:border-r" :class="isDarkMode ? 'border-slate-800' : 'border-slate-100'">
-                            <Icon name="search" className="w-5 h-5 text-blue-600" />
+                            <Icon name="search" class-name="w-5 h-5 text-blue-600" />
                             <input 
                                 v-model="searchQuery"
                                 type="text" 
@@ -222,7 +222,7 @@ const faqs = computed(() => [
                             />
                         </div>
                         <div class="flex-1 w-full flex items-center gap-3 px-6 py-4">
-                            <Icon name="map" className="w-5 h-5 text-blue-600" />
+                            <Icon name="map" class-name="w-5 h-5 text-blue-600" />
                             <input 
                                 v-model="locationQuery"
                                 type="text" 
@@ -240,7 +240,7 @@ const faqs = computed(() => [
                 <!-- Quick Chips (Centered) -->
                 <div class="flex flex-wrap items-center justify-center gap-3 mb-16">
                     <span class="text-[10px] font-black uppercase tracking-[0.2em] mr-2" :class="isDarkMode ? 'text-slate-500' : 'text-slate-400'">{{ t('hero.popular') }}:</span>
-                    <button v-for="tag in ['Remote', 'Jakarta', 'UI/UX', 'Frontend', 'Data', 'Marketing']" :key="tag" @click="searchQuery = tag; submitSearch()" class="px-5 py-2 rounded-full text-xs font-bold transition-all border" :class="isDarkMode ? 'bg-slate-900 border-slate-800 text-slate-400 hover:border-blue-600 hover:text-blue-500' : 'bg-slate-50 border-slate-200 text-slate-600 hover:border-blue-600 hover:text-blue-600'">
+                    <button v-for="tag in ['Remote', 'Jakarta', 'UI/UX', 'Frontend', 'Data', 'Marketing']" :key="tag" class="px-5 py-2 rounded-full text-xs font-bold transition-all border" :class="isDarkMode ? 'bg-slate-900 border-slate-800 text-slate-400 hover:border-blue-600 hover:text-blue-500' : 'bg-slate-50 border-slate-200 text-slate-600 hover:border-blue-600 hover:text-blue-600'" @click="searchQuery = tag; submitSearch()">
                         {{ tag }}
                     </button>
                 </div>
@@ -249,7 +249,7 @@ const faqs = computed(() => [
                 <div class="flex flex-wrap justify-center gap-12">
                     <div v-for="point in ['free_students', 'verified_companies', 'transparent_status']" :key="point" class="flex items-center gap-3">
                         <div class="w-8 h-8 rounded-full flex items-center justify-center bg-emerald-500/10 border border-emerald-500/20">
-                            <Icon name="check" className="w-4 h-4 text-emerald-500" />
+                            <Icon name="check" class-name="w-4 h-4 text-emerald-500" />
                         </div>
                         <span class="text-[10px] font-black uppercase tracking-widest" :class="isDarkMode ? 'text-slate-400' : 'text-slate-500'">{{ t('hero.' + point) }}</span>
                     </div>
@@ -264,14 +264,15 @@ const faqs = computed(() => [
                     <div v-for="i in 4" :key="i" class="h-16 rounded-2xl animate-pulse" :class="isDarkMode ? 'bg-slate-900' : 'bg-white'"></div>
                 </div>
                 <div v-else-if="stats" class="grid grid-cols-2 lg:grid-cols-4 gap-8">
-                    <div v-for="item in [
+                    <div
+v-for="item in [
                         { label: t('stats.internships'), val: stats.total_internships, icon: 'briefcase', color: 'text-blue-500' },
                         { label: t('stats.companies'), val: stats.total_companies, icon: 'building', color: 'text-emerald-500' },
                         { label: t('stats.students'), val: stats.total_students, icon: 'users', color: 'text-amber-500' },
                         { label: t('stats.applications'), val: stats.total_placements, icon: 'send', color: 'text-purple-500' }
                     ]" :key="item.label" class="flex flex-col md:flex-row items-center gap-4 text-center md:text-left p-6 rounded-[2rem] transition-all hover:scale-105" :class="isDarkMode ? 'bg-slate-900/50' : 'bg-white shadow-sm border border-slate-100'">
                         <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shadow-inner" :class="[isDarkMode ? 'bg-slate-800' : 'bg-slate-50', item.color]">
-                            <Icon :name="item.icon" className="w-6 h-6" />
+                            <Icon :name="item.icon" class-name="w-6 h-6" />
                         </div>
                         <div>
                             <div class="text-2xl font-black leading-none mb-1">{{ formatNumber(item.val) }}</div>
@@ -295,7 +296,7 @@ const faqs = computed(() => [
                     </div>
                     <Link :href="route('internships.index')" class="group flex items-center justify-center md:justify-start gap-3 px-8 py-4 rounded-3xl font-black text-xs uppercase tracking-widest transition-all shadow-xl hover:scale-105 active:scale-95" :class="isDarkMode ? 'bg-slate-900 text-blue-400 shadow-slate-950' : 'bg-blue-600 text-white shadow-blue-600/20'">
                         {{ t('jobs.btn_all') }}
-                        <Icon name="chevron" className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                        <Icon name="chevron" class-name="w-4 h-4 transition-transform group-hover:translate-x-1" />
                     </Link>
                 </div>
 
@@ -308,7 +309,7 @@ const faqs = computed(() => [
                     <div v-for="job in featuredInternships" :key="job.id" class="group relative p-6 md:p-8 rounded-[2.5rem] border transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 flex flex-col" :class="isDarkMode ? 'bg-slate-900 border-slate-800 hover:border-blue-900 shadow-slate-950' : 'bg-white border-slate-200 hover:border-blue-100 shadow-slate-100'">
                         <div class="flex items-start justify-between mb-8">
                              <div class="w-14 h-14 rounded-2xl flex items-center justify-center border font-black text-xl overflow-hidden shadow-sm" :class="isDarkMode ? 'bg-slate-800 border-slate-700 text-blue-500' : 'bg-blue-50 border-blue-50 text-blue-600'">
-                                <img loading="lazy" decoding="async" v-if="job.company?.logo_url" :src="job.company.logo_url" class="w-full h-full object-cover p-2" />
+                                <img v-if="job.company?.logo_url" loading="lazy" decoding="async" :src="job.company.logo_url" class="w-full h-full object-cover p-2" />
                                 <span v-else>{{ job.company?.name?.charAt(0) }}</span>
                             </div>
                             <span class="px-3 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest" :class="isDarkMode ? 'bg-blue-900/40 text-blue-400' : 'bg-blue-50 text-blue-600'">{{ job.working_type || job.type }}</span>
@@ -320,16 +321,16 @@ const faqs = computed(() => [
                         
                         <div class="flex items-center gap-2 mb-6">
                             <p class="text-sm font-bold" :class="isDarkMode ? 'text-slate-400' : 'text-slate-600'">{{ job.company?.name }}</p>
-                            <Icon name="shield" className="w-3.5 h-3.5 text-emerald-500" v-if="job.company?.is_verified" />
+                            <Icon v-if="job.company?.is_verified" name="shield" class-name="w-3.5 h-3.5 text-emerald-500" />
                         </div>
 
                         <div class="space-y-4 mb-8 text-[11px] font-bold" :class="isDarkMode ? 'text-slate-500' : 'text-slate-500'">
                             <div class="flex items-center gap-3">
-                                <Icon name="map" className="w-4 h-4 text-blue-500" />
+                                <Icon name="map" class-name="w-4 h-4 text-blue-500" />
                                 <span>{{ job.location }}</span>
                             </div>
                             <div class="flex items-center gap-3">
-                                <Icon name="clock" className="w-4 h-4 text-rose-500" />
+                                <Icon name="clock" class-name="w-4 h-4 text-rose-500" />
                                 <span>{{ job.deadline_at_human || t('job.deadline_urgent') }}</span>
                             </div>
                         </div>
@@ -340,14 +341,14 @@ const faqs = computed(() => [
                                 <span class="text-base font-black" :class="isDarkMode ? 'text-blue-400' : 'text-blue-600'">{{ job.stipend || t('job.stipend_default') }}</span>
                             </div>
                             <Link :href="route('internships.show', { slug: job.slug })" class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center transition-all hover:scale-110 active:scale-95 shadow-lg shadow-blue-600/20">
-                                <Icon name="chevron" className="w-4 h-4" />
+                                <Icon name="chevron" class-name="w-4 h-4" />
                             </Link>
                         </div>
                     </div>
                 </div>
 
                 <div v-else class="text-center py-24 rounded-[3rem] border border-dashed" :class="isDarkMode ? 'bg-slate-900/30 border-slate-800 text-slate-500' : 'bg-slate-50 border-slate-200 text-slate-400'">
-                    <Icon name="briefcase" className="w-12 h-12 mx-auto mb-6 opacity-20" />
+                    <Icon name="briefcase" class-name="w-12 h-12 mx-auto mb-6 opacity-20" />
                     <p class="font-bold text-lg">{{ t('jobs.empty') }}</p>
                 </div>
             </div>
@@ -362,16 +363,16 @@ const faqs = computed(() => [
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <button v-for="cat in categories" :key="cat.id" @click="searchQuery = cat.label; submitSearch()" class="p-8 rounded-[2.5rem] border transition-all duration-300 group text-left" :class="isDarkMode ? 'bg-slate-950 border-slate-800 hover:border-blue-900' : 'bg-white border-slate-200 hover:border-blue-200 hover:shadow-xl'">
+                    <button v-for="cat in categories" :key="cat.id" class="p-8 rounded-[2.5rem] border transition-all duration-300 group text-left" :class="isDarkMode ? 'bg-slate-950 border-slate-800 hover:border-blue-900' : 'bg-white border-slate-200 hover:border-blue-200 hover:shadow-xl'" @click="searchQuery = cat.label; submitSearch()">
                         <div class="w-12 h-12 rounded-2xl flex items-center justify-center mb-6 transition-transform group-hover:scale-110 group-hover:rotate-6" :class="isDarkMode ? 'bg-slate-900 text-blue-500 shadow-inner shadow-slate-950' : 'bg-blue-50 text-blue-600 shadow-inner shadow-blue-100/50'">
-                            <Icon :name="cat.icon" className="w-6 h-6" />
+                            <Icon :name="cat.icon" class-name="w-6 h-6" />
                         </div>
                         <h3 class="text-lg font-black mb-1" :class="isDarkMode ? 'text-white' : 'text-slate-950'">{{ cat.label }}</h3>
                         <p class="text-xs font-bold mb-6" :class="isDarkMode ? 'text-slate-500' : 'text-slate-400'">{{ cat.desc }}</p>
                         <!-- Realtime count would go here if supported -->
                         <div class="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-blue-600">
                             {{ t('cat.explore') }}
-                            <Icon name="chevron" className="w-3 h-3" />
+                            <Icon name="chevron" class-name="w-3 h-3" />
                         </div>
                     </button>
                 </div>
@@ -392,13 +393,13 @@ const faqs = computed(() => [
                 <div v-else-if="companiesRes.length > 0" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
                     <div v-for="comp in companiesRes" :key="comp.id" class="p-6 rounded-3xl border transition-all duration-300 flex flex-col items-center gap-4 group" :class="isDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-100 shadow-sm'">
                         <div class="w-16 h-16 rounded-2xl flex items-center justify-center border font-black text-xl overflow-hidden grayscale group-hover:grayscale-0 transition-all group-hover:scale-110" :class="isDarkMode ? 'bg-slate-800 border-slate-700 text-blue-500' : 'bg-slate-50 border-slate-200 text-slate-400'">
-                            <img loading="lazy" decoding="async" v-if="comp.logo_url" :src="comp.logo_url" class="w-full h-full object-cover" />
+                            <img v-if="comp.logo_url" loading="lazy" decoding="async" :src="comp.logo_url" class="w-full h-full object-cover" />
                             <span v-else>{{ comp.name?.charAt(0) }}</span>
                         </div>
                         <div class="text-center">
                             <p class="text-xs font-black line-clamp-1 mb-1" :class="isDarkMode ? 'text-white' : 'text-slate-950'">{{ comp.name }}</p>
-                            <div class="flex items-center justify-center gap-1 text-[8px] font-black uppercase tracking-widest text-emerald-600" v-if="comp.is_verified">
-                                <Icon name="shield" className="w-2.5 h-2.5" />
+                            <div v-if="comp.is_verified" class="flex items-center justify-center gap-1 text-[8px] font-black uppercase tracking-widest text-emerald-600">
+                                <Icon name="shield" class-name="w-2.5 h-2.5" />
                                 Verified
                             </div>
                         </div>
@@ -438,7 +439,8 @@ const faqs = computed(() => [
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div v-for="item in [
+                    <div
+v-for="item in [
                         { icon: 'shield', title: t('advantages.v1_title'), desc: t('advantages.v1_desc') },
                         { icon: 'briefcase', title: t('advantages.v2_title'), desc: t('advantages.v2_desc') },
                         { icon: 'money', title: t('advantages.v3_title'), desc: t('advantages.v3_desc') },
@@ -446,7 +448,7 @@ const faqs = computed(() => [
                         { icon: 'sparkles', title: t('advantages.v5_title'), desc: t('advantages.v5_desc') },
                         { icon: 'users', title: t('advantages.v6_title'), desc: t('advantages.v6_desc') }
                     ]" :key="item.title" class="p-8 rounded-[2.5rem] border transition-all" :class="isDarkMode ? 'bg-slate-900 border-slate-800 hover:border-blue-900' : 'bg-slate-50 border-slate-100 hover:border-blue-200 hover:bg-white hover:shadow-xl'">
-                        <Icon :name="item.icon" className="w-10 h-10 text-blue-600 mb-6" />
+                        <Icon :name="item.icon" class-name="w-10 h-10 text-blue-600 mb-6" />
                         <h3 class="text-lg font-black mb-3" :class="isDarkMode ? 'text-white' : 'text-slate-950'">{{ item.title }}</h3>
                         <p class="text-sm font-medium leading-relaxed" :class="isDarkMode ? 'text-slate-400' : 'text-slate-500'">{{ item.desc }}</p>
                     </div>
@@ -465,7 +467,7 @@ const faqs = computed(() => [
 
                     <div class="relative z-10">
                         <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 font-black text-[10px] uppercase tracking-widest transition-colors" :class="isDarkMode ? 'bg-blue-500/10 text-blue-400' : 'bg-blue-600/10 text-blue-600'">
-                            <Icon name="sparkles" className="w-4 h-4" />
+                            <Icon name="sparkles" class-name="w-4 h-4" />
                             {{ t('ai.badge') }}
                         </div>
                         
@@ -490,11 +492,11 @@ const faqs = computed(() => [
                                     AI Engine Active
                                 </div>
                                 <button 
-                                    @click="submitAiMatcher"
                                     :disabled="aiLoading || !aiPrompt.trim()"
                                     class="w-full sm:w-auto bg-blue-600 text-white px-10 py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-blue-700 transition-all flex items-center justify-center gap-3 shadow-lg shadow-blue-600/20 disabled:opacity-50 disabled:cursor-not-allowed"
+                                    @click="submitAiMatcher"
                                 >
-                                    <Icon :name="aiLoading ? 'loader' : 'bot'" className="w-5 h-5" :class="aiLoading ? 'animate-spin' : ''" />
+                                    <Icon :name="aiLoading ? 'loader' : 'bot'" class-name="w-5 h-5" :class="aiLoading ? 'animate-spin' : ''" />
                                     {{ aiLoading ? 'Menganalisis...' : t('ai.btn') }}
                                 </button>
                             </div>
@@ -504,7 +506,7 @@ const faqs = computed(() => [
                         <div v-if="aiLoading" class="max-w-2xl mx-auto mt-12 p-8 rounded-[2.5rem] border animate-pulse text-center space-y-6" :class="isDarkMode ? 'bg-slate-950 border-slate-800' : 'bg-white border-slate-100 shadow-sm'">
                             <div class="flex flex-col items-center justify-center gap-4">
                                 <div class="w-16 h-16 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-600 animate-spin">
-                                    <Icon name="sparkles" className="w-8 h-8" />
+                                    <Icon name="sparkles" class-name="w-8 h-8" />
                                 </div>
                                 <div>
                                     <h4 class="text-lg font-black" :class="isDarkMode ? 'text-white' : 'text-slate-900'">Gemini AI sedang bekerja</h4>
@@ -521,7 +523,7 @@ const faqs = computed(() => [
                         <!-- AI Matching Results -->
                         <div v-if="!aiLoading && aiMatches.length > 0" class="max-w-2xl mx-auto mt-12 text-left space-y-6">
                             <h3 class="text-xl font-black mb-6 flex items-center gap-3 px-4" :class="isDarkMode ? 'text-white' : 'text-slate-900'">
-                                <Icon name="sparkles" className="w-6 h-6 text-blue-600" />
+                                <Icon name="sparkles" class-name="w-6 h-6 text-blue-600" />
                                 Rekomendasi Magang Terbaik Untukmu
                             </h3>
                             
@@ -544,7 +546,7 @@ const faqs = computed(() => [
                                             {{ match.company }}
                                         </p>
                                         <p class="text-xs font-semibold text-slate-400 dark:text-neutral-500 flex items-center gap-1.5 mt-1">
-                                            <Icon name="map-pin" className="w-3.5 h-3.5" />
+                                            <Icon name="map-pin" class-name="w-3.5 h-3.5" />
                                             {{ match.location }}
                                         </p>
                                     </div>
@@ -557,8 +559,8 @@ const faqs = computed(() => [
                                 </div>
                                 
                                 <button 
-                                    @click="inertiaRouter.visit(`/internships/${match.slug}`)"
                                     class="w-full md:w-auto shrink-0 bg-blue-600 text-white px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-blue-700 hover:scale-[1.02] active:scale-95 transition-all shadow-lg shadow-blue-600/15"
+                                    @click="inertiaRouter.visit(`/internships/${match.slug}`)"
                                 >
                                     Lihat Detail
                                 </button>
@@ -567,7 +569,7 @@ const faqs = computed(() => [
 
                         <!-- AI No Matches Found -->
                         <div v-else-if="!aiLoading && aiHasSearched && aiMatches.length === 0" class="max-w-2xl mx-auto mt-12 p-10 rounded-[2.5rem] border text-center space-y-4" :class="isDarkMode ? 'bg-slate-950 border-slate-800' : 'bg-white border-slate-100 shadow-sm'">
-                            <Icon name="bot" className="w-12 h-12 text-slate-400 mx-auto" />
+                            <Icon name="bot" class-name="w-12 h-12 text-slate-400 mx-auto" />
                             <h4 class="text-lg font-black" :class="isDarkMode ? 'text-white' : 'text-slate-900'">Tidak ada kecocokan yang ditemukan</h4>
                             <p class="text-sm font-medium text-slate-400 dark:text-neutral-500 max-w-md mx-auto">Kami belum menemukan lowongan magang yang cocok dengan kriteria tersebut. Coba ketikkan keahlian atau minat yang berbeda!</p>
                         </div>
@@ -611,7 +613,7 @@ const faqs = computed(() => [
                     <details v-for="(f, i) in faqs" :key="i" class="group transition-all duration-300 rounded-[2rem] border overflow-hidden" :class="isDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200 open:shadow-xl'">
                         <summary class="flex items-center justify-between p-8 cursor-pointer list-none font-black transition-colors" :class="isDarkMode ? 'text-white' : 'text-slate-950 group-open:text-blue-600'">
                             <h4 class="text-lg">{{ f.q }}</h4>
-                            <Icon name="chevron" className="w-5 h-5 transition-transform group-open:rotate-90 text-slate-500" />
+                            <Icon name="chevron" class-name="w-5 h-5 transition-transform group-open:rotate-90 text-slate-500" />
                         </summary>
                         <div class="px-8 pb-8 text-sm font-medium leading-relaxed border-t transition-colors" :class="isDarkMode ? 'text-slate-400 border-slate-800' : 'text-slate-600 border-slate-100 pt-6'">
                             {{ f.a }}
@@ -645,7 +647,7 @@ const faqs = computed(() => [
 
                     <div class="flex flex-wrap justify-center gap-12 opacity-60">
                         <div v-for="point in ['free_students', 'verified_companies', 'transparent_status']" :key="point" class="flex items-center gap-3">
-                            <Icon name="check" className="w-5 h-5 text-emerald-500" />
+                            <Icon name="check" class-name="w-5 h-5 text-emerald-500" />
                             <span class="text-xs font-black uppercase tracking-widest">{{ t('hero.' + point) }}</span>
                         </div>
                     </div>

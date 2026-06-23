@@ -132,7 +132,7 @@ const togglePermission = (name: string) => {
           <p class="text-slate-500 dark:text-slate-400 font-medium">{{ t('admin.roles.desc') || 'Kelola tingkat akses dan izin granular untuk setiap peran pengguna.' }}</p>
         </div>
         
-        <form @submit.prevent="createRole" class="flex items-center gap-3">
+        <form class="flex items-center gap-3" @submit.prevent="createRole">
           <input 
             v-model="newRole.name"
             type="text" 
@@ -162,16 +162,17 @@ const togglePermission = (name: string) => {
                 class="relative group"
               >
                 <button 
-                  @click="selectRole(role)"
                   :class="[
                     'w-full text-left px-8 py-6 rounded-[2rem] transition-all flex items-center justify-between group overflow-hidden relative',
                     selectedRole === role.id 
                       ? 'bg-slate-900 text-white shadow-2xl shadow-slate-900/20 dark:bg-primary-600' 
                       : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 border border-slate-100 dark:border-slate-800'
                   ]"
+                  @click="selectRole(role)"
                 >
                   <div class="flex items-center gap-4 relative z-10">
-                     <div :class="[
+                     <div
+:class="[
                         'w-10 h-10 rounded-xl flex items-center justify-center transition-colors',
                         selectedRole === role.id ? 'bg-white/10 text-white' : 'bg-primary-50 text-primary-600 dark:bg-primary-900/20'
                      ]">
@@ -184,8 +185,8 @@ const togglePermission = (name: string) => {
                 </button>
                 <button 
                   v-if="role.name !== 'super_admin'"
-                  @click.stop="deleteRole(role.id)"
                   class="absolute right-6 top-1/2 -translate-y-1/2 p-3 text-rose-500 opacity-0 group-hover:opacity-100 transition-all hover:bg-rose-50 dark:hover:bg-rose-900/20 rounded-2xl"
+                  @click.stop="deleteRole(role.id)"
                 >
                   <Trash2 class="w-5 h-5" />
                 </button>
@@ -207,9 +208,9 @@ const togglePermission = (name: string) => {
                     <p class="text-xs font-bold text-slate-400 mt-2 uppercase tracking-widest">{{ t('admin.roles.permissions_desc') || 'Centang izin yang ingin diberikan pada role ini.' }}</p>
                  </div>
                  <button 
-                   @click="syncPermissions"
                    :disabled="permissionForm.processing"
                    class="flex items-center gap-3 px-10 py-5 bg-slate-900 dark:bg-primary-600 text-white rounded-[1.5rem] text-sm font-black hover:bg-slate-800 transition-all shadow-xl shadow-slate-900/20 active:scale-95 disabled:opacity-50"
+                   @click="syncPermissions"
                  >
                     <Save v-if="!permissionForm.processing" class="w-5 h-5" />
                     <Loader2 v-else class="w-5 h-5 animate-spin" />

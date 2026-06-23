@@ -30,7 +30,8 @@ watch(() => props.message, (newVal) => {
     >
         <div v-if="visible && message" class="fixed bottom-10 right-10 z-[100] max-w-sm w-full bg-white shadow-2xl rounded-2xl border border-slate-100 overflow-hidden">
             <div class="p-4 flex items-center gap-4">
-                <div :class="[
+                <div
+:class="[
                     'w-10 h-10 rounded-full flex items-center justify-center shrink-0',
                     type === 'error' ? 'bg-red-50 text-red-600' : 'bg-green-50 text-green-600'
                 ]">
@@ -40,7 +41,7 @@ watch(() => props.message, (newVal) => {
                 <div class="flex-1 min-w-0">
                     <p class="text-sm font-bold text-slate-900">{{ message }}</p>
                 </div>
-                <button @click="visible = false" class="text-slate-400 hover:text-slate-600 transition-colors">
+                <button class="text-slate-400 hover:text-slate-600 transition-colors" @click="visible = false">
                     <X class="w-5 h-5" />
                 </button>
             </div>

@@ -67,7 +67,7 @@ const maxWidthClass = {
         >
             <div v-show="show" class="fixed inset-0 overflow-y-auto px-4 py-6 sm:px-0 z-[100]" scroll-region>
                 <!-- Backdrop -->
-                <div class="fixed inset-0 transform transition-all bg-neutral-900/60" @click="close" aria-hidden="true"></div>
+                <div class="fixed inset-0 transform transition-all bg-neutral-900/60" aria-hidden="true" @click="close"></div>
 
                 <Transition
                     enter-active-class="ease-out duration-300"
@@ -88,8 +88,8 @@ const maxWidthClass = {
                             <h3 class="text-2xl font-bold tracking-tight text-neutral-900 dark:text-white">{{ title }}</h3>
                             <button 
                                 v-if="closeable"
-                                @click="close"
                                 class="w-10 h-10 flex items-center justify-center rounded-xl bg-neutral-50 dark:bg-neutral-800 text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-all"
+                                @click="close"
                             >
                                 <X class="w-6 h-6" />
                             </button>

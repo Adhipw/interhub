@@ -62,10 +62,12 @@ const ask = async (q) => {
                 <p class="text-white/60 font-bold text-sm max-w-[200px]">Halo! Ada yang bisa saya bantu terkait InterHub?</p>
             </div>
 
-            <div v-for="(msg, i) in conversation" :key="i" 
+            <div
+v-for="(msg, i) in conversation" :key="i" 
                  :class="['flex', msg.role === 'user' ? 'justify-end' : 'justify-start']"
                  class="animate-slide-up">
-                <div :class="[
+                <div
+:class="[
                     'max-w-[85%] p-5 rounded-3xl text-sm font-medium leading-relaxed',
                     msg.role === 'user' 
                         ? 'bg-indigo-600 text-white rounded-tr-none' 
@@ -90,8 +92,8 @@ const ask = async (q) => {
                 <button 
                     v-for="q in quickQuestions" 
                     :key="q"
-                    @click="ask(q)"
                     class="px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full text-[10px] font-black text-neutral-400 hover:text-white transition-all uppercase tracking-widest"
+                    @click="ask(q)"
                 >
                     {{ q }}
                 </button>
@@ -106,9 +108,9 @@ const ask = async (q) => {
                     @keyup.enter="ask()"
                 />
                 <button 
-                    @click="ask()"
                     :disabled="isLoading || !question"
                     class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white hover:bg-indigo-700 transition-all disabled:opacity-50"
+                    @click="ask()"
                 >
                     <Send class="w-5 h-5" />
                 </button>

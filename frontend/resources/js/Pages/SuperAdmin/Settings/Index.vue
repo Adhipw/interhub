@@ -85,9 +85,9 @@ const toggleFeature = async (flag: any) => {
                   <p class="text-[10px] font-mono text-slate-400 mt-2">{{ flag.key }}</p>
                </div>
                <button 
-                  @click="toggleFeature(flag)"
                   class="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-offset-2"
                   :class="flag.is_enabled ? 'bg-primary-600' : 'bg-slate-200 dark:bg-slate-800'"
+                  @click="toggleFeature(flag)"
                >
                   <span 
                     class="pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"
@@ -132,9 +132,9 @@ const toggleFeature = async (flag: any) => {
                      />
                   </div>
                   <button 
-                    @click="updateSetting(setting)"
                     :disabled="processing === setting.id"
                     class="p-4 bg-primary-600 text-white rounded-xl hover:bg-primary-700 transition-all active-press disabled:opacity-50"
+                    @click="updateSetting(setting)"
                   >
                      <Loader2 v-if="processing === setting.id" class="w-5 h-5 animate-spin" />
                      <Save v-else class="w-5 h-5" />

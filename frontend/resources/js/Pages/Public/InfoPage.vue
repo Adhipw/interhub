@@ -93,9 +93,9 @@ onMounted(() => {
                                     <button 
                                         v-for="s in sections.filter(s => s.category === 'bantuan')" 
                                         :key="s.id"
-                                        @click="activeTab = s.id"
                                         class="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all group"
                                         :class="activeTab === s.id ? 'bg-primary-600 text-white shadow-lg shadow-primary-600/20' : 'text-slate-600 dark:text-neutral-400 hover:bg-white dark:hover:bg-neutral-900'"
+                                        @click="activeTab = s.id"
                                     >
                                         <component :is="s.icon" class="w-5 h-5" />
                                         <span class="font-bold text-sm">{{ s.label }}</span>
@@ -111,9 +111,9 @@ onMounted(() => {
                                     <button 
                                         v-for="s in sections.filter(s => s.category === 'perusahaan')" 
                                         :key="s.id"
-                                        @click="activeTab = s.id"
                                         class="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all group"
                                         :class="activeTab === s.id ? 'bg-primary-600 text-white shadow-lg shadow-primary-600/20' : 'text-slate-600 dark:text-neutral-400 hover:bg-white dark:hover:bg-neutral-900'"
+                                        @click="activeTab = s.id"
                                     >
                                         <component :is="s.icon" class="w-5 h-5" />
                                         <span class="font-bold text-sm">{{ s.label }}</span>
@@ -129,9 +129,9 @@ onMounted(() => {
                                     <button 
                                         v-for="s in sections.filter(s => s.category === 'mahasiswa')" 
                                         :key="s.id"
-                                        @click="activeTab = s.id"
                                         class="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all group"
                                         :class="activeTab === s.id ? 'bg-primary-600 text-white shadow-lg shadow-primary-600/20' : 'text-slate-600 dark:text-neutral-400 hover:bg-white dark:hover:bg-neutral-900'"
+                                        @click="activeTab = s.id"
                                     >
                                         <component :is="s.icon" class="w-5 h-5" />
                                         <span class="font-bold text-sm">{{ s.label }}</span>
@@ -230,7 +230,8 @@ onMounted(() => {
                                 <template v-if="activeTab === 'selection-system'">
                                     <p>{{ t('info.selection_intro') }}</p>
                                     <div class="grid grid-cols-1 gap-8 mt-10 not-prose">
-                                        <div v-for="item in [
+                                        <div
+v-for="item in [
                                             { title: t('info.ai_scoring'), desc: t('info.ai_scoring_desc'), icon: Rocket },
                                             { title: t('info.kanban'), desc: t('info.kanban_desc'), icon: Users },
                                             { title: t('info.interview'), desc: t('info.interview_desc'), icon: Phone }
@@ -290,7 +291,7 @@ onMounted(() => {
                             <div class="mt-20 pt-10 border-t border-slate-100 dark:border-neutral-800 flex flex-col md:flex-row items-center justify-between gap-6">
                                 <p class="text-slate-500 dark:text-neutral-500 text-sm font-medium">{{ t('info.need_help') }}</p>
                                 <div class="flex gap-4">
-                                    <button @click="activeTab = 'contact'" class="px-6 py-3 rounded-full bg-slate-900 dark:bg-white text-white dark:text-neutral-900 font-bold text-sm transition-transform hover:scale-105">{{ t('info.contact_cs') }}</button>
+                                    <button class="px-6 py-3 rounded-full bg-slate-900 dark:bg-white text-white dark:text-neutral-900 font-bold text-sm transition-transform hover:scale-105" @click="activeTab = 'contact'">{{ t('info.contact_cs') }}</button>
                                     <Link href="/" class="px-6 py-3 rounded-full border border-slate-200 dark:border-neutral-700 text-slate-600 dark:text-neutral-400 font-bold text-sm transition-transform hover:scale-105">{{ t('info.back_home') }}</Link>
                                 </div>
                             </div>

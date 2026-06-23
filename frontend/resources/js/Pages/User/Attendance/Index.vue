@@ -281,7 +281,7 @@ onUnmounted(() => {
         </div>
 
         <!-- Consent Modal -->
-        <Modal :show="showConsentModal" @close="showConsentModal = false" max-width="md">
+        <Modal :show="showConsentModal" max-width="md" @close="showConsentModal = false">
             <div class="p-6">
                 <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center text-blue-600 mx-auto mb-4">
                     <i class="ph-map-pin-line text-3xl"></i>

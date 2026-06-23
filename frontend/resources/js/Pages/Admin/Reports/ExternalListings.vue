@@ -113,15 +113,15 @@ const reject = (id: number) => {
                       <ExternalLink class="w-4 h-4" />
                     </a>
                     <button 
-                      @click="approve(listing.id)"
                       class="flex items-center gap-2 px-4 py-2 bg-green-50 text-green-600 rounded-xl text-xs font-bold hover:bg-green-600 hover:text-white transition-all"
+                      @click="approve(listing.id)"
                     >
                       <CheckCircle class="w-3.5 h-3.5" />
                       Approve
                     </button>
                     <button 
-                      @click="reject(listing.id)"
                       class="flex items-center gap-2 px-4 py-2 bg-red-50 text-red-600 rounded-xl text-xs font-bold hover:bg-red-600 hover:text-white transition-all"
+                      @click="reject(listing.id)"
                     >
                       <XCircle class="w-3.5 h-3.5" />
                       Reject

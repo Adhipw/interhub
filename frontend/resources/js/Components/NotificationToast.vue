@@ -84,7 +84,7 @@ onUnmounted(() => {
                     <p class="text-sm font-bold text-slate-900 dark:text-white">{{ notif.title }}</p>
                     <p class="text-xs text-slate-500 mt-1 leading-relaxed">{{ notif.message }}</p>
                 </div>
-                <button @click="removeNotification(notif.id)" class="text-slate-400 hover:text-slate-600">
+                <button class="text-slate-400 hover:text-slate-600" @click="removeNotification(notif.id)">
                     <X class="w-4 h-4" />
                 </button>
             </div>

@@ -102,7 +102,7 @@ updateSeo();
         <div class="bg-neutral-50 dark:bg-neutral-950 min-h-screen pt-32 pb-32">
             <div class="container mx-auto px-6 max-w-6xl">
                 <!-- Back Button -->
-                <button @click="goBack" class="flex items-center gap-2 text-neutral-400 hover:text-primary-600 transition-colors mb-12 group font-bold text-sm uppercase tracking-widest">
+                <button class="flex items-center gap-2 text-neutral-400 hover:text-primary-600 transition-colors mb-12 group font-bold text-sm uppercase tracking-widest" @click="goBack">
                     <ArrowLeft class="w-5 h-5 group-hover:-translate-x-2 transition-transform" />
                     {{ t('common.back') }}
                 </button>
@@ -119,7 +119,7 @@ updateSeo();
                                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-8 mb-12">
                                     <div class="flex items-center gap-8">
                                         <div class="w-24 h-24 bg-neutral-50 dark:bg-neutral-950 rounded-[2rem] flex items-center justify-center border border-neutral-100 dark:border-neutral-800 shadow-sm overflow-hidden shrink-0">
-                                            <img loading="lazy" decoding="async" v-if="internship.company?.logo_url" :src="internship.company.logo_url" class="w-full h-full object-contain p-4" />
+                                            <img v-if="internship.company?.logo_url" loading="lazy" decoding="async" :src="internship.company.logo_url" class="w-full h-full object-contain p-4" />
                                             <Building2 v-else class="w-12 h-12 text-neutral-300" />
                                         </div>
                                         <div>
@@ -204,10 +204,10 @@ updateSeo();
                                 <h3 class="text-2xl font-black text-white dark:text-neutral-900 mb-6">{{ t('job.apply_card_title') }}</h3>
                                 <p class="text-neutral-400 dark:text-neutral-500 mb-10 font-bold leading-relaxed">{{ t('job.apply_card_desc') }}</p>
                                 <Button 
-                                    @click="handleApply" 
                                     size="xl" 
                                     variant="secondary" 
-                                    class="w-full !bg-white dark:!bg-neutral-900 !text-neutral-900 dark:!text-white hover:scale-105 transition-transform"
+                                    class="w-full !bg-white dark:!bg-neutral-900 !text-neutral-900 dark:!text-white hover:scale-105 transition-transform" 
+                                    @click="handleApply"
                                 >
                                     {{ t('job.apply_now') }}
                                     <ArrowRight class="w-6 h-6 ml-3" />
@@ -222,7 +222,7 @@ updateSeo();
                             <h3 class="text-xs font-black uppercase tracking-[0.2em] text-neutral-400">{{ t('company.about') }}</h3>
                             <div class="flex items-center gap-6">
                                 <div class="w-16 h-16 bg-neutral-50 dark:bg-neutral-950 rounded-2xl flex items-center justify-center border border-neutral-100 dark:border-neutral-800 shadow-sm overflow-hidden shrink-0">
-                                    <img loading="lazy" decoding="async" v-if="internship.company?.logo_url" :src="internship.company.logo_url" class="w-full h-full object-contain p-3" />
+                                    <img v-if="internship.company?.logo_url" loading="lazy" decoding="async" :src="internship.company.logo_url" class="w-full h-full object-contain p-3" />
                                     <Building2 v-else class="w-10 h-10 text-neutral-300" />
                                 </div>
                                 <div>
@@ -254,14 +254,14 @@ updateSeo();
         <!-- Apply Modal -->
         <Modal 
             :show="showApplyModal" 
-            @close="showApplyModal = false" 
-            title="Kirim Lamaran Magang"
-            maxWidth="xl"
+            title="Kirim Lamaran Magang" 
+            max-width="xl"
+            @close="showApplyModal = false"
         >
-            <div class="space-y-8" v-if="internship">
+            <div v-if="internship" class="space-y-8">
                 <div class="p-6 bg-neutral-50 dark:bg-neutral-800 rounded-3xl border border-neutral-100 dark:border-neutral-700 flex items-center gap-6">
                     <div class="w-16 h-16 bg-white dark:bg-neutral-900 rounded-2xl flex items-center justify-center border border-neutral-100 dark:border-neutral-800 shadow-sm overflow-hidden shrink-0">
-                        <img loading="lazy" decoding="async" v-if="internship.company?.logo_url" :src="internship.company.logo_url" class="w-full h-full object-contain p-3" />
+                        <img v-if="internship.company?.logo_url" loading="lazy" decoding="async" :src="internship.company.logo_url" class="w-full h-full object-contain p-3" />
                         <Building2 v-else class="w-10 h-10 text-neutral-300" />
                     </div>
                     <div>
@@ -300,16 +300,16 @@ updateSeo();
                 <div class="flex items-center justify-end gap-4 pt-4 border-t border-neutral-100 dark:border-neutral-800">
                     <Button 
                         variant="outline" 
-                        @click="showApplyModal = false"
                         :disabled="applying"
+                        @click="showApplyModal = false"
                     >
                         Batal
                     </Button>
                     <Button 
                         variant="primary" 
-                        @click="submitApplication"
                         :disabled="applying"
                         class="shadow-lg shadow-primary-500/25"
+                        @click="submitApplication"
                     >
                         <span v-if="applying">Mengirim...</span>
                         <span v-else>Kirim Lamaran</span>

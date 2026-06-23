@@ -86,18 +86,18 @@ const clearFile = () => {
         </label>
 
         <div 
-            @dragover.prevent="isDragging = true"
-            @dragleave.prevent="isDragging = false"
-            @drop.prevent="handleDrop"
             :class="[
                 'relative border-2 border-dashed rounded-2xl p-8 transition-all flex flex-col items-center justify-center gap-4 cursor-pointer',
                 isDragging ? 'border-primary-500 bg-primary-50/50 dark:bg-primary-900/10' : 'border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700'
             ]"
+            @dragover.prevent="isDragging = true"
+            @dragleave.prevent="isDragging = false"
+            @drop.prevent="handleDrop"
             @click="($refs.fileInput as HTMLInputElement).click()"
         >
             <input 
-                type="file" 
                 ref="fileInput" 
+                type="file" 
                 class="hidden" 
                 :accept="accept"
                 @change="handleFileChange"
@@ -130,8 +130,8 @@ const clearFile = () => {
                     <p class="text-[10px] text-slate-500 font-mono uppercase">{{ (selectedFile.size / 1024).toFixed(1) }} KB</p>
                 </div>
                 <button 
-                    @click.stop="clearFile"
                     class="p-2 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-lg transition-colors text-slate-400 hover:text-red-500"
+                    @click.stop="clearFile"
                 >
                     <X class="w-5 h-5" />
                 </button>

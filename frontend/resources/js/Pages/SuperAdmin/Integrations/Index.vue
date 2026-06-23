@@ -117,8 +117,8 @@ const getProviderIcon = (provider: string) => ShieldCheck;
         </div>
         
         <button 
-          @click="openCreateModal"
           class="flex items-center gap-2 px-6 py-3 bg-primary-600 text-white rounded-2xl text-sm font-bold hover:bg-primary-700 transition-all shadow-lg shadow-primary-500/20 active:scale-95"
+          @click="openCreateModal"
         >
           <Plus class="w-4 h-4" />
           Integrasi Baru
@@ -138,7 +138,8 @@ const getProviderIcon = (provider: string) => ShieldCheck;
                     <p class="text-xs text-slate-400 font-mono mt-1">{{ integration.provider.toUpperCase() }}</p>
                  </div>
                  <div class="flex items-center gap-2">
-                    <span :class="[
+                    <span
+:class="[
                       'px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest',
                       integration.is_active ? 'bg-green-50 text-green-600' : 'bg-red-50 text-red-600'
                     ]">
@@ -171,27 +172,27 @@ const getProviderIcon = (provider: string) => ShieldCheck;
                  <div class="flex items-center justify-between pt-4 border-t border-slate-50 dark:border-slate-800">
                     <div class="flex gap-3">
                        <button 
-                         @click="updateIntegration(integration)"
                          :disabled="processing === integration.id"
                          class="flex items-center gap-2 px-6 py-3 bg-primary-600 text-white rounded-xl text-xs font-bold hover:bg-primary-700 transition-all"
+                         @click="updateIntegration(integration)"
                        >
                           <Loader2 v-if="processing === integration.id" class="w-4 h-4 animate-spin" />
                           <Save v-else class="w-4 h-4" />
                           Simpan
                        </button>
                        <button 
-                         @click="deleteIntegration(integration.id)"
                          :disabled="processing === integration.id"
                          class="flex items-center gap-2 px-6 py-3 bg-red-50 text-red-600 rounded-xl text-xs font-bold hover:bg-red-600 hover:text-white transition-all"
+                         @click="deleteIntegration(integration.id)"
                        >
                           <Trash2 class="w-4 h-4" />
                           Hapus
                        </button>
                     </div>
                     <button 
-                      @click="syncIntegration(integration.id)"
                       :disabled="processing === integration.id"
                       class="flex items-center gap-2 px-6 py-3 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-xl text-xs font-bold hover:bg-primary-600 hover:text-white transition-all"
+                      @click="syncIntegration(integration.id)"
                     >
                        <RefreshCw :class="['w-4 h-4', processing === integration.id ? 'animate-spin' : '']" />
                        Tes Koneksi / Sync
@@ -209,12 +210,12 @@ const getProviderIcon = (provider: string) => ShieldCheck;
     </div>
 
     <!-- Create Integration Modal -->
-    <Modal :show="showCreateModal" @close="showCreateModal = false" max-width="md">
+    <Modal :show="showCreateModal" max-width="md" @close="showCreateModal = false">
        <div class="p-8">
           <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-2">Integrasi Baru</h2>
           <p class="text-sm text-slate-500 mb-8">Hubungkan layanan AI atau Cloud baru.</p>
 
-          <form @submit.prevent="submitCreate" class="space-y-6">
+          <form class="space-y-6" @submit.prevent="submitCreate">
              <div class="space-y-2">
                 <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Nama Layanan</label>
                 <input v-model="createForm.name" type="text" class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-2xl p-4 focus:ring-2 focus:ring-primary-500/20" placeholder="Contoh: OpenAI Production" required />
@@ -231,7 +232,7 @@ const getProviderIcon = (provider: string) => ShieldCheck;
              </div>
 
              <div class="flex gap-4 pt-4">
-                <button type="button" @click="showCreateModal = false" class="flex-1 px-6 py-4 bg-slate-100 text-slate-600 rounded-2xl font-bold">Batal</button>
+                <button type="button" class="flex-1 px-6 py-4 bg-slate-100 text-slate-600 rounded-2xl font-bold" @click="showCreateModal = false">Batal</button>
                 <button type="submit" :disabled="processing === true" class="flex-1 px-6 py-4 bg-primary-600 text-white rounded-2xl font-black shadow-lg shadow-primary-500/20 flex items-center justify-center gap-2">
                    <Loader2 v-if="processing === true" class="w-4 h-4 animate-spin" />
                    Buat Sekarang

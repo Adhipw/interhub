@@ -105,7 +105,8 @@ onUnmounted(() => {
                         <div class="relative w-24 h-24 shrink-0">
                             <svg class="w-full h-full transform -rotate-90">
                                 <circle cx="48" cy="48" r="42" fill="transparent" stroke="currentColor" stroke-width="8" class="text-slate-100 dark:text-slate-800" />
-                                <circle cx="48" cy="48" r="42" fill="transparent" stroke="url(#primaryGradient)" stroke-width="8" 
+                                <circle
+cx="48" cy="48" r="42" fill="transparent" stroke="url(#primaryGradient)" stroke-width="8" 
                                     :stroke-dasharray="2 * Math.PI * 42" 
                                     :stroke-dashoffset="2 * Math.PI * 42 * (1 - (stats.profile_completion || 0) / 100)" 
                                     stroke-linecap="round"
@@ -233,7 +234,7 @@ onUnmounted(() => {
                         </div>
                         <div v-else-if="notifications.length > 0" class="space-y-8 relative z-10">
                             <div v-for="note in notifications" :key="note.id" class="flex gap-4 group/item cursor-pointer">
-                                <div class="w-1.5 h-1.5 rounded-full bg-primary-400 mt-2 shrink-0 animate-pulse" v-if="!note.read_at"></div>
+                                <div v-if="!note.read_at" class="w-1.5 h-1.5 rounded-full bg-primary-400 mt-2 shrink-0 animate-pulse"></div>
                                 <div class="flex-1 min-w-0">
                                     <p class="text-sm font-bold text-slate-300 dark:text-slate-600 leading-relaxed group-hover/item:text-white dark:group-hover/item:text-black transition-colors">
                                         {{ note.data?.message || note.data?.title || t('dashboard.new_notif') }}

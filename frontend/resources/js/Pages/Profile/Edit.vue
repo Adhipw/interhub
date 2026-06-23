@@ -138,7 +138,8 @@ const submit = async () => {
     <DashboardLayout>
         <div class="max-w-5xl mx-auto space-y-10 pb-20">
             <!-- Breadcrumbs -->
-            <Breadcrumbs :items="[
+            <Breadcrumbs
+:items="[
                 { label: 'Profil Saya' }
             ]" />
 
@@ -150,9 +151,9 @@ const submit = async () => {
                     <p v-else class="text-slate-500 dark:text-slate-400">Kelola informasi pribadi dan pengaturan akun Anda.</p>
                 </div>
                 <button 
-                    @click="submit"
                     :disabled="processing"
                     class="bg-primary-600 text-white px-8 py-4 rounded-2xl font-bold text-sm hover:bg-primary-700 disabled:opacity-50 transition-all shadow-xl shadow-primary-200 flex items-center gap-2"
+                    @click="submit"
                 >
                     <Loader2 v-if="processing" class="w-4 h-4 animate-spin" />
                     <Save v-else class="w-4 h-4" />
@@ -167,9 +168,9 @@ const submit = async () => {
                     <button 
                         v-for="tab in tabs" 
                         :key="tab.id"
-                        @click="activeTab = tab.id"
                         class="w-full flex items-center gap-3 px-6 py-4 rounded-2xl font-bold text-sm transition-all"
                         :class="activeTab === tab.id ? 'bg-primary-600 text-white shadow-lg shadow-primary-500/20' : 'text-slate-500 dark:text-slate-400 hover:bg-white dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'"
+                        @click="activeTab = tab.id"
                     >
                         <component :is="tab.icon" class="w-5 h-5" />
                         {{ tab.name }}
@@ -185,11 +186,12 @@ const submit = async () => {
                         <div class="flex flex-col md:flex-row items-center gap-8 bg-slate-50 dark:bg-slate-800/50 p-8 rounded-3xl border border-slate-100 dark:border-slate-700">
                             <div class="relative group">
                                 <div class="w-32 h-32 bg-white dark:bg-slate-800 rounded-full border-4 border-white dark:border-slate-700 shadow-xl overflow-hidden flex items-center justify-center text-slate-200 dark:text-slate-600">
-                                    <img loading="lazy" decoding="async" v-if="form.avatar_preview || authStore.user?.avatar_url" :src="form.avatar_preview || authStore.user?.avatar_url" class="w-full h-full object-cover" />
+                                    <img v-if="form.avatar_preview || authStore.user?.avatar_url" loading="lazy" decoding="async" :src="form.avatar_preview || authStore.user?.avatar_url" class="w-full h-full object-cover" />
                                     <User v-else class="w-16 h-16" />
                                 </div>
                                 <label class="absolute inset-0 bg-black/40 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer rounded-full">
-                                    <input type="file" class="hidden" accept="image/*" @change="(e: Event) => {
+                                    <input
+type="file" class="hidden" accept="image/*" @change="(e: Event) => {
                                         const target = e.target as HTMLInputElement;
                                         const file = target.files?.[0];
                                         if (file) {
@@ -262,9 +264,9 @@ const submit = async () => {
                                     />
                                     <button
                                         type="button"
-                                        @click="showCurrentPassword = !showCurrentPassword"
                                         class="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors"
                                         :aria-label="showCurrentPassword ? 'Sembunyikan kata sandi saat ini' : 'Tampilkan kata sandi saat ini'"
+                                        @click="showCurrentPassword = !showCurrentPassword"
                                     >
                                         <Eye v-if="!showCurrentPassword" class="w-5 h-5" />
                                         <EyeOff v-else class="w-5 h-5" />
@@ -283,9 +285,9 @@ const submit = async () => {
                                     />
                                     <button
                                         type="button"
-                                        @click="showNewPassword = !showNewPassword"
                                         class="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors"
                                         :aria-label="showNewPassword ? 'Sembunyikan kata sandi baru' : 'Tampilkan kata sandi baru'"
+                                        @click="showNewPassword = !showNewPassword"
                                     >
                                         <Eye v-if="!showNewPassword" class="w-5 h-5" />
                                         <EyeOff v-else class="w-5 h-5" />
@@ -304,9 +306,9 @@ const submit = async () => {
                                     />
                                     <button
                                         type="button"
-                                        @click="showConfirmPassword = !showConfirmPassword"
                                         class="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors"
                                         :aria-label="showConfirmPassword ? 'Sembunyikan konfirmasi kata sandi' : 'Tampilkan konfirmasi kata sandi'"
+                                        @click="showConfirmPassword = !showConfirmPassword"
                                     >
                                         <Eye v-if="!showConfirmPassword" class="w-5 h-5" />
                                         <EyeOff v-else class="w-5 h-5" />
@@ -327,7 +329,7 @@ const submit = async () => {
                         </div>
 
                         <div v-for="(edu, index) in form.education" :key="index" class="p-8 bg-slate-50 dark:bg-slate-800/50 rounded-3xl relative group border border-slate-100 dark:border-slate-700">
-                            <button @click="removeEducation(index)" class="absolute top-6 right-6 p-2 text-slate-300 hover:text-red-500 transition-colors">
+                            <button class="absolute top-6 right-6 p-2 text-slate-300 hover:text-red-500 transition-colors" @click="removeEducation(index)">
                                 <Trash2 class="w-5 h-5" />
                             </button>
 
@@ -351,7 +353,7 @@ const submit = async () => {
                             </div>
                         </div>
 
-                        <button @click="addEducation" type="button" class="w-full py-6 border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-3xl text-slate-400 dark:text-slate-500 font-bold text-sm hover:border-primary-500 hover:text-primary-600 transition-all flex items-center justify-center gap-2">
+                        <button type="button" class="w-full py-6 border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-3xl text-slate-400 dark:text-slate-500 font-bold text-sm hover:border-primary-500 hover:text-primary-600 transition-all flex items-center justify-center gap-2" @click="addEducation">
                             <Plus class="w-5 h-5" />
                             Tambah Pendidikan
                         </button>
@@ -364,12 +366,12 @@ const submit = async () => {
                             <div class="flex gap-4">
                                 <input 
                                     v-model="newSkill" 
-                                    @keyup.enter="addSkill"
-                                    type="text" 
+                                    type="text"
                                     placeholder="Contoh: UI/UX Design, Laravel, Python..." 
-                                    class="flex-1 bg-slate-50 dark:bg-slate-800 border-none rounded-2xl px-6 py-4 text-sm font-medium text-slate-900 dark:text-white focus:ring-2 focus:ring-primary-500 transition-all"
+                                    class="flex-1 bg-slate-50 dark:bg-slate-800 border-none rounded-2xl px-6 py-4 text-sm font-medium text-slate-900 dark:text-white focus:ring-2 focus:ring-primary-500 transition-all" 
+                                    @keyup.enter="addSkill"
                                 />
-                                <button @click="addSkill" type="button" class="bg-slate-900 dark:bg-primary-600 text-white px-8 rounded-2xl font-bold text-sm hover:bg-slate-800 dark:hover:bg-primary-700 transition-all">
+                                <button type="button" class="bg-slate-900 dark:bg-primary-600 text-white px-8 rounded-2xl font-bold text-sm hover:bg-slate-800 dark:hover:bg-primary-700 transition-all" @click="addSkill">
                                     Tambah
                                 </button>
                             </div>
@@ -378,7 +380,7 @@ const submit = async () => {
                         <div class="flex flex-wrap gap-3">
                             <div v-for="(skill, index) in form.skills" :key="index" class="bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-400 px-5 py-2.5 rounded-full font-bold text-sm border border-primary-100 dark:border-primary-900/30 flex items-center gap-2 group">
                                 {{ skill }}
-                                <button @click="removeSkill(index)" class="hover:text-red-500 transition-colors">
+                                <button class="hover:text-red-500 transition-colors" @click="removeSkill(index)">
                                     <X class="w-4 h-4" />
                                 </button>
                             </div>
@@ -389,20 +391,20 @@ const submit = async () => {
                     <!-- Files Tab -->
                     <div v-if="activeTab === 'files'" class="space-y-10">
                         <FileUpload 
+                            v-model="form.cv" 
                             label="Kurikulum Vitae (CV)" 
                             accept=".pdf" 
-                            :max-size="2" 
+                            :max-size="2"
                             :current-file="userDetail.cv_path"
-                            v-model="form.cv"
                             :error="errors.cv"
                         />
 
                         <FileUpload 
+                            v-model="form.portfolio" 
                             label="Portofolio (Opsional)" 
                             accept=".pdf,.zip,.rar" 
-                            :max-size="5" 
+                            :max-size="5"
                             :current-file="userDetail.portfolio_path"
-                            v-model="form.portfolio"
                             :error="errors.portfolio"
                         />
                     </div>
@@ -451,8 +453,8 @@ const submit = async () => {
                                     <label class="flex items-center gap-4 cursor-pointer group">
                                         <div class="relative">
                                             <input 
-                                                type="checkbox" 
                                                 v-model="form.ai_consent" 
+                                                type="checkbox" 
                                                 class="sr-only"
                                             />
                                             <div 

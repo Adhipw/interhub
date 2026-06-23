@@ -140,7 +140,8 @@ onUnmounted(() => {
             </div>
 
             <div v-else-if="activeMentees.length > 0" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <Card v-for="(mentee, index) in activeMentees" :key="mentee.id" 
+              <Card
+v-for="(mentee, index) in activeMentees" :key="mentee.id" 
                     class="p-8 group relative overflow-hidden animate-slide-up" 
                     :style="`--delay: ${0.4 + (index * 0.1)}s`"
                     hoverable>
@@ -232,7 +233,8 @@ onUnmounted(() => {
             </div>
 
             <div v-else class="space-y-4">
-               <div v-for="(fb, index) in recentFeedbacks" :key="fb.id" 
+               <div
+v-for="(fb, index) in recentFeedbacks" :key="fb.id" 
                     class="bg-white dark:bg-slate-800 p-6 rounded-[2rem] border border-slate-100 dark:border-slate-700 shadow-soft hover:shadow-lg transition-all duration-500 animate-slide-up"
                     :style="`--delay: ${0.7 + (index * 0.1)}s`">
                   <div class="flex items-center gap-4 mb-4">

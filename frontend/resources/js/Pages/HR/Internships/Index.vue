@@ -73,7 +73,7 @@ const deleteInternship = async (id: number) => {
           <p class="text-sm text-gray-500 dark:text-gray-400">{{ t('hr.internships.desc') }}</p>
         </div>
         <div class="flex items-center gap-3">
-          <Button variant="ghost" @click="showImportModal = true" class="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+          <Button variant="ghost" class="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800" @click="showImportModal = true">
             <Download class="w-4 h-4 mr-2" />
             Import
           </Button>
@@ -132,7 +132,7 @@ const deleteInternship = async (id: number) => {
                     <Link :href="'/hr/internships/' + job.id + '/edit'" class="p-2 text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/20 rounded-lg transition-all" :title="t('common.edit')">
                       <PencilIcon class="w-5 h-5" />
                     </Link>
-                    <button @click="deleteInternship(job.id)" class="p-2 text-gray-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-all" :title="t('common.delete')">
+                    <button class="p-2 text-gray-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-all" :title="t('common.delete')" @click="deleteInternship(job.id)">
                       <TrashIcon class="w-5 h-5" />
                     </button>
                     <Link :href="'/internships/' + job.slug" class="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-all" :title="t('common.view_public')">

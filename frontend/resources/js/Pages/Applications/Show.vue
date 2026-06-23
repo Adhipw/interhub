@@ -60,7 +60,8 @@ const withdraw = async () => {
     <DashboardLayout>
         <div class="max-w-5xl mx-auto space-y-10 pb-20">
             <!-- Breadcrumbs -->
-            <Breadcrumbs :items="[
+            <Breadcrumbs
+:items="[
                 { label: 'Lamaran Saya', href: '/my-applications' },
                 { label: 'Detail Lamaran' }
             ]" />
@@ -155,7 +156,7 @@ const withdraw = async () => {
                         <div class="flex items-start justify-between gap-6">
                             <div class="flex gap-6">
                                 <div class="w-20 h-20 bg-slate-50 rounded-3xl flex items-center justify-center shrink-0 border border-slate-50 overflow-hidden shadow-inner">
-                                    <img loading="lazy" decoding="async" v-if="application.internship.company.logo_url" :src="application.internship.company.logo_url" class="w-full h-full object-cover" />
+                                    <img v-if="application.internship.company.logo_url" loading="lazy" decoding="async" :src="application.internship.company.logo_url" class="w-full h-full object-cover" />
                                     <Briefcase v-else class="w-10 h-10 text-slate-200" />
                                 </div>
                                 <div>
@@ -347,8 +348,8 @@ const withdraw = async () => {
                     <!-- Withdraw Action -->
                     <div v-if="application.status === 'pending'" class="pt-6 border-t border-slate-50">
                         <button 
-                            @click="withdraw"
                             class="w-full py-4 text-xs font-bold text-red-500 hover:bg-red-50 rounded-2xl transition-all uppercase tracking-widest flex items-center justify-center gap-2"
+                            @click="withdraw"
                         >
                             <X class="w-4 h-4" />
                             Tarik Lamaran Ini

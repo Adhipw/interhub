@@ -62,8 +62,8 @@ const getLiveLoc = (userId: number) => liveLocations.value[userId] || null;
                 </div>
                 <div class="flex items-center gap-3">
                     <input 
-                        type="date" 
-                        v-model="filters.date"
+                        v-model="filters.date" 
+                        type="date"
                         class="rounded-xl border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-sm focus:ring-primary-500 transition-all"
                     />
                     <Button variant="ghost" class="border border-slate-200 dark:border-slate-700">
@@ -108,10 +108,10 @@ const getLiveLoc = (userId: number) => liveLocations.value[userId] || null;
                         <Search class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                         <input 
                             v-model="filters.search"
-                            @keyup.enter="handleSearch"
-                            type="text" 
-                            placeholder="Cari nama peserta..."
+                            type="text"
+                            placeholder="Cari nama peserta..." 
                             class="w-full pl-10 pr-4 py-2 rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm focus:ring-primary-500 transition-all"
+                            @keyup.enter="handleSearch"
                         />
                     </div>
                 </div>

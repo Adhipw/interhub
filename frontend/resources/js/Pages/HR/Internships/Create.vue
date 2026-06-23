@@ -108,7 +108,7 @@ const submit = () => {
     </template>
 
     <div class="mt-10 max-w-4xl">
-      <form @submit.prevent="submit" class="space-y-10">
+      <form class="space-y-10" @submit.prevent="submit">
         <!-- Section: Basic Info -->
         <section class="space-y-6">
           <div class="pb-2 border-b border-slate-100 dark:border-slate-800">
@@ -152,9 +152,9 @@ const submit = () => {
                   <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest">{{ t('common.location') }}</label>
                   <button 
                     type="button"
-                    @click="detectLocation"
                     :disabled="detecting"
                     class="text-[10px] font-black text-primary-600 uppercase tracking-widest flex items-center gap-1.5 hover:text-primary-700 transition-colors disabled:opacity-50"
+                    @click="detectLocation"
                   >
                     <MapPinIcon v-if="!detecting" class="w-3.5 h-3.5" />
                     <span v-else class="w-3.5 h-3.5 border-2 border-primary-600 border-t-transparent rounded-full animate-spin"></span>
@@ -173,8 +173,8 @@ const submit = () => {
               <div class="pt-2">
                 <button 
                   type="button" 
-                  @click="showCoordinates = !showCoordinates"
                   class="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2 hover:text-slate-600 transition-colors"
+                  @click="showCoordinates = !showCoordinates"
                 >
                   <span>{{ showCoordinates ? '− Sembunyikan Koordinat' : '+ Tambahkan Koordinat Map (Opsional)' }}</span>
                 </button>
@@ -258,7 +258,7 @@ const submit = () => {
             <div class="space-y-2">
               <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Benefit Gaji/Uang Saku</label>
               <label class="flex items-center gap-3 cursor-pointer group p-3 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-100 dark:border-slate-800">
-                <input type="checkbox" v-model="form.is_paid" class="w-5 h-5 rounded border-slate-300 text-primary-600 focus:ring-primary-500" />
+                <input v-model="form.is_paid" type="checkbox" class="w-5 h-5 rounded border-slate-300 text-primary-600 focus:ring-primary-500" />
                 <span class="text-sm font-bold text-slate-700 dark:text-slate-200">Magang Berbayar</span>
               </label>
             </div>

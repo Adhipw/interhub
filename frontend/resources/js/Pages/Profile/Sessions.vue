@@ -43,9 +43,9 @@ const formatDate = (timestamp: number) => {
                 <div class="p-6 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
                     <h2 class="font-bold text-slate-800 text-sm uppercase tracking-wider">Perangkat Aktif</h2>
                     <button 
-                        @click="logoutOthers"
                         :disabled="form.processing"
                         class="text-xs font-bold text-red-600 hover:text-red-700 bg-red-50 px-3 py-2 rounded-lg transition-colors disabled:opacity-50"
+                        @click="logoutOthers"
                     >
                         Logout dari Perangkat Lain
                     </button>

@@ -113,11 +113,11 @@ onUnmounted(() => {
           <div class="relative group">
             <Search class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-primary-600 transition-colors" />
             <input 
-              type="text" 
-              v-model="filters.search"
+              v-model="filters.search" 
+              type="text"
+              :placeholder="t('admin.user_mgmt.search_placeholder')"
+              class="pl-11 pr-6 py-3 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all w-64" 
               @keyup.enter="handleSearch"
-              :placeholder="t('admin.user_mgmt.search_placeholder')" 
-              class="pl-11 pr-6 py-3 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all w-64"
             />
           </div>
         </div>
@@ -198,20 +198,20 @@ onUnmounted(() => {
                 <td class="px-8 py-6 text-right">
                   <div v-if="!user.roles?.some((r: Role) => r.name === 'super_admin')" class="flex items-center justify-end gap-2">
                     <button 
-                      @click="toggleStatus(user.id)"
                       :disabled="processing"
                       class="p-2 rounded-xl transition-all"
                       :class="user.is_active ? 'text-slate-400 hover:bg-orange-50 hover:text-orange-600' : 'text-slate-400 hover:bg-green-50 hover:text-green-600'"
                       :title="t('admin.user_mgmt.toggle_tooltip')"
+                      @click="toggleStatus(user.id)"
                     >
                       <UserX v-if="user.is_active" class="w-4 h-4" />
                       <UserCheck v-else class="w-4 h-4" />
                     </button>
                     <button 
-                      @click="deleteUser(user.id)"
                       :disabled="processing"
                       class="p-2 text-slate-400 hover:bg-red-50 hover:text-red-600 rounded-xl transition-all"
                       :title="t('admin.user_mgmt.delete_tooltip')"
+                      @click="deleteUser(user.id)"
                     >
                       <Trash2 class="w-4 h-4" />
                     </button>

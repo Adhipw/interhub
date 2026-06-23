@@ -35,42 +35,48 @@ class SocialiteController extends Controller
             return redirect()->route('login')->with('error', 'Gagal masuk dengan Google. '.$e->getMessage());
         }
 
-        $user = DB::transaction(function () use ($socialUser) {
-            $account = SocialAccount::where('provider', 'google')
-                ->where('provider_id', $socialUser->getId())
-                ->first();
+        try {
+            $user = DB::transaction(function () use ($socialUser) {
+                $account = SocialAccount::where('provider', 'google')
+                    ->where('provider_id', $socialUser->getId())
+                    ->first();
 
-            if ($account) {
-                return $account->user;
-            }
+                if ($account) {
+                    return $account->user;
+                }
 
-            $user = User::where('email', $socialUser->getEmail())->first();
+                $user = User::where('email', $socialUser->getEmail())->first();
 
-            if (! $user) {
-                $user = User::create([
-                    'name' => $socialUser->getName(),
-                    'email' => $socialUser->getEmail(),
-                    'avatar_url' => $socialUser->getAvatar(),
-                    'password' => bcrypt(Str::random(24)),
-                    'email_verified_at' => now(), // Google emails are already verified
+                if (! $user) {
+                    $user = User::create([
+                        'name' => $socialUser->getName(),
+                        'email' => $socialUser->getEmail(),
+                        'avatar_url' => $socialUser->getAvatar(),
+                        'password' => bcrypt(Str::random(24)),
+                        'email_verified_at' => now(), // Google emails are already verified
+                    ]);
+
+                    // Assign default role
+                    $user->assignRole(UserRole::USER->value);
+                }
+
+                SocialAccount::create([
+                    'user_id' => $user->id,
+                    'provider' => 'google',
+                    'provider_id' => $socialUser->getId(),
+                    'avatar' => $socialUser->getAvatar(),
                 ]);
 
-                // Assign default role
-                $user->assignRole(UserRole::USER->value);
-            }
+                return $user;
+            });
 
-            SocialAccount::create([
-                'user_id' => $user->id,
-                'provider' => 'google',
-                'provider_id' => $socialUser->getId(),
-                'avatar' => $socialUser->getAvatar(),
-            ]);
+            Auth::login($user);
 
-            return $user;
-        });
+            return redirect()->route('dashboard');
+        } catch (\Exception $e) {
+            Log::error('Google OAuth Transaction Error: '.$e->getMessage().' | Trace: '.$e->getTraceAsString());
 
-        Auth::login($user);
-
-        return redirect()->route('dashboard');
+            return redirect()->route('login')->with('error', 'Terjadi kesalahan saat memproses pendaftaran dengan Google. Silakan coba lagi.');
+        }
     }
 }

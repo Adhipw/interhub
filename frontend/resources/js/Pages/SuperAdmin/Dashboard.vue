@@ -166,9 +166,9 @@ onUnmounted(() => {
 
                 <div class="flex gap-4">
                     <button 
-                        @click="fetchData" 
-                        :disabled="loading"
+                        :disabled="loading" 
                         class="p-4 bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all active:scale-95 group"
+                        @click="fetchData"
                     >
                         <RefreshCw :class="['w-5 h-5 text-slate-400 group-hover:text-indigo-500', loading ? 'animate-spin' : '']" />
                     </button>
@@ -317,7 +317,8 @@ onUnmounted(() => {
                         <h3 class="text-2xl font-black mb-8 relative z-10 leading-tight">{{ t('sidebar.system_integration') || 'Control Center' }}</h3>
                         
                         <div class="grid grid-cols-2 gap-4 relative z-10">
-                            <Link v-for="link in [
+                            <Link
+v-for="link in [
                                 { label: t('sidebar.system_settings'), icon: Server, to: '/super-admin/settings' },
                                 { label: t('sidebar.system_integration'), icon: Zap, to: '/super-admin/integrations' },
                                 { label: t('sidebar.global_users'), icon: Users, to: '/super-admin/users' },

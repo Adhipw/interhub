@@ -12,8 +12,8 @@ defineEmits(['click']);
 
 <template>
     <div 
-        @click="$emit('click')"
         class="p-5 bg-white border border-slate-100 rounded-2xl hover:border-blue-200 hover:shadow-lg hover:shadow-blue-500/5 transition-all cursor-pointer group relative overflow-hidden"
+        @click="$emit('click')"
     >
         <div class="flex items-start gap-4">
             <div class="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center shrink-0 group-hover:bg-blue-600 transition-colors">

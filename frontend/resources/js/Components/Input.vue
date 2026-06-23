@@ -65,10 +65,10 @@ const inputClasses = computed(() => {
                 v-bind="attrs"
                 :type="type"
                 :value="modelValue"
-                @input="emit('update:modelValue', ($event.target as HTMLInputElement).value)"
                 :placeholder="placeholder"
                 :disabled="disabled"
                 :class="inputClasses"
+                @input="emit('update:modelValue', ($event.target as HTMLInputElement).value)"
             />
             <slot name="suffix" />
         </div>

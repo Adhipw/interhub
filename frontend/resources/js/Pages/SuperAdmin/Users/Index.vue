@@ -296,22 +296,22 @@ const getObjectURL = (file: File | null) => {
         
         <div class="flex items-center gap-3">
           <button 
-            @click="exportUsers"
             class="flex items-center justify-center gap-2 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 px-6 py-3.5 rounded-2xl font-bold transition-all border border-slate-200 dark:border-slate-700 active:scale-95 hover:bg-slate-200 dark:hover:bg-slate-700"
+            @click="exportUsers"
           >
             <Download class="w-5 h-5" />
             Export CSV
           </button>
           <button 
-            @click="showImportModal = true"
             class="flex items-center justify-center gap-2 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 px-6 py-3.5 rounded-2xl font-bold transition-all border border-slate-200 dark:border-slate-700 active:scale-95 hover:bg-slate-50 dark:hover:bg-slate-700"
+            @click="showImportModal = true"
           >
             <Download class="w-5 h-5" />
             Import
           </button>
           <button 
-            @click="openCreateModal"
             class="flex items-center justify-center gap-2 bg-primary-600 hover:bg-primary-700 text-white px-6 py-3.5 rounded-2xl font-bold transition-all shadow-lg shadow-primary-500/20 active:scale-95"
+            @click="openCreateModal"
           >
             <Plus class="w-5 h-5" />
             {{ t('admin.user_mgmt.add_user') }}
@@ -377,7 +377,7 @@ const getObjectURL = (file: File | null) => {
                 <td class="px-6 py-6">
                   <div class="flex items-center gap-4">
                     <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-primary-500 to-indigo-600 flex items-center justify-center text-white font-black shadow-lg shadow-primary-500/20 shrink-0 overflow-hidden">
-                      <img loading="lazy" decoding="async" v-if="user.avatar_url" :src="user.avatar_url" class="w-full h-full object-cover" />
+                      <img v-if="user.avatar_url" loading="lazy" decoding="async" :src="user.avatar_url" class="w-full h-full object-cover" />
                       <span v-else>{{ user.name.charAt(0) }}</span>
                     </div>
                     <div class="flex flex-col min-w-0">
@@ -427,9 +427,9 @@ const getObjectURL = (file: File | null) => {
                   <div class="flex items-center justify-end gap-1">
                     <button 
                       type="button"
-                      @click="openEditModal(user)" 
                       class="p-2 text-slate-400 hover:text-primary-600 hover:bg-primary-50 dark:hover:bg-primary-900/30 rounded-xl transition-all active:scale-95" 
-                      title="Edit Data"
+                      title="Edit Data" 
+                      @click="openEditModal(user)"
                     >
                       <UserCog class="w-4 h-4" />
                     </button>
@@ -437,9 +437,9 @@ const getObjectURL = (file: File | null) => {
                     <button 
                       v-if="user.banned_at" 
                       type="button"
-                      @click="openConfirmModal('unban', user)" 
                       class="p-2 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 rounded-xl transition-all active:scale-95" 
-                      title="Unban"
+                      title="Unban" 
+                      @click="openConfirmModal('unban', user)"
                     >
                       <Unlock class="w-4 h-4" />
                     </button>
@@ -447,9 +447,9 @@ const getObjectURL = (file: File | null) => {
                     <button 
                       v-else 
                       type="button"
-                      @click="openConfirmModal('ban', user)" 
                       class="p-2 text-slate-400 hover:text-orange-600 hover:bg-orange-50 dark:hover:bg-orange-900/30 rounded-xl transition-all active:scale-95" 
-                      title="Ban"
+                      title="Ban" 
+                      @click="openConfirmModal('ban', user)"
                     >
                       <Ban class="w-4 h-4" />
                     </button>
@@ -457,9 +457,9 @@ const getObjectURL = (file: File | null) => {
                     <button 
                       v-if="user.role !== 'super_admin'"
                       type="button"
-                      @click="openConfirmModal('delete', user)" 
                       class="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/30 rounded-xl transition-all active:scale-95" 
-                      title="Delete"
+                      title="Delete" 
+                      @click="openConfirmModal('delete', user)"
                     >
                       <Trash2 class="w-4 h-4" />
                     </button>
@@ -486,9 +486,10 @@ const getObjectURL = (file: File | null) => {
     </div>
 
     <!-- Confirm Action Modal -->
-    <Modal :show="showConfirmModal" @close="showConfirmModal = false" max-width="md">
+    <Modal :show="showConfirmModal" max-width="md" @close="showConfirmModal = false">
       <div class="p-8 text-center">
-        <div :class="{
+        <div
+:class="{
           'bg-orange-50 text-orange-600': confirmActionType === 'ban',
           'bg-red-50 text-red-600': confirmActionType === 'delete',
           'bg-emerald-50 text-emerald-600': confirmActionType === 'unban'
@@ -516,11 +517,10 @@ const getObjectURL = (file: File | null) => {
         </div>
 
         <div class="flex gap-4">
-          <button @click="showConfirmModal = false" class="flex-1 px-6 py-4 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-2xl font-bold transition-all hover:bg-slate-200">
+          <button class="flex-1 px-6 py-4 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-2xl font-bold transition-all hover:bg-slate-200" @click="showConfirmModal = false">
             {{ t('admin.user_mgmt.cancel_btn') }}
           </button>
           <button 
-            @click="handleConfirmedAction"
             :disabled="processing"
             :class="{
               'bg-orange-600 hover:bg-orange-700 shadow-orange-500/20': confirmActionType === 'ban',
@@ -528,6 +528,7 @@ const getObjectURL = (file: File | null) => {
               'bg-emerald-600 hover:bg-emerald-700 shadow-emerald-500/20': confirmActionType === 'unban'
             }"
             class="flex-1 px-6 py-4 text-white rounded-2xl font-black shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2"
+            @click="handleConfirmedAction"
           >
             <Loader2 v-if="processing" class="w-4 h-4 animate-spin" />
             {{ t('admin.user_mgmt.continue_btn') }}
@@ -537,27 +538,27 @@ const getObjectURL = (file: File | null) => {
     </Modal>
 
     <!-- Create User Modal -->
-    <Modal :show="showCreateModal" @close="showCreateModal = false" max-width="2xl">
+    <Modal :show="showCreateModal" max-width="2xl" @close="showCreateModal = false">
       <div class="p-8">
         <div class="flex items-center justify-between mb-8">
           <div>
             <h2 class="text-2xl font-black text-slate-900 dark:text-white">Tambah Akun Baru</h2>
             <p class="text-sm text-slate-500">Buat akun untuk HR, Mentor, atau Admin baru.</p>
           </div>
-          <button @click="showCreateModal = false" class="p-2 hover:bg-slate-100 rounded-xl transition-colors">
+          <button class="p-2 hover:bg-slate-100 rounded-xl transition-colors" @click="showCreateModal = false">
             <X class="w-6 h-6 text-slate-400" />
           </button>
         </div>
 
-        <form @submit.prevent="submitCreate" class="space-y-6">
+        <form class="space-y-6" @submit.prevent="submitCreate">
           <div class="flex flex-col items-center gap-4 mb-8">
             <div class="w-24 h-24 rounded-full bg-slate-100 dark:bg-slate-800 border-4 border-white dark:border-slate-900 shadow-xl overflow-hidden group relative">
-               <img loading="lazy" decoding="async" v-if="createForm.avatar" :src="getObjectURL(createForm.avatar)" class="w-full h-full object-cover" />
+               <img v-if="createForm.avatar" loading="lazy" decoding="async" :src="getObjectURL(createForm.avatar)" class="w-full h-full object-cover" />
                <div v-else class="w-full h-full flex items-center justify-center text-slate-400">
                   <ImageIcon class="w-10 h-10" />
                </div>
                <label class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
-                  <input type="file" @change="e => handleAvatarChange(e, 'create')" class="hidden" accept="image/*" />
+                  <input type="file" class="hidden" accept="image/*" @change="e => handleAvatarChange(e, 'create')" />
                   <span class="text-white text-[10px] font-black uppercase tracking-tighter">Ganti Foto</span>
                </label>
             </div>
@@ -610,7 +611,7 @@ const getObjectURL = (file: File | null) => {
               <div class="relative group">
                 <Lock class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-primary-600" />
                 <input v-model="createForm.password" :type="showPassword ? 'text' : 'password'" class="w-full pl-11 pr-12 py-3.5 bg-slate-50 dark:bg-slate-800 dark:text-white border-none rounded-2xl focus:ring-2 focus:ring-primary-500/20" placeholder="••••••••" />
-                <button type="button" @click="showPassword = !showPassword" class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
+                <button type="button" class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600" @click="showPassword = !showPassword">
                   <Eye v-if="!showPassword" class="w-4 h-4" />
                   <EyeOff v-else class="w-4 h-4" />
                 </button>
@@ -638,13 +639,13 @@ const getObjectURL = (file: File | null) => {
               </div>
             </div>
             <label class="relative inline-flex items-center cursor-pointer">
-              <input type="checkbox" v-model="createForm.is_active" class="sr-only peer">
+              <input v-model="createForm.is_active" type="checkbox" class="sr-only peer">
               <div class="w-14 h-7 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-primary-600"></div>
             </label>
           </div>
 
           <div class="flex gap-4 pt-4">
-            <button type="button" @click="showCreateModal = false" class="flex-1 px-6 py-4 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-2xl font-bold transition-all">
+            <button type="button" class="flex-1 px-6 py-4 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-2xl font-bold transition-all" @click="showCreateModal = false">
               Batal
             </button>
             <button 
@@ -661,28 +662,28 @@ const getObjectURL = (file: File | null) => {
     </Modal>
 
     <!-- Edit User Modal -->
-    <Modal :show="showEditModal" @close="showEditModal = false" max-width="2xl">
+    <Modal :show="showEditModal" max-width="2xl" @close="showEditModal = false">
       <div class="p-8">
         <div class="flex items-center justify-between mb-8">
           <div>
             <h2 class="text-2xl font-black text-slate-900 dark:text-white">Edit Akun</h2>
             <p class="text-sm text-slate-500">Memperbarui data akun: <span class="font-bold text-primary-600">{{ editingUser?.name }}</span></p>
           </div>
-          <button @click="showEditModal = false" class="p-2 hover:bg-slate-100 rounded-xl transition-colors">
+          <button class="p-2 hover:bg-slate-100 rounded-xl transition-colors" @click="showEditModal = false">
             <X class="w-6 h-6 text-slate-400" />
           </button>
         </div>
 
-        <form @submit.prevent="submitEdit" class="space-y-6">
+        <form class="space-y-6" @submit.prevent="submitEdit">
           <div class="flex flex-col items-center gap-4 mb-8">
             <div class="w-24 h-24 rounded-full bg-slate-100 dark:bg-slate-800 border-4 border-white dark:border-slate-900 shadow-xl overflow-hidden group relative">
-               <img loading="lazy" decoding="async" v-if="editForm.avatar" :src="getObjectURL(editForm.avatar)" class="w-full h-full object-cover" />
-               <img loading="lazy" decoding="async" v-else-if="editingUser?.avatar_url" :src="editingUser.avatar_url" class="w-full h-full object-cover" />
+               <img v-if="editForm.avatar" loading="lazy" decoding="async" :src="getObjectURL(editForm.avatar)" class="w-full h-full object-cover" />
+               <img v-else-if="editingUser?.avatar_url" loading="lazy" decoding="async" :src="editingUser.avatar_url" class="w-full h-full object-cover" />
                <div v-else class="w-full h-full flex items-center justify-center text-slate-400">
                   <ImageIcon class="w-10 h-10" />
                </div>
                <label class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
-                  <input type="file" @change="e => handleAvatarChange(e, 'edit')" class="hidden" accept="image/*" />
+                  <input type="file" class="hidden" accept="image/*" @change="e => handleAvatarChange(e, 'edit')" />
                   <span class="text-white text-[10px] font-black uppercase tracking-tighter">Ganti Foto</span>
                </label>
             </div>
@@ -729,13 +730,13 @@ const getObjectURL = (file: File | null) => {
           <div class="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-900 rounded-2xl">
              <span class="text-sm font-bold text-slate-700 dark:text-slate-300">Status Akun Aktif</span>
              <label class="relative inline-flex items-center cursor-pointer">
-              <input type="checkbox" v-model="editForm.is_active" class="sr-only peer">
+              <input v-model="editForm.is_active" type="checkbox" class="sr-only peer">
               <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
             </label>
           </div>
 
           <div class="flex gap-4">
-            <button type="button" @click="showEditModal = false" class="flex-1 px-6 py-4 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-2xl font-bold transition-all">
+            <button type="button" class="flex-1 px-6 py-4 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-2xl font-bold transition-all" @click="showEditModal = false">
               Batal
             </button>
             <button 

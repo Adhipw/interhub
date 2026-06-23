@@ -173,11 +173,11 @@ onMounted(() => {
           <div class="relative group">
             <Search class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-primary-600 transition-colors" />
             <input 
-              type="text" 
-              v-model="search"
+              v-model="search" 
+              type="text"
+              :placeholder="t('admin.internships.search_placeholder')"
+              class="pl-11 pr-6 py-3 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all w-64" 
               @keyup.enter="fetchInternships"
-              :placeholder="t('admin.internships.search_placeholder')" 
-              class="pl-11 pr-6 py-3 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all w-64"
             />
           </div>
         </div>
@@ -232,9 +232,9 @@ onMounted(() => {
                    <div class="flex items-center justify-end gap-2">
                       <!-- Quick Action Drawer Trigger -->
                       <button 
-                         @click="openReviewDrawer(job)"
                          class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all shrink-0 active-press"
                          title="Tinjau Cepat (Quick Drawer)"
+                         @click="openReviewDrawer(job)"
                       >
                          <Sparkles class="w-4 h-4 text-indigo-500 animate-pulse" />
                       </button>
@@ -244,25 +244,25 @@ onMounted(() => {
                       </Link>
                       <button 
                         v-if="job.status !== 'published'"
-                        @click="updateStatus(job.id, 'published')"
                         class="p-2 text-slate-400 hover:text-green-600 transition-all"
                         :title="t('admin.internships.publish_tooltip')"
+                        @click="updateStatus(job.id, 'published')"
                       >
                          <CheckCircle2 class="w-4 h-4" />
                       </button>
                       <button 
                         v-if="job.status !== 'flagged'"
-                        @click="updateStatus(job.id, 'flagged')"
                         class="p-2 text-slate-400 hover:text-orange-600 transition-all"
                         :title="t('admin.internships.flag_tooltip')"
+                        @click="updateStatus(job.id, 'flagged')"
                       >
                          <Flag class="w-4 h-4" />
                       </button>
                       <button 
                         v-if="job.status !== 'archived'"
-                        @click="updateStatus(job.id, 'archived')"
                         class="p-2 text-slate-400 hover:text-red-600 transition-all"
                         :title="t('admin.internships.archive_tooltip')"
+                        @click="updateStatus(job.id, 'archived')"
                       >
                          <Archive class="w-4 h-4" />
                       </button>
@@ -288,8 +288,8 @@ onMounted(() => {
 
     <!-- Quick Action Drawer (Sliding Sidebar Drawer) -->
     <div 
-      class="fixed inset-0 z-50 overflow-hidden pointer-events-none" 
-      v-if="showQuickDrawer && selectedJobForReview"
+      v-if="showQuickDrawer && selectedJobForReview" 
+      class="fixed inset-0 z-50 overflow-hidden pointer-events-none"
     >
       <!-- Backdrop with blur -->
       <div 
@@ -313,8 +313,8 @@ onMounted(() => {
               </div>
             </div>
             <button 
-              @click="closeReviewDrawer" 
-              class="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all active-press"
+              class="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all active-press" 
+              @click="closeReviewDrawer"
             >
               <X class="w-5 h-5" />
             </button>
@@ -369,7 +369,7 @@ onMounted(() => {
             <div class="space-y-3">
               <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Persyaratan & Keahlian</label>
               <div class="p-5 bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800 rounded-2xl text-xs leading-relaxed text-slate-700 dark:text-slate-350 shadow-inner max-h-48 overflow-y-auto">
-                <ul class="list-disc pl-4 space-y-1" v-if="selectedJobForReview.requirements && selectedJobForReview.requirements.length > 0">
+                <ul v-if="selectedJobForReview.requirements && selectedJobForReview.requirements.length > 0" class="list-disc pl-4 space-y-1">
                   <li v-for="(req, reqIdx) in selectedJobForReview.requirements" :key="reqIdx">
                     {{ req }}
                   </li>
@@ -390,9 +390,9 @@ onMounted(() => {
           <div class="p-6 border-t border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50 flex gap-3">
             <button 
               v-if="selectedJobForReview.status !== 'archived'"
-              @click="updateStatusDirectly(selectedJobForReview.id, 'archived')"
               :disabled="processing"
               class="flex-1 py-3 border border-rose-200 dark:border-rose-900/30 text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/20 text-xs font-black rounded-xl transition-all active-press flex items-center justify-center gap-2"
+              @click="updateStatusDirectly(selectedJobForReview.id, 'archived')"
             >
               <X class="w-4 h-4" />
               Tolak
@@ -400,9 +400,9 @@ onMounted(() => {
 
             <button 
               v-if="selectedJobForReview.status !== 'flagged'"
-              @click="updateStatusDirectly(selectedJobForReview.id, 'flagged')"
               :disabled="processing"
               class="flex-1 py-3 border border-amber-200 dark:border-amber-900/30 text-amber-600 dark:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-950/20 text-xs font-black rounded-xl transition-all active-press flex items-center justify-center gap-2"
+              @click="updateStatusDirectly(selectedJobForReview.id, 'flagged')"
             >
               <Flag class="w-4 h-4" />
               Tandai Flag
@@ -410,9 +410,9 @@ onMounted(() => {
 
             <button 
               v-if="selectedJobForReview.status !== 'published'"
-              @click="updateStatusDirectly(selectedJobForReview.id, 'published')"
               :disabled="processing"
               class="flex-1 py-3 bg-green-600 hover:bg-green-700 text-white text-xs font-black rounded-xl shadow-lg shadow-green-500/10 transition-all active-press flex items-center justify-center gap-2"
+              @click="updateStatusDirectly(selectedJobForReview.id, 'published')"
             >
               <Check class="w-4 h-4" />
               Setujui

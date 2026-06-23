@@ -48,10 +48,10 @@ watch(() => form.value.date, submit);
                     <Search class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                     <input 
                         v-model="form.search"
-                        @keyup.enter="submit"
-                        type="text" 
-                        :placeholder="t('admin.audit.search_placeholder')"
+                        type="text"
+                        :placeholder="t('admin.audit.search_placeholder')" 
                         class="w-full pl-11 pr-4 py-2.5 bg-slate-50 dark:bg-slate-800 border-none rounded-xl text-sm focus:ring-2 focus:ring-primary-500/20 transition-all dark:text-white"
+                        @keyup.enter="submit"
                     />
                 </div>
             </div>
@@ -81,10 +81,10 @@ watch(() => form.value.date, submit);
         </div>
         
         <div class="mt-6 flex justify-end gap-3 pt-6 border-t border-slate-50 dark:border-slate-800/50">
-            <Button variant="ghost" size="sm" @click="reset" class="px-6">
+            <Button variant="ghost" size="sm" class="px-6" @click="reset">
                 <RotateCcw class="w-4 h-4 mr-2" /> {{ t('common.reset') }}
             </Button>
-            <Button variant="primary" size="sm" @click="submit" class="px-8 shadow-lg shadow-primary-500/20">
+            <Button variant="primary" size="sm" class="px-8 shadow-lg shadow-primary-500/20" @click="submit">
                 <Filter class="w-4 h-4 mr-2" /> {{ t('common.filter') }}
             </Button>
         </div>

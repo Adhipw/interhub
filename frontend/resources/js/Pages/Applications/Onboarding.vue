@@ -130,7 +130,7 @@ const getStatusColor = (status: string) => {
                                             title="Re-upload"
                                         >
                                             <Upload class="w-5 h-5" />
-                                            <input type="file" class="hidden" @change="handleFileUpload($event, type.key)" :disabled="!!uploading" />
+                                            <input type="file" class="hidden" :disabled="!!uploading" @change="handleFileUpload($event, type.key)" />
                                         </label>
                                     </div>
                                     <p v-if="getDocument(type.key)?.status === 'rejected'" class="text-[10px] font-bold text-rose-500 max-w-[200px] text-right italic">
@@ -149,7 +149,7 @@ const getStatusColor = (status: string) => {
                                         <Upload class="w-5 h-5" />
                                         Unggah Dokumen
                                     </template>
-                                    <input type="file" class="hidden" @change="handleFileUpload($event, type.key)" :disabled="!!uploading" />
+                                    <input type="file" class="hidden" :disabled="!!uploading" @change="handleFileUpload($event, type.key)" />
                                 </label>
                             </template>
                         </div>

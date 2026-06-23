@@ -82,7 +82,7 @@ const updatePassword = () => {
                             </div>
                         </div>
 
-                        <form @submit.prevent="updateName" class="space-y-6 max-w-md">
+                        <form class="space-y-6 max-w-md" @submit.prevent="updateName">
                             <div>
                                 <label class="block text-sm font-bold text-slate-700 mb-2">{{ t('settings.account.full_name_label') }}</label>
                                 <input
@@ -139,7 +139,7 @@ const updatePassword = () => {
                             </div>
                         </div>
 
-                        <form @submit.prevent="updatePassword" class="space-y-6 max-w-md">
+                        <form class="space-y-6 max-w-md" @submit.prevent="updatePassword">
                             <div class="relative">
                                 <label class="block text-sm font-bold text-slate-700 mb-2">{{ t('settings.account.current_password_label') }}</label>
                                 <div class="relative group">
@@ -151,8 +151,8 @@ const updatePassword = () => {
                                     />
                                     <button
                                         type="button"
-                                        @click="showCurrentPassword = !showCurrentPassword"
                                         class="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
+                                        @click="showCurrentPassword = !showCurrentPassword"
                                     >
                                         <Eye v-if="!showCurrentPassword" class="w-5 h-5" />
                                         <EyeOff v-else class="w-5 h-5" />
@@ -177,8 +177,8 @@ const updatePassword = () => {
                                     />
                                     <button
                                         type="button"
-                                        @click="showNewPassword = !showNewPassword"
                                         class="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
+                                        @click="showNewPassword = !showNewPassword"
                                     >
                                         <Eye v-if="!showNewPassword" class="w-5 h-5" />
                                         <EyeOff v-else class="w-5 h-5" />
@@ -201,9 +201,9 @@ const updatePassword = () => {
                                     />
                                     <button
                                         type="button"
-                                        @click="showConfirmPassword = !showConfirmPassword"
                                         class="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
                                         :aria-label="showConfirmPassword ? t('settings.account.hide_confirm_password') : t('settings.account.show_confirm_password')"
+                                        @click="showConfirmPassword = !showConfirmPassword"
                                     >
                                         <Eye v-if="!showConfirmPassword" class="w-5 h-5" />
                                         <EyeOff v-else class="w-5 h-5" />

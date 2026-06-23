@@ -54,7 +54,7 @@ const t = (key: string) => key;
 
                         <div class="flex items-start justify-between mb-8">
                             <div class="w-16 h-16 rounded-2xl bg-neutral-50 dark:bg-neutral-800 p-2 flex items-center justify-center border border-neutral-100 dark:border-white/5 shadow-sm group-hover:scale-110 transition-transform duration-500">
-                                <img loading="lazy" decoding="async" v-if="company.logo_url" :src="company.logo_url" :alt="company.name" class="w-full h-full object-contain" />
+                                <img v-if="company.logo_url" loading="lazy" decoding="async" :src="company.logo_url" :alt="company.name" class="w-full h-full object-contain" />
                                 <Building2 v-else class="w-8 h-8 text-neutral-300" />
                             </div>
                             <div v-if="company.is_verified" class="flex items-center gap-1.5 px-3 py-1.2 rounded-full bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 text-[10px] font-black uppercase tracking-widest border border-blue-100 dark:border-blue-900/30">
@@ -106,13 +106,13 @@ const t = (key: string) => key;
                     <button 
                         v-for="(link, k) in companies.links" 
                         :key="k"
-                        @click="link.url ? inertiaRouter.get(link.url, {}, { preserveScroll: true, preserveState: true, replace: true }) : null"
-                        v-html="link.label"
                         class="px-4 py-2 rounded-xl text-sm font-bold transition-all"
                         :class="[
                             link.active ? 'bg-primary-600 text-white shadow-lg shadow-primary-600/20' : 'bg-white dark:bg-neutral-900 text-neutral-500 hover:bg-primary-50 dark:hover:bg-primary-900/30',
                             !link.url ? 'opacity-50 cursor-not-allowed' : ''
                         ]"
+                        @click="link.url ? inertiaRouter.get(link.url, {}, { preserveScroll: true, preserveState: true, replace: true }) : null"
+                        v-html="link.label"
                     />
                 </div>
             </div>

@@ -47,13 +47,13 @@ const runAction = async (toastId: number, handler: () => void | Promise<void>) =
                         <button
                             v-for="action in toast.actions"
                             :key="action.label"
-                            @click="runAction(toast.id, action.handler)"
                             class="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-xs font-bold transition-colors"
                             :class="{
                                 'bg-blue-600 text-white hover:bg-blue-500': action.variant === 'primary' || !action.variant,
                                 'bg-slate-100 text-slate-700 hover:bg-slate-200 dark:bg-white/10 dark:text-white dark:hover:bg-white/15': action.variant === 'secondary',
                                 'bg-rose-600 text-white hover:bg-rose-500': action.variant === 'danger',
                             }"
+                            @click="runAction(toast.id, action.handler)"
                         >
                             <RefreshCw v-if="action.variant === 'primary' || !action.variant" class="w-3.5 h-3.5" />
                             <RotateCcw v-else-if="action.variant === 'secondary' || action.variant === 'danger'" class="w-3.5 h-3.5" />
@@ -63,7 +63,7 @@ const runAction = async (toastId: number, handler: () => void | Promise<void>) =
                     </div>
                 </div>
 
-                <button @click="toastStore.remove(toast.id)" class="shrink-0 p-1 hover:bg-slate-100 dark:hover:bg-white/10 rounded-full transition-colors">
+                <button class="shrink-0 p-1 hover:bg-slate-100 dark:hover:bg-white/10 rounded-full transition-colors" @click="toastStore.remove(toast.id)">
                     <X class="w-4 h-4 text-slate-400" />
                 </button>
             </div>

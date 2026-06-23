@@ -29,7 +29,7 @@ const emit = defineEmits(['close']);
                         {{ unreadCount }} New
                     </span>
                 </div>
-                <button @click="emit('close')" class="p-2 text-slate-400 hover:text-slate-600 rounded-lg transition-colors">
+                <button class="p-2 text-slate-400 hover:text-slate-600 rounded-lg transition-colors" @click="emit('close')">
                     <X class="w-6 h-6" />
                 </button>
             </div>
@@ -61,9 +61,9 @@ const emit = defineEmits(['close']);
                             </div>
                             <button 
                                 v-if="!notification.read_at"
-                                @click="markAsRead(notification.id)"
                                 class="p-1.5 text-slate-300 hover:text-blue-600 transition-colors rounded-full hover:bg-white border border-transparent hover:border-blue-100"
                                 title="Mark as read"
+                                @click="markAsRead(notification.id)"
                             >
                                 <Check class="w-4 h-4" />
                             </button>

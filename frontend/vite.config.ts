@@ -66,8 +66,8 @@ export default defineConfig(({ mode }) => {
             }),
             ...(mode === 'production' ? [stripConsolePlugin()] : []),
             tailwindcss(),
-            viteCompression({ algorithm: 'brotliCompress' }),
-            viteCompression({ algorithm: 'gzip' }),
+            viteCompression({ algorithm: 'brotliCompress' }) as any,
+            viteCompression({ algorithm: 'gzip' }) as any,
         ],
         resolve: {
             alias: {

@@ -113,7 +113,7 @@ onMounted(() => {
             </div>
 
             <!-- OTP Form -->
-            <form @submit.prevent="verifyOtp" class="space-y-6">
+            <form class="space-y-6" @submit.prevent="verifyOtp">
                 <div class="flex justify-between gap-2">
                     <input
                         v-for="(digit, i) in otp"
@@ -149,15 +149,15 @@ onMounted(() => {
                 <p class="text-sm text-slate-500">
                     {{ t('auth.did_not_receive_code') }}
                     <button 
-                        @click="resendOtp"
                         :disabled="!canResend || resendLoading"
                         class="text-primary-600 font-bold hover:underline disabled:opacity-50"
+                        @click="resendOtp"
                     >
                         {{ canResend ? t('auth.resend_short') : `${t('auth.resend_in')} ${countdown}s` }}
                     </button>
                 </p>
                 
-                <button @click="inertiaRouter.visit('/register')" class="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-slate-600 transition-colors">
+                <button class="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-slate-600 transition-colors" @click="inertiaRouter.visit('/register')">
                     <ArrowLeft class="w-4 h-4" />
                     {{ t('auth.back_to_register') }}
                 </button>

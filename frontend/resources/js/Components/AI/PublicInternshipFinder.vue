@@ -70,8 +70,8 @@ const search = async () => {
                             <button 
                                 v-for="ex in examples" 
                                 :key="ex"
-                                @click="prompt = ex"
                                 class="text-left text-xs font-bold text-neutral-500 hover:text-primary-600 hover:bg-primary-50 dark:hover:bg-primary-900/20 p-3 rounded-xl border border-dashed border-neutral-200 dark:border-neutral-800 transition-all"
+                                @click="prompt = ex"
                             >
                                 "{{ ex }}"
                             </button>
@@ -79,9 +79,9 @@ const search = async () => {
                     </div>
 
                     <button 
-                        @click="search"
                         :disabled="isLoading || !prompt"
                         class="w-full bg-primary-600 text-white py-6 rounded-2xl font-black text-lg hover:bg-primary-700 disabled:opacity-50 transition-all shadow-xl shadow-primary-600/20 flex items-center justify-center gap-4 active-press"
+                        @click="search"
                     >
                         <span v-if="!isLoading">Cari Rekomendasi</span>
                         <span v-else>Menganalisis...</span>

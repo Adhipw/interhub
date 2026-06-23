@@ -53,9 +53,9 @@ const updateTaskStatus = (taskId: number, currentStatus: string) => {
           <Card v-for="(task, index) in tasks.data" :key="task.id" class="p-6 border-none shadow-sm flex flex-col group hover:-translate-y-1 transition-transform">
             <div class="flex items-start justify-between mb-4">
                 <button 
-                    @click="updateTaskStatus(task.id, task.status)"
                     class="mt-1 w-8 h-8 rounded-2xl border-2 flex items-center justify-center transition-all shrink-0"
                     :class="task.status === 'completed' ? 'bg-green-500 border-green-500 text-white shadow-lg shadow-green-500/20' : 'border-slate-200 dark:border-slate-700 hover:border-primary-500'"
+                    @click="updateTaskStatus(task.id, task.status)"
                 >
                     <CheckCircle2 v-if="task.status === 'completed'" class="w-5 h-5" />
                     <div v-else class="w-2 h-2 rounded-full bg-slate-200 dark:bg-slate-700 group-hover:bg-primary-500 transition-colors"></div>

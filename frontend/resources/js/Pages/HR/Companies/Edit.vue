@@ -59,9 +59,9 @@ const submit = () => {
                 </div>
                 
                 <button 
-                    @click="submit"
                     :disabled="processing || loading"
                     class="bg-primary-600 text-white px-10 py-4 rounded-2xl font-black text-sm hover:bg-primary-700 disabled:opacity-50 transition-all shadow-xl shadow-primary-900/20 flex items-center gap-3 active-press"
+                    @click="submit"
                 >
                     <Loader2 v-if="processing" class="w-5 h-5 animate-spin" />
                     <Save v-else class="w-5 h-5" />
@@ -99,7 +99,7 @@ const submit = () => {
                                 <div class="flex flex-col md:flex-row items-center gap-8 bg-slate-50 dark:bg-slate-800/50 p-8 rounded-[2.5rem] border border-slate-100 dark:border-white/5">
                                     <div class="relative group">
                                         <div class="w-32 h-32 bg-white dark:bg-slate-900 rounded-[2rem] border-4 border-white dark:border-slate-800 shadow-xl overflow-hidden flex items-center justify-center text-slate-200">
-                                            <img loading="lazy" decoding="async" v-if="form.logo_url" :src="form.logo_url" class="w-full h-full object-cover" />
+                                            <img v-if="form.logo_url" loading="lazy" decoding="async" :src="form.logo_url" class="w-full h-full object-cover" />
                                             <Building2 v-else class="w-16 h-16" />
                                         </div>
                                         <div class="absolute inset-0 bg-black/40 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer rounded-[2rem]">

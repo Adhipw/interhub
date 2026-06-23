@@ -100,11 +100,11 @@ const handleConfirmedAction = async (companyId: number) => {
           <div class="relative group">
             <Search class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-primary-600 transition-colors" />
             <input 
-              type="text" 
-              v-model="filters.search"
+              v-model="filters.search" 
+              type="text"
+              placeholder="Cari perusahaan..."
+              class="pl-11 pr-6 py-3 bg-white dark:bg-slate-800 dark:text-white border border-slate-100 dark:border-slate-700 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all w-64" 
               @keyup.enter="handleSearch"
-              placeholder="Cari perusahaan..." 
-              class="pl-11 pr-6 py-3 bg-white dark:bg-slate-800 dark:text-white border border-slate-100 dark:border-slate-700 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all w-64"
             />
           </div>
         </div>
@@ -120,7 +120,7 @@ const handleConfirmedAction = async (companyId: number) => {
           <Card v-for="company in companies.data" :key="company.id" class="p-8 border-none shadow-sm flex flex-col h-full group">
             <div class="flex items-start justify-between mb-6">
               <div class="w-16 h-16 bg-slate-50 dark:bg-slate-900 rounded-2xl flex items-center justify-center text-slate-300 group-hover:bg-primary-600 group-hover:text-white transition-all overflow-hidden border border-slate-50 dark:border-slate-800">
-                 <img loading="lazy" decoding="async" v-if="company.logo_url" :src="company.logo_url" class="w-full h-full object-cover" />
+                 <img v-if="company.logo_url" loading="lazy" decoding="async" :src="company.logo_url" class="w-full h-full object-cover" />
                  <Building2 v-else class="w-8 h-8" />
               </div>
               <div 
@@ -153,23 +153,23 @@ const handleConfirmedAction = async (companyId: number) => {
                <template v-if="confirmingId !== company.id">
                   <button 
                      v-if="!company.is_verified"
-                     @click.stop="startConfirm(company.id, 'verify')"
                      :disabled="processing"
                      type="button"
                      class="flex-1 py-3 bg-primary-600 text-white rounded-xl text-xs font-bold hover:bg-primary-700 shadow-lg shadow-primary-500/20 dark:shadow-none transition-all active:scale-95"
+                     @click.stop="startConfirm(company.id, 'verify')"
                   >
                      Verifikasi
                   </button>
                   <button 
                      v-else
-                     @click.stop="startConfirm(company.id, 'unverify')"
                      :disabled="processing"
                      type="button"
                      class="flex-1 py-3 bg-slate-100 dark:bg-slate-900 text-red-600 rounded-xl text-xs font-bold hover:bg-red-50 transition-all active:scale-95"
+                     @click.stop="startConfirm(company.id, 'unverify')"
                   >
                      Cabut Verifikasi
                   </button>
-                  <Link :href="route('companies.show', { slug: company.slug })" target="_blank" @click.stop class="p-3 bg-slate-50 dark:bg-slate-900 text-slate-400 hover:text-primary-600 rounded-xl transition-all">
+                  <Link :href="route('companies.show', { slug: company.slug })" target="_blank" class="p-3 bg-slate-50 dark:bg-slate-900 text-slate-400 hover:text-primary-600 rounded-xl transition-all" @click.stop>
                      <ExternalLink class="w-4 h-4" />
                   </Link>
                </template>
@@ -180,16 +180,16 @@ const handleConfirmedAction = async (companyId: number) => {
                      <span class="text-[10px] font-bold text-primary-600 px-2 uppercase tracking-tight">Yakin?</span>
                      <div class="flex gap-1.5">
                         <button 
-                           @click.stop="cancelConfirm"
                            :disabled="processing"
                            class="px-3 py-1.5 text-[10px] font-bold text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-white transition-colors"
+                           @click.stop="cancelConfirm"
                         >
                            Batal
                         </button>
                         <button 
-                           @click.stop="handleConfirmedAction(company.id)"
                            :disabled="processing"
                            class="px-4 py-1.5 bg-primary-600 text-white text-[10px] font-bold rounded-lg shadow-md shadow-primary-500/20 active:scale-95 transition-all"
+                           @click.stop="handleConfirmedAction(company.id)"
                         >
                            Ya
                         </button>

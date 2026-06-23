@@ -24,14 +24,14 @@ defineProps<Props>();
                 </tr>
             </thead>
             <tbody class="divide-y divide-neutral-50 dark:divide-neutral-800">
-                <tr v-if="loading" v-for="i in 5" :key="i" class="animate-pulse">
+                <tr v-for="i in 5" v-if="loading" :key="i" class="animate-pulse">
                     <td v-for="h in headers" :key="h.key" class="px-8 py-6">
                         <div class="h-4 bg-neutral-100 dark:bg-neutral-800 rounded-lg w-full"></div>
                     </td>
                 </tr>
                 <tr 
-                    v-else 
                     v-for="(item, index) in items" 
+                    v-else 
                     :key="index"
                     class="hover:bg-neutral-50/50 dark:hover:bg-neutral-800/30 transition-colors"
                 >

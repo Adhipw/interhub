@@ -99,7 +99,7 @@ if (props.filters) {
                         <div class="bg-white dark:bg-neutral-900 rounded-[2.5rem] p-8 border border-neutral-100 dark:border-neutral-800 sticky top-32">
                             <div class="flex items-center justify-between mb-8">
                                 <h3 class="text-lg font-black uppercase tracking-widest text-neutral-900 dark:text-white">{{ t('filters.title') }}</h3>
-                                <button @click="clearFilters" class="text-xs font-bold text-primary-600 hover:text-primary-700 transition-colors">{{ t('filters.reset') }}</button>
+                                <button class="text-xs font-bold text-primary-600 hover:text-primary-700 transition-colors" @click="clearFilters">{{ t('filters.reset') }}</button>
                             </div>
 
                             <div class="space-y-8">
@@ -118,11 +118,11 @@ if (props.filters) {
                                     <div class="space-y-3">
                                         <label v-for="t in types" :key="t.value" class="flex items-center gap-3 cursor-pointer group">
                                             <input 
-                                                type="radio" 
                                                 v-model="filters.type" 
+                                                type="radio" 
                                                 :value="t.value"
-                                                @change="applyFilters"
                                                 class="w-5 h-5 border-neutral-200 text-primary-600 focus:ring-primary-500 rounded-lg"
+                                                @change="applyFilters"
                                             />
                                             <span class="text-sm font-bold text-neutral-600 dark:text-neutral-400 group-hover:text-neutral-900 dark:group-hover:text-white transition-colors">{{ t.label }}</span>
                                         </label>
@@ -133,8 +133,8 @@ if (props.filters) {
                                     <label class="block text-[10px] font-black uppercase tracking-widest text-neutral-400 mb-4">{{ t('filters.sort_label') }}</label>
                                     <select 
                                         v-model="filters.sort" 
-                                        @change="applyFilters"
                                         class="w-full px-5 py-4 bg-neutral-50 dark:bg-neutral-950 border-none rounded-2xl text-sm font-bold text-neutral-900 dark:text-white focus:ring-4 focus:ring-primary-500/10 transition-all"
+                                        @change="applyFilters"
                                     >
                                         <option value="latest">{{ t('filters.sort_latest') }}</option>
                                         <option value="oldest">{{ t('filters.sort_oldest') }}</option>
@@ -142,7 +142,7 @@ if (props.filters) {
                                     </select>
                                 </div>
 
-                                <Button @click="applyFilters" class="w-full">{{ t('filters.btn_apply') }}</Button>
+                                <Button class="w-full" @click="applyFilters">{{ t('filters.btn_apply') }}</Button>
                             </div>
                         </div>
                     </aside>
@@ -168,7 +168,7 @@ if (props.filters) {
                                     <!-- Logo -->
                                     <div class="w-16 h-16 md:w-20 md:h-20 bg-neutral-50 dark:bg-neutral-950 rounded-2xl flex items-center justify-center border border-neutral-100 dark:border-neutral-800 shrink-0 group-hover:scale-105 transition-transform duration-500 shadow-sm relative overflow-hidden">
                                         <div class="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                                        <img loading="lazy" decoding="async" v-if="internship.company?.logo_url" :src="internship.company.logo_url" class="w-full h-full object-contain p-3 relative z-10" />
+                                        <img v-if="internship.company?.logo_url" loading="lazy" decoding="async" :src="internship.company.logo_url" class="w-full h-full object-contain p-3 relative z-10" />
                                         <Building2 v-else class="w-8 h-8 md:w-10 md:h-10 text-neutral-300 relative z-10" />
                                     </div>
 

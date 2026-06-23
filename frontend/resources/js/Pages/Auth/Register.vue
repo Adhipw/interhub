@@ -70,7 +70,7 @@ const submit = async () => {
         
         <AuthDivider />
 
-        <form @submit.prevent="submit" class="space-y-6">
+        <form class="space-y-6" @submit.prevent="submit">
             <div v-if="generalError" class="p-3 bg-red-50 text-red-600 text-sm rounded-lg border border-red-100">
                 {{ generalError }}
             </div>
@@ -79,26 +79,26 @@ const submit = async () => {
             <div class="grid grid-cols-2 gap-4 mb-8">
                 <button 
                     type="button"
-                    @click="form.role = 'user'"
                     :class="[
                         'flex flex-col items-center gap-3 p-4 rounded-2xl border-2 transition-all duration-300',
                         form.role === 'user' 
                             ? 'border-indigo-600 bg-indigo-50 dark:bg-indigo-500/10' 
                             : 'border-slate-100 dark:border-white/5 hover:border-indigo-200'
                     ]"
+                    @click="form.role = 'user'"
                 >
                     <GraduationCap :class="['w-8 h-8', form.role === 'user' ? 'text-indigo-600' : 'text-slate-400']" />
                     <span :class="['text-xs font-bold uppercase tracking-widest', form.role === 'user' ? 'text-indigo-600' : 'text-slate-500']">{{ t('auth.role_student_short') }}</span>
                 </button>
                 <button 
                     type="button"
-                    @click="form.role = 'hr'"
                     :class="[
                         'flex flex-col items-center gap-3 p-4 rounded-2xl border-2 transition-all duration-300',
                         form.role === 'hr' 
                             ? 'border-indigo-600 bg-indigo-50 dark:bg-indigo-500/10' 
                             : 'border-slate-100 dark:border-white/5 hover:border-indigo-200'
                     ]"
+                    @click="form.role = 'hr'"
                 >
                     <Building2 :class="['w-8 h-8', form.role === 'hr' ? 'text-indigo-600' : 'text-slate-400']" />
                     <span :class="['text-xs font-bold uppercase tracking-widest', form.role === 'hr' ? 'text-indigo-600' : 'text-slate-500']">{{ t('auth.role_hr_short') }}</span>
@@ -109,8 +109,8 @@ const submit = async () => {
                 <label for="name" class="block text-sm font-semibold text-slate-700 mb-2">{{ t('auth.full_name') }}</label>
                 <input
                     id="name"
-                    type="text"
                     v-model="form.name"
+                    type="text"
                     class="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-50"
                     :class="{ 'border-red-500 focus:border-red-500 focus:ring-red-50': form.errors.name }"
                     :placeholder="t('auth.full_name_placeholder')"
@@ -123,8 +123,8 @@ const submit = async () => {
                 <label for="email" class="block text-sm font-semibold text-slate-700 mb-2">{{ t('auth.email') }}</label>
                 <input
                     id="email"
-                    type="email"
                     v-model="form.email"
+                    type="email"
                     class="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-50"
                     :class="{ 'border-red-500 focus:border-red-500 focus:ring-red-50': form.errors.email }"
                     :placeholder="t('auth.email_placeholder')"
@@ -137,8 +137,8 @@ const submit = async () => {
                 <label for="phone" class="block text-sm font-semibold text-slate-700 mb-2">{{ t('auth.whatsapp_number') }}</label>
                 <input
                     id="phone"
-                    type="tel"
                     v-model="form.phone_number"
+                    type="tel"
                     class="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-50"
                     :class="{ 'border-red-500 focus:border-red-500 focus:ring-red-50': form.errors.phone_number }"
                     placeholder="08xxxxxxxxxx"
@@ -150,8 +150,8 @@ const submit = async () => {
             <div class="space-y-1">
                 <PasswordField
                     id="password"
-                    :label="t('auth.password')"
                     v-model="form.password"
+                    :label="t('auth.password')"
                     :error="form.errors.password"
                     :placeholder="t('auth.password_placeholder_register')"
                     required
@@ -161,8 +161,8 @@ const submit = async () => {
 
             <PasswordField
                 id="password_confirmation"
-                :label="t('auth.confirm_password')"
                 v-model="form.password_confirmation"
+                :label="t('auth.confirm_password')"
                 :placeholder="t('auth.confirm_password_placeholder')"
                 required
             />
@@ -178,7 +178,7 @@ const submit = async () => {
 
         <AuthLink 
             :label="t('auth.already_have_account')" 
-            :linkText="t('auth.login_here')" 
+            :link-text="t('auth.login_here')" 
             href="/login" 
         />
     </AuthLayout>

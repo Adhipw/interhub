@@ -44,13 +44,13 @@ const submit = async () => {
             {{ status }}
         </div>
 
-        <form @submit.prevent="submit" class="space-y-6">
+        <form class="space-y-6" @submit.prevent="submit">
             <div>
                 <label for="email" class="block text-sm font-semibold text-slate-700 mb-2">{{ t('auth.registered_email_label') }}</label>
                 <input
                     id="email"
-                    type="email"
                     v-model="form.email"
+                    type="email"
                     class="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-50"
                     :class="{ 'border-red-500 focus:border-red-500 focus:ring-red-50': errors.email }"
                     :placeholder="t('auth.email_placeholder')"
@@ -67,7 +67,7 @@ const submit = async () => {
 
         <AuthLink 
             :label="t('auth.remember_password_label')" 
-            :linkText="t('auth.back_to_login')" 
+            :link-text="t('auth.back_to_login')" 
             href="/login" 
         />
     </AuthLayout>
