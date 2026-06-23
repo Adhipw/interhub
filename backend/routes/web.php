@@ -180,7 +180,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/my-applications/{application}', [ApplicationController::class, 'show'])->name('applications.show');
         Route::get('/my-applications/{application}/onboarding', function (Application $application) {
             /** @var \App\Models\User|null $user */
-            $user = auth()->user();
+            $user = \Illuminate\Support\Facades\Auth::user();
             abort_unless($application->user_id === $user?->id, 403);
 
             return Inertia::render('Applications/Onboarding', [
