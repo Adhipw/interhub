@@ -47,9 +47,10 @@ class HandleInertiaRequests extends Middleware
                 'session_id' => $request->session()->getId(),
             ],
             'locale' => app()->getLocale(),
-            'translations' => file_exists(base_path('lang/' . app()->getLocale() . '.json'))
-                ? json_decode(file_get_contents(base_path('lang/' . app()->getLocale() . '.json')), true)
-                : [],
+            'translations' => fn() => \Illuminate\Support\Facades\Cache::remember('translations_' . app()->getLocale(), 3600, function () {
+                $path = base_path('lang/' . app()->getLocale() . '.json');
+                return file_exists($path) ? json_decode(file_get_contents($path), true) : [];
+            }),
             'stats' => fn() => $this->publicStats(),
             'feature_flags' => fn() => \Illuminate\Support\Facades\Cache::remember('global_feature_flags', 60, function () {
                 try {
@@ -91,13 +92,14 @@ class HandleInertiaRequests extends Middleware
      */
     private function publicStats(): array
     {
-        try {
-            return [
-                'applicants_count' => User::where('role', 'user')->count(),
-                'companies_count' => Company::where('is_verified', true)->count(),
-            ];
-        } catch (QueryException $e) {
-            Log::warning('Failed to load shared public stats', [
+        return \Illuminate\Support\Facades\Cache::remember('public_stats', 60, function () {
+            try {
+                return [
+                    'applicants_count' => User::where('role', 'user')->count(),
+                    'companies_count' => Company::where('is_verified', true)->count(),
+                ];
+            } catch (QueryException $e) {
+                Log::warning('Failed to load shared public stats', [
                 'message' => $e->getMessage(),
             ]);
 
@@ -105,6 +107,7 @@ class HandleInertiaRequests extends Middleware
                 'applicants_count' => 0,
                 'companies_count' => 0,
             ];
-        }
+            }
+        });
     }
 }
