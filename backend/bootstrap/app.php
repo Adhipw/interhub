@@ -78,8 +78,15 @@ return Application::configure(basePath: dirname(__DIR__))
             }
 
             if ($request->expectsJson()) {
+                $message = config('app.debug') ? $e->getMessage() : 'An unexpected error occurred.';
+                
+                // Pass through specific safe HTTP Exception messages (like validation or business logic errors)
+                if (!config('app.debug') && $e instanceof \Symfony\Component\HttpKernel\Exception\HttpException && in_array($status, [400, 422])) {
+                    $message = $e->getMessage() ?: $message;
+                }
+
                 return response()->json([
-                    'message' => config('app.debug') ? $e->getMessage() : 'An unexpected error occurred.',
+                    'message' => $message,
                     'request_id' => $requestId,
                     'status' => $status,
                 ], $status);

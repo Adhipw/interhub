@@ -16,7 +16,7 @@ class SafetyGuard
         foreach ($blocked as $keyword) {
             if (stripos($input, $keyword) !== false) {
                 $this->logViolation("Blocked keyword '{$keyword}' detected in AI input.");
-                throw new \Exception('Input contains blocked sensitive keyword.');
+                abort(422, 'Input contains blocked sensitive keyword.');
             }
         }
     }
@@ -95,7 +95,7 @@ class SafetyGuard
                 // If it's used in a context that suggests bias
                 if (preg_match("/(because of|based on|due to|karena|berdasarkan)\s+{$factor}/i", $text)) {
                     $this->logViolation("Potential discriminatory factor detected in AI evaluation: {$factor}");
-                    throw new \Exception('AI evaluation contains potential discriminatory factors. Please review manually.');
+                    abort(422, 'AI evaluation contains potential discriminatory factors. Please review manually.');
                 }
             }
         }

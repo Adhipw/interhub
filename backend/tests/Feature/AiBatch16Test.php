@@ -79,7 +79,7 @@ class AiBatch16Test extends TestCase
             ->postJson(route('admin.ai.summarize-report'), [
                 'report_content' => 'My secret password is 123456',
             ])
-            ->assertStatus(500); // Because it throws an exception on blocked keyword
+            ->assertStatus(422); // Because it aborts with 422 on blocked keyword
 
         $this->assertDatabaseHas('security_events', [
             'user_id' => $this->superAdminUser->id,

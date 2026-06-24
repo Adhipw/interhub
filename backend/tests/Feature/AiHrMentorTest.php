@@ -111,7 +111,7 @@ class AiHrMentorTest extends TestCase
             'title' => 'Software Engineer',
         ]);
 
-        $response->assertStatus(500); // Exception thrown and caught as 500
+        $response->assertStatus(422); // Handled gracefully instead of crashing
         $this->assertStringContainsString('discriminatory factors', $response->json('message'));
     }
 }

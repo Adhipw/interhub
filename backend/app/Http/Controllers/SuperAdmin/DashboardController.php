@@ -37,12 +37,25 @@ class DashboardController extends Controller
         $usersData = [];
         $appsData = [];
         
+        $startDate = Carbon::today()->subDays(6);
+        
+        $usersPerDay = User::where('created_at', '>=', $startDate)
+            ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as count'))
+            ->groupBy('date')
+            ->pluck('count', 'date');
+
+        $appsPerDay = Application::where('created_at', '>=', $startDate)
+            ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as count'))
+            ->groupBy('date')
+            ->pluck('count', 'date');
+
         for ($i = 6; $i >= 0; $i--) {
             $date = Carbon::today()->subDays($i);
             $chartDates[] = $date->format('M d');
+            $dateStr = $date->toDateString();
             
-            $usersData[] = User::whereDate('created_at', $date)->count();
-            $appsData[] = Application::whereDate('created_at', $date)->count();
+            $usersData[] = $usersPerDay[$dateStr] ?? 0;
+            $appsData[] = $appsPerDay[$dateStr] ?? 0;
         }
 
         $chartData = [
