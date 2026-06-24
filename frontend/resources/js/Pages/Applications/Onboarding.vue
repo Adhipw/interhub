@@ -25,7 +25,7 @@ const documents = ref<ApplicationDocument[]>(props.documents || []);
 const uploading = ref<string | null>(null);
 
 const documentTypes = [
-    { key: 'agreement', name: 'Signed Internship Agreement', description: 'Dokumen perjanjian magang yang sudah ditandatangani.', icon: ClipboardDocumentCheckIcon },
+    { key: 'agreement', name: 'Signed Internship Agreement', description: 'Dokumen perjanjian magang yang sudah ditandatangani.', icon: ClipboardDocumentCheckIcon, hasTemplate: true },
     { key: 'ktp', name: 'Identity Card (KTP/KTM)', description: 'Kartu identitas resmi (KTP atau Kartu Tanda Mahasiswa).', icon: IdentificationIcon },
     { key: 'campus_letter', name: 'Campus Recommendation Letter', description: 'Surat pengantar atau rekomendasi dari kampus.', icon: AcademicCapIcon },
 ];
@@ -103,6 +103,15 @@ const getStatusColor = (status: string) => {
                             <div class="space-y-1">
                                 <h3 class="text-lg font-black text-slate-900 dark:text-white group-hover:text-primary-600 transition-colors">{{ type.name }}</h3>
                                 <p class="text-sm text-slate-500 dark:text-slate-400 font-medium">{{ type.description }}</p>
+                                
+                                <a 
+                                    v-if="type.hasTemplate" 
+                                    :href="'/my-applications/' + application.id + '/agreement-template'" 
+                                    target="_blank" 
+                                    class="inline-flex mt-2 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 text-sm font-bold items-center gap-1.5 transition-colors"
+                                >
+                                    <Download class="w-4 h-4" /> Unduh Template Perjanjian (Otomatis)
+                                </a>
                                 
                                 <!-- Document Status Badge -->
                                 <div v-if="getDocument(type.key)" class="inline-flex mt-3">

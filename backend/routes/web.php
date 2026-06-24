@@ -188,6 +188,16 @@ Route::middleware('auth')->group(function () {
                 'documents' => $application->onboardingDocuments()->with('verifier')->get(),
             ]);
         })->name('applications.onboarding');
+
+        Route::get('/my-applications/{application}/agreement-template', function (Application $application) {
+            /** @var \App\Models\User|null $user */
+            $user = \Illuminate\Support\Facades\Auth::user();
+            abort_unless($application->user_id === $user?->id, 403);
+
+            return view('documents.internship-agreement', [
+                'application' => $application->load(['internship.company', 'user'])
+            ]);
+        })->name('applications.agreement-template');
         Route::redirect('/applications', '/my-applications');
         Route::get('/applications/{application}', fn (Application $application) => redirect()->route('applications.show', $application));
         Route::get('/applications/{application}/onboarding', fn (Application $application) => redirect()->route('applications.onboarding', $application));
