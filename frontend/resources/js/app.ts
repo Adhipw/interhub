@@ -21,6 +21,9 @@ declare global {
         pageData: any;
         Ziggy?: Record<string, unknown>;
         route: typeof routeFn;
+        __APP_CONFIG__: any;
+        initialTranslations?: Record<string, string>;
+        initialLocale?: 'id' | 'en';
     }
 }
 
@@ -46,11 +49,6 @@ const hydrateStores = (pinia: Pinia, page: Page) => {
     const langStore = useLangStore(pinia);
     const authStore = useAuthStore(pinia);
     const props = page.props as Record<string, any>;
-
-    if (props.translations) {
-        langStore.translations = props.translations;
-        logger.log('Translations hydrated from server:', Object.keys(props.translations).length, 'keys');
-    }
 
     if (props.locale && typeof props.locale === 'string') {
         langStore.locale = props.locale;
@@ -162,6 +160,15 @@ createInertiaApp({
         const langStore = useLangStore(pinia);
         const authStore = useAuthStore(pinia);
         const toastStore = useToastStore(pinia);
+
+        if (window.initialTranslations && Object.keys(window.initialTranslations).length > 0) {
+            langStore.translations = window.initialTranslations;
+            if (window.initialLocale) {
+                langStore.locale = window.initialLocale;
+                localStorage.setItem('locale', window.initialLocale);
+            }
+            logger.log('Translations hydrated from blade template:', Object.keys(window.initialTranslations).length, 'keys');
+        }
 
         inertiaRouter.on('navigate', (event: any) => {
             hydrateStores(pinia, event.detail.page);

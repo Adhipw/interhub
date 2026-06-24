@@ -49,11 +49,6 @@ class HandleInertiaRequests extends Middleware
                 'session_id' => $request->session()->getId(),
             ],
             'locale' => app()->getLocale(),
-            'translations' => fn () => Cache::remember('translations_'.app()->getLocale(), 3600, function () {
-                $path = base_path('lang/'.app()->getLocale().'.json');
-
-                return file_exists($path) ? json_decode(file_get_contents($path), true) : [];
-            }),
             'stats' => fn () => $this->publicStats(),
             'feature_flags' => fn () => Cache::remember('global_feature_flags', 60, function () {
                 try {

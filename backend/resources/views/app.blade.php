@@ -56,6 +56,13 @@
         ]) }}">
         <script>
             window.__APP_CONFIG__ = JSON.parse(document.querySelector('meta[name="app-config"]').getAttribute('content'));
+            @php
+                $locale = app()->getLocale();
+                $path = base_path("lang/{$locale}.json");
+                $translations = file_exists($path) ? json_decode(file_get_contents($path), true) : [];
+            @endphp
+            window.initialTranslations = @json($translations);
+            window.initialLocale = "{{ $locale }}";
         </script>
         @vite(['resources/js/app.ts', 'resources/css/app.css'], 'build')
 
