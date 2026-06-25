@@ -24,8 +24,8 @@ class PublicStatsUpdated implements ShouldBroadcastNow
     public function __construct()
     {
         $this->stats = [
-            'total_internships' => Internship::count(),
-            'total_companies' => Company::count(),
+            'total_internships' => Internship::published()->count(),
+            'total_companies' => Company::where('is_verified', true)->count(),
             'total_placements' => Application::count(),
             'total_students' => User::where('role', 'user')->count(),
         ];
