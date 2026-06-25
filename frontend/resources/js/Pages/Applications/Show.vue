@@ -331,7 +331,7 @@ const withdraw = async () => {
                                 <p class="text-sm font-bold text-slate-900">{{ event.label }}</p>
                                 <p class="text-xs text-slate-500 leading-relaxed">{{ event.description }}</p>
                                 <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest pt-2">
-                                    {{ new Date(event.date).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) }}
+                                    {{ new Date(event.date.includes('T') ? event.date : event.date.replace(' ', 'T') + 'Z').toLocaleDateString('id-ID', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) }}
                                 </p>
                             </div>
                         </div>

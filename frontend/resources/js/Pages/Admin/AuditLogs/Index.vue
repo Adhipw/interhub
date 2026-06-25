@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import logger from '@/Lib/logger';
+
 import { ref, onMounted, onUnmounted, watch, computed } from 'vue';
 import { router as inertiaRouter } from '@inertiajs/vue3';
 import { Head } from '@/Components';
@@ -15,24 +15,23 @@ import {
     Filter,
     Loader2
 } from 'lucide-vue-next';
-import api from '@/Services/api';
 import type { User, PaginatedResponse } from '@/Types/user';
 
 interface AuditLog {
     id: number;
     action: string;
     description: string;
-    metadata?: any;
+    metadata?: Record<string, unknown>;
     ip_address?: string;
     created_at: string;
     user?: User;
 }
 
-const urlParams = new URLSearchParams(window.location.search);
+const urlParams = new window.URLSearchParams(window.location.search);
 
 const props = defineProps<{
     logs?: PaginatedResponse<AuditLog>;
-    filters?: any;
+    filters?: Record<string, unknown>;
 }>();
 
 const loading = ref(false);
@@ -41,12 +40,12 @@ const currentPage = ref(urlParams.get('page') || 1);
 const logs = computed(() => props.logs || {
     data: [],
     links: [],
-    meta: {} as any
+    meta: {} as Record<string, unknown>
 });
 
-const debounce = (fn: Function, ms: number) => {
+const debounce = (fn: (...args: unknown[]) => void, ms: number) => {
     let timeoutId: ReturnType<typeof setTimeout>;
-    return function (this: any, ...args: any[]) {
+    return function (this: unknown, ...args: unknown[]) {
         clearTimeout(timeoutId);
         timeoutId = setTimeout(() => fn.apply(this, args), ms);
     };
@@ -67,7 +66,7 @@ watch(search, debounce(() => {
     fetchLogs();
 }, 500));
 
-let refreshInterval: any = null;
+let refreshInterval: ReturnType<typeof setInterval> | null = null;
 
 onMounted(() => {
     // High-frequency polling for audit logs (30s)

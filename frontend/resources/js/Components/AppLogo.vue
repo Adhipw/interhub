@@ -77,8 +77,8 @@ const cobalt = computed(() => props.isDarkMode ? '#60A5FA' : '#0056B3'); // Coba
                     'font-black tracking-tight flex items-center'
                 ]"
             >
-                <span :class="isDarkMode ? 'text-white' : 'text-slate-950'">Intern</span>
-                <span :class="isDarkMode ? 'text-blue-400' : 'text-blue-600'">Hub</span>
+                <span class="text-slate-950 dark:text-white transition-colors">Intern</span>
+                <span class="text-blue-600 dark:text-blue-400 transition-colors">Hub</span>
             </h1>
             
             <!-- Professional Role Tag (Subtle & Modern) -->

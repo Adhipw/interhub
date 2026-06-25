@@ -43,10 +43,22 @@ class SuperAdminSeeder extends Seeder
             'description' => 'Aktifkan fitur mentoring untuk mentor dan mahasiswa.',
         ]);
 
-        FeatureFlag::updateOrCreate(['key' => 'enable_google_login'], [
-            'name' => 'Google Login',
-            'is_enabled' => false,
-            'description' => 'Izinkan pengguna login menggunakan akun Google.',
+        FeatureFlag::updateOrCreate(['key' => 'social_login'], [
+            'name' => 'Social Login (OAuth)',
+            'is_enabled' => true,
+            'description' => 'Izinkan pengguna login menggunakan akun sosial seperti Google.',
+        ]);
+
+        FeatureFlag::updateOrCreate(['key' => 'public_registration'], [
+            'name' => 'Public Registration',
+            'is_enabled' => true,
+            'description' => 'Izinkan pengguna baru mendaftar secara mandiri.',
+        ]);
+
+        FeatureFlag::updateOrCreate(['key' => 'enable_ai_features'], [
+            'name' => 'AI Features',
+            'is_enabled' => true,
+            'description' => 'Aktifkan asisten cerdas AI untuk HR, Admin, dan Kandidat.',
         ]);
 
         FeatureFlag::updateOrCreate(['key' => 'maintenance_mode'], [

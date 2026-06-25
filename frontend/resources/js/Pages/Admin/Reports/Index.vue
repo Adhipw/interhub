@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import logger from '@/Lib/logger';
 import { ref, onMounted, onUnmounted, computed } from 'vue';
 import { Head } from '@/Components';
 
@@ -9,20 +8,31 @@ import {
   BarChart3, 
   TrendingUp, 
   Users, 
-  Building2, 
   FileText,
   Calendar,
   ArrowUpRight,
   PieChart,
   Loader2
 } from 'lucide-vue-next';
-import api from '@/Services/api';
 import { router as inertiaRouter } from '@inertiajs/vue3';
 
+interface ApplicationStat {
+  status: string;
+  total: number;
+}
+interface UserGrowth {
+  date: string;
+  total: number;
+}
+interface CompanyStat {
+  is_verified: boolean;
+  total: number;
+}
+
 const props = defineProps<{
-    applicationStats?: any[];
-    userGrowth?: any[];
-    companyStats?: any[];
+    applicationStats?: ApplicationStat[];
+    userGrowth?: UserGrowth[];
+    companyStats?: CompanyStat[];
 }>();
 
 const loading = ref(false);
@@ -43,7 +53,7 @@ const goToMasterData = () => {
     inertiaRouter.visit('/admin/internships');
 };
 
-let refreshInterval: any = null;
+let refreshInterval: ReturnType<typeof setInterval> | null = null;
 
 onMounted(() => {
     // Refresh analytics every 2 minutes

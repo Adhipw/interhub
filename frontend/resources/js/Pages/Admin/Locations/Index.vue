@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import logger from '@/Lib/logger';
 import { ref, reactive, onMounted, computed } from 'vue';
 import DashboardLayout from '@/Layouts/DashboardLayout.vue';
 import Card from '@/Components/Card.vue';
 import Pagination from '@/Components/Pagination.vue';
 import { 
-  MapPin, Plus, Trash2, Power, 
-  Map, CheckCircle2, XCircle, Loader2
+  MapPin, Plus, Trash2,
+  Loader2
 } from 'lucide-vue-next';
 import { useLangStore } from '@/Stores/lang';
 import api from '@/Services/api';
@@ -34,22 +33,16 @@ const processing = ref(false);
 const locations = computed(() => props.locations || {
   data: [],
   links: [],
-  meta: {} as any
+  meta: {} as Record<string, unknown>
 });
 
 const form = reactive({
     name: '',
     type: 'city',
-    errors: {} as any
+    errors: {} as Record<string, string[]>
 });
 
-const fetchLocations = (page = 1) => {
-    inertiaRouter.get('/admin/locations', { page }, {
-        preserveState: true,
-        preserveScroll: true,
-        replace: true
-    });
-};
+
 
 const submit = async () => {
     processing.value = true;
@@ -59,9 +52,10 @@ const submit = async () => {
         form.name = '';
         form.type = 'city';
         inertiaRouter.reload({ only: ['locations'] });
-    } catch (error: any) {
-        if (error.response?.data?.errors) {
-            form.errors = error.response.data.errors;
+    } catch (error: unknown) {
+        const err = error as { response?: { data?: { errors?: Record<string, string[]> } } };
+        if (err.response?.data?.errors) {
+            form.errors = err.response.data.errors;
         } else {
             alert(t('common.error_occurred'));
         }
@@ -74,7 +68,7 @@ const toggleStatus = async (id: number) => {
     try {
         await api.post(`/admin/locations/${id}/toggle`);
         inertiaRouter.reload({ only: ['locations'] });
-    } catch (error) {
+    } catch {
         alert(t('common.error_occurred'));
     }
 };
@@ -84,7 +78,7 @@ const deleteLocation = async (id: number) => {
         try {
             await api.delete(`/admin/locations/${id}`);
             inertiaRouter.reload({ only: ['locations'] });
-        } catch (error) {
+        } catch {
             alert(t('common.error_occurred'));
         }
     }

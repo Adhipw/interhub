@@ -1,28 +1,26 @@
 <script setup lang="ts">
-import logger from '@/Lib/logger';
-import { ref, reactive, onMounted, onUnmounted, watch, computed } from 'vue';
+import { ref, reactive, onMounted, onUnmounted, computed } from 'vue';
 import { router as inertiaRouter } from '@inertiajs/vue3';
 import DashboardLayout from '@/Layouts/DashboardLayout.vue';
 import Card from '@/Components/Card.vue';
 import Pagination from '@/Components/Pagination.vue';
 import EmptyState from '@/Components/EmptyState.vue';
 import { 
-  Users, Search, ShieldCheck, ShieldAlert,
-  Trash2, UserX, UserCheck, MoreVertical,
-  Filter, Loader2
+  Search, ShieldCheck, ShieldAlert,
+  Trash2, UserX, UserCheck,
+  Loader2
 } from 'lucide-vue-next';
-import { formatDate } from '@/Lib/utils';
 import { useLangStore } from '@/Stores/lang';
 import api from '@/Services/api';
 import type { User, PaginatedResponse, Role } from '@/Types/user';
 
-const urlParams = new URLSearchParams(window.location.search);
+const urlParams = new window.URLSearchParams(window.location.search);
 const langStore = useLangStore();
 const t = (key: string) => langStore.t(key);
 
 const props = defineProps<{
     users?: PaginatedResponse<User>;
-    filters?: any;
+    filters?: Record<string, unknown>;
 }>();
 
 const loading = ref(false);
@@ -30,10 +28,10 @@ const processing = ref(false);
 const users = computed(() => props.users || {
   data: [],
   links: [],
-  meta: {} as any
+  meta: {} as Record<string, unknown>
 });
 
-const filters = reactive({
+const activeFilters = reactive({
   search: urlParams.get('search') || '',
   role: urlParams.get('role') || '',
   status: urlParams.get('status') || '',
@@ -41,7 +39,7 @@ const filters = reactive({
 });
 
 const fetchUsers = () => {
-    inertiaRouter.get('/admin/users', { ...filters }, {
+    inertiaRouter.get('/admin/users', { ...activeFilters }, {
         preserveState: true,
         preserveScroll: true,
         replace: true
@@ -49,7 +47,7 @@ const fetchUsers = () => {
 };
 
 const handleSearch = () => {
-    filters.page = 1;
+    activeFilters.page = 1;
     updateQuery();
 };
 
@@ -63,7 +61,7 @@ const toggleStatus = async (userId: number) => {
         try {
             await api.post(`/admin/users/${userId}/toggle-status`);
             inertiaRouter.reload({ only: ['users'] });
-        } catch (error) {
+        } catch {
             alert(t('common.error_occurred'));
         } finally {
             processing.value = false;
@@ -77,7 +75,7 @@ const deleteUser = async (userId: number) => {
         try {
             await api.delete(`/admin/users/${userId}`);
             inertiaRouter.reload({ only: ['users'] });
-        } catch (error) {
+        } catch {
             alert(t('common.error_occurred'));
         } finally {
             processing.value = false;
@@ -85,7 +83,7 @@ const deleteUser = async (userId: number) => {
     }
 };
 
-let refreshInterval: any = null;
+let refreshInterval: ReturnType<typeof setInterval> | null = null;
 
 onMounted(() => {
     // Auto refresh every 60 seconds for real-time feel
@@ -113,7 +111,7 @@ onUnmounted(() => {
           <div class="relative group">
             <Search class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-primary-600 transition-colors" />
             <input 
-              v-model="filters.search" 
+              v-model="activeFilters.search" 
               type="text"
               :placeholder="t('admin.user_mgmt.search_placeholder')"
               class="pl-11 pr-6 py-3 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all w-64" 

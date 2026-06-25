@@ -4,6 +4,7 @@ import { router as inertiaRouter } from '@inertiajs/vue3';
 const clearStoredAuth = () => {
     localStorage.removeItem('auth_token');
     localStorage.removeItem('user');
+    localStorage.removeItem('remembered_email');
     sessionStorage.removeItem('auth_token');
     sessionStorage.removeItem('user');
 };

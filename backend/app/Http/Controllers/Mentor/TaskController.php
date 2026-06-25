@@ -14,7 +14,7 @@ class TaskController extends Controller
     public function index()
     {
         $tasks = MentorTask::with(['application.user', 'application.internship'])
-            ->where('mentor_user_id', auth()->id())
+            ->where('mentor_user_id', auth()->user()->id)
             ->latest()
             ->paginate(10);
 
@@ -25,7 +25,7 @@ class TaskController extends Controller
 
     public function store(Request $request, Application $application)
     {
-        if ($application->mentor_user_id !== auth()->id()) {
+        if ($application->mentor_user_id !== auth()->user()->id) {
             abort(403);
         }
 
@@ -38,7 +38,7 @@ class TaskController extends Controller
 
         $task = MentorTask::create([
             'application_id' => $application->id,
-            'mentor_user_id' => auth()->id(),
+            'mentor_user_id' => auth()->user()->id,
             'title' => $validated['title'],
             'description' => $validated['description'] ?? null,
             'due_date' => $validated['due_date'] ?? null,
@@ -53,7 +53,7 @@ class TaskController extends Controller
 
     public function updateStatus(Request $request, MentorTask $task)
     {
-        if ($task->mentor_user_id !== auth()->id()) {
+        if ($task->mentor_user_id !== auth()->user()->id) {
             abort(403);
         }
 
@@ -70,7 +70,7 @@ class TaskController extends Controller
 
     public function destroy(MentorTask $task)
     {
-        if ($task->mentor_user_id !== auth()->id()) {
+        if ($task->mentor_user_id !== auth()->user()->id) {
             abort(403);
         }
 

@@ -14,11 +14,15 @@ interface Props {
     title?: string;
     description?: string;
     actionLabel?: string;
-    actionIcon?: any;
+    actionIcon?: unknown;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-    type: 'empty'
+    type: 'empty',
+    title: undefined,
+    description: undefined,
+    actionLabel: undefined,
+    actionIcon: undefined
 });
 
 const emit = defineEmits<{

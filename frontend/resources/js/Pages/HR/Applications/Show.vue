@@ -17,11 +17,22 @@ import {
 } from '@heroicons/vue/24/outline';
 import type { Application } from '@/Types/application';
 import type { User } from '@/Types/user';
+import { format } from 'date-fns';
 
 const props = defineProps<{
     application?: Application;
     mentors?: { id: number, user_id: number, user: User }[];
 }>();
+
+const formatEventDate = (dateStr: string) => {
+    if (!dateStr) return '';
+    const isoStr = dateStr.includes('T') ? dateStr : dateStr.replace(' ', 'T') + 'Z';
+    try {
+        return format(new Date(isoStr), 'yyyy-MM-dd HH:mm:ss');
+    } catch(e) {
+        return dateStr;
+    }
+};
 
 const application = computed(() => props.application || null);
 const mentors = computed(() => props.mentors || []);
@@ -383,7 +394,7 @@ const verifyDocument = async (id: number, status: string) => {
                 <div class="w-1.5 h-1.5 rounded-full bg-slate-300"></div>
               </div>
               <p class="text-sm font-bold text-slate-900 dark:text-white">{{ event.label }}</p>
-              <p class="text-[10px] font-medium text-slate-400 uppercase mt-0.5">{{ event.date }}</p>
+              <p class="text-[10px] font-medium text-slate-400 uppercase mt-0.5">{{ formatEventDate(event.date) }}</p>
               <p class="mt-2 text-xs text-slate-500 leading-relaxed">{{ event.description }}</p>
             </div>
           </div>

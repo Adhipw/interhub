@@ -1,25 +1,24 @@
 <script setup lang="ts">
-import logger from '@/Lib/logger';
+
 import { Link, router as inertiaRouter } from '@inertiajs/vue3';
-import { ref, reactive, onMounted, watch, computed } from 'vue';
+import { ref, reactive, computed } from 'vue';
 import DashboardLayout from '@/Layouts/DashboardLayout.vue';
 import Card from '@/Components/Card.vue';
 import Pagination from '@/Components/Pagination.vue';
 import { 
-  Building2, Search, CheckCircle2, XCircle, 
-  ExternalLink, Globe, MapPin, Filter, Loader2
+  Building2, Search, CheckCircle2,
+  ExternalLink, Globe, MapPin, Loader2
 } from 'lucide-vue-next';
-import { formatDate } from '@/Lib/utils';
 import { useLangStore } from '@/Stores/lang';
 import api from '@/Services/api';
 
-const urlParams = new URLSearchParams(window.location.search);
+const urlParams = new window.URLSearchParams(window.location.search);
 const langStore = useLangStore();
 const t = (key: string) => langStore.t(key);
 
 const props = defineProps<{
-    companies?: { data: any[]; links: any[]; meta: any };
-    filters?: any;
+    companies?: { data: Record<string, unknown>[]; links: Record<string, unknown>[]; meta: Record<string, unknown> };
+    filters?: Record<string, unknown>;
 }>();
 
 const loading = ref(false);
@@ -76,7 +75,7 @@ const handleConfirmedAction = async (companyId: number) => {
         }
         confirmingId.value = null;
         inertiaRouter.reload({ only: ['companies'] });
-    } catch (error) {
+    } catch {
         alert(t('common.error_occurred'));
     } finally {
         processing.value = false;

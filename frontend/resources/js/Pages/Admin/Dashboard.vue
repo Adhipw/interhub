@@ -4,18 +4,28 @@ import DashboardLayout from '@/Layouts/DashboardLayout.vue';
 import { computed } from 'vue';
 import { 
     Users, Building2, Briefcase, FileText,
-    ShieldCheck, History, CheckCircle2, XCircle,
-    AlertTriangle, ArrowRight, BarChart3, Activity,
-    Lock, Server, Globe, Search, Bell, Sparkles
+    ShieldCheck, AlertTriangle, Activity, Lock
 } from 'lucide-vue-next';
 import Card from '@/Components/Card.vue';
 import Skeleton from '@/Components/Skeleton.vue';
-import { formatDate } from '@/Lib/utils';
 import { useAuthStore } from '@/Stores/auth';
 import { useLangStore } from '@/Stores/lang';
 import { router as inertiaRouter } from '@inertiajs/vue3';
 import echo from '@/echo';
 import { onMounted, onUnmounted, ref } from 'vue';
+
+interface DashboardLog {
+  id: number;
+  description?: string;
+  action?: string;
+  created_at_human?: string;
+  user?: { name: string };
+}
+interface DashboardCompany {
+  id: number;
+  name: string;
+  created_at_human?: string;
+}
 
 interface AdminDashboardProps {
     stats?: {
@@ -24,10 +34,10 @@ interface AdminDashboardProps {
         active_internships?: number;
         total_applications?: number;
     };
-    recentLogs?: any[];
-    recent_logs?: any[];
-    pendingCompanies?: any[];
-    pending_companies?: any[];
+    recentLogs?: DashboardLog[];
+    recentLogsFallback?: DashboardLog[];
+    pendingCompanies?: DashboardCompany[];
+    pendingCompaniesFallback?: DashboardCompany[];
 }
 
 const props = defineProps<AdminDashboardProps>();
@@ -36,7 +46,6 @@ const authStore = useAuthStore();
 const langStore = useLangStore();
 const user = computed(() => authStore.user || {});
 const t = (key: string) => langStore.t(key);
-const __ = (key: string) => langStore.__(key);
 
 const stats = computed(() => props.stats || {
     total_users: 0,
@@ -44,8 +53,8 @@ const stats = computed(() => props.stats || {
     active_internships: 0,
     total_applications: 0,
 });
-const recentLogs = computed(() => props.recentLogs || props.recent_logs || []);
-const pendingCompanies = computed(() => props.pendingCompanies || props.pending_companies || []);
+const recentLogs = computed(() => props.recentLogs || props.recentLogsFallback || []);
+const pendingCompanies = computed(() => props.pendingCompanies || props.pendingCompaniesFallback || []);
 const loading = ref(false);
 
 const fetchData = () => {
@@ -59,7 +68,7 @@ const fetchData = () => {
 onMounted(() => {
     if (echo && user.value?.id) {
         echo.join('admins.online')
-            .listen('DashboardUpdated', (e: any) => {
+            .listen('DashboardUpdated', (e: Record<string, unknown>) => {
                 if (e.reload) {
                     fetchData();
                 }

@@ -7,13 +7,10 @@ import StatusBadge from '@/Components/StatusBadge.vue';
 import Pagination from '@/Components/Pagination.vue';
 import EmptyState from '@/Components/EmptyState.vue';
 import { 
-  FunnelIcon, MagnifyingGlassIcon, UserCircleIcon, UsersIcon,
   ChevronRightIcon
 } from '@heroicons/vue/24/outline';
 import { useDebounceFn } from '@vueuse/core';
 import { useLangStore } from '@/Stores/lang';
-import { useAuthStore } from '@/Stores/auth';
-import echo from '@/echo';
 import type { Application } from '@/Types/application';
 import type { PaginatedResponse } from '@/Types/user';
 
@@ -27,19 +24,17 @@ interface HrApplicationsIndexProps {
 
 const props = defineProps<HrApplicationsIndexProps>();
 
-const authStore = useAuthStore();
 const langStore = useLangStore();
 const t = (key: string) => langStore.t(key);
-const user = computed(() => authStore.user || {});
 
 const applications = computed<PaginatedResponse<Application>>(() => props.applications || {
     data: [],
     links: [],
-    meta: {} as any
+    meta: {} as PaginatedResponse<Application>['meta']
 });
 const loading = ref(false);
-const statusFilter = ref(props.filters?.status || new URLSearchParams(window.location.search).get('status') || '');
-const internshipId = ref(props.filters?.internship_id || new URLSearchParams(window.location.search).get('internship_id') || '');
+const statusFilter = ref(props.filters?.status || new window.URLSearchParams(window.location.search).get('status') || '');
+const internshipId = ref(props.filters?.internship_id || new window.URLSearchParams(window.location.search).get('internship_id') || '');
 
 const debouncedFilter = useDebounceFn(() => {
     loading.value = true;
