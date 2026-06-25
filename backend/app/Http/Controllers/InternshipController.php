@@ -42,9 +42,9 @@ class InternshipController extends Controller
                 ->get(),
             'stats' => [
                 'total_internships' => Internship::published()->count(),
-                'total_companies' => Company::count(),
+                'total_companies' => Company::where('is_verified', true)->count(),
                 'total_placements' => Application::count(),
-                'total_students' => User::count(),
+                'total_students' => User::where('role', 'user')->count(),
             ],
         ]);
     }
