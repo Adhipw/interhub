@@ -27,6 +27,28 @@ const t = (key: string) => langStore.t(key);
 
 const internship = computed(() => props.internship);
 
+const parsedBenefits = computed(() => {
+    const benefits = internship.value?.benefits;
+    if (!benefits) return [];
+    if (Array.isArray(benefits)) return benefits;
+    
+    if (typeof benefits === 'string') {
+        const splitRegex = /[\n\*\-\u2022]/;
+        if (splitRegex.test(benefits)) {
+            return benefits.split(splitRegex)
+                .map(b => b.trim())
+                .filter(b => b.length > 0);
+        }
+        if (benefits.includes(',')) {
+            return benefits.split(',')
+                .map(b => b.trim())
+                .filter(b => b.length > 0);
+        }
+        return [benefits];
+    }
+    return [];
+});
+
 const updateSeo = () => {
     if (!props.internship) return;
 
@@ -184,13 +206,13 @@ updateSeo();
                                 </ul>
                             </section>
 
-                            <section v-if="internship.benefits && internship.benefits.length">
+                            <section v-if="parsedBenefits.length">
                                 <h2 class="text-2xl font-black text-neutral-900 dark:text-white mb-8 flex items-center gap-3">
                                     <div class="w-1.5 h-8 bg-primary-600 rounded-full"></div>
                                     {{ t('job.benefit') }}
                                 </h2>
                                 <div class="flex flex-wrap gap-4">
-                                    <Badge v-for="(benefit, index) in internship.benefits" :key="index" variant="accent" size="lg" class="px-6 py-3 rounded-2xl border-none shadow-sm">
+                                    <Badge v-for="(benefit, index) in parsedBenefits" :key="index" variant="accent" size="lg" class="px-6 py-3 rounded-2xl border-none shadow-sm">
                                         {{ benefit }}
                                     </Badge>
                                 </div>
