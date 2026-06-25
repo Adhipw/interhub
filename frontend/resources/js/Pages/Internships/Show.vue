@@ -240,6 +240,13 @@ updateSeo();
                             <Button variant="outline" class="w-full" @click="inertiaRouter.visit('/companies/' + internship.company?.slug)">
                                 {{ t('company.view_profile') }}
                             </Button>
+                            <a 
+                                :href="`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(internship.location || internship.company?.name || '')}`" 
+                                target="_blank"
+                                class="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-bold text-sm bg-blue-50 text-blue-600 hover:bg-blue-100 dark:bg-blue-900/20 dark:text-blue-400 dark:hover:bg-blue-900/40 transition-colors"
+                            >
+                                <MapPin class="w-4 h-4" /> Buka di Google Maps
+                            </a>
                         </div>
 
                         <!-- Trust Badge -->

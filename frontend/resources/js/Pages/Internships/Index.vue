@@ -97,6 +97,11 @@ if (props.filters) {
                     <!-- Filters Sidebar -->
                     <aside class="w-full lg:w-80 shrink-0">
                         <div class="bg-white dark:bg-neutral-900 rounded-[2.5rem] p-8 border border-neutral-100 dark:border-neutral-800 sticky top-32">
+                            <!-- Map Button -->
+                            <Button class="w-full mb-8 !bg-emerald-500 hover:!bg-emerald-600 !text-white flex items-center justify-center gap-2 shadow-xl shadow-emerald-500/20 active:scale-95 transition-all" @click="inertiaRouter.visit('/internships/map')">
+                                <MapPin class="w-5 h-5" /> Cari Lewat Peta
+                            </Button>
+
                             <div class="flex items-center justify-between mb-8">
                                 <h3 class="text-lg font-black uppercase tracking-widest text-neutral-900 dark:text-white">{{ t('filters.title') }}</h3>
                                 <button class="text-xs font-bold text-primary-600 hover:text-primary-700 transition-colors" @click="clearFilters">{{ t('filters.reset') }}</button>

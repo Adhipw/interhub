@@ -60,6 +60,25 @@ class InternshipController extends Controller
         ]);
     }
 
+    public function map()
+    {
+        view()->share('seo', [
+            'title' => 'Peta Magang - Cari Lowongan Magang di Sekitar Anda',
+            'description' => 'Temukan lowongan magang berdasarkan lokasi menggunakan Peta Interaktif InternHub.',
+            'image' => asset('brand/logo-mark.svg'),
+            'url' => request()->url(),
+            'type' => 'website',
+        ]);
+
+        return Inertia::render('Internships/MapSearch', [
+            'internships' => Internship::published()
+                ->whereNotNull('latitude')
+                ->whereNotNull('longitude')
+                ->with('company:id,name,logo_url')
+                ->get(['id', 'title', 'slug', 'company_id', 'latitude', 'longitude', 'type', 'location']),
+        ]);
+    }
+
     public function show(Internship $internship)
     {
         if ($internship->status !== 'published') {

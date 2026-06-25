@@ -101,6 +101,7 @@ Route::match(['get', 'post'], '/language/{locale}', function ($locale) {
 })->name('language.switch');
 
 Route::get('/internships', [InternshipController::class, 'index'])->name('internships.index');
+Route::get('/internships/map', [InternshipController::class, 'map'])->name('internships.map');
 Route::get('/internships/{internship:slug}', [InternshipController::class, 'show'])->name('internships.show');
 Route::get('/companies', [CompanyPublicController::class, 'index'])->name('companies.index');
 // Public Info & Legal Routes
