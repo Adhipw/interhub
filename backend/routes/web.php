@@ -302,6 +302,7 @@ Route::middleware('auth')->group(function () {
         // Admin Routes
         Route::prefix('admin')->name('admin.')->middleware(['role:admin,super_admin'])->group(function () {
             Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+            Route::get('/security-guide', fn () => Inertia::render('Admin/SecurityGuide'))->name('security-guide');
 
             // User Moderation
             Route::get('/users', [UserController::class, 'index'])->name('users.index');
