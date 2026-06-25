@@ -16,9 +16,26 @@ const urlParams = new window.URLSearchParams(window.location.search);
 const langStore = useLangStore();
 const t = (key: string) => langStore.t(key);
 
+interface PaginationLink {
+    url: string | null;
+    label: string;
+    active: boolean;
+}
+
+interface Company {
+    id: number;
+    name: string;
+    slug: string;
+    logo_url?: string;
+    is_verified: boolean;
+    website?: string;
+    location?: string;
+    description?: string;
+}
+
 const props = defineProps<{
-    companies?: { data: Record<string, unknown>[]; links: Record<string, unknown>[]; meta: Record<string, unknown> };
-    filters?: Record<string, unknown>;
+    companies?: { data: Company[]; links: PaginationLink[]; meta: Record<string, unknown> };
+    filters?: Record<string, string>;
 }>();
 
 const loading = ref(false);
@@ -30,8 +47,8 @@ const companies = computed(() => props.companies || {
 });
 
 const filters = reactive({
-  search: props.filters?.search || urlParams.get('search') || '',
-  status: props.filters?.status || urlParams.get('status') || '',
+  search: (props.filters?.search as string) || urlParams.get('search') || '',
+  status: (props.filters?.status as string) || urlParams.get('status') || '',
   page: urlParams.get('page') || 1
 });
 

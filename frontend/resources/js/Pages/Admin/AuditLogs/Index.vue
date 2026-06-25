@@ -31,7 +31,7 @@ const urlParams = new window.URLSearchParams(window.location.search);
 
 const props = defineProps<{
     logs?: PaginatedResponse<AuditLog>;
-    filters?: Record<string, unknown>;
+    filters?: Record<string, string>;
 }>();
 
 const loading = ref(false);
@@ -53,8 +53,8 @@ const debounce = (fn: (...args: unknown[]) => void, ms: number) => {
 
 const fetchLogs = () => {
     inertiaRouter.get('/admin/audit-logs', {
-        search: search.value,
-        page: currentPage.value
+        search: search.value as string,
+        page: currentPage.value as string | number
     }, {
         preserveState: true,
         preserveScroll: true,

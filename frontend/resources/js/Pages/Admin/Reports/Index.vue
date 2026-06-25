@@ -160,7 +160,7 @@ onUnmounted(() => {
               </div>
             </div>
             <div class="space-y-4">
-              <div v-for="stat in companyStats" :key="stat.is_verified" class="space-y-2">
+              <div v-for="stat in companyStats" :key="String(stat.is_verified)" class="space-y-2">
                 <div class="flex justify-between text-xs font-bold uppercase tracking-widest">
                   <span class="text-slate-500">{{ stat.is_verified ? 'Terverifikasi' : 'Pending' }}</span>
                   <span class="text-slate-900 dark:text-white">{{ stat.total }}</span>
