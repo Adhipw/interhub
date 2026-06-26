@@ -42,35 +42,55 @@ const initMap = () => {
 
     const markers = L.featureGroup();
 
+    const groupedInternships: Record<string, Internship[]> = {};
+
     props.internships.forEach(internship => {
         if (internship.latitude && internship.longitude) {
-            // Add a tiny random jitter so overlapping markers are distinctly visible (~10-20 meters)
-            const jitterLat = (Math.random() - 0.5) * 0.0003;
-            const jitterLng = (Math.random() - 0.5) * 0.0003;
-            const lat = Number(internship.latitude) + jitterLat;
-            const lng = Number(internship.longitude) + jitterLng;
+            const key = `${internship.latitude},${internship.longitude}`;
+            if (!groupedInternships[key]) {
+                groupedInternships[key] = [];
+            }
+            groupedInternships[key].push(internship);
+        }
+    });
 
-            const popupContent = `
-                <div class="p-2 min-w-[200px]">
-                    <div class="text-xs font-bold text-primary-600 mb-1">${internship.type}</div>
-                    <h3 class="font-black text-sm text-slate-900 mb-1 line-clamp-1">${internship.title}</h3>
-                    <div class="flex items-center gap-1 text-slate-500 text-xs mb-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-building-2"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg>
-                        <span>${internship.company?.name}</span>
+    Object.values(groupedInternships).forEach(group => {
+        const first = group[0];
+        
+        let popupContent = `<div class="p-2 min-w-[200px] max-w-[280px] max-h-[300px] overflow-y-auto pr-2">`;
+        
+        if (group.length > 1) {
+            popupContent += `
+                <div class="text-[10px] font-black text-primary-600 bg-primary-50 px-2 py-1 rounded-md mb-3 border border-primary-100 inline-block uppercase tracking-wider">
+                    ${group.length} Lowongan di lokasi ini
+                </div>
+            `;
+        }
+        
+        group.forEach((internship, index) => {
+            popupContent += `
+                <div class="${index > 0 ? 'border-t border-slate-100 pt-3 mt-3' : ''}">
+                    <div class="text-[10px] font-bold text-slate-500 mb-0.5 uppercase tracking-wider">${internship.type}</div>
+                    <h3 class="font-black text-sm text-slate-900 mb-1 leading-tight">${internship.title}</h3>
+                    <div class="flex items-start gap-1.5 text-slate-500 text-xs mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-building-2 shrink-0 mt-0.5"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg>
+                        <span class="leading-tight">${internship.company?.name || 'Perusahaan'}</span>
                     </div>
-                    <a href="/internships/${internship.slug}" class="block w-full text-center bg-primary-600 text-white rounded-lg py-2 text-xs font-bold hover:bg-primary-700 transition-colors">
+                    <a href="/internships/${internship.slug}" class="block w-full text-center bg-slate-900 text-white rounded-lg py-2 text-xs font-bold hover:bg-primary-600 transition-colors shadow-sm">
                         Lihat Detail
                     </a>
                 </div>
             `;
+        });
+        
+        popupContent += `</div>`;
 
-            const marker = L.marker([lat, lng])
-                .bindPopup(popupContent, {
-                    className: 'custom-popup'
-                });
-            
-            markers.addLayer(marker);
-        }
+        const marker = L.marker([Number(first.latitude), Number(first.longitude)])
+            .bindPopup(popupContent, {
+                className: 'custom-popup'
+            });
+        
+        markers.addLayer(marker);
     });
 
     if (map && markers.getLayers().length > 0) {
