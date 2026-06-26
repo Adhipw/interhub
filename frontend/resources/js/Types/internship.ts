@@ -29,6 +29,8 @@ export interface Internship {
     created_at_human?: string;
     is_paid?: boolean;
     applications_count?: number;
+    latitude?: number;
+    longitude?: number;
 }
 
 export interface InternshipStats {
