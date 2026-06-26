@@ -187,6 +187,19 @@ const formatNumber = (num: number) => {
     return new Intl.NumberFormat(langStore.locale === 'id' ? 'id-ID' : 'en-US').format(num);
 };
 
+const vReveal = {
+    mounted: (el: HTMLElement) => {
+        el.classList.add('opacity-0', 'translate-y-8', 'transition-all', 'duration-1000', 'ease-out');
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                el.classList.remove('opacity-0', 'translate-y-8');
+                observer.unobserve(el);
+            }
+        }, { threshold: 0.1 });
+        setTimeout(() => observer.observe(el), 100);
+    }
+};
+
 // Categories static data but labels translated
 const categories = computed(() => [
     { id: 'tech', label: t('cat.technology'), desc: t('cat.technology_desc'), icon: 'laptop' },
@@ -216,15 +229,15 @@ const faqs = computed(() => [
         <section class="relative pt-16 pb-24 lg:pt-24 lg:pb-32 overflow-hidden transition-colors duration-500" :class="isDarkMode ? 'bg-slate-950' : 'bg-white'">
             <div class="absolute inset-0 -z-10 opacity-30" :class="isDarkMode ? 'bg-[radial-gradient(circle_at_top_right,rgba(37,99,235,0.1),transparent)]' : 'bg-[radial-gradient(circle_at_top_right,rgba(37,99,235,0.05),transparent)]'"></div>
             
-            <div class="max-w-5xl mx-auto px-6 text-center">
+            <div v-reveal class="max-w-5xl mx-auto px-6 text-center">
                 <!-- Badge -->
                 <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 transition-colors" :class="isDarkMode ? 'bg-blue-900/30 text-blue-400' : 'bg-blue-50 text-blue-600'">
                     <span class="flex h-2 w-2 rounded-full bg-blue-600 animate-pulse"></span>
-                    <span class="text-xs font-black uppercase tracking-widest">{{ t('hero.badge') }}</span>
+                    <span class="text-xs font-semibold text-xs tracking-wide">{{ t('hero.badge') }}</span>
                 </div>
 
                 <!-- Title & Subtitle -->
-                <h1 class="text-4xl lg:text-7xl font-black mb-8 leading-tight mx-auto max-w-4xl" :class="isDarkMode ? 'text-white' : 'text-slate-950'">
+                <h1 class="text-4xl lg:text-7xl font-bold mb-8 leading-tight mx-auto max-w-4xl" :class="isDarkMode ? 'text-white' : 'text-slate-950'">
                     {{ t('hero.title') }}
                 </h1>
                 
@@ -233,7 +246,7 @@ const faqs = computed(() => [
                 </p>
 
                 <!-- Professional Search Box (Centered) -->
-                <div class="p-2 rounded-[2.5rem] shadow-2xl border transition-all duration-300 group focus-within:ring-4 focus-within:ring-blue-600/10 mb-12 max-w-4xl mx-auto" :class="isDarkMode ? 'bg-slate-900 border-slate-800 shadow-slate-950' : 'bg-white border-slate-200 shadow-slate-200/50'">
+                <div class="p-2 rounded-2xl shadow-2xl border transition-all duration-300 group focus-within:ring-4 focus-within:ring-blue-600/10 mb-12 max-w-4xl mx-auto" :class="isDarkMode ? 'bg-slate-900 border-slate-800 shadow-slate-950' : 'bg-white border-slate-200 shadow-slate-200/50'">
                     <form class="flex flex-col md:flex-row items-center gap-2" @submit.prevent="submitSearch">
                         <div class="flex-1 w-full flex items-center gap-3 px-6 py-4 border-b md:border-b-0 md:border-r" :class="isDarkMode ? 'border-slate-800' : 'border-slate-100'">
                             <Icon name="search" class-name="w-5 h-5 text-blue-600" />
@@ -255,7 +268,7 @@ const faqs = computed(() => [
                                 :class="isDarkMode ? 'text-white' : 'text-slate-950'"
                             />
                         </div>
-                        <button type="submit" class="w-full md:w-auto bg-blue-600 text-white px-12 py-4 rounded-3xl font-black text-sm uppercase tracking-widest hover:bg-blue-700 hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-blue-600/20">
+                        <button type="submit" class="w-full md:w-auto bg-blue-600 text-white px-12 py-4 rounded-3xl font-bold text-sm uppercase tracking-widest hover:bg-blue-700 hover:scale-[1.02] active:scale-95 transition-all shadow-sm hover:shadow-md">
                             {{ t('hero.btn_search') }}
                         </button>
                     </form>
@@ -263,7 +276,7 @@ const faqs = computed(() => [
 
                 <!-- Quick Chips (Centered) -->
                 <div class="flex flex-wrap items-center justify-center gap-3 mb-16">
-                    <span class="text-[10px] font-black uppercase tracking-[0.2em] mr-2" :class="isDarkMode ? 'text-slate-500' : 'text-slate-400'">{{ t('hero.popular') }}:</span>
+                    <span class="text-[10px] font-semibold text-sm mr-2" :class="isDarkMode ? 'text-slate-500' : 'text-slate-400'">{{ t('hero.popular') }}:</span>
                     <button v-for="tag in ['Remote', 'Jakarta', 'UI/UX', 'Frontend', 'Data', 'Marketing']" :key="tag" class="px-5 py-2 rounded-full text-xs font-bold transition-all border" :class="isDarkMode ? 'bg-slate-900 border-slate-800 text-slate-400 hover:border-blue-600 hover:text-blue-500' : 'bg-slate-50 border-slate-200 text-slate-600 hover:border-blue-600 hover:text-blue-600'" @click="searchQuery = tag; submitSearch()">
                         {{ tag }}
                     </button>
@@ -275,7 +288,7 @@ const faqs = computed(() => [
                         <div class="w-8 h-8 rounded-full flex items-center justify-center bg-emerald-500/10 border border-emerald-500/20">
                             <Icon name="check" class-name="w-4 h-4 text-emerald-500" />
                         </div>
-                        <span class="text-[10px] font-black uppercase tracking-widest" :class="isDarkMode ? 'text-slate-400' : 'text-slate-500'">{{ t('hero.' + point) }}</span>
+                        <span class="text-[10px] font-semibold text-xs tracking-wide" :class="isDarkMode ? 'text-slate-400' : 'text-slate-500'">{{ t('hero.' + point) }}</span>
                     </div>
                 </div>
             </div>
@@ -299,8 +312,8 @@ v-for="item in [
                             <Icon :name="item.icon" class-name="w-6 h-6" />
                         </div>
                         <div>
-                            <div class="text-2xl font-black leading-none mb-1">{{ formatNumber(item.val) }}</div>
-                            <div class="text-[10px] font-black uppercase tracking-widest" :class="isDarkMode ? 'text-slate-500' : 'text-slate-400'">{{ item.label }}</div>
+                            <div class="text-2xl font-bold leading-none mb-1">{{ formatNumber(item.val) }}</div>
+                            <div class="text-[10px] font-semibold text-xs tracking-wide" :class="isDarkMode ? 'text-slate-500' : 'text-slate-400'">{{ item.label }}</div>
                         </div>
                     </div>
                 </div>
@@ -314,11 +327,11 @@ v-for="item in [
         <section class="py-24 lg:py-32 transition-colors duration-300" :class="isDarkMode ? 'bg-slate-950' : 'bg-white'">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-16">
-                    <div class="max-w-2xl text-center md:text-left">
-                        <h2 class="text-3xl lg:text-5xl font-black mb-4 tracking-tight" :class="isDarkMode ? 'text-white' : 'text-slate-950'">{{ t('jobs.title') }}</h2>
+                    <div v-reveal class="max-w-2xl text-center md:text-left">
+                        <h2 class="text-3xl lg:text-5xl font-bold mb-4 tracking-tight" :class="isDarkMode ? 'text-white' : 'text-slate-950'">{{ t('jobs.title') }}</h2>
                         <p class="text-lg font-medium" :class="isDarkMode ? 'text-slate-400' : 'text-slate-600'">{{ t('jobs.subtitle') }}</p>
                     </div>
-                    <Link :href="route('internships.index')" class="group flex items-center justify-center md:justify-start gap-3 px-8 py-4 rounded-3xl font-black text-xs uppercase tracking-widest transition-all shadow-xl hover:scale-105 active:scale-95" :class="isDarkMode ? 'bg-slate-900 text-blue-400 shadow-slate-950' : 'bg-blue-600 text-white shadow-blue-600/20'">
+                    <Link :href="route('internships.index')" class="group flex items-center justify-center md:justify-start gap-3 px-8 py-4 rounded-3xl font-bold text-xs uppercase tracking-widest transition-all shadow-xl hover:scale-105 active:scale-95" :class="isDarkMode ? 'bg-slate-900 text-blue-400 shadow-slate-950' : 'bg-blue-600 text-white shadow-blue-600/20'">
                         {{ t('jobs.btn_all') }}
                         <Icon name="chevron" class-name="w-4 h-4 transition-transform group-hover:translate-x-1" />
                     </Link>
@@ -326,21 +339,21 @@ v-for="item in [
 
                 <!-- Grid Lowongan -->
                 <div v-if="loading.jobs" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div v-for="i in 6" :key="i" class="h-[400px] rounded-[2.5rem] animate-pulse" :class="isDarkMode ? 'bg-slate-900' : 'bg-slate-100'"></div>
+                    <div v-for="i in 6" :key="i" class="h-[400px] rounded-2xl animate-pulse" :class="isDarkMode ? 'bg-slate-900' : 'bg-slate-100'"></div>
                 </div>
                 
-                <div v-else-if="featuredInternships.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div v-for="job in featuredInternships" :key="job.id" class="group relative p-6 md:p-8 rounded-[2.5rem] border transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 flex flex-col" :class="isDarkMode ? 'bg-slate-900 border-slate-800 hover:border-blue-900 shadow-slate-950' : 'bg-white border-slate-200 hover:border-blue-100 shadow-slate-100'">
+                <div v-reveal v-else-if="featuredInternships.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div v-for="job in featuredInternships" :key="job.id" class="group relative p-6 md:p-8 rounded-2xl border transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 flex flex-col" :class="isDarkMode ? 'bg-slate-900 border-slate-800 hover:border-blue-900 shadow-slate-950' : 'bg-white border-slate-200 hover:border-blue-100 shadow-slate-100'">
                         <div class="flex items-start justify-between mb-8">
-                             <div class="w-14 h-14 rounded-2xl flex items-center justify-center border font-black text-xl overflow-hidden shadow-sm" :class="isDarkMode ? 'bg-slate-800 border-slate-700 text-blue-500' : 'bg-blue-50 border-blue-50 text-blue-600'">
+                             <div class="w-14 h-14 rounded-2xl flex items-center justify-center border font-bold text-xl overflow-hidden shadow-sm" :class="isDarkMode ? 'bg-slate-800 border-slate-700 text-blue-500' : 'bg-blue-50 border-blue-50 text-blue-600'">
                                 <img v-if="job.company?.logo_url" loading="lazy" decoding="async" :src="job.company.logo_url" class="w-full h-full object-cover p-2" />
                                 <span v-else>{{ job.company?.name?.charAt(0) }}</span>
                             </div>
-                            <span class="px-3 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest" :class="isDarkMode ? 'bg-blue-900/40 text-blue-400' : 'bg-blue-50 text-blue-600'">{{ job.working_type || job.type }}</span>
+                            <span class="px-3 py-1.5 rounded-full text-[9px] font-semibold text-xs tracking-wide" :class="isDarkMode ? 'bg-blue-900/40 text-blue-400' : 'bg-blue-50 text-blue-600'">{{ job.working_type || job.type }}</span>
                         </div>
 
                         <Link :href="route('internships.show', { slug: job.slug })" class="block mb-2 group-hover:text-blue-600 transition-colors">
-                            <h3 class="text-xl font-black tracking-tight line-clamp-1" :class="isDarkMode ? 'text-white' : 'text-slate-950'">{{ job.title }}</h3>
+                            <h3 class="text-xl font-bold tracking-tight line-clamp-1" :class="isDarkMode ? 'text-white' : 'text-slate-950'">{{ job.title }}</h3>
                         </Link>
                         
                         <div class="flex items-center gap-2 mb-6">
@@ -361,8 +374,8 @@ v-for="item in [
 
                         <div class="pt-6 border-t flex items-center justify-between mt-auto" :class="isDarkMode ? 'border-slate-800' : 'border-slate-100'">
                             <div class="flex flex-col">
-                                <span class="text-[9px] font-black uppercase tracking-widest text-slate-500 mb-1">{{ t('job.stipend') }}</span>
-                                <span class="text-base font-black" :class="isDarkMode ? 'text-blue-400' : 'text-blue-600'">{{ job.stipend || t('job.stipend_default') }}</span>
+                                <span class="text-[9px] font-semibold text-xs tracking-wide text-slate-500 mb-1">{{ t('job.stipend') }}</span>
+                                <span class="text-base font-bold" :class="isDarkMode ? 'text-blue-400' : 'text-blue-600'">{{ job.stipend || t('job.stipend_default') }}</span>
                             </div>
                             <Link :href="route('internships.show', { slug: job.slug })" class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center transition-all hover:scale-110 active:scale-95 shadow-lg shadow-blue-600/20">
                                 <Icon name="chevron" class-name="w-4 h-4" />
@@ -371,7 +384,7 @@ v-for="item in [
                     </div>
                 </div>
 
-                <div v-else class="text-center py-24 rounded-[3rem] border border-dashed" :class="isDarkMode ? 'bg-slate-900/30 border-slate-800 text-slate-500' : 'bg-slate-50 border-slate-200 text-slate-400'">
+                <div v-else class="text-center py-24 rounded-2xl border border-dashed" :class="isDarkMode ? 'bg-slate-900/30 border-slate-800 text-slate-500' : 'bg-slate-50 border-slate-200 text-slate-400'">
                     <Icon name="briefcase" class-name="w-12 h-12 mx-auto mb-6 opacity-20" />
                     <p class="font-bold text-lg">{{ t('jobs.empty') }}</p>
                 </div>
@@ -382,19 +395,19 @@ v-for="item in [
         <section class="py-24 transition-colors duration-300" :class="isDarkMode ? 'bg-slate-900 border-y border-slate-800' : 'bg-slate-50 border-y border-slate-100'">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="text-center mb-16">
-                    <h2 class="text-3xl lg:text-4xl font-black mb-4 tracking-tight" :class="isDarkMode ? 'text-white' : 'text-slate-950'">{{ t('categories.title') }}</h2>
+                    <h2 class="text-3xl lg:text-4xl font-bold mb-4 tracking-tight" :class="isDarkMode ? 'text-white' : 'text-slate-950'">{{ t('categories.title') }}</h2>
                     <p class="text-lg font-medium max-w-2xl mx-auto" :class="isDarkMode ? 'text-slate-400' : 'text-slate-600'">{{ t('categories.subtitle') }}</p>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <button v-for="cat in categories" :key="cat.id" class="p-8 rounded-[2.5rem] border transition-all duration-300 group text-left" :class="isDarkMode ? 'bg-slate-950 border-slate-800 hover:border-blue-900' : 'bg-white border-slate-200 hover:border-blue-200 hover:shadow-xl'" @click="searchQuery = cat.label; submitSearch()">
+                <div v-reveal class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <button v-for="cat in categories" :key="cat.id" class="p-8 rounded-2xl border transition-all duration-300 group text-left" :class="isDarkMode ? 'bg-slate-950 border-slate-800 hover:border-blue-900' : 'bg-white border-slate-200 hover:border-blue-200 hover:shadow-xl'" @click="searchQuery = cat.label; submitSearch()">
                         <div class="w-12 h-12 rounded-2xl flex items-center justify-center mb-6 transition-transform group-hover:scale-110 group-hover:rotate-6" :class="isDarkMode ? 'bg-slate-900 text-blue-500 shadow-inner shadow-slate-950' : 'bg-blue-50 text-blue-600 shadow-inner shadow-blue-100/50'">
                             <Icon :name="cat.icon" class-name="w-6 h-6" />
                         </div>
-                        <h3 class="text-lg font-black mb-1" :class="isDarkMode ? 'text-white' : 'text-slate-950'">{{ cat.label }}</h3>
+                        <h3 class="text-lg font-bold mb-1" :class="isDarkMode ? 'text-white' : 'text-slate-950'">{{ cat.label }}</h3>
                         <p class="text-xs font-bold mb-6" :class="isDarkMode ? 'text-slate-500' : 'text-slate-400'">{{ cat.desc }}</p>
                         <!-- Realtime count would go here if supported -->
-                        <div class="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-blue-600">
+                        <div class="flex items-center gap-2 text-[10px] font-semibold text-xs tracking-wide text-blue-600">
                             {{ t('cat.explore') }}
                             <Icon name="chevron" class-name="w-3 h-3" />
                         </div>
@@ -407,7 +420,7 @@ v-for="item in [
         <section class="py-24 transition-colors duration-300" :class="isDarkMode ? 'bg-slate-950' : 'bg-white'">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="text-center mb-16">
-                    <h2 class="text-3xl font-black mb-4 tracking-tight" :class="isDarkMode ? 'text-white' : 'text-slate-950'">{{ t('companies.title') }}</h2>
+                    <h2 class="text-3xl font-bold mb-4 tracking-tight" :class="isDarkMode ? 'text-white' : 'text-slate-950'">{{ t('companies.title') }}</h2>
                     <p class="text-lg font-medium max-w-2xl mx-auto" :class="isDarkMode ? 'text-slate-400' : 'text-slate-600'">{{ t('companies.subtitle') }}</p>
                 </div>
 
@@ -416,13 +429,13 @@ v-for="item in [
                 </div>
                 <div v-else-if="companiesRes.length > 0" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
                     <div v-for="comp in companiesRes" :key="comp.id" class="p-6 rounded-3xl border transition-all duration-300 flex flex-col items-center gap-4 group" :class="isDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-100 shadow-sm'">
-                        <div class="w-16 h-16 rounded-2xl flex items-center justify-center border font-black text-xl overflow-hidden grayscale group-hover:grayscale-0 transition-all group-hover:scale-110" :class="isDarkMode ? 'bg-slate-800 border-slate-700 text-blue-500' : 'bg-slate-50 border-slate-200 text-slate-400'">
+                        <div class="w-16 h-16 rounded-2xl flex items-center justify-center border font-bold text-xl overflow-hidden grayscale group-hover:grayscale-0 transition-all group-hover:scale-110" :class="isDarkMode ? 'bg-slate-800 border-slate-700 text-blue-500' : 'bg-slate-50 border-slate-200 text-slate-400'">
                             <img v-if="comp.logo_url" loading="lazy" decoding="async" :src="comp.logo_url" class="w-full h-full object-cover" />
                             <span v-else>{{ comp.name?.charAt(0) }}</span>
                         </div>
                         <div class="text-center">
-                            <p class="text-xs font-black line-clamp-1 mb-1" :class="isDarkMode ? 'text-white' : 'text-slate-950'">{{ comp.name }}</p>
-                            <div v-if="comp.is_verified" class="flex items-center justify-center gap-1 text-[8px] font-black uppercase tracking-widest text-emerald-600">
+                            <p class="text-xs font-bold line-clamp-1 mb-1" :class="isDarkMode ? 'text-white' : 'text-slate-950'">{{ comp.name }}</p>
+                            <div v-if="comp.is_verified" class="flex items-center justify-center gap-1 text-[8px] font-semibold text-xs tracking-wide text-emerald-600">
                                 <Icon name="shield" class-name="w-2.5 h-2.5" />
                                 Verified
                             </div>
@@ -438,7 +451,7 @@ v-for="item in [
         <!-- 6. Cara Melamar Magang -->
         <section class="py-24 border-y transition-colors duration-300" :class="isDarkMode ? 'bg-slate-950 border-slate-800' : 'bg-slate-50 border-slate-100'">
             <div class="max-w-7xl mx-auto px-6 text-center">
-                <h2 class="text-3xl lg:text-4xl font-black mb-16 tracking-tight" :class="isDarkMode ? 'text-white' : 'text-slate-950'">{{ t('steps.title') }}</h2>
+                <h2 class="text-3xl lg:text-4xl font-bold mb-16 tracking-tight" :class="isDarkMode ? 'text-white' : 'text-slate-950'">{{ t('steps.title') }}</h2>
                 
                 <div class="grid grid-cols-1 md:grid-cols-5 gap-4 relative">
                     <!-- Decor Line -->
@@ -446,9 +459,9 @@ v-for="item in [
                     
                     <div v-for="(step, i) in ['register', 'profile', 'find', 'apply', 'monitor']" :key="step" class="relative z-10 flex flex-col items-center">
                         <div class="w-24 h-24 rounded-full flex items-center justify-center border-4 mb-6 transition-all duration-500 hover:scale-110" :class="isDarkMode ? 'bg-slate-900 border-slate-800 text-blue-500' : 'bg-white border-white text-blue-600 shadow-xl'">
-                            <span class="text-3xl font-black">{{ i + 1 }}</span>
+                            <span class="text-3xl font-bold">{{ i + 1 }}</span>
                         </div>
-                        <h4 class="text-sm font-black uppercase tracking-widest mb-2" :class="isDarkMode ? 'text-white' : 'text-slate-950'">{{ t('steps.step' + (i+1) + '_title') }}</h4>
+                        <h4 class="text-sm font-semibold text-xs tracking-wide mb-2" :class="isDarkMode ? 'text-white' : 'text-slate-950'">{{ t('steps.step' + (i+1) + '_title') }}</h4>
                         <p class="text-xs font-medium leading-relaxed max-w-[160px]" :class="isDarkMode ? 'text-slate-500' : 'text-slate-500'">{{ t('steps.step' + (i+1) + '_desc') }}</p>
                     </div>
                 </div>
@@ -459,10 +472,10 @@ v-for="item in [
         <section class="py-24 transition-colors duration-300" :class="isDarkMode ? 'bg-slate-950' : 'bg-white'">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="text-center mb-16">
-                    <h2 class="text-3xl lg:text-4xl font-black mb-4 tracking-tight" :class="isDarkMode ? 'text-white' : 'text-slate-950'">{{ t('advantages.title') }}</h2>
+                    <h2 class="text-3xl lg:text-4xl font-bold mb-4 tracking-tight" :class="isDarkMode ? 'text-white' : 'text-slate-950'">{{ t('advantages.title') }}</h2>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div v-reveal class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div
 v-for="item in [
                         { icon: 'shield', title: t('advantages.v1_title'), desc: t('advantages.v1_desc') },
@@ -471,9 +484,9 @@ v-for="item in [
                         { icon: 'send', title: t('advantages.v4_title'), desc: t('advantages.v4_desc') },
                         { icon: 'sparkles', title: t('advantages.v5_title'), desc: t('advantages.v5_desc') },
                         { icon: 'users', title: t('advantages.v6_title'), desc: t('advantages.v6_desc') }
-                    ]" :key="item.title" class="p-8 rounded-[2.5rem] border transition-all" :class="isDarkMode ? 'bg-slate-900 border-slate-800 hover:border-blue-900' : 'bg-slate-50 border-slate-100 hover:border-blue-200 hover:bg-white hover:shadow-xl'">
+                    ]" :key="item.title" class="p-8 rounded-2xl border transition-all" :class="isDarkMode ? 'bg-slate-900 border-slate-800 hover:border-blue-900' : 'bg-slate-50 border-slate-100 hover:border-blue-200 hover:bg-white hover:shadow-xl'">
                         <Icon :name="item.icon" class-name="w-10 h-10 text-blue-600 mb-6" />
-                        <h3 class="text-lg font-black mb-3" :class="isDarkMode ? 'text-white' : 'text-slate-950'">{{ item.title }}</h3>
+                        <h3 class="text-lg font-bold mb-3" :class="isDarkMode ? 'text-white' : 'text-slate-950'">{{ item.title }}</h3>
                         <p class="text-sm font-medium leading-relaxed" :class="isDarkMode ? 'text-slate-400' : 'text-slate-500'">{{ item.desc }}</p>
                     </div>
                 </div>
@@ -483,25 +496,25 @@ v-for="item in [
         <!-- 8. Rekomendasi AI -->
         <section class="py-24 transition-colors duration-300" :class="isDarkMode ? 'bg-slate-950' : 'bg-white'">
             <div class="container mx-auto px-6">
-                <div class="max-w-4xl mx-auto rounded-[3.5rem] p-12 lg:p-20 border transition-all duration-500 relative overflow-hidden text-center" :class="isDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-slate-50 border-slate-100 shadow-sm'">
+                <div v-reveal class="max-w-4xl mx-auto rounded-2xl p-12 lg:p-20 border transition-all duration-500 relative overflow-hidden text-center" :class="isDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-slate-50 border-slate-100 shadow-sm'">
                     
                     <!-- Decorative Element -->
                     <div class="absolute -top-24 -left-24 w-64 h-64 bg-blue-600/5 rounded-full blur-3xl"></div>
                     <div class="absolute -bottom-24 -right-24 w-64 h-64 bg-blue-600/5 rounded-full blur-3xl"></div>
 
                     <div class="relative z-10">
-                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 font-black text-[10px] uppercase tracking-widest transition-colors" :class="isDarkMode ? 'bg-blue-500/10 text-blue-400' : 'bg-blue-600/10 text-blue-600'">
+                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 font-bold text-[10px] uppercase tracking-widest transition-colors" :class="isDarkMode ? 'bg-blue-500/10 text-blue-400' : 'bg-blue-600/10 text-blue-600'">
                             <Icon name="sparkles" class-name="w-4 h-4" />
                             {{ t('ai.badge') }}
                         </div>
                         
-                        <h2 class="text-3xl lg:text-5xl font-black mb-6 tracking-tight" :class="isDarkMode ? 'text-white' : 'text-slate-900'">{{ t('ai.title') }}</h2>
+                        <h2 class="text-3xl lg:text-5xl font-bold mb-6 tracking-tight" :class="isDarkMode ? 'text-white' : 'text-slate-900'">{{ t('ai.title') }}</h2>
                         
                         <p class="text-lg font-medium leading-relaxed mb-12 max-w-2xl mx-auto" :class="isDarkMode ? 'text-slate-400' : 'text-slate-500'">
                             {{ t('ai.subtitle') }}
                         </p>
                         
-                        <div class="max-w-2xl mx-auto p-4 rounded-[2.5rem] border transition-all duration-300 focus-within:shadow-2xl focus-within:scale-[1.02]" :class="isDarkMode ? 'bg-slate-950 border-slate-800 shadow-slate-950' : 'bg-white border-slate-200 shadow-xl shadow-slate-200/50'">
+                        <div class="max-w-2xl mx-auto p-4 rounded-2xl border transition-all duration-300 focus-within:shadow-2xl focus-within:scale-[1.02]" :class="isDarkMode ? 'bg-slate-950 border-slate-800 shadow-slate-950' : 'bg-white border-slate-200 shadow-xl shadow-slate-200/50'">
                             <textarea 
                                 v-model="aiPrompt"
                                 :placeholder="t('ai.placeholder')" 
@@ -512,13 +525,13 @@ v-for="item in [
                             ></textarea>
                             
                             <div class="flex items-center justify-between p-2">
-                                <div class="hidden sm:flex items-center gap-2 px-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                                <div class="hidden sm:flex items-center gap-2 px-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
                                     <div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
                                     AI Engine Active
                                 </div>
                                 <button 
                                     :disabled="aiLoading || !aiPrompt.trim()"
-                                    class="w-full sm:w-auto bg-blue-600 text-white px-10 py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-blue-700 transition-all flex items-center justify-center gap-3 shadow-lg shadow-blue-600/20 disabled:opacity-50 disabled:cursor-not-allowed"
+                                    class="w-full sm:w-auto bg-blue-600 text-white px-10 py-5 rounded-2xl font-bold text-xs uppercase tracking-widest hover:bg-blue-700 transition-all flex items-center justify-center gap-3 shadow-lg shadow-blue-600/20 disabled:opacity-50 disabled:cursor-not-allowed"
                                     @click="submitAiMatcher"
                                 >
                                     <Icon :name="aiLoading ? 'loader' : 'bot'" class-name="w-5 h-5" :class="aiLoading ? 'animate-spin' : ''" />
@@ -529,7 +542,7 @@ v-for="item in [
 
                         <!-- AI Example Prompt Chips -->
                         <div v-if="!aiHasSearched" class="max-w-2xl mx-auto mt-6 flex flex-wrap justify-center gap-2">
-                            <span class="text-[10px] font-black uppercase tracking-widest text-slate-400 w-full text-center mb-1">Contoh:</span>
+                            <span class="text-[10px] font-semibold text-xs tracking-wide text-slate-400 w-full text-center mb-1">Contoh:</span>
                             <button
                                 v-for="ex in aiExamples"
                                 :key="ex"
@@ -542,13 +555,13 @@ v-for="item in [
                         </div>
 
                         <!-- AI Loader State -->
-                        <div v-if="aiLoading" class="max-w-2xl mx-auto mt-12 p-8 rounded-[2.5rem] border animate-pulse text-center space-y-6" :class="isDarkMode ? 'bg-slate-950 border-slate-800' : 'bg-white border-slate-100 shadow-sm'">
+                        <div v-if="aiLoading" class="max-w-2xl mx-auto mt-12 p-8 rounded-2xl border animate-pulse text-center space-y-6" :class="isDarkMode ? 'bg-slate-950 border-slate-800' : 'bg-white border-slate-100 shadow-sm'">
                             <div class="flex flex-col items-center justify-center gap-4">
                                 <div class="w-16 h-16 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-600 animate-spin">
                                     <Icon name="sparkles" class-name="w-8 h-8" />
                                 </div>
                                 <div>
-                                    <h4 class="text-lg font-black" :class="isDarkMode ? 'text-white' : 'text-slate-900'">Gemini AI sedang bekerja</h4>
+                                    <h4 class="text-lg font-bold" :class="isDarkMode ? 'text-white' : 'text-slate-900'">Gemini AI sedang bekerja</h4>
                                     <p class="text-sm font-medium text-slate-400 dark:text-neutral-500 mt-1">Mencocokkan profil minat kamu dengan database magang kami...</p>
                                 </div>
                             </div>
@@ -561,24 +574,24 @@ v-for="item in [
 
                         <!-- AI Matching Results -->
                         <div v-if="!aiLoading && aiMatches.length > 0" class="max-w-2xl mx-auto mt-12 text-left space-y-6">
-                            <h3 class="text-xl font-black mb-6 flex items-center gap-3 px-4" :class="isDarkMode ? 'text-white' : 'text-slate-900'">
+                            <h3 class="text-xl font-bold mb-6 flex items-center gap-3 px-4" :class="isDarkMode ? 'text-white' : 'text-slate-900'">
                                 <Icon name="sparkles" class-name="w-6 h-6 text-blue-600" />
                                 Rekomendasi Magang Terbaik Untukmu
                             </h3>
                             
-                            <div v-for="match in aiMatches" :key="match.id" class="p-8 rounded-[2.5rem] border transition-all duration-300 hover:border-blue-500 flex flex-col md:flex-row items-start md:items-center justify-between gap-6" :class="isDarkMode ? 'bg-slate-950 border-slate-800' : 'bg-white border-slate-100 shadow-xl shadow-slate-100/30'">
+                            <div v-for="match in aiMatches" :key="match.id" class="p-8 rounded-2xl border transition-all duration-300 hover:border-blue-500 flex flex-col md:flex-row items-start md:items-center justify-between gap-6" :class="isDarkMode ? 'bg-slate-950 border-slate-800' : 'bg-white border-slate-100 shadow-sm'">
                                 <div class="flex-1 space-y-4">
                                     <div class="flex flex-wrap items-center gap-3">
-                                        <span class="px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest text-emerald-600 bg-emerald-500/10">
+                                        <span class="px-4 py-1.5 rounded-full text-xs font-semibold text-xs tracking-wide text-emerald-600 bg-emerald-500/10">
                                             Match: {{ match.match_score }}%
                                         </span>
-                                        <span class="px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest text-blue-600 bg-blue-500/10">
+                                        <span class="px-4 py-1.5 rounded-full text-xs font-semibold text-xs tracking-wide text-blue-600 bg-blue-500/10">
                                             {{ match.type }}
                                         </span>
                                     </div>
                                     
                                     <div>
-                                        <h4 class="text-lg font-black" :class="isDarkMode ? 'text-white' : 'text-slate-900'">
+                                        <h4 class="text-lg font-bold" :class="isDarkMode ? 'text-white' : 'text-slate-900'">
                                             {{ match.title }}
                                         </h4>
                                         <p class="text-sm font-bold text-blue-600 mt-1">
@@ -592,13 +605,13 @@ v-for="item in [
                                     
                                     <!-- AI Explanation Bubble -->
                                     <div class="p-5 rounded-2xl border text-sm font-semibold leading-relaxed" :class="isDarkMode ? 'bg-slate-900 border-slate-800 text-slate-300' : 'bg-slate-50 border-slate-100 text-slate-600'">
-                                        <span class="font-black text-blue-600 block mb-1">💡 Mengapa ini cocok?</span>
+                                        <span class="font-bold text-blue-600 block mb-1">💡 Mengapa ini cocok?</span>
                                         {{ match.explanation }}
                                     </div>
                                 </div>
                                 
                                 <button 
-                                    class="w-full md:w-auto shrink-0 bg-blue-600 text-white px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-blue-700 hover:scale-[1.02] active:scale-95 transition-all shadow-lg shadow-blue-600/15"
+                                    class="w-full md:w-auto shrink-0 bg-blue-600 text-white px-8 py-4 rounded-2xl font-bold text-xs uppercase tracking-widest hover:bg-blue-700 hover:scale-[1.02] active:scale-95 transition-all shadow-lg shadow-blue-600/15"
                                     @click="inertiaRouter.visit(`/internships/${match.slug}`)"
                                 >
                                     Lihat Detail
@@ -607,9 +620,9 @@ v-for="item in [
                         </div>
 
                         <!-- AI No Matches Found -->
-                        <div v-else-if="!aiLoading && aiHasSearched && aiMatches.length === 0" class="max-w-2xl mx-auto mt-12 p-10 rounded-[2.5rem] border text-center space-y-4" :class="isDarkMode ? 'bg-slate-950 border-slate-800' : 'bg-white border-slate-100 shadow-sm'">
+                        <div v-else-if="!aiLoading && aiHasSearched && aiMatches.length === 0" class="max-w-2xl mx-auto mt-12 p-10 rounded-2xl border text-center space-y-4" :class="isDarkMode ? 'bg-slate-950 border-slate-800' : 'bg-white border-slate-100 shadow-sm'">
                             <Icon name="bot" class-name="w-12 h-12 text-slate-400 mx-auto" />
-                            <h4 class="text-lg font-black" :class="isDarkMode ? 'text-white' : 'text-slate-900'">Tidak ada kecocokan yang ditemukan</h4>
+                            <h4 class="text-lg font-bold" :class="isDarkMode ? 'text-white' : 'text-slate-900'">Tidak ada kecocokan yang ditemukan</h4>
                             <p class="text-sm font-medium text-slate-400 dark:text-neutral-500 max-w-md mx-auto">Kami belum menemukan lowongan magang yang cocok dengan kriteria tersebut. Coba ketikkan keahlian atau minat yang berbeda!</p>
                         </div>
                     </div>
@@ -621,18 +634,18 @@ v-for="item in [
         <section v-if="testimonials.length > 0" class="py-24 lg:py-32 transition-colors duration-300" :class="isDarkMode ? 'bg-slate-950' : 'bg-white'">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="text-center mb-16">
-                    <h2 class="text-3xl lg:text-4xl font-black mb-4 tracking-tight" :class="isDarkMode ? 'text-white' : 'text-slate-950'">{{ t('testimonials.title') }}</h2>
+                    <h2 class="text-3xl lg:text-4xl font-bold mb-4 tracking-tight" :class="isDarkMode ? 'text-white' : 'text-slate-950'">{{ t('testimonials.title') }}</h2>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div v-for="t in testimonials" :key="t.name" class="p-10 rounded-[3rem] border transition-all" :class="isDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-slate-50 border-slate-100 hover:bg-white hover:shadow-xl'">
+                    <div v-for="t in testimonials" :key="t.name" class="p-10 rounded-2xl border transition-all" :class="isDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-slate-50 border-slate-100 hover:bg-white hover:shadow-xl'">
                         <div class="flex items-center gap-6 mb-8">
-                            <div class="w-16 h-16 rounded-2xl flex items-center justify-center font-black text-xl text-white shadow-xl bg-blue-600">
+                            <div class="w-16 h-16 rounded-2xl flex items-center justify-center font-bold text-xl text-white shadow-xl bg-blue-600">
                                 {{ t.initials }}
                             </div>
                             <div>
-                                <h4 class="text-lg font-black mb-1" :class="isDarkMode ? 'text-white' : 'text-slate-950'">{{ t.name }}</h4>
-                                <p class="text-[10px] font-black uppercase tracking-widest text-blue-600">{{ t.role }}</p>
+                                <h4 class="text-lg font-bold mb-1" :class="isDarkMode ? 'text-white' : 'text-slate-950'">{{ t.name }}</h4>
+                                <p class="text-[10px] font-semibold text-xs tracking-wide text-blue-600">{{ t.role }}</p>
                             </div>
                         </div>
                         <p class="text-lg font-medium italic leading-relaxed" :class="isDarkMode ? 'text-slate-400' : 'text-slate-600'">"{{ t.text }}"</p>
@@ -643,14 +656,14 @@ v-for="item in [
 
         <!-- 10. FAQ -->
         <section class="py-24 lg:py-32 transition-colors duration-300" :class="isDarkMode ? 'bg-slate-950 border-t border-slate-800' : 'bg-white border-t border-slate-100'">
-            <div class="max-w-4xl mx-auto px-6">
+            <div v-reveal class="max-w-4xl mx-auto px-6">
                 <div class="text-center mb-16">
-                    <h2 class="text-3xl lg:text-4xl font-black mb-4 tracking-tight" :class="isDarkMode ? 'text-white' : 'text-slate-950'">{{ t('faq.title') }}</h2>
+                    <h2 class="text-3xl lg:text-4xl font-bold mb-4 tracking-tight" :class="isDarkMode ? 'text-white' : 'text-slate-950'">{{ t('faq.title') }}</h2>
                 </div>
                 
                 <div class="space-y-4">
                     <details v-for="(f, i) in faqs" :key="i" class="group transition-all duration-300 rounded-[2rem] border overflow-hidden" :class="isDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200 open:shadow-xl'">
-                        <summary class="flex items-center justify-between p-8 cursor-pointer list-none font-black transition-colors" :class="isDarkMode ? 'text-white' : 'text-slate-950 group-open:text-blue-600'">
+                        <summary class="flex items-center justify-between p-8 cursor-pointer list-none font-bold transition-colors" :class="isDarkMode ? 'text-white' : 'text-slate-950 group-open:text-blue-600'">
                             <h4 class="text-lg">{{ f.q }}</h4>
                             <Icon name="chevron" class-name="w-5 h-5 transition-transform group-open:rotate-90 text-slate-500" />
                         </summary>
@@ -664,22 +677,22 @@ v-for="item in [
 
         <!-- 11. CTA Akhir -->
         <section class="py-24 lg:py-32 max-w-7xl mx-auto px-6">
-            <div class="rounded-[4rem] p-16 lg:p-24 text-center border transition-all duration-500 relative overflow-hidden" :class="isDarkMode ? 'bg-slate-900 border-slate-800 shadow-slate-950' : 'bg-white border-slate-100 shadow-2xl shadow-slate-200/50'">
+            <div v-reveal class="rounded-3xl p-16 lg:p-24 text-center border transition-all duration-500 relative overflow-hidden" :class="isDarkMode ? 'bg-slate-900 border-slate-800 shadow-slate-950' : 'bg-white border-slate-100 shadow-2xl shadow-slate-200/50'">
                 <!-- Abstract Decor -->
                 <div class="absolute -bottom-20 -left-20 w-80 h-80 bg-blue-600/5 rounded-full blur-[100px]"></div>
                 <div class="absolute -top-20 -right-20 w-80 h-80 bg-blue-600/5 rounded-full blur-[100px]"></div>
 
                 <div class="relative z-10">
-                    <h2 class="text-4xl lg:text-6xl font-black mb-8 tracking-tight leading-tight" :class="isDarkMode ? 'text-white' : 'text-slate-950'">{{ t('cta.title') }}</h2>
+                    <h2 class="text-4xl lg:text-6xl font-bold mb-8 tracking-tight leading-tight" :class="isDarkMode ? 'text-white' : 'text-slate-950'">{{ t('cta.title') }}</h2>
                     <p class="text-xl font-medium max-w-3xl mx-auto mb-16 leading-relaxed" :class="isDarkMode ? 'text-slate-400' : 'text-slate-600'">
                         {{ t('cta.subtitle') }}
                     </p>
                     
                     <div class="flex flex-col md:flex-row justify-center items-center gap-6 mb-20">
-                        <Link v-if="$page.props.feature_flags?.public_registration !== false" href="/register" class="w-full md:w-auto bg-blue-600 text-white px-16 py-6 rounded-full font-black text-lg uppercase tracking-[0.2em] hover:bg-blue-700 hover:scale-105 transition-all shadow-2xl shadow-blue-600/40">
+                        <Link v-if="$page.props.feature_flags?.public_registration !== false" href="/register" class="w-full md:w-auto bg-blue-600 text-white px-16 py-6 rounded-full font-bold text-lg uppercase tracking-[0.2em] hover:bg-blue-700 hover:scale-105 transition-all shadow-sm hover:shadow-md">
                             {{ t('cta.btn_register') }}
                         </Link>
-                        <Link href="/internships" class="w-full md:w-auto px-16 py-6 rounded-full font-black text-lg uppercase tracking-[0.2em] border-2 transition-all hover:bg-slate-50 dark:hover:bg-slate-800" :class="isDarkMode ? 'border-slate-800 text-white' : 'border-slate-200 text-slate-950'">
+                        <Link href="/internships" class="w-full md:w-auto px-16 py-6 rounded-full font-bold text-lg uppercase tracking-[0.2em] border-2 transition-all hover:bg-slate-50 dark:hover:bg-slate-800" :class="isDarkMode ? 'border-slate-800 text-white' : 'border-slate-200 text-slate-950'">
                             {{ t('cta.btn_jobs') }}
                         </Link>
                     </div>
@@ -687,7 +700,7 @@ v-for="item in [
                     <div class="flex flex-wrap justify-center gap-12 opacity-60">
                         <div v-for="point in ['free_students', 'verified_companies', 'transparent_status']" :key="point" class="flex items-center gap-3">
                             <Icon name="check" class-name="w-5 h-5 text-emerald-500" />
-                            <span class="text-xs font-black uppercase tracking-widest">{{ t('hero.' + point) }}</span>
+                            <span class="text-xs font-semibold text-xs tracking-wide">{{ t('hero.' + point) }}</span>
                         </div>
                     </div>
                 </div>
