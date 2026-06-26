@@ -15,10 +15,7 @@ const t = (key: string) => langStore.t(key);
 
 <template>
     <div class="min-h-screen bg-slate-50 dark:bg-neutral-950 flex flex-col items-center justify-center p-6 font-sans text-slate-900 dark:text-slate-100">
-        <div class="absolute inset-0 overflow-hidden pointer-events-none">
-            <div class="absolute -top-[10%] -left-[5%] w-[40%] h-[40%] bg-blue-500/5 rounded-full blur-2xl opacity-30"></div>
-            <div class="absolute -bottom-[10%] -right-[5%] w-[40%] h-[40%] bg-indigo-500/5 rounded-full blur-2xl opacity-30"></div>
-        </div>
+        <!-- Minimal clean background, no blobs -->
 
         <div class="w-full max-w-[480px] relative z-10">
             <div class="flex justify-center mb-6">
@@ -27,9 +24,9 @@ const t = (key: string) => langStore.t(key);
                 </Link>
             </div>
 
-            <div class="bg-white dark:bg-neutral-900 rounded-2xl p-6 md:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none border border-slate-100 dark:border-neutral-800">
+            <div class="bg-white dark:bg-neutral-900 rounded-xl p-6 md:p-8 shadow-sm border border-slate-200 dark:border-neutral-800">
                 <div class="mb-8 text-center lg:text-left">
-                    <h1 class="text-2xl font-extrabold text-slate-900 dark:text-white mb-2 tracking-tight">
+                    <h1 class="text-xl font-bold text-slate-900 dark:text-white mb-2 tracking-tight">
                         <slot name="title">{{ props.title }}</slot>
                     </h1>
                     <p class="text-slate-500 dark:text-neutral-400 text-sm font-medium leading-relaxed">
@@ -43,12 +40,12 @@ const t = (key: string) => langStore.t(key);
 
                 <div class="mt-8 pt-6 border-t border-slate-50 dark:border-neutral-800 flex items-center justify-center gap-2 text-slate-300 dark:text-neutral-600">
                     <ShieldCheck class="w-4 h-4" />
-                    <span class="text-[10px] font-bold uppercase tracking-[0.1em]">{{ t('auth.secure_connection') }}</span>
+                    <span class="text-xs font-semibold">{{ t('auth.secure_connection') }}</span>
                 </div>
             </div>
 
             <footer class="mt-8 flex flex-col items-center gap-4">
-                <div class="flex items-center gap-6 text-xs font-bold text-slate-400 dark:text-neutral-500 uppercase tracking-widest">
+                <div class="flex items-center gap-6 text-sm font-medium text-slate-500 dark:text-neutral-500">
                     <Link href="/help" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">{{ t('nav.help') }}</Link>
                     <span class="w-1 h-1 bg-slate-200 dark:bg-neutral-800 rounded-full"></span>
                     <Link href="/privacy" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">{{ t('info.privacy') }}</Link>

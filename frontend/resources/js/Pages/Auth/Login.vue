@@ -91,7 +91,7 @@ const submit = async () => {
         <template #subtitle>
             <div v-if="requestedRole" class="flex items-center gap-2 mb-2">
                 <span class="w-1.5 h-1.5 rounded-full bg-blue-600 "></span>
-                <span class="text-[10px] font-bold tracking-widest text-blue-600 uppercase">
+                <span class="text-xs font-semibold text-blue-600">
                     {{ t('auth.portal_access') }} {{ roleLabel }}
                 </span>
             </div>
@@ -136,7 +136,7 @@ const submit = async () => {
                         type="checkbox"
                         class="h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500/20"
                     />
-                    <span class="text-sm font-semibold text-slate-600 group-hover:text-slate-900 transition-colors uppercase tracking-wider">{{ t('auth.remember_me') }}</span>
+                    <span class="text-sm font-medium text-slate-600 group-hover:text-slate-900 transition-colors">{{ t('auth.remember_me') }}</span>
                 </label>
                 <Link href="/forgot-password" class="text-sm font-bold text-blue-600 hover:text-blue-700 p-2 -mr-2 transition-all">
                     {{ t('auth.forgot_password') }}
@@ -146,7 +146,7 @@ const submit = async () => {
             <div class="pt-1">
                 <Captcha ref="captchaRef" v-model="captchaToken" />
             </div>
-            <div v-if="errors.captcha" class="text-center text-xs font-bold text-red-500 mb-2 uppercase tracking-widest">
+            <div v-if="errors.captcha" class="text-center text-xs font-semibold text-red-500 mb-2">
                 {{ errors.captcha }}
             </div>
 
