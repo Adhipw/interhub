@@ -43,6 +43,29 @@ class SearchService
             $query->where('is_paid', filter_var($dto->isPaid, FILTER_VALIDATE_BOOLEAN));
         }
 
+        if ($dto->lat !== null && $dto->lng !== null && $dto->radius !== null) {
+            $lat = (float) $dto->lat;
+            $lng = (float) $dto->lng;
+            $radius = (int) $dto->radius;
+
+            // Haversine formula
+            $query->whereNotNull('latitude')
+                  ->whereNotNull('longitude')
+                  ->select('internships.*')
+                  ->selectRaw('( 6371 * acos( cos( radians(?) ) *
+                           cos( radians( latitude ) )
+                           * cos( radians( longitude ) - radians(?)
+                           ) + sin( radians(?) ) *
+                           sin( radians( latitude ) ) )
+                         ) AS distance', [$lat, $lng, $lat])
+                  ->whereRaw('( 6371 * acos( cos( radians(?) ) *
+                           cos( radians( latitude ) )
+                           * cos( radians( longitude ) - radians(?)
+                           ) + sin( radians(?) ) *
+                           sin( radians( latitude ) ) )
+                         ) <= ?', [$lat, $lng, $lat, $radius]);
+        }
+
         match ($dto->sort) {
             'oldest' => $query->orderBy('created_at', 'asc'),
             'deadline' => $query->orderBy('deadline_at', 'asc'),

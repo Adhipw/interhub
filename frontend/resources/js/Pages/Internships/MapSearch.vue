@@ -5,6 +5,7 @@ import { useLangStore } from '@/Stores/lang';
 import { ArrowLeft, MapPin, Building2, ExternalLink, Compass } from 'lucide-vue-next';
 import { Link, router as inertiaRouter } from '@inertiajs/vue3';
 import type { Internship } from '@/Types/internship';
+import { Loader2 } from 'lucide-vue-next';
 
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
@@ -27,6 +28,23 @@ const t = (key: string) => langStore.t(key);
 const mapContainer = ref<HTMLElement | null>(null);
 let map: L.Map | null = null;
 const isLoadingLocation = ref(false);
+const userLat = ref<number | null>(null);
+const userLng = ref<number | null>(null);
+const radiusKm = ref(5);
+let markersLayer: L.FeatureGroup | null = null;
+let userMarker: L.Circle | null = null;
+
+const getDistanceFromLatLonInKm = (lat1: number, lon1: number, lat2: number, lon2: number) => {
+    const R = 6371; // Radius of the earth in km
+    const dLat = (lat2 - lat1) * (Math.PI / 180);
+    const dLon = (lon2 - lon1) * (Math.PI / 180);
+    const a = 
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) * 
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)); 
+    return R * c;
+};
 
 const initMap = () => {
     if (!mapContainer.value) return;
@@ -40,17 +58,37 @@ const initMap = () => {
         maxZoom: 20
     }).addTo(map);
 
-    const markers = L.featureGroup();
+    markersLayer = L.featureGroup();
+
+    renderMarkers();
+
+    if (map && markersLayer.getLayers().length > 0) {
+        map.addLayer(markersLayer);
+        map.fitBounds(markersLayer.getBounds(), { padding: [50, 50] });
+    }
+};
+
+const renderMarkers = () => {
+    if (!map || !markersLayer) return;
+    
+    markersLayer.clearLayers();
 
     const groupedInternships: Record<string, Internship[]> = {};
 
     props.internships.forEach(internship => {
         if (internship.latitude && internship.longitude) {
-            const key = `${internship.latitude},${internship.longitude}`;
-            if (!groupedInternships[key]) {
-                groupedInternships[key] = [];
+            let add = true;
+            if (userLat.value !== null && userLng.value !== null) {
+                const dist = getDistanceFromLatLonInKm(userLat.value, userLng.value, Number(internship.latitude), Number(internship.longitude));
+                if (dist > radiusKm.value) add = false;
             }
-            groupedInternships[key].push(internship);
+            if (add) {
+                const key = `${internship.latitude},${internship.longitude}`;
+                if (!groupedInternships[key]) {
+                    groupedInternships[key] = [];
+                }
+                groupedInternships[key].push(internship);
+            }
         }
     });
 
@@ -105,13 +143,8 @@ const initMap = () => {
                 className: 'custom-popup'
             });
         
-        markers.addLayer(marker);
+        markersLayer!.addLayer(marker);
     });
-
-    if (map && markers.getLayers().length > 0) {
-        map.addLayer(markers);
-        map.fitBounds(markers.getBounds(), { padding: [50, 50] });
-    }
 };
 
 const locateMe = () => {
@@ -122,17 +155,29 @@ const locateMe = () => {
     
     map.on('locationfound', (e) => {
         isLoadingLocation.value = false;
-        L.circle(e.latlng, e.accuracy / 2, {
+        userLat.value = e.latlng.lat;
+        userLng.value = e.latlng.lng;
+        
+        if (userMarker) {
+            map!.removeLayer(userMarker);
+        }
+        userMarker = L.circle(e.latlng, e.accuracy / 2, {
             color: '#0ea5e9',
             fillColor: '#0ea5e9',
             fillOpacity: 0.15
         }).addTo(map!);
+        
+        renderMarkers();
     });
 
     map.on('locationerror', (e) => {
         isLoadingLocation.value = false;
         alert("Gagal mendeteksi lokasi. Pastikan GPS aktif dan Anda memberikan izin lokasi pada browser.");
     });
+};
+
+const handleRadiusChange = () => {
+    renderMarkers();
 };
 
 onMounted(() => {
@@ -161,14 +206,27 @@ onUnmounted(() => {
                         <p class="text-xs text-slate-500 font-bold mt-1">Temukan peluang terbaik di sekitar Anda</p>
                     </div>
                 </div>
-                
-                <button 
-                    @click="locateMe"
-                    class="flex items-center gap-2 bg-primary-600 text-white px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-primary-700 transition-colors shadow-lg shadow-primary-600/20 active:scale-95"
-                >
-                    <Compass class="w-4 h-4" :class="{ 'animate-spin': isLoadingLocation }" />
-                    <span class="hidden md:inline">{{ isLoadingLocation ? 'Mencari...' : 'Lokasi Saya' }}</span>
-                </button>
+                <div class="flex items-center gap-4">
+                    <div v-if="userLat !== null" class="hidden md:flex items-center gap-3 bg-neutral-100 dark:bg-neutral-800 px-4 py-2 rounded-xl">
+                        <span class="text-xs font-bold text-neutral-500">Radius: {{ radiusKm }} KM</span>
+                        <input 
+                            type="range" 
+                            v-model="radiusKm" 
+                            min="1" 
+                            max="50" 
+                            class="w-32 accent-primary-600"
+                            @change="handleRadiusChange"
+                        />
+                    </div>
+                    <button 
+                        @click="locateMe"
+                        class="flex items-center gap-2 bg-primary-600 text-white px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-primary-700 transition-colors shadow-lg shadow-primary-600/20 active:scale-95"
+                    >
+                        <Loader2 v-if="isLoadingLocation" class="w-4 h-4 animate-spin" />
+                        <Compass v-else class="w-4 h-4" />
+                        <span class="hidden md:inline">{{ isLoadingLocation ? 'Mencari...' : 'Lokasi Saya' }}</span>
+                    </button>
+                </div>
             </div>
 
             <!-- Map Container -->

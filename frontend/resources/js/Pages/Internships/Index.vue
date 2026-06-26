@@ -4,7 +4,8 @@ import { router as inertiaRouter } from '@inertiajs/vue3';
 import PublicLayout from '@/Layouts/PublicLayout.vue';
 import { 
     Search, MapPin, Briefcase, Building2, Filter, 
-    ChevronRight, ArrowRight, X, Clock, DollarSign
+    ChevronRight, ArrowRight, X, Clock, DollarSign,
+    Navigation, Loader2
 } from 'lucide-vue-next';
 import { useLangStore } from '@/Stores/lang';
 import Card from '@/Components/Card.vue';
@@ -48,8 +49,41 @@ const filters = ref({
     location: String(urlParams.get('location') || ''),
     type: String(urlParams.get('type') || ''),
     is_paid: String(urlParams.get('is_paid') || ''),
-    sort: String(urlParams.get('sort') || 'latest')
+    sort: String(urlParams.get('sort') || 'latest'),
+    lat: urlParams.get('lat') || '',
+    lng: urlParams.get('lng') || '',
+    radius: urlParams.get('radius') || '5',
 });
+
+const isLocating = ref(false);
+const locationError = ref('');
+
+const getUserLocation = () => {
+    isLocating.value = true;
+    locationError.value = '';
+    
+    if (!navigator.geolocation) {
+        locationError.value = 'Browser Anda tidak mendukung deteksi lokasi.';
+        isLocating.value = false;
+        return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+        (position) => {
+            filters.value.lat = position.coords.latitude.toString();
+            filters.value.lng = position.coords.longitude.toString();
+            if (!filters.value.radius) filters.value.radius = '5';
+            isLocating.value = false;
+            applyFilters();
+        },
+        (error) => {
+            console.error('Error getting location:', error);
+            locationError.value = 'Gagal mendeteksi lokasi. Pastikan izin GPS aktif.';
+            isLocating.value = false;
+        },
+        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+    );
+};
 
 const types = computed(() => [
     { label: t('filters.type_all'), value: '' },
@@ -74,7 +108,7 @@ const applyFilters = () => {
 };
 
 const clearFilters = () => {
-    filters.value = { q: '', location: '', type: '', is_paid: '', sort: 'latest' };
+    filters.value = { q: '', location: '', type: '', is_paid: '', sort: 'latest', lat: '', lng: '', radius: '5' };
     applyFilters();
 };
 
@@ -116,6 +150,38 @@ if (props.filters) {
                                 <div>
                                     <label class="block text-[10px] font-black uppercase tracking-widest text-neutral-400 mb-4">{{ t('filters.location_label') }}</label>
                                     <Input v-model="filters.location" :placeholder="t('filters.location_placeholder')" @keyup.enter="applyFilters" />
+                                </div>
+
+                                <div class="p-5 bg-neutral-50 dark:bg-neutral-950/50 rounded-2xl border border-neutral-100 dark:border-neutral-800">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <label class="block text-[10px] font-black uppercase tracking-widest text-primary-600">Radius Kampus/Kos</label>
+                                        <span v-if="filters.lat" class="text-xs font-bold text-emerald-500 flex items-center gap-1">
+                                            <div class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></div> Aktif
+                                        </span>
+                                    </div>
+                                    <p class="text-[11px] font-medium text-neutral-500 dark:text-neutral-400 mb-4 leading-relaxed">Cari lowongan terdekat dari lokasi fisik Anda (Radius: {{ filters.radius }} KM)</p>
+                                    
+                                    <div v-if="filters.lat" class="space-y-4">
+                                        <input 
+                                            type="range" 
+                                            v-model="filters.radius" 
+                                            min="1" 
+                                            max="50" 
+                                            class="w-full accent-primary-600"
+                                            @change="applyFilters"
+                                        />
+                                        <Button variant="outline" class="w-full text-xs" size="sm" @click="() => { filters.lat = ''; filters.lng = ''; applyFilters(); }">
+                                            Hapus Lokasi
+                                        </Button>
+                                    </div>
+                                    <div v-else>
+                                        <Button class="w-full text-xs flex items-center justify-center gap-2" variant="secondary" size="sm" @click="getUserLocation" :disabled="isLocating">
+                                            <Loader2 v-if="isLocating" class="w-4 h-4 animate-spin" />
+                                            <Navigation v-else class="w-4 h-4" />
+                                            Gunakan Lokasi Saya
+                                        </Button>
+                                        <p v-if="locationError" class="text-[10px] text-rose-500 mt-2 font-medium">{{ locationError }}</p>
+                                    </div>
                                 </div>
 
                                 <div>
@@ -192,6 +258,10 @@ if (props.filters) {
                                             <div class="flex items-center gap-2">
                                                 <MapPin class="w-4 h-4" />
                                                 {{ internship.location }}
+                                            </div>
+                                            <div v-if="internship.distance !== undefined" class="flex items-center gap-2 text-primary-600 bg-primary-50 dark:bg-primary-900/20 px-2 py-1 rounded-lg border border-primary-100 dark:border-primary-800/30">
+                                                <Navigation class="w-3.5 h-3.5" />
+                                                <span class="text-xs">{{ Number(internship.distance).toFixed(1) }} km</span>
                                             </div>
                                             <div class="flex items-center gap-2 text-rose-500 bg-rose-50 dark:bg-rose-900/10 px-3 py-1 rounded-lg border border-rose-100 dark:border-rose-900/20">
                                                 <Clock class="w-3.5 h-3.5" />

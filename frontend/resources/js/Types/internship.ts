@@ -31,6 +31,7 @@ export interface Internship {
     applications_count?: number;
     latitude?: number;
     longitude?: number;
+    distance?: number | string;
 }
 
 export interface InternshipStats {

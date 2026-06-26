@@ -12,7 +12,10 @@ class SearchInternshipDTO
         public readonly ?string $type = null,
         public readonly ?string $isPaid = null,
         public readonly ?string $sort = 'latest',
-        public readonly int $perPage = 12
+        public readonly int $perPage = 12,
+        public readonly ?float $lat = null,
+        public readonly ?float $lng = null,
+        public readonly ?int $radius = null
     ) {}
 
     public static function fromRequest(Request $request): self
@@ -23,7 +26,10 @@ class SearchInternshipDTO
             type: $request->input('type'),
             isPaid: $request->input('is_paid'),
             sort: $request->input('sort', 'latest'),
-            perPage: (int) $request->input('per_page', 12)
+            perPage: (int) $request->input('per_page', 12),
+            lat: $request->has('lat') ? (float) $request->input('lat') : null,
+            lng: $request->has('lng') ? (float) $request->input('lng') : null,
+            radius: $request->has('radius') ? (int) $request->input('radius') : null
         );
     }
 
@@ -35,6 +41,9 @@ class SearchInternshipDTO
             'type' => $this->type,
             'is_paid' => $this->isPaid,
             'sort' => $this->sort,
-        ]);
+            'lat' => $this->lat,
+            'lng' => $this->lng,
+            'radius' => $this->radius,
+        ], fn($value) => !is_null($value) && $value !== '');
     }
 }
