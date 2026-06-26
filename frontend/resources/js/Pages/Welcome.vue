@@ -296,7 +296,7 @@ const faqs = computed(() => [
 
         <!-- 2. Trust/Statistic Strip -->
         <section class="py-12 border-y transition-colors duration-300" :class="isDarkMode ? 'bg-slate-950 border-slate-800' : 'bg-slate-50 border-slate-100'">
-            <div class="max-w-7xl mx-auto px-6">
+            <div v-reveal class="max-w-7xl mx-auto px-6">
                 <div v-if="loading.stats" class="grid grid-cols-2 lg:grid-cols-4 gap-8">
                     <div v-for="i in 4" :key="i" class="h-16 rounded-2xl " :class="isDarkMode ? 'bg-slate-900' : 'bg-white'"></div>
                 </div>
@@ -418,7 +418,7 @@ v-for="item in [
 
         <!-- 5. Perusahaan Terverifikasi -->
         <section class="py-24 transition-colors duration-300" :class="isDarkMode ? 'bg-slate-950' : 'bg-white'">
-            <div class="max-w-7xl mx-auto px-6">
+            <div v-reveal class="max-w-7xl mx-auto px-6">
                 <div class="text-center mb-16">
                     <h2 class="text-3xl font-bold mb-4 tracking-tight" :class="isDarkMode ? 'text-white' : 'text-slate-950'">{{ t('companies.title') }}</h2>
                     <p class="text-lg font-medium max-w-2xl mx-auto" :class="isDarkMode ? 'text-slate-400' : 'text-slate-600'">{{ t('companies.subtitle') }}</p>
@@ -450,7 +450,7 @@ v-for="item in [
 
         <!-- 6. Cara Melamar Magang -->
         <section class="py-24 border-y transition-colors duration-300" :class="isDarkMode ? 'bg-slate-950 border-slate-800' : 'bg-slate-50 border-slate-100'">
-            <div class="max-w-7xl mx-auto px-6 text-center">
+            <div v-reveal class="max-w-7xl mx-auto px-6 text-center">
                 <h2 class="text-3xl lg:text-4xl font-bold mb-16 tracking-tight" :class="isDarkMode ? 'text-white' : 'text-slate-950'">{{ t('steps.title') }}</h2>
                 
                 <div class="grid grid-cols-1 md:grid-cols-5 gap-4 relative">
@@ -632,7 +632,7 @@ v-for="item in [
 
         <!-- 9. Testimoni -->
         <section v-if="testimonials.length > 0" class="py-24 lg:py-32 transition-colors duration-300" :class="isDarkMode ? 'bg-slate-950' : 'bg-white'">
-            <div class="max-w-7xl mx-auto px-6">
+            <div v-reveal class="max-w-7xl mx-auto px-6">
                 <div class="text-center mb-16">
                     <h2 class="text-3xl lg:text-4xl font-bold mb-4 tracking-tight" :class="isDarkMode ? 'text-white' : 'text-slate-950'">{{ t('testimonials.title') }}</h2>
                 </div>
