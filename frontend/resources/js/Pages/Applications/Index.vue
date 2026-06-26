@@ -99,14 +99,16 @@ const getAppsByStatus = (statusGroup: string) => {
 
                 <!-- List View -->
                 <div v-if="viewMode === 'list'" class="space-y-4">
-                    <div v-for="app in normalizedApplications.data" :key="app.id" class="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm hover:border-primary-200 transition-all group relative overflow-hidden">
+                    <div v-for="(app, idx) in normalizedApplications.data" :key="app.id" 
+                        class="bg-white p-6 rounded-2xl border border-slate-200/60 shadow-sm hover:border-primary-300 transition-all group relative overflow-hidden animate-reveal opacity-0"
+                        :style="`animation-delay: ${100 + (Number(idx) * 50)}ms`">
                         <div class="absolute top-0 right-0 w-32 h-32 bg-slate-50 rounded-full blur-3xl -mr-16 -mt-16 opacity-50 group-hover:bg-primary-50 transition-colors"></div>
                         
-                        <div class="relative z-10 flex flex-col md:flex-row md:items-center gap-8">
+                        <div class="relative z-10 flex flex-col md:flex-row md:items-center gap-6">
                             <!-- Company Logo -->
-                            <div class="w-20 h-20 bg-slate-50 rounded-3xl flex items-center justify-center shrink-0 border border-slate-50 overflow-hidden shadow-inner">
+                            <div class="w-16 h-16 bg-slate-50 rounded-xl flex items-center justify-center shrink-0 border border-slate-100 overflow-hidden shadow-inner">
                                 <img v-if="app.internship.company.logo_url" loading="lazy" decoding="async" :src="app.internship.company.logo_url" class="w-full h-full object-cover" />
-                                <Briefcase v-else class="w-10 h-10 text-slate-200" />
+                                <Briefcase v-else class="w-8 h-8 text-slate-300" />
                             </div>
 
                             <!-- Info -->
@@ -149,9 +151,9 @@ const getAppsByStatus = (statusGroup: string) => {
                             <div class="flex items-center justify-end mt-6 w-full">
                                 <Link 
                                     :href="'/my-applications/' + app.id"
-                                    class="bg-slate-900 text-white px-8 py-3.5 rounded-2xl font-bold text-sm hover:bg-slate-800 transition-all flex items-center gap-2 shadow-lg shadow-slate-200"
+                                    class="bg-slate-900 text-white px-6 py-2.5 rounded-lg font-medium text-sm hover:bg-slate-800 transition-all flex items-center gap-2 shadow-sm"
                                 >
-                                    Lihat Detail & Timeline
+                                    Lihat Detail
                                     <ChevronRight class="w-4 h-4" />
                                 </Link>
                             </div>
@@ -160,42 +162,43 @@ const getAppsByStatus = (statusGroup: string) => {
                 </div>
 
                 <!-- Kanban Board View -->
-                <div v-if="viewMode === 'board'" class="flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory">
+                <div v-if="viewMode === 'board'" class="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory animate-reveal delay-100 opacity-0">
                     <div 
                         v-for="col in columns" 
                         :key="col.id" 
-                        class="shrink-0 w-80 bg-slate-50/50 rounded-3xl border border-slate-100 p-4 flex flex-col h-[70vh] snap-start"
+                        class="shrink-0 w-80 bg-slate-50 rounded-2xl border border-slate-200/60 p-4 flex flex-col h-[70vh] snap-start"
                     >
-                        <div class="flex items-center justify-between mb-4 px-2">
-                            <h3 class="font-black text-slate-900 tracking-tight">{{ col.label }}</h3>
-                            <span :class="['text-xs font-black px-2 py-1 rounded-lg', col.color]">
+                        <div class="flex items-center justify-between mb-4 px-1">
+                            <h3 class="font-semibold text-slate-800 text-sm tracking-tight">{{ col.label }}</h3>
+                            <span :class="['text-[11px] font-semibold px-2 py-0.5 rounded-md', col.color]">
                                 {{ getAppsByStatus(col.id).length }}
                             </span>
                         </div>
                         
-                        <div class="flex-1 overflow-y-auto space-y-4 pr-1 custom-scrollbar">
+                        <div class="flex-1 overflow-y-auto space-y-3 pr-1 custom-scrollbar">
                             <div 
-                                v-for="app in getAppsByStatus(col.id)" 
+                                v-for="(app, idx) in getAppsByStatus(col.id)" 
                                 :key="app.id"
-                                class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm hover:border-primary-300 hover:shadow-md transition-all cursor-pointer group"
+                                class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm hover:border-primary-300 hover:shadow transition-all cursor-pointer group animate-reveal opacity-0 hover:-translate-y-1"
+                                :style="`animation-delay: ${150 + (Number(idx) * 50)}ms`"
                                 @click="$inertia.visit('/my-applications/' + app.id)"
                             >
                                 <div class="flex items-center gap-3 mb-3">
-                                    <div class="w-10 h-10 bg-slate-50 rounded-xl flex items-center justify-center border border-slate-100 shrink-0 overflow-hidden">
+                                    <div class="w-8 h-8 bg-slate-50 rounded-lg flex items-center justify-center border border-slate-100 shrink-0 overflow-hidden">
                                         <img v-if="app.internship.company.logo_url" :src="app.internship.company.logo_url" class="w-full h-full object-cover" />
-                                        <Briefcase v-else class="w-5 h-5 text-slate-300" />
+                                        <Briefcase v-else class="w-4 h-4 text-slate-300" />
                                     </div>
                                     <div class="min-w-0">
-                                        <p class="text-xs font-bold text-primary-600 truncate">{{ app.internship.company.name }}</p>
-                                        <p class="text-xs text-slate-400 font-medium truncate flex items-center gap-1 mt-0.5">
+                                        <p class="text-xs font-semibold text-primary-600 truncate">{{ app.internship.company.name }}</p>
+                                        <p class="text-xs text-slate-500 truncate flex items-center gap-1 mt-0.5">
                                             <MapPin class="w-3 h-3" /> {{ app.internship.location }}
                                         </p>
                                     </div>
                                 </div>
-                                <h4 class="font-bold text-slate-900 text-sm leading-snug mb-3 group-hover:text-primary-600 transition-colors">{{ app.internship.title }}</h4>
+                                <h4 class="font-semibold text-slate-900 text-sm leading-snug mb-3 group-hover:text-primary-600 transition-colors">{{ app.internship.title }}</h4>
                                 
                                 <div class="flex items-center justify-between pt-3 border-t border-slate-50">
-                                    <span class="text-[10px] font-bold text-slate-400 flex items-center gap-1 uppercase tracking-wider">
+                                    <span class="text-[11px] font-medium text-slate-500 flex items-center gap-1">
                                         <Clock class="w-3 h-3" /> {{ new Date(app.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'short' }) }}
                                     </span>
                                     <span :class="['w-2 h-2 rounded-full', col.color.split(' ')[0].replace('100', '500')]"></span>
@@ -203,8 +206,8 @@ const getAppsByStatus = (statusGroup: string) => {
                             </div>
 
                             <!-- Empty Column State -->
-                            <div v-if="getAppsByStatus(col.id).length === 0" class="h-32 border-2 border-dashed border-slate-200 rounded-2xl flex flex-col items-center justify-center text-slate-400">
-                                <p class="text-xs font-bold">Kosong</p>
+                            <div v-if="getAppsByStatus(col.id).length === 0" class="h-24 border border-dashed border-slate-300 rounded-xl flex flex-col items-center justify-center text-slate-400">
+                                <p class="text-xs font-medium">Kosong</p>
                             </div>
                         </div>
                     </div>
@@ -214,15 +217,15 @@ const getAppsByStatus = (statusGroup: string) => {
             </div>
 
             <!-- Empty State -->
-            <div v-else class="bg-white border border-slate-100 rounded-[3rem] p-20 text-center shadow-sm">
-                <div class="w-24 h-24 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-8">
-                    <Search class="w-10 h-10 text-slate-200" />
+            <div v-else class="bg-white border border-slate-200/60 rounded-2xl p-16 text-center shadow-sm">
+                <div class="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <Search class="w-8 h-8 text-slate-300" />
                 </div>
-                <h3 class="text-2xl font-bold text-slate-900 mb-4">Belum ada lamaran terkirim</h3>
-                <p class="text-slate-500 max-w-md mx-auto mb-10">Jelajahi berbagai peluang magang menarik dan mulai kirimkan lamaran pertamamu hari ini!</p>
+                <h3 class="text-xl font-semibold text-slate-900 mb-3">Belum ada lamaran terkirim</h3>
+                <p class="text-slate-500 max-w-md mx-auto mb-8 text-sm">Jelajahi berbagai peluang magang menarik dan mulai kirimkan lamaran pertamamu hari ini!</p>
                 <Link 
                     href="/internships" 
-                    class="inline-flex items-center gap-2 bg-primary-600 text-white px-10 py-4 rounded-full font-bold text-sm hover:bg-primary-700 transition-all shadow-xl shadow-primary-100"
+                    class="inline-flex items-center gap-2 bg-primary-600 text-white px-6 py-2.5 rounded-lg font-medium text-sm hover:bg-primary-700 transition-all shadow-sm"
                 >
                     Cari Peluang Magang
                     <ExternalLink class="w-4 h-4" />

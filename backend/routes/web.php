@@ -204,6 +204,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/applications/{application}/onboarding', fn (Application $application) => redirect()->route('applications.onboarding', $application));
         Route::post('/my-applications/{application}/withdraw', [ApplicationController::class, 'withdraw'])->name('applications.withdraw');
         Route::post('/internships/{internship:slug}/apply', [ApplicationController::class, 'store'])->name('internships.apply');
+        Route::post('/companies/{company:slug}/reviews', [App\Http\Controllers\Public\CompanyReviewController::class, 'store'])->name('companies.reviews.store');
 
         Route::get('/saved-internships', [SavedInternshipController::class, 'index'])->name('saved-internships.index');
         Route::post('/internships/{internship:slug}/toggle-save', [SavedInternshipController::class, 'toggle'])->name('internships.toggle-save');

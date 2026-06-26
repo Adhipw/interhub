@@ -27,7 +27,11 @@ class CompanyPublicController extends Controller
     public function show(Company $company)
     {
         return Inertia::render('Companies/Show', [
-            'company' => $company->loadCount(['internships' => function ($query) {
+            'company' => $company->load([
+                'reviews.user' => function ($query) {
+                    $query->select('id', 'name', 'avatar_url');
+                }
+            ])->loadCount(['internships' => function ($query) {
                 $query->published();
             }]),
             'internships' => Internship::published()

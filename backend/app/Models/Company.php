@@ -21,7 +21,7 @@ class Company extends Model
         'is_verified',
     ];
 
-    protected $appends = ['created_at_human'];
+    protected $appends = ['created_at_human', 'average_rating', 'reviews_count'];
 
     protected $casts = [
         'is_verified' => 'boolean',
@@ -44,8 +44,23 @@ class Company extends Model
             ->withTimestamps();
     }
 
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(CompanyReview::class);
+    }
+
     public function getCreatedAtHumanAttribute(): string
     {
         return $this->created_at ? $this->created_at->diffForHumans() : '';
+    }
+
+    public function getAverageRatingAttribute()
+    {
+        return $this->reviews()->avg('rating') ? round($this->reviews()->avg('rating'), 1) : 0;
+    }
+
+    public function getReviewsCountAttribute()
+    {
+        return $this->reviews()->count();
     }
 }
