@@ -44,6 +44,12 @@ const initMap = () => {
 
     props.internships.forEach(internship => {
         if (internship.latitude && internship.longitude) {
+            // Add a tiny random jitter so overlapping markers are distinctly visible (~10-20 meters)
+            const jitterLat = (Math.random() - 0.5) * 0.0003;
+            const jitterLng = (Math.random() - 0.5) * 0.0003;
+            const lat = Number(internship.latitude) + jitterLat;
+            const lng = Number(internship.longitude) + jitterLng;
+
             const popupContent = `
                 <div class="p-2 min-w-[200px]">
                     <div class="text-xs font-bold text-primary-600 mb-1">${internship.type}</div>
@@ -58,7 +64,7 @@ const initMap = () => {
                 </div>
             `;
 
-            const marker = L.marker([internship.latitude, internship.longitude])
+            const marker = L.marker([lat, lng])
                 .bindPopup(popupContent, {
                     className: 'custom-popup'
                 });
