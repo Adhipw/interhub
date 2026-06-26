@@ -85,7 +85,22 @@ const initMap = () => {
         
         popupContent += `</div>`;
 
-        const marker = L.marker([Number(first.latitude), Number(first.longitude)])
+        const iconHtml = `
+            <div style="position: relative; display: inline-block;">
+                <img src="https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png" style="width: 25px; height: 41px;" />
+                ${group.length > 1 ? `<div style="position: absolute; top: -8px; right: -8px; background-color: #ef4444; color: white; border-radius: 9999px; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: bold; border: 2px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.2); z-index: 50;">${group.length}</div>` : ''}
+            </div>
+        `;
+
+        const customIcon = L.divIcon({
+            html: iconHtml,
+            className: 'bg-transparent border-0',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+        });
+
+        const marker = L.marker([Number(first.latitude), Number(first.longitude)], { icon: customIcon })
             .bindPopup(popupContent, {
                 className: 'custom-popup'
             });
