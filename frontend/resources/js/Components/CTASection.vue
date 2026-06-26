@@ -34,8 +34,8 @@ defineProps<Props>();
                 </div>
             </div>
             <!-- Decorative Elements -->
-            <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-white/10 rounded-full blur-2xl opacity-50 -mr-64 -mt-64"></div>
-            <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-black/10 rounded-full blur-2xl opacity-50 -ml-48 -mb-48"></div>
+            
+            
         </div>
     </section>
 </template>

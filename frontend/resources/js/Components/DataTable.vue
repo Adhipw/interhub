@@ -49,7 +49,7 @@ defineProps<Props>();
                 <tr v-if="!loading && items.length === 0">
                     <td :colspan="headers.length" class="px-8 py-20 text-center">
                         <slot name="empty">
-                            <p class="text-neutral-400 font-bold uppercase tracking-widest">Tidak ada data ditemukan</p>
+                            <p class="text-neutral-400 font-bold font-medium">Tidak ada data ditemukan</p>
                         </slot>
                     </td>
                 </tr>

@@ -72,7 +72,7 @@ const trendClass = computed(() => {
       <!-- Action Indicator (Subtle) -->
       <div class="mt-8 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
         <div class="w-1.5 h-1.5 rounded-full bg-primary-600"></div>
-        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Detail Insight</span>
+        <span class="text-[10px] font-bold text-slate-400 font-medium">Detail Insight</span>
       </div>
     </div>
   </div>

@@ -58,7 +58,7 @@ const handleSubmit = () => {
                     <Send v-else class="w-4 h-4" />
                 </button>
             </div>
-            <p class="mt-3 text-[10px] text-center text-slate-400 uppercase tracking-widest font-bold">
+            <p class="mt-3 text-[10px] text-center text-slate-400 font-medium font-bold">
                 AI assists, human decides
             </p>
         </div>

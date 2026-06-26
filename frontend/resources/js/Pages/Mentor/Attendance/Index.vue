@@ -67,12 +67,12 @@ const getStatusClass = (status: string) => {
           <table class="w-full text-left border-collapse">
             <thead>
               <tr class="bg-slate-50/50 dark:bg-slate-900/50 border-b border-slate-100 dark:border-slate-800">
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Mentee</th>
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Tanggal</th>
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Check In</th>
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Check Out</th>
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest text-center">Status</th>
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Lokasi</th>
+                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">Mentee</th>
+                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">Tanggal</th>
+                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">Check In</th>
+                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">Check Out</th>
+                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium text-center">Status</th>
+                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">Lokasi</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-slate-50 dark:divide-slate-800/50">
@@ -109,7 +109,7 @@ const getStatusClass = (status: string) => {
                   <span v-else class="text-xs text-slate-400">--:--</span>
                 </td>
                 <td class="px-8 py-6 text-center">
-                  <span :class="['px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest', getStatusClass(attendance.status)]">
+                  <span :class="['px-3 py-1 rounded-full text-[10px] font-bold font-medium', getStatusClass(attendance.status)]">
                     {{ attendance.status }}
                   </span>
                 </td>

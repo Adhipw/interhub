@@ -93,7 +93,7 @@ onMounted(() => {
                         <div class="sticky top-32 space-y-8">
                             <!-- Category: Bantuan -->
                             <div>
-                                <h4 class="text-xs font-bold text-slate-400 dark:text-neutral-500 uppercase tracking-[0.2em] mb-4 px-4">{{ t('info.help_center') }}</h4>
+                                <h4 class="text-xs font-bold text-slate-400 dark:text-neutral-500 uppercase tracking-normal mb-4 px-4">{{ t('info.help_center') }}</h4>
                                 <div class="space-y-1">
                                     <button 
                                         v-for="s in sections.filter(s => s.category === 'bantuan')" 
@@ -111,7 +111,7 @@ onMounted(() => {
 
                             <!-- Category: Perusahaan -->
                             <div>
-                                <h4 class="text-xs font-bold text-slate-400 dark:text-neutral-500 uppercase tracking-[0.2em] mb-4 px-4">{{ t('info.for_companies') }}</h4>
+                                <h4 class="text-xs font-bold text-slate-400 dark:text-neutral-500 uppercase tracking-normal mb-4 px-4">{{ t('info.for_companies') }}</h4>
                                 <div class="space-y-1">
                                     <button 
                                         v-for="s in sections.filter(s => s.category === 'perusahaan')" 
@@ -129,7 +129,7 @@ onMounted(() => {
 
                             <!-- Category: Mahasiswa -->
                             <div>
-                                <h4 class="text-xs font-bold text-slate-400 dark:text-neutral-500 uppercase tracking-[0.2em] mb-4 px-4">{{ t('info.for_students') }}</h4>
+                                <h4 class="text-xs font-bold text-slate-400 dark:text-neutral-500 uppercase tracking-normal mb-4 px-4">{{ t('info.for_students') }}</h4>
                                 <div class="space-y-1">
                                     <button 
                                         v-for="s in sections.filter(s => s.category === 'mahasiswa')" 

@@ -59,7 +59,7 @@ onMounted(() => {
                         <span class="text-xl leading-none">{{ lang.flag }}</span>
                         <div class="flex flex-col">
                             <span class="text-sm font-bold">{{ lang.name }}</span>
-                            <span class="text-[10px] opacity-50 uppercase tracking-widest">{{ lang.code }}</span>
+                            <span class="text-[10px] opacity-50 font-medium">{{ lang.code }}</span>
                         </div>
                     </button>
                 </div>

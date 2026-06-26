@@ -149,7 +149,7 @@ const pendingApplications = computed(() =>
                         class="group p-6 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl shadow-sm"
                     >
                         <component :is="stat.icon" class="w-7 h-7 text-primary-600 mb-5" />
-                        <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">{{ stat.label }}</p>
+                        <p class="text-xs font-bold text-slate-400 font-medium">{{ stat.label }}</p>
                         <p class="mt-2 text-4xl font-display font-bold text-slate-900 dark:text-white group-hover:text-primary-600 transition-colors">
                             {{ stat.value }}
                         </p>
@@ -213,10 +213,10 @@ const pendingApplications = computed(() =>
                                 <table class="w-full text-left">
                                     <thead class="bg-slate-50 dark:bg-slate-900/50">
                                         <tr>
-                                            <th class="px-6 py-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">{{ t('hr.dashboard.col_candidate') }}</th>
-                                            <th class="px-6 py-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">{{ t('hr.dashboard.col_position') }}</th>
-                                            <th class="px-6 py-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">{{ t('hr.dashboard.col_status') }}</th>
-                                            <th class="px-6 py-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest text-right">{{ t('hr.dashboard.col_time') }}</th>
+                                            <th class="px-6 py-4 text-[10px] font-bold text-slate-400 font-medium">{{ t('hr.dashboard.col_candidate') }}</th>
+                                            <th class="px-6 py-4 text-[10px] font-bold text-slate-400 font-medium">{{ t('hr.dashboard.col_position') }}</th>
+                                            <th class="px-6 py-4 text-[10px] font-bold text-slate-400 font-medium">{{ t('hr.dashboard.col_status') }}</th>
+                                            <th class="px-6 py-4 text-[10px] font-bold text-slate-400 font-medium text-right">{{ t('hr.dashboard.col_time') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody class="divide-y divide-slate-50 dark:divide-slate-700">
@@ -257,11 +257,11 @@ const pendingApplications = computed(() =>
                                     <ArrowRight class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                                 </Link>
                             </div>
-                            <div class="absolute top-[-20%] right-[-10%] w-40 h-40 bg-primary-500/5 dark:bg-white/5 rounded-full blur-2xl opacity-50 group-hover:scale-125 transition-transform duration-700"></div>
+                            
                         </div>
 
                         <section>
-                            <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6">{{ t('hr.dashboard.quick_navigation') }}</h4>
+                            <h4 class="text-xs font-bold text-slate-400 font-medium mb-6">{{ t('hr.dashboard.quick_navigation') }}</h4>
                             <div class="grid grid-cols-1 gap-3">
                                 <Link
                                     v-for="link in quickLinks"

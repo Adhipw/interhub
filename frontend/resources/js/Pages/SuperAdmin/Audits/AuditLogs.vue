@@ -108,11 +108,11 @@ onUnmounted(() => {
             <table class="w-full text-left border-collapse">
                 <thead>
                 <tr class="bg-slate-50/50 dark:bg-slate-900/50 border-b border-slate-100 dark:border-slate-800">
-                    <th class="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest">{{ t('admin.audit.col_time') }}</th>
-                    <th class="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest">{{ t('admin.audit.col_actor') }}</th>
-                    <th class="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest">{{ t('admin.audit.col_action') }}</th>
-                    <th class="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest">{{ t('admin.audit.col_desc') }}</th>
-                    <th class="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest">{{ t('admin.audit.col_ip') }}</th>
+                    <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">{{ t('admin.audit.col_time') }}</th>
+                    <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">{{ t('admin.audit.col_actor') }}</th>
+                    <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">{{ t('admin.audit.col_action') }}</th>
+                    <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">{{ t('admin.audit.col_desc') }}</th>
+                    <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">{{ t('admin.audit.col_ip') }}</th>
                 </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-50 dark:divide-slate-800/50">
@@ -134,7 +134,7 @@ onUnmounted(() => {
                     </div>
                     </td>
                     <td class="px-8 py-6">
-                    <span class="px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded text-[10px] font-bold uppercase tracking-widest text-slate-600 dark:text-slate-400">
+                    <span class="px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded text-[10px] font-bold font-medium text-slate-600 dark:text-slate-400">
                         {{ log.action }}
                     </span>
                     </td>

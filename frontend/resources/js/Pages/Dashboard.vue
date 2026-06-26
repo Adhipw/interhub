@@ -124,7 +124,7 @@ cx="48" cy="48" r="42" fill="transparent" stroke="url(#primaryGradient)" stroke-
                             </div>
                         </div>
                         <div class="space-y-1">
-                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em]">{{ t('dashboard.profile_completion') || 'Kelengkapan Profil' }}</p>
+                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-normal">{{ t('dashboard.profile_completion') || 'Kelengkapan Profil' }}</p>
                             <Link href="/profile" class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2 hover:text-primary-600 transition-all group/link">
                                 {{ t('dashboard.complete_data') || 'Lengkapi Data' }}
                                 <ArrowUpRight class="w-5 h-5 group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform" />
@@ -187,7 +187,7 @@ cx="48" cy="48" r="42" fill="transparent" stroke="url(#primaryGradient)" stroke-
                                 <h2 class="text-3xl font-bold text-slate-900 dark:text-white tracking-tight">{{ t('dashboard.app_status') || 'Tracking Lamaran' }}</h2>
                                 <p class="text-slate-500 font-bold text-sm">{{ t('dashboard.track_desc') || 'Pantau status magang Anda secara real-time.' }}</p>
                             </div>
-                            <Link href="/my-applications" class="text-xs font-bold text-primary-600 uppercase tracking-widest hover:underline">Lihat Semua</Link>
+                            <Link href="/my-applications" class="text-xs font-bold text-primary-600 font-medium hover:underline">Lihat Semua</Link>
                         </div>
 
                         <div v-if="loading" class="space-y-4">
@@ -222,7 +222,7 @@ cx="48" cy="48" r="42" fill="transparent" stroke="url(#primaryGradient)" stroke-
                 <!-- Sidebar Content -->
                 <div class="space-y-12">
                     <section class="bg-slate-900 dark:bg-white p-10 rounded-2xl shadow-2xl relative overflow-hidden group">
-                        <div class="absolute top-0 right-0 w-32 h-32 bg-primary-500/20 rounded-full blur-2xl opacity-50 -mr-16 -mt-16"></div>
+                        
                         
                         <div class="flex items-center justify-between mb-10 relative z-10">
                             <h2 class="text-xl font-bold text-white dark:text-slate-900 tracking-tight">{{ t('dashboard.notifications') || 'Notifikasi' }}</h2>
@@ -239,7 +239,7 @@ cx="48" cy="48" r="42" fill="transparent" stroke="url(#primaryGradient)" stroke-
                                     <p class="text-sm font-bold text-slate-300 dark:text-slate-600 leading-relaxed group-hover/item:text-white dark:group-hover/item:text-black transition-colors">
                                         {{ note.data?.message || note.data?.title || t('dashboard.new_notif') }}
                                     </p>
-                                    <p class="text-[10px] font-bold text-slate-500 mt-2 uppercase tracking-widest">{{ note.created_at_human }}</p>
+                                    <p class="text-[10px] font-bold text-slate-500 mt-2 font-medium">{{ note.created_at_human }}</p>
                                 </div>
                             </div>
                         </div>

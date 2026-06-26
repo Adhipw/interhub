@@ -215,7 +215,7 @@ const withdraw = async () => {
                                         </div>
                                         <div class="flex-1 min-w-0">
                                             <p class="text-xs font-bold text-slate-900 truncate">Curriculum Vitae (CV)</p>
-                                            <p class="text-[10px] text-slate-500 uppercase tracking-widest">Snapshot PDF</p>
+                                            <p class="text-[10px] text-slate-500 font-medium">Snapshot PDF</p>
                                         </div>
                                     </a>
 
@@ -230,7 +230,7 @@ const withdraw = async () => {
                                         </div>
                                         <div class="flex-1 min-w-0">
                                             <p class="text-xs font-bold text-slate-900 truncate">Portofolio Kerja</p>
-                                            <p class="text-[10px] text-slate-500 uppercase tracking-widest">Dokumen Pendukung</p>
+                                            <p class="text-[10px] text-slate-500 font-medium">Dokumen Pendukung</p>
                                         </div>
                                     </a>
                                 </div>
@@ -242,21 +242,21 @@ const withdraw = async () => {
                     <div v-if="application.evaluations && application.evaluations.length > 0" class="space-y-6">
                         <div v-for="evaluation in application.evaluations" :key="evaluation.id" class="bg-white rounded-2xl p-10 border border-slate-100 shadow-sm relative overflow-hidden">
                             <div class="absolute top-0 right-0 p-8">
-                                <div :class="['px-4 py-2 rounded-2xl text-xs font-bold uppercase tracking-widest', evaluation.final_status === 'completed' ? 'bg-green-50 text-green-600' : 'bg-red-50 text-red-600']">
+                                <div :class="['px-4 py-2 rounded-2xl text-xs font-bold font-medium', evaluation.final_status === 'completed' ? 'bg-green-50 text-green-600' : 'bg-red-50 text-red-600']">
                                     {{ evaluation.final_status === 'completed' ? 'Magang Lolos' : 'Magang Selesai' }}
                                 </div>
                             </div>
                             
                             <h2 class="text-2xl font-bold text-slate-900 mb-2">{{ evaluation.title }}</h2>
-                            <p class="text-xs text-slate-400 font-bold uppercase tracking-widest mb-8">Evaluasi Oleh {{ evaluation.mentor.name }}</p>
+                            <p class="text-xs text-slate-400 font-bold font-medium mb-8">Evaluasi Oleh {{ evaluation.mentor.name }}</p>
                             
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-10">
                                 <div>
-                                    <h4 class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-4">Ringkasan Performa</h4>
+                                    <h4 class="text-[10px] font-bold text-slate-400 font-medium mb-4">Ringkasan Performa</h4>
                                     <p class="text-sm text-slate-600 leading-relaxed italic">"{{ evaluation.summary }}"</p>
                                 </div>
                                 <div>
-                                    <h4 class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-4">Hasil Penilaian</h4>
+                                    <h4 class="text-[10px] font-bold text-slate-400 font-medium mb-4">Hasil Penilaian</h4>
                                     <div class="space-y-4">
                                         <div v-for="(val, key) in evaluation.metrics" :key="key">
                                             <div class="flex items-center justify-between text-xs mb-1.5">
@@ -272,7 +272,7 @@ const withdraw = async () => {
                             </div>
                             
                             <div v-if="evaluation.recommendation" class="p-6 bg-primary-50 rounded-2xl border border-primary-100">
-                                <h4 class="text-[10px] font-bold text-primary-400 uppercase tracking-widest mb-2">Rekomendasi Mentor</h4>
+                                <h4 class="text-[10px] font-bold text-primary-400 font-medium mb-2">Rekomendasi Mentor</h4>
                                 <p class="text-sm text-primary-900 font-medium">{{ evaluation.recommendation }}</p>
                             </div>
                         </div>
@@ -330,7 +330,7 @@ const withdraw = async () => {
                             <div class="space-y-1">
                                 <p class="text-sm font-bold text-slate-900">{{ event.label }}</p>
                                 <p class="text-xs text-slate-500 leading-relaxed">{{ event.description }}</p>
-                                <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest pt-2">
+                                <p class="text-[10px] text-slate-400 font-bold font-medium pt-2">
                                     {{ new Date(event.date.includes('T') ? event.date : event.date.replace(' ', 'T') + 'Z').toLocaleDateString('id-ID', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) }}
                                 </p>
                             </div>
@@ -348,7 +348,7 @@ const withdraw = async () => {
                     <!-- Withdraw Action -->
                     <div v-if="application.status === 'pending'" class="pt-6 border-t border-slate-50">
                         <button 
-                            class="w-full py-4 text-xs font-bold text-red-500 hover:bg-red-50 rounded-2xl transition-all uppercase tracking-widest flex items-center justify-center gap-2"
+                            class="w-full py-4 text-xs font-bold text-red-500 hover:bg-red-50 rounded-2xl transition-all font-medium flex items-center justify-center gap-2"
                             @click="withdraw"
                         >
                             <X class="w-4 h-4" />

@@ -140,7 +140,7 @@ const getProviderIcon = (provider: string) => ShieldCheck;
                  <div class="flex items-center gap-2">
                     <span
 :class="[
-                      'px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest',
+                      'px-3 py-1 rounded-full text-[10px] font-bold font-medium',
                       integration.is_active ? 'bg-green-50 text-green-600' : 'bg-red-50 text-red-600'
                     ]">
                        {{ integration.is_active ? 'Aktif' : 'Non-aktif' }}
@@ -152,7 +152,7 @@ const getProviderIcon = (provider: string) => ShieldCheck;
               <div class="flex-1 space-y-8">
                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="space-y-2">
-                       <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Nama Integrasi</label>
+                       <label class="text-[10px] font-bold text-slate-400 font-medium">Nama Integrasi</label>
                        <input 
                          v-model="integration.name"
                          type="text" 
@@ -160,7 +160,7 @@ const getProviderIcon = (provider: string) => ShieldCheck;
                        />
                     </div>
                     <div class="space-y-2">
-                       <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Provider</label>
+                       <label class="text-[10px] font-bold text-slate-400 font-medium">Provider</label>
                        <div class="p-4 bg-slate-50 dark:bg-slate-900 rounded-xl text-sm text-slate-500 font-bold flex items-center gap-2">
                           <Lock class="w-4 h-4 text-slate-300" />
                           {{ integration.provider }}
@@ -217,12 +217,12 @@ const getProviderIcon = (provider: string) => ShieldCheck;
 
           <form class="space-y-6" @submit.prevent="submitCreate">
              <div class="space-y-2">
-                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Nama Layanan</label>
+                <label class="text-[10px] font-bold text-slate-400 font-medium">Nama Layanan</label>
                 <input v-model="createForm.name" type="text" class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-2xl p-4 focus:ring-2 focus:ring-primary-500/20" placeholder="Contoh: OpenAI Production" required />
              </div>
 
              <div class="space-y-2">
-                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Provider</label>
+                <label class="text-[10px] font-bold text-slate-400 font-medium">Provider</label>
                 <select v-model="createForm.provider" class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-2xl p-4 focus:ring-2 focus:ring-primary-500/20 appearance-none">
                    <option value="openai">OpenAI (ChatGPT)</option>
                    <option value="google">Google Cloud</option>

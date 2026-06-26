@@ -82,8 +82,8 @@ const clearFile = () => {
     <div class="space-y-4">
         <label v-if="label" class="text-sm font-bold text-slate-700 dark:text-slate-300 flex items-center gap-2">
             {{ label }}
-            <span v-if="currentFile && !selectedFile" class="text-[10px] bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 px-2 py-0.5 rounded-full uppercase tracking-wider font-bold">Tersedia</span>
-            <span v-if="selectedFile" class="text-[10px] bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-400 px-2 py-0.5 rounded-full uppercase tracking-wider font-bold">Baru</span>
+            <span v-if="currentFile && !selectedFile" class="text-[10px] bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 px-2 py-0.5 rounded-full font-medium font-bold">Tersedia</span>
+            <span v-if="selectedFile" class="text-[10px] bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-400 px-2 py-0.5 rounded-full font-medium font-bold">Baru</span>
         </label>
 
         <div 
@@ -119,7 +119,7 @@ const clearFile = () => {
                 <p class="text-base font-bold transition-colors" :class="isDragging ? 'text-primary-600 dark:text-primary-400' : 'text-slate-900 dark:text-white'">
                     {{ isDragging ? 'Lepaskan File Sekarang!' : 'Seret & Lepas Dokumen di Sini' }}
                 </p>
-                <p class="text-xs font-bold text-slate-500 dark:text-slate-400 mt-2 uppercase tracking-widest flex items-center justify-center gap-2">
+                <p class="text-xs font-bold text-slate-500 dark:text-slate-400 mt-2 font-medium flex items-center justify-center gap-2">
                     <span>Atau</span>
                     <span class="text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/20 px-3 py-1 rounded-lg cursor-pointer hover:bg-primary-100 transition-colors">Cari File</span>
                 </p>
@@ -136,7 +136,7 @@ const clearFile = () => {
                     </div>
                     <div class="flex-1 min-w-0 text-left">
                         <p class="text-sm font-bold text-slate-900 dark:text-white truncate">Dokumen Tersimpan</p>
-                        <a :href="currentFile" target="_blank" class="text-[10px] text-primary-600 hover:text-primary-700 dark:text-primary-400 font-bold uppercase tracking-widest flex items-center gap-1 mt-1 z-10 w-max hover:underline bg-primary-50 dark:bg-primary-900/20 px-2 py-0.5 rounded">
+                        <a :href="currentFile" target="_blank" class="text-[10px] text-primary-600 hover:text-primary-700 dark:text-primary-400 font-bold font-medium flex items-center gap-1 mt-1 z-10 w-max hover:underline bg-primary-50 dark:bg-primary-900/20 px-2 py-0.5 rounded">
                             Lihat Dokumen <ExternalLink class="w-3 h-3" />
                         </a>
                     </div>
@@ -146,7 +146,7 @@ const clearFile = () => {
             <!-- Selected File State -->
             <div v-else class="w-full flex items-center gap-5 bg-white dark:bg-slate-800 p-6 rounded-2xl border border-primary-200 dark:border-primary-900/50 shadow-xl shadow-primary-500/5 relative overflow-hidden group/card cursor-default" @click.stop>
                 <!-- Decorative background elements -->
-                <div class="absolute -right-10 -top-10 w-32 h-32 bg-primary-50 dark:bg-primary-900/20 rounded-full blur-2xl opacity-50"></div>
+                
                 <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-primary-500"></div>
                 
                 <div class="w-14 h-14 bg-gradient-to-br from-primary-500 to-primary-600 rounded-2xl flex items-center justify-center shrink-0 shadow-lg shadow-primary-500/30 transform group-hover/card:scale-110 group-hover/card:rotate-3 transition-transform duration-300">
@@ -155,7 +155,7 @@ const clearFile = () => {
                 <div class="flex-1 min-w-0 text-left relative z-10">
                     <p class="text-sm font-bold text-slate-900 dark:text-white truncate" :title="selectedFile.name">{{ selectedFile.name }}</p>
                     <div class="flex items-center gap-3 mt-1.5">
-                        <p class="text-[10px] font-mono font-bold text-slate-500 bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded uppercase tracking-wider">
+                        <p class="text-[10px] font-mono font-bold text-slate-500 bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded font-medium">
                             {{ (selectedFile.size / 1024).toFixed(1) }} KB
                         </p>
                         <p class="text-[10px] font-bold text-green-600 dark:text-green-400 flex items-center gap-1">

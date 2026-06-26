@@ -98,7 +98,7 @@ onMounted(() => {
                 <div>
                    <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-1">{{ event.description }}</h3>
                    <div class="flex items-center gap-4 text-xs text-slate-500">
-                      <span class="flex items-center gap-1.5 font-bold uppercase tracking-widest" :class="event.severity === 'high' ? 'text-red-500' : ''">
+                      <span class="flex items-center gap-1.5 font-bold font-medium" :class="event.severity === 'high' ? 'text-red-500' : ''">
                          {{ t('admin.security.severity_' + event.severity) }}
                       </span>
                       <span class="flex items-center gap-1.5 font-bold">
@@ -108,7 +108,7 @@ onMounted(() => {
                    </div>
                 </div>
                 <div class="flex items-center gap-3">
-                   <div class="px-3 py-1.5 bg-slate-50 dark:bg-slate-900 rounded-xl flex flex-col gap-1 text-[10px] font-bold text-slate-500 uppercase tracking-widest border border-slate-100 dark:border-slate-800">
+                   <div class="px-3 py-1.5 bg-slate-50 dark:bg-slate-900 rounded-xl flex flex-col gap-1 text-[10px] font-bold text-slate-500 font-medium border border-slate-100 dark:border-slate-800">
                       <div class="flex items-center gap-2">
                         <Monitor class="w-3.5 h-3.5" />
                         {{ event.ip_address }}
@@ -122,7 +122,7 @@ onMounted(() => {
              </div>
 
              <div v-if="event.payload" class="p-4 bg-slate-900 rounded-xl overflow-hidden group/payload relative">
-                <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">{{ t('admin.security.payload') }}</p>
+                <p class="text-[10px] font-bold text-slate-500 font-medium mb-2">{{ t('admin.security.payload') }}</p>
                 <pre class="text-xs text-green-400 font-mono overflow-x-auto whitespace-pre-wrap">{{ typeof event.payload === 'string' ? JSON.stringify(JSON.parse(event.payload), null, 2) : JSON.stringify(event.payload, null, 2) }}</pre>
              </div>
           </div>

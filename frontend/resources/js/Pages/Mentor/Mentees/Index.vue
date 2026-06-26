@@ -56,11 +56,11 @@ const loading = ref(false);
           <table class="w-full text-left border-collapse">
             <thead>
               <tr class="bg-slate-50/50 dark:bg-slate-900/50 border-b border-slate-100 dark:border-slate-800">
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Nama Mentee</th>
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Posisi Magang</th>
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest text-center">Status</th>
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Bergabung Pada</th>
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest text-right">Aksi</th>
+                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">Nama Mentee</th>
+                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">Posisi Magang</th>
+                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium text-center">Status</th>
+                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">Bergabung Pada</th>
+                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium text-right">Aksi</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-slate-50 dark:divide-slate-800/50">
@@ -114,10 +114,10 @@ const loading = ref(false);
 
         <!-- Pagination Placeholder -->
         <div v-if="mentees.data.length > 0" class="px-8 py-6 bg-slate-50/30 dark:bg-slate-900/30 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
-           <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Menampilkan {{ mentees.data.length }} Mentee</p>
+           <p class="text-xs font-bold text-slate-400 font-medium">Menampilkan {{ mentees.data.length }} Mentee</p>
            <div class="flex gap-2">
-              <button disabled class="px-4 py-2 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-xl text-[10px] font-bold text-slate-300 uppercase tracking-widest">Kembali</button>
-              <button disabled class="px-4 py-2 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-xl text-[10px] font-bold text-slate-300 uppercase tracking-widest">Lanjut</button>
+              <button disabled class="px-4 py-2 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-xl text-[10px] font-bold text-slate-300 font-medium">Kembali</button>
+              <button disabled class="px-4 py-2 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-xl text-[10px] font-bold text-slate-300 font-medium">Lanjut</button>
            </div>
         </div>
       </Card>

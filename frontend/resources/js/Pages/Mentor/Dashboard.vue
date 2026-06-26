@@ -93,7 +93,7 @@ onUnmounted(() => {
                 <Users class="w-8 h-8" />
               </div>
               <div>
-                <p class="text-[11px] font-bold text-slate-400 uppercase tracking-[0.2em] mb-1">{{ __('Total Mentee') }}</p>
+                <p class="text-[11px] font-bold text-slate-400 uppercase tracking-normal mb-1">{{ __('Total Mentee') }}</p>
                 <p class="text-4xl font-bold text-slate-900 dark:text-white tracking-tighter">
                    <template v-if="loading">--</template>
                    <template v-else>{{ stats.total_mentees }}</template>
@@ -107,7 +107,7 @@ onUnmounted(() => {
                 <Clock class="w-8 h-8" />
               </div>
               <div>
-                <p class="text-[11px] font-bold text-slate-400 uppercase tracking-[0.2em] mb-1">{{ __('Tugas Pending') }}</p>
+                <p class="text-[11px] font-bold text-slate-400 uppercase tracking-normal mb-1">{{ __('Tugas Pending') }}</p>
                 <p class="text-4xl font-bold text-slate-900 dark:text-white tracking-tighter">
                    <template v-if="loading">--</template>
                    <template v-else>{{ stats.pending_tasks }}</template>
@@ -164,7 +164,7 @@ v-for="(mentee, index) in activeMentees" :key="mentee.id"
                   </div>
 
                   <div class="mt-8 pt-8 border-t border-slate-100 dark:border-white/5 flex items-center justify-between">
-                    <div class="flex items-center gap-2 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                    <div class="flex items-center gap-2 text-[10px] font-bold text-slate-400 font-medium">
                        <Clock class="w-3.5 h-3.5" />
                        {{ __('Bergabung') }} {{ formatDate(mentee.created_at, { month: 'short', year: 'numeric' }) }}
                     </div>
@@ -187,7 +187,7 @@ v-for="(mentee, index) in activeMentees" :key="mentee.id"
 
           <!-- Insight/Editorial Card -->
           <div class="bg-slate-900 rounded-2xl p-12 text-white relative overflow-hidden group animate-slide-up" style="--delay: 0.5s">
-             <div class="absolute top-0 right-0 w-96 h-96 bg-primary-500/20 rounded-full blur-2xl opacity-30 -mr-48 -mt-48 group-hover:bg-primary-500/30 transition-all duration-700"></div>
+             
              <div class="absolute bottom-0 left-0 w-64 h-64 bg-blue-500/10 rounded-full blur-[80px] -ml-32 -mb-32"></div>
              
              <div class="relative z-10 grid lg:grid-cols-2 gap-10 items-center">
@@ -270,11 +270,11 @@ v-for="(fb, index) in recentFeedbacks" :key="fb.id"
 
             <div class="space-y-5 relative z-10">
                <div class="flex items-center justify-between p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-white/5">
-                  <span class="text-sm text-slate-500 font-bold uppercase tracking-widest text-[9px]">{{ __('Evaluasi Selesai') }}</span>
+                  <span class="text-sm text-slate-500 font-bold font-medium text-[9px]">{{ __('Evaluasi Selesai') }}</span>
                   <span class="text-xl font-bold text-slate-900 dark:text-white">{{ stats.completed_evaluations }}</span>
                </div>
                <div class="flex items-center justify-between p-4 rounded-2xl bg-green-50 dark:bg-green-500/10 border border-green-100 dark:border-green-500/20">
-                  <span class="text-sm text-green-700 dark:text-green-400 font-bold uppercase tracking-widest text-[9px]">{{ __('Status Akun') }}</span>
+                  <span class="text-sm text-green-700 dark:text-green-400 font-bold font-medium text-[9px]">{{ __('Status Akun') }}</span>
                   <span class="text-xs font-bold text-green-700 dark:text-green-400 flex items-center gap-1.5 bg-white dark:bg-green-900/30 px-3 py-1 rounded-full shadow-sm">
                       <UserCheck class="w-3.5 h-3.5" />
                       {{ __('AKTIF') }}

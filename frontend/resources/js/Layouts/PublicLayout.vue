@@ -100,7 +100,7 @@ onUnmounted(() => {
 
                         <!-- Lang Switcher -->
                         <div class="relative">
-                            <button class="flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-bold uppercase tracking-widest transition-all" :class="isDarkMode ? 'bg-slate-800 text-slate-300' : 'bg-slate-100 text-slate-600'" @click="isLangMenuOpen = !isLangMenuOpen">
+                            <button class="flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-bold font-medium transition-all" :class="isDarkMode ? 'bg-slate-800 text-slate-300' : 'bg-slate-100 text-slate-600'" @click="isLangMenuOpen = !isLangMenuOpen">
                                 {{ locale }}
                                 <Icon name="chevron" class-name="w-3 h-3 transition-transform" :class="isLangMenuOpen ? 'rotate-180' : ''" />
                             </button>
@@ -176,7 +176,11 @@ onUnmounted(() => {
 
         <!-- Main Content -->
         <main class="pt-[72px]">
-            <slot />
+            <Transition name="page" mode="out-in" appear>
+                <div :key="$page.url" class="w-full">
+                    <slot />
+                </div>
+            </Transition>
         </main>
 
         <!-- Footer (Job Portal Style) -->
@@ -197,7 +201,7 @@ onUnmounted(() => {
                     </div>
 
                     <div>
-                        <h4 class="font-bold mb-6 text-sm uppercase tracking-widest" :class="isDarkMode ? 'text-white' : 'text-slate-900'">{{ t('footer.students') }}</h4>
+                        <h4 class="font-bold mb-6 text-sm font-medium" :class="isDarkMode ? 'text-white' : 'text-slate-900'">{{ t('footer.students') }}</h4>
                         <ul class="space-y-4 text-sm font-semibold" :class="isDarkMode ? 'text-slate-400' : 'text-slate-500'">
                             <li><Link href="/internships" class="hover:text-blue-600 transition-colors">{{ t('footer.find_internships') }}</Link></li>
                             <li><Link href="/career-tips" class="hover:text-blue-600 transition-colors">{{ t('footer.career_tips') }}</Link></li>
@@ -206,7 +210,7 @@ onUnmounted(() => {
                     </div>
 
                     <div>
-                        <h4 class="font-bold mb-6 text-sm uppercase tracking-widest" :class="isDarkMode ? 'text-white' : 'text-slate-900'">{{ t('footer.companies') }}</h4>
+                        <h4 class="font-bold mb-6 text-sm font-medium" :class="isDarkMode ? 'text-white' : 'text-slate-900'">{{ t('footer.companies') }}</h4>
                         <ul class="space-y-4 text-sm font-semibold" :class="isDarkMode ? 'text-slate-400' : 'text-slate-500'">
                             <li><Link href="/login?role=hr" class="hover:text-blue-600 transition-colors">{{ t('footer.post_internship') }}</Link></li>
                             <li><Link href="/selection-system" class="hover:text-blue-600 transition-colors">{{ t('footer.verify_company') }}</Link></li>
@@ -215,7 +219,7 @@ onUnmounted(() => {
                     </div>
 
                     <div>
-                        <h4 class="font-bold mb-6 text-sm uppercase tracking-widest" :class="isDarkMode ? 'text-white' : 'text-slate-900'">{{ t('footer.help') }}</h4>
+                        <h4 class="font-bold mb-6 text-sm font-medium" :class="isDarkMode ? 'text-white' : 'text-slate-900'">{{ t('footer.help') }}</h4>
                         <ul class="space-y-4 text-sm font-semibold" :class="isDarkMode ? 'text-slate-400' : 'text-slate-500'">
                             <li><Link href="/help" class="hover:text-blue-600 transition-colors">{{ t('footer.help_center') }}</Link></li>
                             <li><Link href="/help" class="hover:text-blue-600 transition-colors">{{ t('footer.faq') }}</Link></li>
@@ -224,7 +228,7 @@ onUnmounted(() => {
                     </div>
                 </div>
                 
-                <div class="pt-12 border-t flex flex-col md:flex-row justify-between items-center gap-8 text-xs font-bold uppercase tracking-widest" :class="isDarkMode ? 'border-slate-800 text-slate-500' : 'border-slate-100 text-slate-400'">
+                <div class="pt-12 border-t flex flex-col md:flex-row justify-between items-center gap-8 text-xs font-bold font-medium" :class="isDarkMode ? 'border-slate-800 text-slate-500' : 'border-slate-100 text-slate-400'">
                     <p>© 2026 InternHub. {{ t('footer.all_rights') }}</p>
                     <div class="flex items-center gap-8">
                         <span>{{ t('footer.made_in') }}</span>

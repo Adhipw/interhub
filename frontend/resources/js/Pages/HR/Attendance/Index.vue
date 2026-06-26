@@ -81,7 +81,7 @@ const getLiveLoc = (userId: number) => liveLocations.value[userId] || null;
                         <Users class="w-6 h-6" />
                     </div>
                     <div>
-                        <p class="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-widest">Hadir Hari Ini</p>
+                        <p class="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 font-medium">Hadir Hari Ini</p>
                         <p class="text-2xl font-bold text-slate-900 dark:text-white leading-none mt-1">{{ stats.total_present }}</p>
                     </div>
                 </Card>
@@ -91,7 +91,7 @@ const getLiveLoc = (userId: number) => liveLocations.value[userId] || null;
                         <Activity class="w-6 h-6" />
                     </div>
                     <div>
-                        <p class="text-[10px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest">Sesi Aktif (Live)</p>
+                        <p class="text-[10px] font-bold text-blue-600 dark:text-blue-400 font-medium">Sesi Aktif (Live)</p>
                         <p class="text-2xl font-bold text-slate-900 dark:text-white leading-none mt-1">{{ stats.currently_active }}</p>
                     </div>
                 </Card>
@@ -164,7 +164,7 @@ const getLiveLoc = (userId: number) => liveLocations.value[userId] || null;
                                         <div class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></div>
                                         <span class="text-[10px] font-semibold text-xs tracking-wide">Live Now</span>
                                     </div>
-                                    <span v-else class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Offline</span>
+                                    <span v-else class="text-[10px] font-bold text-slate-400 font-medium">Offline</span>
                                 </td>
                                 <td class="px-6 py-5">
                                     <Badge :variant="item.status === 'present' ? 'success' : 'warning'" class="px-3 py-1 rounded-lg">

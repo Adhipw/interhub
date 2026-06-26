@@ -128,7 +128,7 @@ v-for="(stat, i) in [
                         <div :class="['w-14 h-14 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-all', stat.bg, stat.color]">
                             <component :is="stat.icon" class="w-6 h-6" />
                         </div>
-                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">{{ stat.label }}</p>
+                        <p class="text-[10px] font-bold text-slate-400 font-medium mb-1">{{ stat.label }}</p>
                         <p class="text-4xl font-bold text-slate-900 dark:text-white">{{ stat.value || 0 }}</p>
                     </template>
                 </Card>
@@ -142,7 +142,7 @@ v-for="(stat, i) in [
                             <Activity class="w-6 h-6 text-primary-600" />
                             Audit System
                         </h2>
-                        <Link href="/admin/audit-logs" class="text-xs font-bold text-primary-600 uppercase tracking-widest hover:underline">View All Logs</Link>
+                        <Link href="/admin/audit-logs" class="text-xs font-bold text-primary-600 font-medium hover:underline">View All Logs</Link>
                     </div>
 
                     <Card class="!p-0 !rounded-2xl overflow-hidden border-slate-100 dark:border-white/5 shadow-premium">
@@ -153,9 +153,9 @@ v-for="(stat, i) in [
                             <table class="w-full text-left">
                                 <thead>
                                     <tr class="bg-slate-50/50 dark:bg-slate-800/30 border-b border-slate-100 dark:border-white/5">
-                                        <th class="px-8 py-6 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Admin</th>
-                                        <th class="px-8 py-6 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Aktivitas</th>
-                                        <th class="px-8 py-6 text-[10px] font-bold text-slate-400 uppercase tracking-widest text-right">Waktu</th>
+                                        <th class="px-8 py-6 text-[10px] font-bold text-slate-400 font-medium">Admin</th>
+                                        <th class="px-8 py-6 text-[10px] font-bold text-slate-400 font-medium">Aktivitas</th>
+                                        <th class="px-8 py-6 text-[10px] font-bold text-slate-400 font-medium text-right">Waktu</th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-slate-50 dark:divide-white/5">
@@ -172,7 +172,7 @@ v-for="(stat, i) in [
                                             <p class="text-xs font-bold text-slate-600 dark:text-slate-400 leading-relaxed">{{ log.description || log.action }}</p>
                                         </td>
                                         <td class="px-8 py-6 text-right">
-                                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{{ log.created_at_human }}</span>
+                                            <span class="text-[10px] font-bold text-slate-400 font-medium">{{ log.created_at_human }}</span>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -201,7 +201,7 @@ v-for="(stat, i) in [
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <p class="text-sm font-bold text-slate-900 dark:text-white truncate">{{ company.name }}</p>
-                                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{{ company.created_at_human }}</p>
+                                        <p class="text-[10px] font-bold text-slate-400 font-medium">{{ company.created_at_human }}</p>
                                     </div>
                                 </div>
                                 <Link 
@@ -223,7 +223,7 @@ v-for="(stat, i) in [
                         <AlertTriangle class="w-20 h-20 absolute -right-4 -top-4 opacity-10 group-hover:scale-110 transition-transform" />
                         <h3 class="text-xl font-bold mb-4 relative z-10">Security Note</h3>
                         <p class="text-sm font-medium text-white/80 mb-8 relative z-10">Selalu verifikasi legalitas perusahaan sebelum menyetujui akses ke data mahasiswa.</p>
-                        <Link href="/admin/security-guide" class="inline-flex items-center gap-2 bg-white text-red-600 px-6 py-3 rounded-2xl font-bold text-[10px] uppercase tracking-widest hover:bg-red-50 transition-all">
+                        <Link href="/admin/security-guide" class="inline-flex items-center gap-2 bg-white text-red-600 px-6 py-3 rounded-2xl font-bold text-[10px] font-medium hover:bg-red-50 transition-all">
                             Baca Panduan
                         </Link>
                     </div>

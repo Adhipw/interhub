@@ -73,7 +73,7 @@ const toggleFeature = async (flag: any) => {
       <div v-else class="grid grid-cols-1 lg:grid-cols-2 gap-10 animate-fade-in">
         <!-- Feature Flags -->
         <div class="space-y-6">
-          <h3 class="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-widest flex items-center gap-2 px-4">
+          <h3 class="text-sm font-bold text-slate-900 dark:text-white font-medium flex items-center gap-2 px-4">
              <Flag class="w-4 h-4 text-primary-600" />
              Feature Flags
           </h3>
@@ -103,7 +103,7 @@ const toggleFeature = async (flag: any) => {
 
         <!-- System Settings -->
         <div class="space-y-6">
-          <h3 class="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-widest flex items-center gap-2 px-4">
+          <h3 class="text-sm font-bold text-slate-900 dark:text-white font-medium flex items-center gap-2 px-4">
              <Settings class="w-4 h-4 text-primary-600" />
              System Settings
           </h3>
@@ -117,14 +117,14 @@ const toggleFeature = async (flag: any) => {
                      </h4>
                      <p class="text-[10px] text-slate-500">{{ setting.description }}</p>
                   </div>
-                  <span class="px-2 py-1 bg-slate-50 dark:bg-slate-900 rounded text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                  <span class="px-2 py-1 bg-slate-50 dark:bg-slate-900 rounded text-[10px] font-bold text-slate-400 font-medium">
                      {{ setting.group }}
                   </span>
                </div>
 
                <div class="flex items-end gap-3">
                   <div class="flex-1 space-y-1">
-                     <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Value</label>
+                     <label class="text-[10px] font-bold text-slate-400 font-medium">Value</label>
                      <input 
                         v-model="setting.value"
                         :type="setting.is_sensitive ? 'password' : 'text'"

@@ -135,7 +135,7 @@ const runFeature = async (payload = {}) => {
                     </div>
                     <div>
                         <div class="text-sm font-semibold text-gray-900">{{ feature.name }}</div>
-                        <div class="text-[10px] text-gray-400 uppercase tracking-wider">AI Tool</div>
+                        <div class="text-[10px] text-gray-400 font-medium">AI Tool</div>
                     </div>
                 </button>
             </div>
@@ -216,7 +216,7 @@ const runFeature = async (payload = {}) => {
                 <div v-if="result" class="bg-indigo-50/50 rounded-2xl p-4 border border-indigo-100 animate-in fade-in slide-in-from-bottom-2 duration-300">
                     <div class="flex items-center space-x-2 mb-3">
                         <Sparkles class="w-4 h-4 text-indigo-600" />
-                        <span class="text-[10px] font-bold text-indigo-600 uppercase tracking-widest">AI Result</span>
+                        <span class="text-[10px] font-bold text-indigo-600 font-medium">AI Result</span>
                     </div>
                     <div class="prose prose-sm text-gray-700 whitespace-pre-wrap leading-relaxed">
                         {{ result }}

@@ -153,19 +153,19 @@ updateSeo();
 
                                 <div class="grid grid-cols-2 md:grid-cols-4 gap-6 pt-8 border-t border-neutral-100 dark:border-neutral-800">
                                     <div>
-                                        <p class="text-[11px] font-semibold text-neutral-500 uppercase tracking-wider mb-1.5">{{ t('job.stipend') }}</p>
+                                        <p class="text-[11px] font-semibold text-neutral-500 font-medium mb-1.5">{{ t('job.stipend') }}</p>
                                         <p class="text-sm font-semibold text-neutral-900 dark:text-white">{{ internship.stipend || t('job.stipend_default') }}</p>
                                     </div>
                                     <div>
-                                        <p class="text-[11px] font-semibold text-neutral-500 uppercase tracking-wider mb-1.5">{{ t('filters.location_label') }}</p>
+                                        <p class="text-[11px] font-semibold text-neutral-500 font-medium mb-1.5">{{ t('filters.location_label') }}</p>
                                         <p class="text-sm font-semibold text-neutral-900 dark:text-white">{{ internship.location }}</p>
                                     </div>
                                     <div>
-                                        <p class="text-[11px] font-semibold text-neutral-500 uppercase tracking-wider mb-1.5">{{ t('job.deadline_label') }}</p>
+                                        <p class="text-[11px] font-semibold text-neutral-500 font-medium mb-1.5">{{ t('job.deadline_label') }}</p>
                                         <p class="text-sm font-semibold text-rose-600">{{ internship.deadline_at_human || t('job.deadline_urgent') }}</p>
                                     </div>
                                     <div>
-                                        <p class="text-[11px] font-semibold text-neutral-500 uppercase tracking-wider mb-1.5">{{ t('job.published_at') }}</p>
+                                        <p class="text-[11px] font-semibold text-neutral-500 font-medium mb-1.5">{{ t('job.published_at') }}</p>
                                         <p class="text-sm font-semibold text-neutral-900 dark:text-white">{{ internship.created_at_human }}</p>
                                     </div>
                                 </div>
@@ -230,7 +230,7 @@ updateSeo();
 
                         <!-- Company Card -->
                         <div class="bg-white dark:bg-neutral-900 p-6 rounded-2xl border border-neutral-200/60 dark:border-neutral-800 shadow-sm space-y-6">
-                            <h3 class="text-[11px] font-semibold uppercase tracking-wider text-neutral-500">{{ t('company.about') }}</h3>
+                            <h3 class="text-[11px] font-semibold font-medium text-neutral-500">{{ t('company.about') }}</h3>
                             <div class="flex items-center gap-4">
                                 <div class="w-12 h-12 bg-white dark:bg-neutral-950 rounded-lg flex items-center justify-center border border-neutral-200/60 dark:border-neutral-800 shadow-sm shrink-0 overflow-hidden">
                                     <img v-if="internship.company?.logo_url" loading="lazy" decoding="async" :src="internship.company.logo_url" class="w-full h-full object-contain p-2" />

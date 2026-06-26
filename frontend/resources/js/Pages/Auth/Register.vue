@@ -88,7 +88,7 @@ const submit = async () => {
                     @click="form.role = 'user'"
                 >
                     <GraduationCap :class="['w-8 h-8', form.role === 'user' ? 'text-indigo-600' : 'text-slate-400']" />
-                    <span :class="['text-xs font-bold uppercase tracking-widest', form.role === 'user' ? 'text-indigo-600' : 'text-slate-500']">{{ t('auth.role_student_short') }}</span>
+                    <span :class="['text-xs font-bold font-medium', form.role === 'user' ? 'text-indigo-600' : 'text-slate-500']">{{ t('auth.role_student_short') }}</span>
                 </button>
                 <button 
                     type="button"
@@ -101,7 +101,7 @@ const submit = async () => {
                     @click="form.role = 'hr'"
                 >
                     <Building2 :class="['w-8 h-8', form.role === 'hr' ? 'text-indigo-600' : 'text-slate-400']" />
-                    <span :class="['text-xs font-bold uppercase tracking-widest', form.role === 'hr' ? 'text-indigo-600' : 'text-slate-500']">{{ t('auth.role_hr_short') }}</span>
+                    <span :class="['text-xs font-bold font-medium', form.role === 'hr' ? 'text-indigo-600' : 'text-slate-500']">{{ t('auth.role_hr_short') }}</span>
                 </button>
             </div>
 

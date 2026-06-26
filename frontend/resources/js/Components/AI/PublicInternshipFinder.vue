@@ -46,7 +46,7 @@ const search = async () => {
                     </div>
                     <div>
                         <h3 class="text-2xl font-bold text-neutral-900 dark:text-white tracking-tight">AI Assistant</h3>
-                        <p class="text-xs font-bold text-primary-600 uppercase tracking-widest">Powered by Gemini AI</p>
+                        <p class="text-xs font-bold text-primary-600 font-medium">Powered by Gemini AI</p>
                     </div>
                 </div>
 
@@ -62,7 +62,7 @@ const search = async () => {
                     </div>
 
                     <div class="flex flex-col gap-4">
-                        <p class="text-[10px] font-bold text-neutral-400 uppercase tracking-widest flex items-center gap-2">
+                        <p class="text-[10px] font-bold text-neutral-400 font-medium flex items-center gap-2">
                             <Lightbulb class="w-3.5 h-3.5 text-amber-500" />
                             Contoh Prompt:
                         </p>
@@ -151,7 +151,7 @@ const search = async () => {
                     </div>
 
                     <div class="mt-6 pt-6 border-t border-neutral-200 dark:border-neutral-800 flex justify-between items-center">
-                        <span class="text-[10px] font-bold text-neutral-400 uppercase tracking-[0.2em] italic">Dipersembahkan oleh Gemini AI</span>
+                        <span class="text-[10px] font-bold text-neutral-400 uppercase tracking-normal italic">Dipersembahkan oleh Gemini AI</span>
                     </div>
                 </div>
             </div>

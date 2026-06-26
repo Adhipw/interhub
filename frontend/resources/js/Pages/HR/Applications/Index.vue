@@ -105,11 +105,11 @@ watch(statusFilter, () => {
           <table class="w-full text-left">
             <thead class="bg-gray-50 dark:bg-gray-900/50">
               <tr>
-                <th class="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">{{ t('hr.applications.col_candidate') }}</th>
-                <th class="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">{{ t('hr.applications.col_job') }}</th>
-                <th class="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">{{ t('hr.applications.col_date') }}</th>
-                <th class="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">{{ t('hr.applications.col_status') }}</th>
-                <th class="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider text-right">{{ t('hr.applications.col_actions') }}</th>
+                <th class="px-6 py-4 text-xs font-semibold text-gray-500 font-medium">{{ t('hr.applications.col_candidate') }}</th>
+                <th class="px-6 py-4 text-xs font-semibold text-gray-500 font-medium">{{ t('hr.applications.col_job') }}</th>
+                <th class="px-6 py-4 text-xs font-semibold text-gray-500 font-medium">{{ t('hr.applications.col_date') }}</th>
+                <th class="px-6 py-4 text-xs font-semibold text-gray-500 font-medium">{{ t('hr.applications.col_status') }}</th>
+                <th class="px-6 py-4 text-xs font-semibold text-gray-500 font-medium text-right">{{ t('hr.applications.col_actions') }}</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
@@ -121,7 +121,7 @@ watch(statusFilter, () => {
                     </div>
                     <div class="ml-5">
                       <div class="text-sm font-bold text-slate-900 dark:text-white">{{ app.user.name }}</div>
-                      <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">{{ app.user.email }}</div>
+                      <div class="text-[10px] font-bold text-slate-400 font-medium mt-0.5">{{ app.user.email }}</div>
                     </div>
                   </div>
                 </td>
@@ -129,7 +129,7 @@ watch(statusFilter, () => {
                   <div class="text-sm text-slate-900 dark:text-white font-bold">{{ app.internship.title }}</div>
                 </td>
                 <td class="px-8 py-6">
-                  <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{{ app.created_at_human }}</div>
+                  <div class="text-[10px] font-bold text-slate-400 font-medium">{{ app.created_at_human }}</div>
                 </td>
                 <td class="px-8 py-6">
                   <StatusBadge :status="app.status" />

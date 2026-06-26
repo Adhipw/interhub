@@ -77,10 +77,10 @@ const reject = (id: number) => {
           <table class="w-full text-left border-collapse">
             <thead>
               <tr class="bg-slate-50/50 dark:bg-slate-900/50 border-b border-slate-100 dark:border-slate-800">
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Lowongan & Perusahaan</th>
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Sumber</th>
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Tipe & Lokasi</th>
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest text-right">Aksi</th>
+                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">Lowongan & Perusahaan</th>
+                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">Sumber</th>
+                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">Tipe & Lokasi</th>
+                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium text-right">Aksi</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-slate-50 dark:divide-slate-800/50">
@@ -97,7 +97,7 @@ const reject = (id: number) => {
                   </div>
                 </td>
                 <td class="px-8 py-6">
-                  <span class="px-2.5 py-1 bg-slate-100 dark:bg-slate-800 rounded-lg text-[10px] font-bold text-slate-500 uppercase tracking-widest border border-slate-200 dark:border-slate-700">
+                  <span class="px-2.5 py-1 bg-slate-100 dark:bg-slate-800 rounded-lg text-[10px] font-bold text-slate-500 font-medium border border-slate-200 dark:border-slate-700">
                     {{ listing.external_source }}
                   </span>
                 </td>

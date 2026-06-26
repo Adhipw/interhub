@@ -138,9 +138,9 @@ const formatDate = (date: string) => {
                     <table class="w-full text-left border-collapse">
                         <thead>
                             <tr class="bg-slate-50/50 dark:bg-slate-900/50 border-b border-slate-100 dark:border-slate-800">
-                                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Administrator</th>
-                                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Aksi & Deskripsi</th>
-                                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest text-right">Waktu Kejadian</th>
+                                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">Administrator</th>
+                                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">Aksi & Deskripsi</th>
+                                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium text-right">Waktu Kejadian</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-50 dark:divide-slate-700/50">

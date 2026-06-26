@@ -44,12 +44,12 @@ const icon = computed(() => {
     <div class="flex flex-col items-center justify-center py-20 px-4 text-center animate-reveal relative overflow-hidden">
         <!-- Floating decorative elements -->
         <div class="absolute inset-0 pointer-events-none overflow-hidden">
-            <div class="absolute top-10 left-1/4 w-32 h-32 bg-primary-400/20 dark:bg-primary-600/20 rounded-full blur-2xl opacity-50 animate-float" style="animation-delay: 0s;"></div>
-            <div class="absolute bottom-10 right-1/4 w-40 h-40 bg-accent-400/20 dark:bg-accent-600/20 rounded-full blur-2xl opacity-50 animate-float" style="animation-delay: 2s;"></div>
+            
+            
         </div>
 
         <div class="relative mb-10 group">
-            <div class="absolute inset-0 bg-gradient-to-r from-primary-200 to-primary-100 dark:from-primary-900/40 dark:to-primary-800/20 rounded-2xl blur-2xl opacity-60 scale-125 -glow group-hover:opacity-100 transition-opacity duration-700"></div>
+            
             <div class="relative w-28 h-28 glass-premium rounded-2xl flex items-center justify-center transform group-hover:scale-110 group-hover:-rotate-3 group-hover:translate-y-[-5px] transition-all duration-500 ease-out z-10">
                 <component :is="icon" class="w-14 h-14 text-primary-600 dark:text-primary-400 group-hover:text-primary-500 transition-colors" />
             </div>

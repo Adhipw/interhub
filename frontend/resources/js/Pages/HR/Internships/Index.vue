@@ -97,11 +97,11 @@ const deleteInternship = async (id: number) => {
           <table class="w-full text-left">
             <thead class="bg-gray-50 dark:bg-gray-900/50">
               <tr>
-                <th class="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">{{ t('hr.internships.col_job') }}</th>
-                <th class="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">{{ t('hr.internships.col_type_loc') }}</th>
-                <th class="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider text-center">{{ t('hr.internships.col_applicants') }}</th>
-                <th class="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">{{ t('hr.internships.col_status') }}</th>
-                <th class="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider text-right">{{ t('hr.internships.col_actions') }}</th>
+                <th class="px-6 py-4 text-xs font-semibold text-gray-500 font-medium">{{ t('hr.internships.col_job') }}</th>
+                <th class="px-6 py-4 text-xs font-semibold text-gray-500 font-medium">{{ t('hr.internships.col_type_loc') }}</th>
+                <th class="px-6 py-4 text-xs font-semibold text-gray-500 font-medium text-center">{{ t('hr.internships.col_applicants') }}</th>
+                <th class="px-6 py-4 text-xs font-semibold text-gray-500 font-medium">{{ t('hr.internships.col_status') }}</th>
+                <th class="px-6 py-4 text-xs font-semibold text-gray-500 font-medium text-right">{{ t('hr.internships.col_actions') }}</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-100 dark:divide-gray-700">

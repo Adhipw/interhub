@@ -206,7 +206,7 @@ const deleteMember = (id: number) => {
         />
 
         <div>
-          <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Role Anggota</label>
+          <label class="block text-xs font-bold text-slate-400 font-medium mb-2">Role Anggota</label>
           <select v-model="addForm.role" class="w-full rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-sm focus:ring-primary-500 focus:border-primary-500 transition-all h-[42px]">
             <option v-for="role in roles" :key="role.value" :value="role.value">
               {{ role.label }}
@@ -226,7 +226,7 @@ const deleteMember = (id: number) => {
     <Modal :show="showEditModal" :title="`Edit Anggota: ${selectedMember?.user?.name || ''}`" @close="showEditModal = false">
       <form class="p-8 space-y-6" @submit.prevent="submitEdit">
         <div>
-          <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Role Anggota</label>
+          <label class="block text-xs font-bold text-slate-400 font-medium mb-2">Role Anggota</label>
           <select v-model="editForm.role" class="w-full rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-sm focus:ring-primary-500 focus:border-primary-500 transition-all h-[42px]">
             <option v-for="role in roles" :key="role.value" :value="role.value">
               {{ role.label }}

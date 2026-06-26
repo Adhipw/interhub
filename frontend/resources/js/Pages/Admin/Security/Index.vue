@@ -99,9 +99,9 @@ const getSeverityClass = (severity: string) => {
         
         <!-- Server Health Dials Card -->
         <Card class="p-6 border-none shadow-sm relative overflow-hidden group bg-gradient-to-br from-white to-slate-50/50 dark:from-slate-800 dark:to-slate-900/50 transition-all duration-300 hover:shadow-lg">
-          <div class="absolute -right-8 -bottom-8 w-24 h-24 rounded-full bg-indigo-500/5 blur-2xl group-hover:bg-indigo-500/10 transition-all duration-500"></div>
           
-          <h3 class="text-[10px] font-bold text-slate-450 dark:text-slate-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+          
+          <h3 class="text-[10px] font-bold text-slate-450 dark:text-slate-400 font-medium mb-4 flex items-center gap-2">
             <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
             Kesehatan Server (Telemetri Live)
           </h3>
@@ -148,9 +148,9 @@ const getSeverityClass = (severity: string) => {
 
         <!-- Gemini AI API Quota Card -->
         <Card class="p-6 border-none shadow-sm relative overflow-hidden group bg-gradient-to-br from-white to-slate-50/50 dark:from-slate-800 dark:to-slate-900/50 transition-all duration-300 hover:shadow-lg">
-          <div class="absolute -right-8 -bottom-8 w-24 h-24 rounded-full bg-violet-500/5 blur-2xl group-hover:bg-violet-500/10 transition-all duration-500"></div>
+          
 
-          <h3 class="text-[10px] font-bold text-slate-450 dark:text-slate-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+          <h3 class="text-[10px] font-bold text-slate-450 dark:text-slate-400 font-medium mb-4 flex items-center gap-2">
             <Sparkles class="w-3.5 h-3.5 text-violet-500 " />
             Penggunaan Kuota Gemini AI
           </h3>
@@ -179,9 +179,9 @@ const getSeverityClass = (severity: string) => {
 
         <!-- Blocked Attacks Graph Card -->
         <Card class="p-6 border-none shadow-sm relative overflow-hidden group bg-gradient-to-br from-white to-slate-50/50 dark:from-slate-800 dark:to-slate-900/50 transition-all duration-300 hover:shadow-lg">
-          <div class="absolute -right-8 -bottom-8 w-24 h-24 rounded-full bg-rose-500/5 blur-2xl group-hover:bg-rose-500/10 transition-all duration-500"></div>
+          
 
-          <h3 class="text-[10px] font-bold text-slate-450 dark:text-slate-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+          <h3 class="text-[10px] font-bold text-slate-450 dark:text-slate-400 font-medium mb-4 flex items-center gap-2">
             <ShieldAlert class="w-3.5 h-3.5 text-rose-500" />
             Ancaman Keamanan Dicegah (7 Hari Terakhir)
           </h3>
@@ -211,11 +211,11 @@ const getSeverityClass = (severity: string) => {
           <table class="w-full text-left border-collapse">
             <thead>
               <tr class="bg-slate-50/50 dark:bg-slate-900/50 border-b border-slate-100 dark:border-slate-800">
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Waktu</th>
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Event</th>
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Pengguna</th>
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest text-center">Severity</th>
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Region</th>
+                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">Waktu</th>
+                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">Event</th>
+                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">Pengguna</th>
+                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium text-center">Severity</th>
+                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">Region</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-slate-50 dark:divide-slate-800/50">
@@ -242,7 +242,7 @@ const getSeverityClass = (severity: string) => {
                   <span v-else class="text-xs text-slate-400 italic">Guest / System</span>
                 </td>
                 <td class="px-8 py-6 text-center">
-                  <span :class="['px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest border', getSeverityClass(event.severity)]">
+                  <span :class="['px-3 py-1 rounded-full text-[10px] font-bold font-medium border', getSeverityClass(event.severity)]">
                     {{ event.severity }}
                   </span>
                 </td>

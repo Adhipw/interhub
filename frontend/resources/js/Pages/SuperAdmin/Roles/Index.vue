@@ -154,7 +154,7 @@ const togglePermission = (name: string) => {
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
         <!-- Roles List -->
         <div class="lg:col-span-4 space-y-6">
-           <h3 class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] px-4">{{ t('admin.roles.list_title') || 'Daftar Role' }}</h3>
+           <h3 class="text-[10px] font-bold text-slate-400 uppercase tracking-normal px-4">{{ t('admin.roles.list_title') || 'Daftar Role' }}</h3>
            <div class="space-y-3">
               <div 
                 v-for="role in roles" 
@@ -197,7 +197,7 @@ const togglePermission = (name: string) => {
         <!-- Permissions Matrix -->
         <div class="lg:col-span-8">
            <Card v-if="selectedRole" class="!p-10 border-none shadow-2xl !rounded-2xl min-h-[500px] relative overflow-hidden bg-white dark:bg-slate-900">
-              <div class="absolute top-0 right-0 w-64 h-64 bg-primary-500/5 blur-2xl opacity-30 rounded-full -mr-32 -mt-32"></div>
+              
               
               <div class="flex flex-col md:flex-row md:items-center justify-between mb-12 gap-6 relative z-10">
                  <div>
@@ -205,7 +205,7 @@ const togglePermission = (name: string) => {
                        {{ t('admin.roles.permissions_for') || 'Izin Role:' }} 
                        <span class="text-primary-600 capitalize">{{ roles.find(r => r.id === selectedRole)?.name.replace(/_/g, ' ') }}</span>
                     </h2>
-                    <p class="text-xs font-bold text-slate-400 mt-2 uppercase tracking-widest">{{ t('admin.roles.permissions_desc') || 'Centang izin yang ingin diberikan pada role ini.' }}</p>
+                    <p class="text-xs font-bold text-slate-400 mt-2 font-medium">{{ t('admin.roles.permissions_desc') || 'Centang izin yang ingin diberikan pada role ini.' }}</p>
                  </div>
                  <button 
                    :disabled="permissionForm.processing"
@@ -248,7 +248,7 @@ const togglePermission = (name: string) => {
                  <div class="w-24 h-24 bg-white dark:bg-slate-800 rounded-[2rem] shadow-sm flex items-center justify-center mx-auto mb-8">
                     <Key class="w-10 h-10 text-slate-200" />
                  </div>
-                 <p class="text-lg font-bold text-slate-400 uppercase tracking-widest">{{ t('admin.roles.select_prompt') || 'Pilih role untuk mengelola izin.' }}</p>
+                 <p class="text-lg font-bold text-slate-400 font-medium">{{ t('admin.roles.select_prompt') || 'Pilih role untuk mengelola izin.' }}</p>
               </div>
            </div>
         </div>

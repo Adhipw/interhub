@@ -265,7 +265,7 @@ if (props.filters) {
                                             </div>
                                             <div class="flex items-center gap-2 text-rose-500 bg-rose-50 dark:bg-rose-900/10 px-3 py-1 rounded-lg border border-rose-100 dark:border-rose-900/20">
                                                 <Clock class="w-3.5 h-3.5" />
-                                                <span class="text-[10px] uppercase tracking-wider">{{ t('job.deadline_label') }}: {{ internship.deadline_at_human || 'Segera' }}</span>
+                                                <span class="text-[10px] font-medium">{{ t('job.deadline_label') }}: {{ internship.deadline_at_human || 'Segera' }}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -273,7 +273,7 @@ if (props.filters) {
                                     <!-- Action -->
                                     <div class="shrink-0 flex items-center justify-between md:justify-end gap-4 lg:gap-10 pt-4 md:pt-0 border-t md:border-t-0 border-neutral-50 dark:border-neutral-800">
                                         <div class="text-right flex flex-col items-end">
-                                            <p class="text-[9px] font-bold text-neutral-400 uppercase tracking-widest mb-1">{{ t('job.stipend') }}</p>
+                                            <p class="text-[9px] font-bold text-neutral-400 font-medium mb-1">{{ t('job.stipend') }}</p>
                                             <p class="text-base md:text-xl font-bold text-neutral-900 dark:text-white leading-none">{{ internship.stipend || t('job.stipend_default') }}</p>
                                         </div>
                                         <div class="w-14 h-14 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 rounded-full flex items-center justify-center group-hover:bg-primary-600 group-hover:text-white group-hover:translate-x-3 transition-all shadow-xl">

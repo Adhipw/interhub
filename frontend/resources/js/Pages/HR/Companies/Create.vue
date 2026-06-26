@@ -81,7 +81,7 @@ const submit = async () => {
           </div>
 
           <div>
-            <label class="block text-sm font-bold text-slate-700 dark:text-slate-400 uppercase tracking-wider ml-1 mb-1">Deskripsi Perusahaan</label>
+            <label class="block text-sm font-bold text-slate-700 dark:text-slate-400 font-medium ml-1 mb-1">Deskripsi Perusahaan</label>
             <textarea 
               v-model="form.description"
               rows="5"

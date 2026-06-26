@@ -80,12 +80,12 @@ onUnmounted(() => {
           <p class="text-slate-500 dark:text-slate-400 font-medium">Pantau pertumbuhan ekosistem InternHub secara real-time.</p>
         </div>
         <div class="flex items-center gap-3 bg-white dark:bg-slate-800 p-2 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-sm">
-           <div class="px-4 py-2 flex items-center gap-2 text-xs font-bold text-slate-400 uppercase tracking-widest border-r border-slate-100 dark:border-slate-700">
+           <div class="px-4 py-2 flex items-center gap-2 text-xs font-bold text-slate-400 font-medium border-r border-slate-100 dark:border-slate-700">
              <Calendar class="w-4 h-4" />
              30 Hari Terakhir
            </div>
            <button 
-             class="px-4 py-2 text-xs font-bold text-primary-600 hover:bg-primary-50 dark:hover:bg-primary-900/20 rounded-xl transition-all uppercase tracking-widest"
+             class="px-4 py-2 text-xs font-bold text-primary-600 hover:bg-primary-50 dark:hover:bg-primary-900/20 rounded-xl transition-all font-medium"
              @click="downloadPDF"
            >
              Unduh PDF
@@ -103,7 +103,7 @@ onUnmounted(() => {
                 <TrendingUp class="w-5 h-5 text-green-500" />
                 Pertumbuhan Pengguna
               </h3>
-              <p class="text-xs text-slate-400 font-medium uppercase tracking-widest mt-1">Harian - 30 Hari Terakhir</p>
+              <p class="text-xs text-slate-400 font-medium font-medium mt-1">Harian - 30 Hari Terakhir</p>
             </div>
             <div class="p-3 bg-green-50 dark:bg-green-900/20 rounded-2xl">
               <ArrowUpRight class="w-5 h-5 text-green-600" />
@@ -139,7 +139,7 @@ onUnmounted(() => {
                </div>
                <span class="text-xs font-bold bg-white/20 px-2 py-1 rounded-lg">High Retention</span>
             </div>
-            <p class="text-xs font-bold text-indigo-100 uppercase tracking-widest mb-1">Total Lamaran</p>
+            <p class="text-xs font-bold text-indigo-100 font-medium mb-1">Total Lamaran</p>
             <p class="text-4xl font-bold mb-6">{{ applicationStats.reduce((a, b) => a + b.total, 0) }}</p>
             <div class="flex gap-2">
                <div v-for="stat in applicationStats.slice(0,3)" :key="stat.status" class="flex-1 bg-white/10 p-2 rounded-xl text-center">
@@ -156,12 +156,12 @@ onUnmounted(() => {
               </div>
               <div>
                 <h4 class="font-bold text-slate-900 dark:text-white">Verifikasi Company</h4>
-                <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Rasio Keamanan</p>
+                <p class="text-[10px] text-slate-400 font-bold font-medium">Rasio Keamanan</p>
               </div>
             </div>
             <div class="space-y-4">
               <div v-for="stat in companyStats" :key="String(stat.is_verified)" class="space-y-2">
-                <div class="flex justify-between text-xs font-bold uppercase tracking-widest">
+                <div class="flex justify-between text-xs font-bold font-medium">
                   <span class="text-slate-500">{{ stat.is_verified ? 'Terverifikasi' : 'Pending' }}</span>
                   <span class="text-slate-900 dark:text-white">{{ stat.total }}</span>
                 </div>

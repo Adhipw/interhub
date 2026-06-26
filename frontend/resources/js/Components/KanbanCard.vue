@@ -71,7 +71,7 @@ const initials = computed(() => {
         <div class="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-white/5">
           <div class="flex items-center gap-3">
              <StatusBadge :status="status" size="sm" />
-             <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-1">
+             <span class="text-[10px] font-bold text-slate-400 font-medium flex items-center gap-1">
                <Clock class="w-3 h-3" />
                {{ date }}
              </span>

@@ -50,7 +50,7 @@ const t = (key: string) => key;
                         class="group bg-white dark:bg-neutral-900 rounded-2xl p-8 border border-neutral-100 dark:border-white/5 hover:border-primary-200 dark:hover:border-primary-900/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary-600/5 relative overflow-hidden"
                     >
                         <!-- Hover Decoration -->
-                        <div class="absolute -right-4 -top-4 w-24 h-24 bg-primary-600/5 rounded-full blur-2xl group-hover:bg-primary-600/10 transition-all"></div>
+                        
 
                         <div class="flex items-start justify-between mb-8">
                             <div class="w-16 h-16 rounded-2xl bg-neutral-50 dark:bg-neutral-800 p-2 flex items-center justify-center border border-neutral-100 dark:border-white/5 shadow-sm group-hover:scale-110 transition-transform duration-500">

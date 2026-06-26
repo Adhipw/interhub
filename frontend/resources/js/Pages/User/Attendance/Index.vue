@@ -195,7 +195,7 @@ onUnmounted(() => {
 
                     <!-- Company Info -->
                     <Card class="mt-6 p-6">
-                        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Lokasi Kantor</h4>
+                        <h4 class="text-xs font-bold text-slate-400 font-medium mb-4">Lokasi Kantor</h4>
                         <p class="font-bold text-slate-800 dark:text-white">{{ activeApplication.internship.company.name }}</p>
                         <p class="text-sm text-slate-500 mt-1">{{ activeApplication.internship.company.location }}</p>
                         <div class="mt-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded border border-blue-100 dark:border-blue-800 text-xs text-blue-700 dark:text-blue-300 flex items-center gap-2">
@@ -220,7 +220,7 @@ onUnmounted(() => {
                         <div v-if="history.data.length > 0" class="overflow-x-auto">
                             <table class="w-full text-left">
                                 <thead>
-                                    <tr class="bg-slate-50 dark:bg-slate-800/50 text-[10px] text-slate-400 uppercase font-bold tracking-[0.2em]">
+                                    <tr class="bg-slate-50 dark:bg-slate-800/50 text-[10px] text-slate-400 uppercase font-bold tracking-normal">
                                         <th class="px-6 py-5">Tanggal</th>
                                         <th class="px-6 py-5">Check-in</th>
                                         <th class="px-6 py-5">Check-out</th>
@@ -246,7 +246,7 @@ onUnmounted(() => {
                                             </Badge>
                                         </td>
                                         <td class="px-6 py-5 text-right">
-                                            <div class="flex items-center justify-end gap-2 text-[10px] font-bold text-emerald-600 uppercase tracking-widest">
+                                            <div class="flex items-center justify-end gap-2 text-[10px] font-bold text-emerald-600 font-medium">
                                                 <CheckCircle2 class="w-4 h-4" /> Verified
                                             </div>
                                         </td>

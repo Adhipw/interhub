@@ -203,7 +203,7 @@ const submitReview = () => {
                     <!-- Sidebar Stats -->
                     <aside class="space-y-6 animate-reveal delay-200 opacity-0">
                         <div class="bg-white dark:bg-neutral-900 p-6 rounded-xl border border-neutral-200/60 dark:border-neutral-800 shadow-sm hover:shadow-md hover:border-primary-200/50 transition-all duration-300">
-                            <h3 class="text-xs font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-6">Statistik Magang</h3>
+                            <h3 class="text-xs font-semibold font-medium text-neutral-500 dark:text-neutral-400 mb-6">Statistik Magang</h3>
                             <div class="space-y-6">
                                 <div>
                                     <p class="text-3xl font-bold text-neutral-900 dark:text-white mb-1">{{ internships.length }}</p>

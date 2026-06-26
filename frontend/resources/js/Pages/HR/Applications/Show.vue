@@ -211,7 +211,7 @@ const verifyDocument = async (id: number, status: string) => {
           <div class="p-6 bg-slate-50 dark:bg-slate-900/50 rounded-2xl border border-slate-100 dark:border-slate-800">
             <div class="flex items-center text-slate-400 mb-3">
               <AcademicCapIcon class="w-4 h-4 mr-2" />
-              <span class="text-[10px] font-bold uppercase tracking-widest">Pendidikan Terakhir</span>
+              <span class="text-[10px] font-bold font-medium">Pendidikan Terakhir</span>
             </div>
             <p class="text-sm font-bold text-slate-900 dark:text-white truncate">
               {{ application.user.detail?.education?.[0]?.institution || 'N/A' }}
@@ -220,7 +220,7 @@ const verifyDocument = async (id: number, status: string) => {
           <div class="p-6 bg-slate-50 dark:bg-slate-900/50 rounded-2xl border border-slate-100 dark:border-slate-800">
             <div class="flex items-center text-slate-400 mb-3">
               <SparklesIcon class="w-4 h-4 mr-2" />
-              <span class="text-[10px] font-bold uppercase tracking-widest">Top Skill</span>
+              <span class="text-[10px] font-bold font-medium">Top Skill</span>
             </div>
             <p class="text-sm font-bold text-slate-900 dark:text-white truncate">
               {{ application.user.detail?.skills?.[0] || 'N/A' }}
@@ -229,7 +229,7 @@ const verifyDocument = async (id: number, status: string) => {
           <div class="p-6 bg-slate-50 dark:bg-slate-900/50 rounded-2xl border border-slate-100 dark:border-slate-800">
             <div class="flex items-center text-slate-400 mb-3">
               <IdentificationIcon class="w-4 h-4 mr-2" />
-              <span class="text-[10px] font-bold uppercase tracking-widest">Kontak</span>
+              <span class="text-[10px] font-bold font-medium">Kontak</span>
             </div>
             <p class="text-sm font-bold text-slate-900 dark:text-white truncate">
               {{ application.user.detail?.phone_number || 'N/A' }}
@@ -241,8 +241,8 @@ const verifyDocument = async (id: number, status: string) => {
         <section class="animate-reveal">
           <div class="p-8 bg-gradient-to-br from-primary-500/5 to-indigo-500/5 dark:from-primary-950/20 dark:to-indigo-950/20 border border-primary-100/50 dark:border-primary-900/30 rounded-2xl shadow-sm relative overflow-hidden">
             <!-- Glassmorphism decorative blur -->
-            <div class="absolute -right-16 -top-16 w-36 h-36 bg-primary-600/10 rounded-full blur-2xl opacity-50"></div>
-            <div class="absolute -left-16 -bottom-16 w-36 h-36 bg-indigo-600/10 rounded-full blur-2xl opacity-50"></div>
+            
+            
 
             <div class="flex items-center justify-between mb-6 relative z-10">
               <div class="flex items-center space-x-3">
@@ -250,7 +250,7 @@ const verifyDocument = async (id: number, status: string) => {
                   <SparklesIcon class="w-5 h-5 text-white " />
                 </div>
                 <div>
-                  <h3 class="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-widest">AI Candidate Smart Summary</h3>
+                  <h3 class="text-xs font-bold text-slate-900 dark:text-white font-medium">AI Candidate Smart Summary</h3>
                   <p class="text-[10px] text-slate-500 dark:text-neutral-400 font-medium">Analisis Resume & Portofolio Otomatis</p>
                 </div>
               </div>
@@ -284,7 +284,7 @@ const verifyDocument = async (id: number, status: string) => {
 
         <!-- Cover Letter / Intro -->
         <section>
-          <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Pesan Pengantar (Cover Letter)</h3>
+          <h3 class="text-xs font-bold text-slate-400 font-medium mb-4">Pesan Pengantar (Cover Letter)</h3>
           <div class="p-8 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl shadow-sm italic leading-relaxed text-slate-700 dark:text-slate-300">
             <p v-if="application.cover_letter" class="whitespace-pre-wrap">{{ application.cover_letter }}</p>
             <p v-else class="text-slate-400 italic">Kandidat tidak menyertakan pesan pengantar.</p>
@@ -293,7 +293,7 @@ const verifyDocument = async (id: number, status: string) => {
 
         <!-- Documents Section -->
         <section>
-          <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Dokumen Pendukung</h3>
+          <h3 class="text-xs font-bold text-slate-400 font-medium mb-4">Dokumen Pendukung</h3>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <a v-if="application.cv_snapshot" :href="'/storage-private/cvs/' + (application.cv_snapshot?.split('/').pop() || '')" target="_blank" class="flex items-center p-5 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl hover:border-primary-500 hover:shadow-md transition-all group">
               <div class="p-3 bg-slate-50 dark:bg-slate-900 rounded-xl group-hover:bg-primary-50 dark:group-hover:bg-primary-900/30 transition-colors">
@@ -319,7 +319,7 @@ const verifyDocument = async (id: number, status: string) => {
         <!-- Onboarding Documents Section (Batch 7) -->
         <section v-if="application.status === 'accepted' || application.status === 'onboarding'">
           <div class="flex items-center justify-between mb-6">
-            <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest">Dokumen Onboarding (Verifikasi)</h3>
+            <h3 class="text-xs font-bold text-slate-400 font-medium">Dokumen Onboarding (Verifikasi)</h3>
             <span class="px-2 py-0.5 bg-primary-50 text-primary-600 text-[10px] font-bold rounded-lg">PROSES ONBOARDING</span>
           </div>
 
@@ -362,7 +362,7 @@ const verifyDocument = async (id: number, status: string) => {
 
         <!-- In-App Messaging Section -->
         <section>
-          <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Pesan Masuk</h3>
+          <h3 class="text-xs font-bold text-slate-400 font-medium mb-4">Pesan Masuk</h3>
           <ApplicationMessages :application-id="application.id" />
         </section>
       </div>
@@ -371,7 +371,7 @@ const verifyDocument = async (id: number, status: string) => {
       <div class="lg:col-span-4 space-y-10">
         <!-- Internal Notes -->
         <section>
-          <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Catatan Internal HR</h3>
+          <h3 class="text-xs font-bold text-slate-400 font-medium mb-4">Catatan Internal HR</h3>
           <div class="p-6 bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800 rounded-2xl">
             <p class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed mb-6">{{ application.hr_notes || 'Belum ada catatan internal.' }}</p>
             <div class="grid grid-cols-1 gap-2">
@@ -387,7 +387,7 @@ const verifyDocument = async (id: number, status: string) => {
 
         <!-- Application Timeline -->
         <section>
-          <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6">Log Aktivitas</h3>
+          <h3 class="text-xs font-bold text-slate-400 font-medium mb-6">Log Aktivitas</h3>
           <div class="space-y-8 relative before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-0.5 before:bg-slate-100 dark:before:bg-slate-800">
             <div v-for="(event, index) in application.timeline" :key="index" class="relative pl-8">
               <div class="absolute left-0 top-1.5 w-[24px] h-[24px] rounded-full bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-700 z-10 flex items-center justify-center">
@@ -412,14 +412,14 @@ const verifyDocument = async (id: number, status: string) => {
             <XCircleIcon v-else class="w-8 h-8" />
           </div>
           <div class="space-y-1">
-            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Keputusan untuk</p>
+            <p class="text-[10px] font-bold text-slate-400 font-medium">Keputusan untuk</p>
             <h4 class="text-xl font-bold text-slate-900 dark:text-white">{{ application.user.name }}</h4>
             <p class="text-sm text-slate-500 font-medium">Posisi: {{ application.internship.title }}</p>
           </div>
         </div>
 
         <div v-if="selectedStatus === 'rejected'" class="space-y-4">
-          <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest">Alasan Penolakan (Human-Friendly)</label>
+          <label class="block text-xs font-bold text-slate-400 font-medium">Alasan Penolakan (Human-Friendly)</label>
           <div class="grid grid-cols-1 gap-2">
             <button 
               v-for="reason in rejectionReasons" 
@@ -434,7 +434,7 @@ const verifyDocument = async (id: number, status: string) => {
         </div>
 
         <div class="space-y-4">
-          <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest">
+          <label class="block text-xs font-bold text-slate-400 font-medium">
             {{ selectedStatus === 'accepted' ? 'Catatan Onboarding / Pesan Selamat' : 'Catatan Tambahan (Internal)' }}
           </label>
           <textarea 
@@ -468,7 +468,7 @@ const verifyDocument = async (id: number, status: string) => {
             required
           />
           <div>
-            <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Tipe Wawancara</label>
+            <label class="block text-xs font-bold text-slate-400 font-medium mb-2">Tipe Wawancara</label>
             <select v-model="interviewForm.type" class="w-full rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-sm focus:ring-primary-500 focus:border-primary-500 transition-all h-[42px]">
               <option value="online">Online (Video Call)</option>
               <option value="offline">Offline (Tatap Muka)</option>
@@ -501,7 +501,7 @@ const verifyDocument = async (id: number, status: string) => {
     <Modal :show="showMentorModal" title="Tugaskan Mentor" @close="showMentorModal = false">
       <form class="p-8 space-y-8" @submit.prevent="submitMentor">
         <div>
-          <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Pilih Mentor Aktif</label>
+          <label class="block text-xs font-bold text-slate-400 font-medium mb-2">Pilih Mentor Aktif</label>
           <select v-model="mentorForm.mentor_user_id" class="w-full rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-sm focus:ring-primary-500 focus:border-primary-500 transition-all h-[42px]">
             <option value="" disabled>Pilih mentor dari daftar...</option>
             <option v-for="mentor in mentors" :key="mentor.id" :value="mentor.user_id">

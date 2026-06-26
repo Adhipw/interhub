@@ -70,7 +70,7 @@ const updateTaskStatus = (taskId: number, currentStatus: string) => {
                 <p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 leading-relaxed mb-4" :class="{'opacity-50': task.status === 'completed'}">{{ task.description }}</p>
                 
                 <div class="p-3 bg-slate-50 dark:bg-slate-900/50 rounded-xl mb-4 border border-slate-100 dark:border-slate-800">
-                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Ditugaskan Kepada</p>
+                    <p class="text-[10px] font-bold text-slate-400 font-medium mb-1">Ditugaskan Kepada</p>
                     <p class="text-xs font-bold text-slate-900 dark:text-white">{{ task.application?.user?.name }}</p>
                     <p class="text-[10px] text-slate-500 mt-0.5">{{ task.application?.internship?.title }}</p>
                 </div>

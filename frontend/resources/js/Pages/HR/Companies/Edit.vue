@@ -90,7 +90,7 @@ const submit = () => {
                     <!-- Identity Section -->
                     <div class="lg:col-span-2 space-y-10">
                         <Card class="!p-10 !rounded-2xl border-slate-100 dark:border-white/5 shadow-premium">
-                            <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-8 flex items-center gap-2">
+                            <h3 class="text-xs font-bold text-slate-400 font-medium mb-8 flex items-center gap-2">
                                 <Building2 class="w-4 h-4" />
                                 Identitas & Brand
                             </h3>
@@ -120,12 +120,12 @@ const submit = () => {
 
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                                     <div class="space-y-3">
-                                        <label class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest ml-1">Nama Perusahaan</label>
+                                        <label class="text-xs font-bold text-slate-500 dark:text-slate-400 font-medium ml-1">Nama Perusahaan</label>
                                         <input v-model="form.name" type="text" class="w-full bg-slate-50 dark:bg-slate-900 border-none rounded-2xl px-6 py-4 text-sm font-bold focus:ring-2 focus:ring-primary-500 shadow-inner" />
                                         <p v-if="form.errors.name" class="text-xs text-red-500 font-bold">{{ form.errors.name }}</p>
                                     </div>
                                     <div class="space-y-3">
-                                        <label class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest ml-1">Industri</label>
+                                        <label class="text-xs font-bold text-slate-500 dark:text-slate-400 font-medium ml-1">Industri</label>
                                         <input v-model="form.industry" type="text" placeholder="Contoh: Teknologi, Perbankan..." class="w-full bg-slate-50 dark:bg-slate-900 border-none rounded-2xl px-6 py-4 text-sm font-bold focus:ring-2 focus:ring-primary-500 shadow-inner" />
                                     </div>
                                 </div>
@@ -133,18 +133,18 @@ const submit = () => {
                         </Card>
 
                         <Card class="!p-10 !rounded-2xl border-slate-100 dark:border-white/5 shadow-premium">
-                            <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-8 flex items-center gap-2">
+                            <h3 class="text-xs font-bold text-slate-400 font-medium mb-8 flex items-center gap-2">
                                 <Globe class="w-4 h-4" />
                                 Lokasi & Kontak
                             </h3>
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                                 <div class="space-y-3">
-                                    <label class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest ml-1">Website</label>
+                                    <label class="text-xs font-bold text-slate-500 dark:text-slate-400 font-medium ml-1">Website</label>
                                     <input v-model="form.website" type="text" placeholder="https://..." class="w-full bg-slate-50 dark:bg-slate-900 border-none rounded-2xl px-6 py-4 text-sm font-bold focus:ring-2 focus:ring-primary-500 shadow-inner" />
                                 </div>
                                 <div class="space-y-3">
-                                    <label class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest ml-1">Alamat Utama</label>
+                                    <label class="text-xs font-bold text-slate-500 dark:text-slate-400 font-medium ml-1">Alamat Utama</label>
                                     <input v-model="form.location" type="text" placeholder="Jakarta, Indonesia" class="w-full bg-slate-50 dark:bg-slate-900 border-none rounded-2xl px-6 py-4 text-sm font-bold focus:ring-2 focus:ring-primary-500 shadow-inner" />
                                 </div>
                             </div>
@@ -154,13 +154,13 @@ const submit = () => {
                     <!-- Description Section -->
                     <div class="lg:col-span-1 space-y-10">
                         <Card class="!p-10 !rounded-2xl border-slate-100 dark:border-white/5 shadow-premium h-full">
-                            <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-8 flex items-center gap-2">
+                            <h3 class="text-xs font-bold text-slate-400 font-medium mb-8 flex items-center gap-2">
                                 <FileText class="w-4 h-4" />
                                 Tentang Perusahaan
                             </h3>
                             
                             <div class="space-y-3">
-                                <label class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest ml-1">Deskripsi Publik</label>
+                                <label class="text-[10px] font-bold text-slate-500 dark:text-slate-400 font-medium ml-1">Deskripsi Publik</label>
                                 <textarea 
                                     v-model="form.description" 
                                     rows="15" 

@@ -364,7 +364,7 @@ const getObjectURL = (file: File | null) => {
         <div class="overflow-x-auto">
           <table class="w-full text-left border-collapse">
             <thead>
-              <tr class="bg-slate-50/50 dark:bg-slate-900/50 border-b border-slate-100 dark:border-slate-800 text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em]">
+              <tr class="bg-slate-50/50 dark:bg-slate-900/50 border-b border-slate-100 dark:border-slate-800 text-[10px] font-bold text-slate-400 uppercase tracking-normal">
                 <th class="px-8 py-6">{{ t('admin.user_mgmt.col_user') }}</th>
                 <th class="px-4 py-6 text-center">{{ t('admin.user_mgmt.col_role') }}</th>
                 <th class="px-4 py-6 text-center">{{ t('admin.user_mgmt.col_status') }}</th>
@@ -562,7 +562,7 @@ const getObjectURL = (file: File | null) => {
                   <span class="text-white text-[10px] font-semibold text-sm tracking-tighter">Ganti Foto</span>
                </label>
             </div>
-            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Foto Profil (Opsional)</p>
+            <p class="text-[10px] font-bold text-slate-400 font-medium">Foto Profil (Opsional)</p>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -687,7 +687,7 @@ const getObjectURL = (file: File | null) => {
                   <span class="text-white text-[10px] font-semibold text-sm tracking-tighter">Ganti Foto</span>
                </label>
             </div>
-            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Update Foto Profil</p>
+            <p class="text-[10px] font-bold text-slate-400 font-medium">Update Foto Profil</p>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -723,7 +723,7 @@ const getObjectURL = (file: File | null) => {
           </div>
 
           <div class="p-6 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-dashed border-slate-200 dark:border-slate-700">
-            <p class="text-xs font-bold text-slate-400 mb-4 flex items-center gap-2 uppercase tracking-widest">
+            <p class="text-xs font-bold text-slate-400 mb-4 flex items-center gap-2 font-medium">
               <Lock class="w-3 h-3" /> Ubah Password (Kosongkan jika tidak ingin diubah)
             </p>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">

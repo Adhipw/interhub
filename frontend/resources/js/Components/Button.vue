@@ -33,7 +33,7 @@ const variants = {
 };
 
 const sizes = {
-    xs: "px-3 py-1.5 text-[10px] uppercase tracking-widest rounded-lg",
+    xs: "px-3 py-1.5 text-[10px] font-medium rounded-lg",
     sm: "px-4 py-2 text-xs rounded-xl",
     md: "px-6 py-3 text-sm rounded-2xl",
     lg: "px-8 py-4 text-base rounded-2xl",

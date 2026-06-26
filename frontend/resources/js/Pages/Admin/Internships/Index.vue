@@ -199,11 +199,11 @@ onMounted(() => {
           <table class="w-full text-left border-collapse">
             <thead>
               <tr class="bg-slate-50/50 dark:bg-slate-900/50 border-b border-slate-100 dark:border-slate-800">
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest">{{ t('admin.internships.col_internship') }}</th>
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest">{{ t('admin.internships.col_company') }}</th>
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest text-center">{{ t('admin.internships.col_status') }}</th>
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest">{{ t('admin.internships.col_posted') }}</th>
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest text-right">{{ t('admin.internships.col_actions') }}</th>
+                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">{{ t('admin.internships.col_internship') }}</th>
+                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">{{ t('admin.internships.col_company') }}</th>
+                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium text-center">{{ t('admin.internships.col_status') }}</th>
+                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">{{ t('admin.internships.col_posted') }}</th>
+                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium text-right">{{ t('admin.internships.col_actions') }}</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-slate-50 dark:divide-slate-800/50">
@@ -315,7 +315,7 @@ onMounted(() => {
                 <Sparkles class="w-5 h-5 " />
               </div>
               <div>
-                <h3 class="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-widest">Moderasi Cepat AI</h3>
+                <h3 class="text-sm font-bold text-slate-900 dark:text-white font-medium">Moderasi Cepat AI</h3>
                 <p class="text-[10px] text-slate-500 font-medium">Asisten Tinjau Otomatis InternHub</p>
               </div>
             </div>
@@ -366,7 +366,7 @@ onMounted(() => {
 
             <!-- Job Description Detail -->
             <div class="space-y-3">
-              <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Deskripsi Posisi</label>
+              <label class="text-[10px] font-bold text-slate-400 font-medium ml-1">Deskripsi Posisi</label>
               <div class="p-5 bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800 rounded-2xl text-xs leading-relaxed text-slate-700 dark:text-slate-350 shadow-inner whitespace-pre-wrap max-h-48 overflow-y-auto">
                 {{ selectedJobForReview.description || 'Tidak ada deskripsi.' }}
               </div>
@@ -374,7 +374,7 @@ onMounted(() => {
 
             <!-- Requirements Detail -->
             <div class="space-y-3">
-              <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Persyaratan & Keahlian</label>
+              <label class="text-[10px] font-bold text-slate-400 font-medium ml-1">Persyaratan & Keahlian</label>
               <div class="p-5 bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800 rounded-2xl text-xs leading-relaxed text-slate-700 dark:text-slate-350 shadow-inner max-h-48 overflow-y-auto">
                 <ul v-if="selectedJobForReview.requirements && selectedJobForReview.requirements.length > 0" class="list-disc pl-4 space-y-1">
                   <li v-for="(req, reqIdx) in selectedJobForReview.requirements" :key="reqIdx">

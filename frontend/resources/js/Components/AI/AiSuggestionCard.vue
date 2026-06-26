@@ -29,6 +29,6 @@ defineEmits(['click']);
         </div>
         
         <!-- Subtle AI Badge -->
-        <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-blue-50/30 rounded-full blur-2xl group-hover:bg-blue-100/50 transition-colors"></div>
+        
     </div>
 </template>

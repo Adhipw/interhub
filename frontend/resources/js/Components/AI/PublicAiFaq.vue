@@ -46,7 +46,7 @@ const ask = async (q) => {
                 </div>
                 <div>
                     <h3 class="text-xl font-bold text-white tracking-tight">AI FAQ Support</h3>
-                    <p class="text-[10px] font-bold text-indigo-400 uppercase tracking-widest flex items-center gap-1">
+                    <p class="text-[10px] font-bold text-indigo-400 font-medium flex items-center gap-1">
                         <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-ping"></span>
                         Online Sekarang
                     </p>
@@ -92,7 +92,7 @@ v-for="(msg, i) in conversation" :key="i"
                 <button 
                     v-for="q in quickQuestions" 
                     :key="q"
-                    class="px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full text-[10px] font-bold text-neutral-400 hover:text-white transition-all uppercase tracking-widest"
+                    class="px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full text-[10px] font-bold text-neutral-400 hover:text-white transition-all font-medium"
                     @click="ask(q)"
                 >
                     {{ q }}

@@ -335,19 +335,19 @@ type="file" class="hidden" accept="image/*" @change="(e: Event) => {
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div class="space-y-2">
-                                    <label class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest">Institusi</label>
+                                    <label class="text-xs font-bold text-slate-500 dark:text-slate-400 font-medium">Institusi</label>
                                     <input v-model="edu.school" type="text" placeholder="Universitas Indonesia" class="w-full bg-white dark:bg-slate-800 border-none rounded-xl px-4 py-3 text-sm font-medium text-slate-900 dark:text-white focus:ring-2 focus:ring-primary-500 shadow-sm" />
                                 </div>
                                 <div class="space-y-2">
-                                    <label class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest">Gelar</label>
+                                    <label class="text-xs font-bold text-slate-500 dark:text-slate-400 font-medium">Gelar</label>
                                     <input v-model="edu.degree" type="text" placeholder="S1 Teknik Informatika" class="w-full bg-white dark:bg-slate-800 border-none rounded-xl px-4 py-3 text-sm font-medium text-slate-900 dark:text-white focus:ring-2 focus:ring-primary-500 shadow-sm" />
                                 </div>
                                 <div class="space-y-2">
-                                    <label class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest">Tahun Mulai</label>
+                                    <label class="text-xs font-bold text-slate-500 dark:text-slate-400 font-medium">Tahun Mulai</label>
                                     <input v-model="edu.start_year" type="number" class="w-full bg-white dark:bg-slate-800 border-none rounded-xl px-4 py-3 text-sm font-medium text-slate-900 dark:text-white focus:ring-2 focus:ring-primary-500 shadow-sm" />
                                 </div>
                                 <div class="space-y-2">
-                                    <label class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest">Tahun Lulus (Kosongkan jika aktif)</label>
+                                    <label class="text-xs font-bold text-slate-500 dark:text-slate-400 font-medium">Tahun Lulus (Kosongkan jika aktif)</label>
                                     <input v-model="edu.end_year" type="number" class="w-full bg-white dark:bg-slate-800 border-none rounded-xl px-4 py-3 text-sm font-medium text-slate-900 dark:text-white focus:ring-2 focus:ring-primary-500 shadow-sm" />
                                 </div>
                             </div>

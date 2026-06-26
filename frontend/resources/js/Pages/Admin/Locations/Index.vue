@@ -113,10 +113,10 @@ onMounted(() => {
               <table class="w-full text-left border-collapse">
                 <thead>
                   <tr class="bg-slate-50/50 dark:bg-slate-900/50 border-b border-slate-100 dark:border-slate-800">
-                    <th class="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest">{{ t('admin.locations.col_name') }}</th>
-                    <th class="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest">{{ t('admin.locations.col_type') }}</th>
-                    <th class="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest text-center">{{ t('admin.locations.col_status') }}</th>
-                    <th class="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest text-right">{{ t('admin.locations.col_actions') }}</th>
+                    <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">{{ t('admin.locations.col_name') }}</th>
+                    <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">{{ t('admin.locations.col_type') }}</th>
+                    <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium text-center">{{ t('admin.locations.col_status') }}</th>
+                    <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium text-right">{{ t('admin.locations.col_actions') }}</th>
                   </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-50 dark:divide-slate-800/50">
@@ -128,12 +128,12 @@ onMounted(() => {
                       </div>
                     </td>
                     <td class="px-8 py-6">
-                      <span class="text-xs font-bold text-slate-500 uppercase tracking-widest">{{ loc.type }}</span>
+                      <span class="text-xs font-bold text-slate-500 font-medium">{{ loc.type }}</span>
                     </td>
                     <td class="px-8 py-6 text-center">
                       <div class="flex items-center justify-center">
                         <button 
-                          class="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all"
+                          class="px-3 py-1 rounded-full text-[10px] font-bold font-medium transition-all"
                           :class="loc.is_active ? 'bg-green-50 text-green-600 hover:bg-green-100' : 'bg-slate-100 text-slate-400 hover:bg-slate-200'"
                           @click="toggleStatus(loc.id)"
                         >
@@ -167,18 +167,18 @@ onMounted(() => {
 
         <!-- Add Location Form -->
         <Card class="p-8 border-none shadow-sm h-fit">
-          <h3 class="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-widest mb-6 flex items-center">
+          <h3 class="text-sm font-bold text-slate-900 dark:text-white font-medium mb-6 flex items-center">
             <Plus class="w-4 h-4 mr-2 text-primary-600" />
             {{ t('admin.locations.form_title') }}
           </h3>
           <form class="space-y-6" @submit.prevent="submit">
             <div class="space-y-1">
-               <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{{ t('admin.locations.label_name') }}</label>
+               <label class="text-[10px] font-bold text-slate-400 font-medium">{{ t('admin.locations.label_name') }}</label>
                <input v-model="form.name" type="text" :placeholder="t('admin.locations.placeholder_name')" class="w-full bg-slate-50 dark:bg-slate-900 dark:text-white border-none rounded-xl text-sm p-4 focus:ring-2 focus:ring-primary-500/20" required />
                <p v-if="form.errors.name" class="text-[10px] text-red-500 font-bold mt-1">{{ form.errors.name[0] }}</p>
             </div>
             <div class="space-y-1">
-               <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{{ t('admin.locations.label_type') }}</label>
+               <label class="text-[10px] font-bold text-slate-400 font-medium">{{ t('admin.locations.label_type') }}</label>
                <select v-model="form.type" class="w-full bg-slate-50 dark:bg-slate-900 dark:text-white border-none rounded-xl text-sm p-4 focus:ring-2 focus:ring-primary-500/20">
                   <option value="city">{{ t('admin.locations.type_city') }}</option>
                   <option value="province">{{ t('admin.locations.type_province') }}</option>

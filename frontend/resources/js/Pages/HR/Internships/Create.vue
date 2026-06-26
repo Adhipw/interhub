@@ -112,7 +112,7 @@ const submit = () => {
         <!-- Section: Basic Info -->
         <section class="space-y-6">
           <div class="pb-2 border-b border-slate-100 dark:border-slate-800">
-            <h3 class="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-widest">{{ t('hr.internships.basic_info') }}</h3>
+            <h3 class="text-sm font-bold text-slate-900 dark:text-white font-medium">{{ t('hr.internships.basic_info') }}</h3>
           </div>
           
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -127,7 +127,7 @@ const submit = () => {
             </div>
 
             <div>
-              <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Bidang Industri</label>
+              <label class="block text-xs font-bold text-slate-400 font-medium mb-2">Bidang Industri</label>
               <select v-model="form.industry_id" class="w-full rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-sm focus:ring-primary-500 focus:border-primary-500 h-[48px] transition-all px-4 font-semibold" required>
                 <option value="">Pilih Industri</option>
                 <option v-for="industry in industries" :key="industry.id" :value="industry.id">
@@ -138,7 +138,7 @@ const submit = () => {
             </div>
 
             <div>
-              <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Tipe Magang</label>
+              <label class="block text-xs font-bold text-slate-400 font-medium mb-2">Tipe Magang</label>
               <select v-model="form.type" class="w-full rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-sm focus:ring-primary-500 focus:border-primary-500 h-[48px] transition-all px-4 font-semibold">
                 <option value="Office">Office (WFO)</option>
                 <option value="WFH">Remote (WFH)</option>
@@ -149,11 +149,11 @@ const submit = () => {
             <div class="md:col-span-2 grid grid-cols-1 gap-6">
               <div class="space-y-4">
                 <div class="flex items-center justify-between">
-                  <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest">{{ t('common.location') }}</label>
+                  <label class="block text-xs font-bold text-slate-400 font-medium">{{ t('common.location') }}</label>
                   <button 
                     type="button"
                     :disabled="detecting"
-                    class="text-[10px] font-bold text-primary-600 uppercase tracking-widest flex items-center gap-1.5 hover:text-primary-700 transition-colors disabled:opacity-50"
+                    class="text-[10px] font-bold text-primary-600 font-medium flex items-center gap-1.5 hover:text-primary-700 transition-colors disabled:opacity-50"
                     @click="detectLocation"
                   >
                     <MapPinIcon v-if="!detecting" class="w-3.5 h-3.5" />
@@ -173,7 +173,7 @@ const submit = () => {
               <div class="pt-2">
                 <button 
                   type="button" 
-                  class="text-[10px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2 hover:text-slate-600 transition-colors"
+                  class="text-[10px] font-bold text-slate-400 font-medium flex items-center gap-2 hover:text-slate-600 transition-colors"
                   @click="showCoordinates = !showCoordinates"
                 >
                   <span>{{ showCoordinates ? '− Sembunyikan Koordinat' : '+ Tambahkan Koordinat Map (Opsional)' }}</span>
@@ -209,12 +209,12 @@ const submit = () => {
         <!-- Section: Content -->
         <section class="space-y-6">
           <div class="pb-2 border-b border-slate-100 dark:border-slate-800">
-            <h3 class="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-widest">{{ t('internships.job_desc') }} & {{ t('hr.internships.requirements') }}</h3>
+            <h3 class="text-sm font-bold text-slate-900 dark:text-white font-medium">{{ t('internships.job_desc') }} & {{ t('hr.internships.requirements') }}</h3>
           </div>
           
           <div class="space-y-6">
             <div>
-              <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">{{ t('hr.internships.about_role') }}</label>
+              <label class="block text-xs font-bold text-slate-400 font-medium mb-2">{{ t('hr.internships.about_role') }}</label>
               <textarea 
                 v-model="form.description"
                 rows="6"
@@ -227,7 +227,7 @@ const submit = () => {
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">{{ t('internships.main_qualifications') }}</label>
+                <label class="block text-xs font-bold text-slate-400 font-medium mb-2">{{ t('internships.main_qualifications') }}</label>
                 <textarea 
                   v-model="form.requirements"
                   rows="4"
@@ -236,7 +236,7 @@ const submit = () => {
                 ></textarea>
               </div>
               <div>
-                <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">{{ t('hr.internships.benefits') }}</label>
+                <label class="block text-xs font-bold text-slate-400 font-medium mb-2">{{ t('hr.internships.benefits') }}</label>
                 <textarea 
                   v-model="form.benefits"
                   rows="4"
@@ -251,12 +251,12 @@ const submit = () => {
         <!-- Section: Settings -->
         <section class="space-y-6">
           <div class="pb-2 border-b border-slate-100 dark:border-slate-800">
-            <h3 class="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-widest">{{ t('common.settings') }} & {{ t('internships.deadline') }}</h3>
+            <h3 class="text-sm font-bold text-slate-900 dark:text-white font-medium">{{ t('common.settings') }} & {{ t('internships.deadline') }}</h3>
           </div>
           
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
             <div class="space-y-2">
-              <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Benefit Gaji/Uang Saku</label>
+              <label class="block text-xs font-bold text-slate-400 font-medium mb-2">Benefit Gaji/Uang Saku</label>
               <label class="flex items-center gap-3 cursor-pointer group p-3 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-100 dark:border-slate-800">
                 <input v-model="form.is_paid" type="checkbox" class="w-5 h-5 rounded border-slate-300 text-primary-600 focus:ring-primary-500" />
                 <span class="text-sm font-bold text-slate-700 dark:text-slate-200">Magang Berbayar</span>
@@ -279,7 +279,7 @@ const submit = () => {
               :error="form.errors.deadline_at"
             />
             <div>
-              <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">{{ t('hr.internships.pub_status') }}</label>
+              <label class="block text-xs font-bold text-slate-400 font-medium mb-2">{{ t('hr.internships.pub_status') }}</label>
               <select v-model="form.status" class="w-full rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-sm focus:ring-primary-500 focus:border-primary-500 h-[42px] transition-all">
                 <option value="published">{{ t('hr.internships.pub_now') }}</option>
                 <option value="draft">{{ t('common.save_as_draft') }}</option>

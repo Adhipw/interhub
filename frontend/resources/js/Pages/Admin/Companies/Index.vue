@@ -140,7 +140,7 @@ const handleConfirmedAction = async (companyId: number) => {
                  <Building2 v-else class="w-8 h-8" />
               </div>
               <div 
-                class="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest flex items-center gap-1"
+                class="px-3 py-1 rounded-full text-[10px] font-bold font-medium flex items-center gap-1"
                 :class="company.is_verified ? 'bg-green-50 text-green-600' : 'bg-orange-50 text-orange-600'"
               >
                 <CheckCircle2 v-if="company.is_verified" class="w-3 h-3" />

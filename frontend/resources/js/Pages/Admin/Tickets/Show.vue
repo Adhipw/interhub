@@ -36,7 +36,7 @@ const submitResolution = () => {
 <template>
     <DashboardLayout>
         <div class="space-y-8 animate-fade-in max-w-4xl mx-auto">
-            <Link href="/admin/tickets" class="inline-flex items-center gap-2 text-xs font-bold text-slate-500 uppercase tracking-widest hover:text-slate-900 transition-colors">
+            <Link href="/admin/tickets" class="inline-flex items-center gap-2 text-xs font-bold text-slate-500 font-medium hover:text-slate-900 transition-colors">
                 <ArrowLeft class="w-4 h-4" />
                 Kembali ke Daftar
             </Link>
@@ -54,7 +54,7 @@ const submitResolution = () => {
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="md:col-span-2 space-y-6">
                     <Card class="p-8 border-none shadow-premium rounded-2xl">
-                        <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Laporan</h2>
+                        <h2 class="text-xs font-bold text-slate-400 font-medium mb-4">Laporan</h2>
                         <div class="p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl mb-6">
                             <p class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-medium">
                                 {{ ticket.description }}
@@ -62,25 +62,25 @@ const submitResolution = () => {
                         </div>
                         <div class="flex items-center gap-6">
                             <div>
-                                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Kategori</p>
+                                <p class="text-[10px] font-bold text-slate-400 font-medium mb-1">Kategori</p>
                                 <p class="text-sm font-bold text-slate-900 dark:text-white">{{ ticket.category }}</p>
                             </div>
                             <div>
-                                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Pelapor</p>
+                                <p class="text-[10px] font-bold text-slate-400 font-medium mb-1">Pelapor</p>
                                 <p class="text-sm font-bold text-slate-900 dark:text-white">{{ ticket.reporter.name }}</p>
                             </div>
                             <div v-if="ticket.reportedUser">
-                                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Terlapor</p>
+                                <p class="text-[10px] font-bold text-slate-400 font-medium mb-1">Terlapor</p>
                                 <p class="text-sm font-bold text-slate-900 dark:text-white">{{ ticket.reportedUser.name }}</p>
                             </div>
                         </div>
                     </Card>
 
                     <Card class="p-8 border-none shadow-premium rounded-2xl bg-indigo-50/50 dark:bg-indigo-900/10">
-                        <h2 class="text-xs font-bold text-indigo-400 uppercase tracking-widest mb-4">Resolusi Admin</h2>
+                        <h2 class="text-xs font-bold text-indigo-400 font-medium mb-4">Resolusi Admin</h2>
                         <form class="space-y-6" @submit.prevent="submitResolution">
                             <div>
-                                <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest ml-1 block mb-2">Ubah Status</label>
+                                <label class="text-[10px] font-bold text-slate-500 font-medium ml-1 block mb-2">Ubah Status</label>
                                 <select v-model="form.status" class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl text-sm p-4 outline-none focus:ring-4 focus:ring-indigo-500/20">
                                     <option value="open">Open</option>
                                     <option value="investigating">Investigating</option>
@@ -89,7 +89,7 @@ const submitResolution = () => {
                                 </select>
                             </div>
                             <div>
-                                <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest ml-1 block mb-2">Catatan Resolusi</label>
+                                <label class="text-[10px] font-bold text-slate-500 font-medium ml-1 block mb-2">Catatan Resolusi</label>
                                 <textarea v-model="form.resolution_notes" rows="4" placeholder="Tulis catatan penyelesaian atau sanksi di sini..." class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl text-sm p-4 outline-none focus:ring-4 focus:ring-indigo-500/20"></textarea>
                             </div>
                             <div class="flex justify-end">
@@ -104,7 +104,7 @@ const submitResolution = () => {
                 
                 <div class="space-y-6">
                     <Card class="p-6 border-none shadow-sm rounded-[2rem] bg-slate-50 dark:bg-slate-800/50">
-                        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Informasi Pelapor</h3>
+                        <h3 class="text-xs font-bold text-slate-400 font-medium mb-4">Informasi Pelapor</h3>
                         <div class="space-y-3">
                             <p class="text-sm font-bold text-slate-900">{{ ticket.reporter.name }}</p>
                             <p class="text-xs text-slate-500">{{ ticket.reporter.email }}</p>
@@ -112,7 +112,7 @@ const submitResolution = () => {
                     </Card>
 
                     <Card v-if="ticket.reportedUser" class="p-6 border-none shadow-sm rounded-[2rem] border border-red-100 dark:border-red-900/30">
-                        <h3 class="text-xs font-bold text-red-400 uppercase tracking-widest mb-4">Informasi Terlapor</h3>
+                        <h3 class="text-xs font-bold text-red-400 font-medium mb-4">Informasi Terlapor</h3>
                         <div class="space-y-3">
                             <p class="text-sm font-bold text-slate-900">{{ ticket.reportedUser.name }}</p>
                             <p class="text-xs text-slate-500">{{ ticket.reportedUser.email }}</p>

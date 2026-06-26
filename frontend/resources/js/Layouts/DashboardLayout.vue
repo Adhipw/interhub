@@ -346,7 +346,7 @@ const navigation = computed(() => {
                     </div>
                     <div class="overflow-hidden">
                         <p class="text-xs font-bold text-neutral-900 dark:text-white truncate">{{ user.name }}</p>
-                        <p class="text-[10px] font-bold text-neutral-400 uppercase tracking-widest truncate">{{ roleLabel }}</p>
+                        <p class="text-[10px] font-bold text-neutral-400 font-medium truncate">{{ roleLabel }}</p>
                     </div>
                 </div>
                 
@@ -439,10 +439,10 @@ const navigation = computed(() => {
                             @click.stop
                         >
                             <div class="flex items-center justify-between mb-6 border-b border-neutral-50 dark:border-neutral-800 pb-4">
-                                <h4 class="text-xs font-bold text-neutral-900 dark:text-white uppercase tracking-widest">{{ t('sidebar.notifications') }}</h4>
+                                <h4 class="text-xs font-bold text-neutral-900 dark:text-white font-medium">{{ t('sidebar.notifications') }}</h4>
                                 <span 
                                     v-if="notifications.length > 0"
-                                    class="text-[10px] font-bold text-primary-600 uppercase tracking-widest cursor-pointer hover:underline"
+                                    class="text-[10px] font-bold text-primary-600 font-medium cursor-pointer hover:underline"
                                     @click="markAllAsRead"
                                 >
                                     {{ t('sidebar.mark_all_read') }}
@@ -463,7 +463,7 @@ const navigation = computed(() => {
                                 <p class="text-[10px] font-medium text-neutral-500 mt-1">
                                         {{ note.data?.message || note.message || t('sidebar.notification_default_message') }}
                                 </p>
-                                    <p class="text-[9px] font-bold text-neutral-400 mt-2 uppercase tracking-widest">
+                                    <p class="text-[9px] font-bold text-neutral-400 mt-2 font-medium">
                                         {{ note.created_at_human || note.time }}
                                     </p>
                                 </div>
@@ -479,7 +479,7 @@ const navigation = computed(() => {
                     <Link :href="profileHref" class="flex items-center gap-3 pl-2 group">
                         <div class="text-right hidden sm:block">
                             <p class="text-xs font-bold text-neutral-900 dark:text-white truncate">{{ user.name }}</p>
-                            <p class="text-[9px] font-bold text-primary-600 uppercase tracking-widest truncate">{{ roleLabel }}</p>
+                            <p class="text-[9px] font-bold text-primary-600 font-medium truncate">{{ roleLabel }}</p>
                         </div>
                         <div class="w-12 h-12 rounded-2xl bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 flex items-center justify-center group-hover:scale-105 transition-transform overflow-hidden">
                             <img v-if="user.avatar_url" loading="lazy" decoding="async" :src="user.avatar_url" class="w-full h-full object-cover" />
@@ -490,11 +490,15 @@ const navigation = computed(() => {
             </header>
 
             <!-- Dashboard Content -->
-            <div class="p-8 lg:p-12 animate-reveal">
+            <div class="p-8 lg:p-12">
                 <div v-if="$slots.header" class="mb-8">
                     <slot name="header" />
                 </div>
-                <slot />
+                <Transition name="page" mode="out-in" appear>
+                    <div :key="$page.url" class="w-full">
+                        <slot />
+                    </div>
+                </Transition>
             </div>
         </main>
 
@@ -538,12 +542,12 @@ const navigation = computed(() => {
                     </div>
                     <div>
                         <h4 class="text-sm font-bold text-neutral-900 dark:text-white">{{ user.name }}</h4>
-                        <p class="text-[10px] font-bold text-primary-600 uppercase tracking-widest">{{ roleLabel }}</p>
+                        <p class="text-[10px] font-bold text-primary-600 font-medium">{{ roleLabel }}</p>
                     </div>
                 </div>
 
                 <div v-if="extraNavItems.length > 0" class="space-y-2 mb-8">
-                    <h5 class="text-xs font-bold text-neutral-400 uppercase tracking-widest mb-4 px-2">Menu Lainnya</h5>
+                    <h5 class="text-xs font-bold text-neutral-400 font-medium mb-4 px-2">Menu Lainnya</h5>
                     <Link 
                         v-for="item in extraNavItems" 
                         :key="item.name" 
@@ -561,14 +565,14 @@ const navigation = computed(() => {
                     <button class="p-4 rounded-2xl bg-neutral-50 dark:bg-neutral-800/50 flex flex-col items-center gap-3 text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors" @click="toggleDarkMode">
                         <Sun v-if="isDarkMode" class="w-6 h-6" />
                         <Moon v-else class="w-6 h-6" />
-                        <span class="text-[10px] font-bold uppercase tracking-widest">{{ isDarkMode ? 'Mode Terang' : 'Mode Gelap' }}</span>
+                        <span class="text-[10px] font-bold font-medium">{{ isDarkMode ? 'Mode Terang' : 'Mode Gelap' }}</span>
                     </button>
                     <div class="p-4 rounded-2xl bg-neutral-50 dark:bg-neutral-800/50 flex flex-col items-center justify-center gap-3">
                         <div class="flex gap-2 bg-white dark:bg-neutral-900 p-1 rounded-xl shadow-sm">
                             <button class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all" :class="langStore.locale === 'id' ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-600' : 'text-neutral-400 hover:text-neutral-600'" @click="langStore.setLocale('id')">ID</button>
                             <button class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all" :class="langStore.locale === 'en' ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-600' : 'text-neutral-400 hover:text-neutral-600'" @click="langStore.setLocale('en')">EN</button>
                         </div>
-                        <span class="text-[10px] font-bold text-neutral-500 dark:text-neutral-400 uppercase tracking-widest">Bahasa</span>
+                        <span class="text-[10px] font-bold text-neutral-500 dark:text-neutral-400 font-medium">Bahasa</span>
                     </div>
                 </div>
 

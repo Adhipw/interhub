@@ -174,7 +174,7 @@ onUnmounted(() => {
                     </button>
                     <Card glass class="!p-4 !rounded-2xl border-white/50 flex items-center gap-4">
                         <div class="w-3 h-3 rounded-full bg-indigo-500 shadow-[0_0_15px_rgba(99,102,241,0.5)]"></div>
-                        <span class="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-widest">{{ t('super_admin.dashboard.master_key_active') }}</span>
+                        <span class="text-xs font-bold text-slate-700 dark:text-slate-300 font-medium">{{ t('super_admin.dashboard.master_key_active') }}</span>
                     </Card>
                 </div>
             </div>
@@ -191,7 +191,7 @@ onUnmounted(() => {
                         <div :class="['w-14 h-14 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-all', stat.bg, stat.color]">
                             <component :is="stat.icon" class="w-6 h-6" />
                         </div>
-                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">{{ stat.label }}</p>
+                        <p class="text-[10px] font-bold text-slate-400 font-medium mb-1">{{ stat.label }}</p>
                         <p class="text-4xl font-bold text-slate-900 dark:text-white">{{ stat.value }}</p>
                     </template>
                 </Card>
@@ -241,14 +241,14 @@ onUnmounted(() => {
                                     <Database class="w-8 h-8" />
                                 </div>
                                 <div class="text-right">
-                                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Disk Storage</p>
+                                    <p class="text-[10px] font-bold text-slate-400 font-medium mb-1">Disk Storage</p>
                                     <p class="text-xl font-bold text-slate-900 dark:text-white">{{ stats.storage_used }}% Used</p>
                                 </div>
                             </div>
                             <div class="h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden mb-4">
                                 <div class="h-full bg-indigo-500 transition-all duration-1000" :style="{ width: stats.storage_used + '%' }"></div>
                             </div>
-                            <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Status: {{ systemHealth.storage }}</p>
+                            <p class="text-[10px] font-bold text-slate-500 font-medium">Status: {{ systemHealth.storage }}</p>
                         </Card>
 
                         <Card glass class="!p-10 !rounded-2xl border-white/50 group">
@@ -257,14 +257,14 @@ onUnmounted(() => {
                                     <Zap class="w-8 h-8" />
                                 </div>
                                 <div class="text-right">
-                                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">API Latency</p>
+                                    <p class="text-[10px] font-bold text-slate-400 font-medium mb-1">API Latency</p>
                                     <p class="text-xl font-bold text-slate-900 dark:text-white">{{ systemHealth.latency }}</p>
                                 </div>
                             </div>
                             <div class="h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden mb-4">
                                 <div class="h-full bg-emerald-500 w-[100%]"></div>
                             </div>
-                            <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Uptime: {{ systemHealth.uptime }}</p>
+                            <p class="text-[10px] font-bold text-slate-500 font-medium">Uptime: {{ systemHealth.uptime }}</p>
                         </Card>
                     </div>
 
@@ -275,7 +275,7 @@ onUnmounted(() => {
                                 <Lock class="w-6 h-6 text-rose-500" />
                                 {{ t('admin.security.title') || 'Security Events' }}
                             </h3>
-                            <Link href="/super-admin/security-events" class="text-[10px] font-bold text-indigo-600 uppercase tracking-widest hover:underline">{{ t('super_admin.dashboard.view_all') || 'View All' }}</Link>
+                            <Link href="/super-admin/security-events" class="text-[10px] font-bold text-indigo-600 font-medium hover:underline">{{ t('super_admin.dashboard.view_all') || 'View All' }}</Link>
                         </div>
                         <div class="overflow-x-auto">
                             <table class="w-full text-left">
@@ -294,7 +294,7 @@ onUnmounted(() => {
                                             <p class="text-xs font-bold text-slate-500 leading-relaxed">{{ event.description }}</p>
                                         </td>
                                         <td class="px-8 py-6 text-right">
-                                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{{ event.created_at_human }}</span>
+                                            <span class="text-[10px] font-bold text-slate-400 font-medium">{{ event.created_at_human }}</span>
                                         </td>
                                     </tr>
                                     <tr v-if="recentSecurityEvents.length === 0">
@@ -362,7 +362,7 @@ v-for="link in [
                         <div class="space-y-4">
                             <template v-if="props?.system_info">
                                 <div v-for="(value, key) in props.system_info" :key="key" class="flex items-center justify-between">
-                                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{{ String(key).replace(/_/g, ' ') }}</span>
+                                    <span class="text-[10px] font-bold text-slate-400 font-medium">{{ String(key).replace(/_/g, ' ') }}</span>
                                     <span class="text-xs font-bold text-slate-700 dark:text-slate-300">{{ value }}</span>
                                 </div>
                             </template>

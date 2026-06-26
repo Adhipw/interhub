@@ -43,12 +43,12 @@ const statusColors = {
                     <table class="w-full text-left">
                         <thead>
                             <tr class="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-100 dark:border-white/5">
-                                <th class="px-8 py-6 text-[10px] font-bold text-slate-400 uppercase tracking-widest">ID</th>
-                                <th class="px-8 py-6 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Pelapor</th>
-                                <th class="px-8 py-6 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Kategori</th>
-                                <th class="px-8 py-6 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Status</th>
-                                <th class="px-8 py-6 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Tanggal</th>
-                                <th class="px-8 py-6 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Aksi</th>
+                                <th class="px-8 py-6 text-[10px] font-bold text-slate-400 font-medium">ID</th>
+                                <th class="px-8 py-6 text-[10px] font-bold text-slate-400 font-medium">Pelapor</th>
+                                <th class="px-8 py-6 text-[10px] font-bold text-slate-400 font-medium">Kategori</th>
+                                <th class="px-8 py-6 text-[10px] font-bold text-slate-400 font-medium">Status</th>
+                                <th class="px-8 py-6 text-[10px] font-bold text-slate-400 font-medium">Tanggal</th>
+                                <th class="px-8 py-6 text-[10px] font-bold text-slate-400 font-medium">Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-50 dark:divide-white/5">
@@ -70,7 +70,7 @@ const statusColors = {
                                 </td>
                                 <td class="px-8 py-6 text-xs font-bold text-slate-500">{{ ticket.created_at_human }}</td>
                                 <td class="px-8 py-6">
-                                    <Link :href="`/admin/tickets/${ticket.id}`" class="text-xs font-bold text-primary-600 hover:text-primary-700 uppercase tracking-widest">Tinjau</Link>
+                                    <Link :href="`/admin/tickets/${ticket.id}`" class="text-xs font-bold text-primary-600 hover:text-primary-700 font-medium">Tinjau</Link>
                                 </td>
                             </tr>
                             <tr v-if="tickets.data.length === 0">

@@ -52,7 +52,7 @@ const submit = () => {
         <!-- Section: Basic Info -->
         <section class="space-y-6">
           <div class="pb-2 border-b border-slate-100 dark:border-slate-800">
-            <h3 class="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-widest">Informasi Dasar</h3>
+            <h3 class="text-sm font-bold text-slate-900 dark:text-white font-medium">Informasi Dasar</h3>
           </div>
           
           <div class="grid grid-cols-1 gap-6">
@@ -65,7 +65,7 @@ const submit = () => {
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Tipe Magang</label>
+                <label class="block text-xs font-bold text-slate-400 font-medium mb-2">Tipe Magang</label>
                 <select v-model="form.type" class="w-full rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-sm focus:ring-primary-500 focus:border-primary-500 h-[42px] transition-all">
                   <option value="Office">Office (WFO)</option>
                   <option value="WFH">Remote (WFH)</option>
@@ -86,12 +86,12 @@ const submit = () => {
         <!-- Section: Content -->
         <section class="space-y-6">
           <div class="pb-2 border-b border-slate-100 dark:border-slate-800">
-            <h3 class="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-widest">Deskripsi & Kebutuhan</h3>
+            <h3 class="text-sm font-bold text-slate-900 dark:text-white font-medium">Deskripsi & Kebutuhan</h3>
           </div>
           
           <div class="space-y-6">
             <div>
-              <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Tentang Peran Ini</label>
+              <label class="block text-xs font-bold text-slate-400 font-medium mb-2">Tentang Peran Ini</label>
               <textarea 
                 v-model="form.description"
                 rows="6"
@@ -103,7 +103,7 @@ const submit = () => {
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Kualifikasi</label>
+                <label class="block text-xs font-bold text-slate-400 font-medium mb-2">Kualifikasi</label>
                 <textarea 
                   v-model="form.requirements"
                   rows="4"
@@ -111,7 +111,7 @@ const submit = () => {
                 ></textarea>
               </div>
               <div>
-                <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Benefit & Fasilitas</label>
+                <label class="block text-xs font-bold text-slate-400 font-medium mb-2">Benefit & Fasilitas</label>
                 <textarea 
                   v-model="form.benefits"
                   rows="4"
@@ -125,7 +125,7 @@ const submit = () => {
         <!-- Section: Settings -->
         <section class="space-y-6">
           <div class="pb-2 border-b border-slate-100 dark:border-slate-800">
-            <h3 class="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-widest">Pengaturan & Batas Waktu</h3>
+            <h3 class="text-sm font-bold text-slate-900 dark:text-white font-medium">Pengaturan & Batas Waktu</h3>
           </div>
           
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -142,7 +142,7 @@ const submit = () => {
               :error="form.errors.deadline_at"
             />
             <div>
-              <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Status Publikasi</label>
+              <label class="block text-xs font-bold text-slate-400 font-medium mb-2">Status Publikasi</label>
               <select v-model="form.status" class="w-full rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-sm focus:ring-primary-500 focus:border-primary-500 h-[42px] transition-all">
                 <option value="published">Aktif / Publik</option>
                 <option value="draft">Draft</option>
