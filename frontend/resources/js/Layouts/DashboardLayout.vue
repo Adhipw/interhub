@@ -288,12 +288,6 @@ const navigation = computed(() => {
 
 <template>
     <div class="min-h-screen bg-neutral-50 dark:bg-neutral-950 flex transition-colors duration-500 font-sans">
-        <!-- Mobile Sidebar Overlay -->
-        <div 
-            v-if="isSidebarOpen"
-            class="fixed inset-0 bg-neutral-900/60 backdrop-blur-sm z-40 lg:hidden transition-opacity"
-            @click="isSidebarOpen = false"
-        ></div>
 
         <!-- Modern Sidebar -->
         <aside 
