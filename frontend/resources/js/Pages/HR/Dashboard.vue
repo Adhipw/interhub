@@ -124,7 +124,10 @@ const pendingApplications = computed(() =>
                     </p>
                 </div>
 
+                <Link
+                    href="/hr/internships/create"
                     class="inline-flex items-center px-6 py-3 bg-slate-900 hover:bg-slate-800 active:scale-[0.98] dark:bg-white dark:hover:bg-gray-100 dark:text-slate-900 text-white text-sm font-bold rounded-xl transition-colors shadow-sm"
+                >
                     <Briefcase class="w-4 h-4 mr-2" />
                     {{ t('hr.dashboard.post_job') }}
                 </Link>
