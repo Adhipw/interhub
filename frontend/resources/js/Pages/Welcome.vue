@@ -411,10 +411,6 @@ v-for="(item, index) in [
                         <h3 class="text-lg font-bold mb-1" :class="isDarkMode ? 'text-white' : 'text-slate-950'">{{ cat.label }}</h3>
                         <p class="text-xs font-medium mb-6" :class="isDarkMode ? 'text-slate-500' : 'text-slate-400'">{{ cat.desc }}</p>
                         <!-- Realtime count would go here if supported -->
-                        <Link href="/register" class="inline-flex items-center gap-2 bg-blue-600 text-white px-10 py-4 rounded-xl font-bold text-sm hover:bg-blue-700 active:scale-[0.98] transition-colors">
-                        {{ t('cta.btn_register') }}
-                        <Icon name="chevron" class-name="w-4 h-4" />
-                    </Link>    </div>
                     </button>
                 </div>
             </div>
