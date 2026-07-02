@@ -82,14 +82,14 @@ const getAppsByStatus = (statusGroup: string) => {
                     <div class="flex items-center gap-1 bg-slate-100 p-1 rounded-xl">
                         <button 
                             @click="viewMode = 'list'"
-                            :class="['p-2 rounded-lg flex items-center justify-center transition-all', viewMode === 'list' ? 'bg-white text-primary-600 shadow-sm' : 'text-slate-400 hover:text-slate-600']"
+                            :class="['p-2 rounded-lg flex items-center justify-center transition-colors', viewMode === 'list' ? 'bg-white text-primary-600 shadow-sm' : 'text-slate-400 hover:text-slate-600']"
                             title="List View"
                         >
                             <List class="w-5 h-5" />
                         </button>
                         <button 
                             @click="viewMode = 'board'"
-                            :class="['p-2 rounded-lg flex items-center justify-center transition-all', viewMode === 'board' ? 'bg-white text-primary-600 shadow-sm' : 'text-slate-400 hover:text-slate-600']"
+                            :class="['p-2 rounded-lg flex items-center justify-center transition-colors', viewMode === 'board' ? 'bg-white text-primary-600 shadow-sm' : 'text-slate-400 hover:text-slate-600']"
                             title="Kanban Board View"
                         >
                             <LayoutGrid class="w-5 h-5" />
@@ -100,7 +100,7 @@ const getAppsByStatus = (statusGroup: string) => {
                 <!-- List View -->
                 <div v-if="viewMode === 'list'" class="space-y-4">
                     <div v-for="(app, idx) in normalizedApplications.data" :key="app.id" 
-                        class="bg-white p-6 rounded-2xl border border-slate-200/60 shadow-sm hover:border-primary-300 transition-all group relative overflow-hidden animate-reveal opacity-0"
+                        class="bg-white p-6 rounded-2xl border border-slate-200/60 shadow-sm hover:border-primary-300 transition-colors group relative overflow-hidden animate-reveal opacity-0"
                         :style="`animation-delay: ${100 + (Number(idx) * 50)}ms`">
                         
                         
@@ -134,7 +134,7 @@ const getAppsByStatus = (statusGroup: string) => {
                                 <div class="relative">
                                     <div class="overflow-hidden h-2 mb-4 text-xs flex rounded-full bg-slate-100">
                                         <div :style="{ width: app.status === 'withdrawn' ? '100%' : (app.status === 'rejected' ? '100%' : (app.status === 'accepted' ? '100%' : (app.status === 'interview' ? '66%' : (app.status === 'reviewed' ? '33%' : '10%')))) }" 
-                                             class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center transition-all duration-500"
+                                             class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center transition-colors duration-500"
                                              :class="app.status === 'withdrawn' ? 'bg-slate-400' : (app.status === 'rejected' ? 'bg-rose-500' : (app.status === 'accepted' ? 'bg-emerald-500' : 'bg-primary-500'))">
                                         </div>
                                     </div>
@@ -151,7 +151,7 @@ const getAppsByStatus = (statusGroup: string) => {
                             <div class="flex items-center justify-end mt-6 w-full">
                                 <Link 
                                     :href="'/my-applications/' + app.id"
-                                    class="bg-slate-900 text-white px-6 py-2.5 rounded-lg font-medium text-sm hover:bg-slate-800 transition-all flex items-center gap-2 shadow-sm"
+                                    class="bg-slate-900 text-white px-6 py-2.5 rounded-lg font-medium text-sm hover:bg-slate-800 transition-colors flex items-center gap-2 shadow-sm"
                                 >
                                     Lihat Detail
                                     <ChevronRight class="w-4 h-4" />
@@ -170,7 +170,7 @@ const getAppsByStatus = (statusGroup: string) => {
                     >
                         <div class="flex items-center justify-between mb-4 px-1">
                             <h3 class="font-semibold text-slate-800 text-sm tracking-tight">{{ col.label }}</h3>
-                            <span :class="['text-[11px] font-semibold px-2 py-0.5 rounded-md', col.color]">
+                            <span :class="['text-xs font-semibold px-2 py-0.5 rounded-md', col.color]">
                                 {{ getAppsByStatus(col.id).length }}
                             </span>
                         </div>
@@ -179,7 +179,7 @@ const getAppsByStatus = (statusGroup: string) => {
                             <div 
                                 v-for="(app, idx) in getAppsByStatus(col.id)" 
                                 :key="app.id"
-                                class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm hover:border-primary-300 hover:shadow transition-all cursor-pointer group animate-reveal opacity-0 hover:-translate-y-1"
+                                class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm hover:border-primary-300 hover:shadow transition-colors cursor-pointer group animate-reveal opacity-0 hover:-translate-y-1"
                                 :style="`animation-delay: ${150 + (Number(idx) * 50)}ms`"
                                 @click="$inertia.visit('/my-applications/' + app.id)"
                             >
@@ -198,7 +198,7 @@ const getAppsByStatus = (statusGroup: string) => {
                                 <h4 class="font-semibold text-slate-900 text-sm leading-snug mb-3 group-hover:text-primary-600 transition-colors">{{ app.internship.title }}</h4>
                                 
                                 <div class="flex items-center justify-between pt-3 border-t border-slate-50">
-                                    <span class="text-[11px] font-medium text-slate-500 flex items-center gap-1">
+                                    <span class="text-xs font-medium text-slate-500 flex items-center gap-1">
                                         <Clock class="w-3 h-3" /> {{ new Date(app.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'short' }) }}
                                     </span>
                                     <span :class="['w-2 h-2 rounded-full', col.color.split(' ')[0].replace('100', '500')]"></span>
@@ -225,7 +225,7 @@ const getAppsByStatus = (statusGroup: string) => {
                 <p class="text-slate-500 max-w-md mx-auto mb-8 text-sm">Jelajahi berbagai peluang magang menarik dan mulai kirimkan lamaran pertamamu hari ini!</p>
                 <Link 
                     href="/internships" 
-                    class="inline-flex items-center gap-2 bg-primary-600 text-white px-6 py-2.5 rounded-lg font-medium text-sm hover:bg-primary-700 transition-all shadow-sm"
+                    class="inline-flex items-center gap-2 bg-primary-600 text-white px-6 py-2.5 rounded-lg font-medium text-sm hover:bg-primary-700 transition-colors shadow-sm"
                 >
                     Cari Peluang Magang
                     <ExternalLink class="w-4 h-4" />

@@ -117,12 +117,12 @@ const formatDate = (date: string) => {
                         v-model="search"
                         type="text" 
                         placeholder="Cari aksi, deskripsi, atau nama admin..."
-                        class="w-full pl-11 pr-4 py-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl text-sm focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all outline-none"
+                        class="w-full pl-11 pr-4 py-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl text-sm focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-colors outline-none"
                     >
                 </div>
                 
                 <div class="flex items-center gap-2">
-                    <button class="flex items-center gap-2 px-4 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm font-bold text-slate-600 dark:text-slate-400 hover:border-primary-500 transition-all">
+                    <button class="flex items-center gap-2 px-4 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm font-bold text-slate-600 dark:text-slate-400 hover:border-primary-500 transition-colors">
                         <Filter class="w-4 h-4" />
                         Filter Lanjutan
                     </button>
@@ -138,13 +138,13 @@ const formatDate = (date: string) => {
                     <table class="w-full text-left border-collapse">
                         <thead>
                             <tr class="bg-slate-50/50 dark:bg-slate-900/50 border-b border-slate-100 dark:border-slate-800">
-                                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">Administrator</th>
-                                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">Aksi & Deskripsi</th>
-                                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium text-right">Waktu Kejadian</th>
+                                <th class="px-8 py-5 text-xs font-bold text-slate-400 font-medium">Administrator</th>
+                                <th class="px-8 py-5 text-xs font-bold text-slate-400 font-medium">Aksi & Deskripsi</th>
+                                <th class="px-8 py-5 text-xs font-bold text-slate-400 font-medium text-right">Waktu Kejadian</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-50 dark:divide-slate-700/50">
-                            <tr v-for="log in logs.data" :key="log.id" class="group hover:bg-slate-50/30 dark:hover:bg-slate-700/20 transition-all">
+                            <tr v-for="log in logs.data" :key="log.id" class="group hover:bg-slate-50/30 dark:hover:bg-slate-700/20 transition-colors">
                                 <td class="px-8 py-6">
                                     <div class="flex items-center gap-3">
                                         <div class="w-10 h-10 rounded-full bg-primary-50 dark:bg-primary-900/20 flex items-center justify-center text-primary-600 font-bold border border-primary-100 dark:border-primary-900/30">
@@ -152,19 +152,19 @@ const formatDate = (date: string) => {
                                         </div>
                                         <div>
                                             <p class="text-sm font-bold text-slate-900 dark:text-white">{{ log.user?.name || 'System' }}</p>
-                                            <p class="text-[10px] text-slate-400 font-medium">{{ log.user?.email || 'automated@system.com' }}</p>
+                                            <p class="text-xs text-slate-400 font-medium">{{ log.user?.email || 'automated@system.com' }}</p>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="px-8 py-6">
                                     <div class="flex flex-col gap-1">
                                         <div class="flex items-center gap-2">
-                                            <span class="px-2 py-0.5 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-[10px] font-bold rounded uppercase tracking-tighter">
+                                            <span class="px-2 py-0.5 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs font-bold rounded uppercase tracking-tighter">
                                                 {{ log.action }}
                                             </span>
                                             <span class="text-xs font-medium text-slate-600 dark:text-slate-300">{{ log.description }}</span>
                                         </div>
-                                        <p v-if="log.metadata" class="text-[10px] text-slate-400 font-mono truncate max-w-md">
+                                        <p v-if="log.metadata" class="text-xs text-slate-400 font-mono truncate max-w-md">
                                             {{ JSON.stringify(log.metadata) }}
                                         </p>
                                     </div>
@@ -175,7 +175,7 @@ const formatDate = (date: string) => {
                                             <Clock class="w-3.5 h-3.5 text-slate-400" />
                                             {{ formatDate(log.created_at) }}
                                         </div>
-                                        <span class="text-[10px] text-slate-400 font-medium">Melalui IP: {{ log.ip_address || 'Internal' }}</span>
+                                        <span class="text-xs text-slate-400 font-medium">Melalui IP: {{ log.ip_address || 'Internal' }}</span>
                                     </div>
                                 </td>
                             </tr>

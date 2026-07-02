@@ -85,7 +85,7 @@ onUnmounted(() => {
              30 Hari Terakhir
            </div>
            <button 
-             class="px-4 py-2 text-xs font-bold text-primary-600 hover:bg-primary-50 dark:hover:bg-primary-900/20 rounded-xl transition-all font-medium"
+             class="px-4 py-2 text-xs font-bold text-primary-600 hover:bg-primary-50 dark:hover:bg-primary-900/20 rounded-xl transition-colors font-medium"
              @click="downloadPDF"
            >
              Unduh PDF
@@ -115,15 +115,15 @@ onUnmounted(() => {
             <div 
               v-for="(point, i) in userGrowth" 
               :key="i" 
-              class="flex-1 bg-primary-500/20 hover:bg-primary-500 rounded-t-lg transition-all relative group/bar"
+              class="flex-1 bg-primary-500/20 hover:bg-primary-500 rounded-t-lg transition-colors relative group/bar"
               :style="{ height: `${Math.min((point.total / 10) * 100, 100)}%` }"
             >
-               <div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover/bar:opacity-100 transition-opacity whitespace-nowrap z-10">
+               <div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover/bar:opacity-100 transition-opacity whitespace-nowrap z-10">
                  {{ point.total }} User
                </div>
             </div>
           </div>
-          <div class="mt-6 pt-6 border-t border-slate-50 dark:border-slate-800 flex justify-between text-[10px] font-bold text-slate-300 uppercase tracking-tighter">
+          <div class="mt-6 pt-6 border-t border-slate-50 dark:border-slate-800 flex justify-between text-xs font-bold text-slate-300 uppercase tracking-tighter">
              <span>{{ userGrowth[0]?.date }}</span>
              <span>{{ userGrowth[Math.floor(userGrowth.length/2)]?.date }}</span>
              <span>Hari Ini</span>
@@ -143,7 +143,7 @@ onUnmounted(() => {
             <p class="text-4xl font-bold mb-6">{{ applicationStats.reduce((a, b) => a + b.total, 0) }}</p>
             <div class="flex gap-2">
                <div v-for="stat in applicationStats.slice(0,3)" :key="stat.status" class="flex-1 bg-white/10 p-2 rounded-xl text-center">
-                 <p class="text-[8px] font-bold uppercase opacity-60 truncate">{{ stat.status }}</p>
+                 <p class="text-xs font-bold uppercase opacity-60 truncate">{{ stat.status }}</p>
                  <p class="text-sm font-bold">{{ stat.total }}</p>
                </div>
             </div>
@@ -156,18 +156,18 @@ onUnmounted(() => {
               </div>
               <div>
                 <h4 class="font-bold text-slate-900 dark:text-white">Verifikasi Company</h4>
-                <p class="text-[10px] text-slate-400 font-bold font-medium">Rasio Keamanan</p>
+                <p class="text-xs text-slate-400 font-medium">Rasio Keamanan</p>
               </div>
             </div>
             <div class="space-y-4">
               <div v-for="stat in companyStats" :key="String(stat.is_verified)" class="space-y-2">
-                <div class="flex justify-between text-xs font-bold font-medium">
+                <div class="flex justify-between text-xs font-medium">
                   <span class="text-slate-500">{{ stat.is_verified ? 'Terverifikasi' : 'Pending' }}</span>
                   <span class="text-slate-900 dark:text-white">{{ stat.total }}</span>
                 </div>
                 <div class="h-2 bg-slate-100 dark:bg-slate-900 rounded-full overflow-hidden">
                   <div 
-                    class="h-full transition-all duration-1000" 
+                    class="h-full transition-colors duration-1000" 
                     :class="stat.is_verified ? 'bg-green-500' : 'bg-orange-400'"
                     :style="{ width: `${(stat.total / companyStats.reduce((a,b) => a + b.total, 0)) * 100}%` }"
                   ></div>
@@ -203,7 +203,7 @@ onUnmounted(() => {
                 <p class="text-xs text-slate-500 leading-relaxed">Pertumbuhan user stabil di angka 12% MoM. Disarankan untuk menambah kategori lowongan baru untuk menjaga engagement.</p>
               </div>
               <button 
-                class="bg-primary-600 text-white px-6 py-3 rounded-2xl font-bold text-sm hover:scale-105 active:scale-95 transition-all shadow-lg shadow-primary-500/25"
+                class="bg-primary-600 text-white px-6 py-3 rounded-2xl font-bold text-sm hover:scale-105 active:scale-95 transition-colors shadow-lg shadow-primary-500/25"
                 @click="goToMasterData"
               >
                 Kelola Master Data

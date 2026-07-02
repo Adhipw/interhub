@@ -49,11 +49,11 @@ const strengthColor = computed(() => {
             <div 
                 v-for="i in 5" 
                 :key="i"
-                class="flex-1 transition-all duration-500"
+                class="flex-1 transition-colors duration-500"
                 :class="[i <= strength ? strengthColor : 'bg-transparent']"
             ></div>
         </div>
-        <div v-if="password" class="mt-2 flex justify-between items-center text-[10px] font-bold font-medium">
+        <div v-if="password" class="mt-2 flex justify-between items-center text-xs font-medium">
             <span class="text-slate-400">Keamanan Password</span>
             <span :class="strength > 0 ? strengthColor.replace('bg-', 'text-') : 'text-slate-400'">
                 {{ strengthText }}

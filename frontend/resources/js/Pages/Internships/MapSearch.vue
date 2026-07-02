@@ -99,7 +99,7 @@ const renderMarkers = () => {
         
         if (group.length > 1) {
             popupContent += `
-                <div class="text-[10px] font-bold text-primary-600 bg-primary-50 px-2 py-1 rounded-md mb-3 border border-primary-100 inline-block font-medium">
+                <div class="text-xs font-bold text-primary-600 bg-primary-50 px-2 py-1 rounded-md mb-3 border border-primary-100 inline-block font-medium">
                     ${group.length} Lowongan di lokasi ini
                 </div>
             `;
@@ -108,7 +108,7 @@ const renderMarkers = () => {
         group.forEach((internship, index) => {
             popupContent += `
                 <div class="${index > 0 ? 'border-t border-slate-100 pt-3 mt-3' : ''}">
-                    <div class="text-[10px] font-bold text-slate-500 mb-0.5 font-medium">${internship.type}</div>
+                    <div class="text-xs font-bold text-slate-500 mb-0.5 font-medium">${internship.type}</div>
                     <h3 class="font-bold text-sm text-slate-900 mb-1 leading-tight">${internship.title}</h3>
                     <div class="flex items-start gap-1.5 text-slate-500 text-xs mb-3">
                         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-building-2 shrink-0 mt-0.5"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg>

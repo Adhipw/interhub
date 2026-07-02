@@ -52,10 +52,10 @@ const getStatusClass = (status: string) => {
             <input 
               type="text" 
               placeholder="Cari mentee..." 
-              class="pl-11 pr-6 py-3 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all w-64"
+              class="pl-11 pr-6 py-3 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-colors w-64"
             />
           </div>
-          <button class="p-3 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl text-slate-500 hover:text-primary-600 transition-all">
+          <button class="p-3 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl text-slate-500 hover:text-primary-600 transition-colors">
             <Filter class="w-5 h-5" />
           </button>
         </div>
@@ -67,12 +67,12 @@ const getStatusClass = (status: string) => {
           <table class="w-full text-left border-collapse">
             <thead>
               <tr class="bg-slate-50/50 dark:bg-slate-900/50 border-b border-slate-100 dark:border-slate-800">
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">Mentee</th>
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">Tanggal</th>
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">Check In</th>
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">Check Out</th>
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium text-center">Status</th>
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">Lokasi</th>
+                <th class="px-8 py-5 text-xs font-bold text-slate-400 font-medium">Mentee</th>
+                <th class="px-8 py-5 text-xs font-bold text-slate-400 font-medium">Tanggal</th>
+                <th class="px-8 py-5 text-xs font-bold text-slate-400 font-medium">Check In</th>
+                <th class="px-8 py-5 text-xs font-bold text-slate-400 font-medium">Check Out</th>
+                <th class="px-8 py-5 text-xs font-bold text-slate-400 font-medium text-center">Status</th>
+                <th class="px-8 py-5 text-xs font-bold text-slate-400 font-medium">Lokasi</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-slate-50 dark:divide-slate-800/50">
@@ -84,7 +84,7 @@ const getStatusClass = (status: string) => {
                     </div>
                     <div>
                       <p class="text-sm font-bold text-slate-900 dark:text-white">{{ attendance.user.name }}</p>
-                      <p class="text-[10px] text-slate-500 line-clamp-1">{{ attendance.application.internship.title }}</p>
+                      <p class="text-xs text-slate-500 line-clamp-1">{{ attendance.application.internship.title }}</p>
                     </div>
                   </div>
                 </td>
@@ -109,7 +109,7 @@ const getStatusClass = (status: string) => {
                   <span v-else class="text-xs text-slate-400">--:--</span>
                 </td>
                 <td class="px-8 py-6 text-center">
-                  <span :class="['px-3 py-1 rounded-full text-[10px] font-bold font-medium', getStatusClass(attendance.status)]">
+                  <span :class="['px-3 py-1 rounded-full text-xs font-medium', getStatusClass(attendance.status)]">
                     {{ attendance.status }}
                   </span>
                 </td>

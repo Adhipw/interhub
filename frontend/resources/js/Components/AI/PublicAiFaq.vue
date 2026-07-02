@@ -37,7 +37,7 @@ const ask = async (q) => {
 </script>
 
 <template>
-    <div class="bg-neutral-900 rounded-2xl border border-white/10 overflow-hidden shadow-2xl flex flex-col h-[600px] group transition-all duration-500 hover:border-indigo-500/30">
+    <div class="bg-neutral-900 rounded-2xl border border-white/10 overflow-hidden shadow-2xl flex flex-col h-[600px] group transition-colors duration-500 hover:border-indigo-500/30">
         <!-- Header -->
         <div class="p-8 border-b border-white/10 bg-gradient-to-r from-indigo-600/20 to-transparent flex items-center justify-between">
             <div class="flex items-center gap-4">
@@ -46,7 +46,7 @@ const ask = async (q) => {
                 </div>
                 <div>
                     <h3 class="text-xl font-bold text-white tracking-tight">AI FAQ Support</h3>
-                    <p class="text-[10px] font-bold text-indigo-400 font-medium flex items-center gap-1">
+                    <p class="text-xs font-bold text-indigo-400 font-medium flex items-center gap-1">
                         <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-ping"></span>
                         Online Sekarang
                     </p>
@@ -92,7 +92,7 @@ v-for="(msg, i) in conversation" :key="i"
                 <button 
                     v-for="q in quickQuestions" 
                     :key="q"
-                    class="px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full text-[10px] font-bold text-neutral-400 hover:text-white transition-all font-medium"
+                    class="px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full text-xs font-bold text-neutral-400 hover:text-white transition-colors font-medium"
                     @click="ask(q)"
                 >
                     {{ q }}
@@ -104,12 +104,12 @@ v-for="(msg, i) in conversation" :key="i"
                     v-model="question"
                     type="text" 
                     placeholder="Tanya apapun di sini..."
-                    class="w-full bg-white/5 border-white/10 rounded-2xl py-4 pl-6 pr-16 text-white placeholder-white/20 focus:border-indigo-500 focus:ring-0 transition-all font-medium"
+                    class="w-full bg-white/5 border-white/10 rounded-2xl py-4 pl-6 pr-16 text-white placeholder-white/20 focus:border-indigo-500 focus:ring-0 transition-colors font-medium"
                     @keyup.enter="ask()"
                 />
                 <button 
                     :disabled="isLoading || !question"
-                    class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white hover:bg-indigo-700 transition-all disabled:opacity-50"
+                    class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white hover:bg-indigo-700 transition-colors disabled:opacity-50"
                     @click="ask()"
                 >
                     <Send class="w-5 h-5" />

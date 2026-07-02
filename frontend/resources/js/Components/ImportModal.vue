@@ -135,18 +135,18 @@ const close = () => {
                 <div class="grid grid-cols-2 gap-4 mt-8">
                     <div class="bg-slate-50 dark:bg-slate-900 p-4 rounded-2xl border border-slate-100 dark:border-slate-800">
                         <p class="text-2xl font-bold text-slate-900 dark:text-white">{{ result.imported }}</p>
-                        <p class="text-[10px] font-bold text-slate-500 font-medium">{{ t('import.success_count') }}</p>
+                        <p class="text-xs font-bold text-slate-500 font-medium">{{ t('import.success_count') }}</p>
                     </div>
                     <div class="bg-slate-50 dark:bg-slate-900 p-4 rounded-2xl border border-slate-100 dark:border-slate-800">
                         <p class="text-2xl font-bold" :class="result.errors.length > 0 ? 'text-red-500' : 'text-slate-400'">{{ result.errors.length }}</p>
-                        <p class="text-[10px] font-bold text-slate-500 font-medium">{{ t('import.error_count') }}</p>
+                        <p class="text-xs font-bold text-slate-500 font-medium">{{ t('import.error_count') }}</p>
                     </div>
                 </div>
 
                 <div v-if="result.errors.length > 0" class="mt-6 text-left max-h-48 overflow-y-auto bg-red-50/50 dark:bg-red-900/10 p-4 rounded-xl border border-red-100 dark:border-red-900/20">
-                    <p class="text-[10px] font-bold text-red-600 font-medium mb-3">{{ t('import.error_details') }}</p>
+                    <p class="text-xs font-bold text-red-600 font-medium mb-3">{{ t('import.error_details') }}</p>
                     <ul class="space-y-2">
-                        <li v-for="(err, idx) in result.errors" :key="idx" class="text-[11px] text-slate-600 dark:text-slate-400 leading-tight">
+                        <li v-for="(err, idx) in result.errors" :key="idx" class="text-xs text-slate-600 dark:text-slate-400 leading-tight">
                             <span class="font-bold text-red-600">Row {{ err.row }}:</span> {{ err.messages.join(', ') }}
                         </li>
                     </ul>

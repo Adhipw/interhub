@@ -61,11 +61,11 @@ const handleReset = () => {
                 <div>
                     <h2 class="text-3xl font-bold text-slate-900 dark:text-white tracking-tight">{{ t('admin.audit.title') }}</h2>
                     <div class="flex items-center gap-3 mt-2">
-                        <span class="flex items-center gap-1.5 text-[10px] font-semibold text-xs tracking-wide text-slate-400">
+                        <span class="flex items-center gap-1.5 text-xs font-semibold text-xs tracking-wide text-slate-400">
                             <Activity class="w-3 h-3 text-primary-500" /> {{ t('admin.audit.operational_history') }}
                         </span>
                         <span class="w-1 h-1 rounded-full bg-slate-300"></span>
-                        <span class="flex items-center gap-1.5 text-[10px] font-semibold text-xs tracking-wide text-slate-400">
+                        <span class="flex items-center gap-1.5 text-xs font-semibold text-xs tracking-wide text-slate-400">
                             <ShieldCheck class="w-3 h-3 text-emerald-500" /> {{ t('admin.audit.compliance_ready') }}
                         </span>
                     </div>

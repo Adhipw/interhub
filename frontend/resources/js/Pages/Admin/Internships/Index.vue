@@ -183,7 +183,7 @@ onMounted(() => {
               v-model="search" 
               type="text"
               :placeholder="t('admin.internships.search_placeholder')"
-              class="pl-11 pr-6 py-3 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all w-64" 
+              class="pl-11 pr-6 py-3 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-colors w-64" 
               @keyup.enter="fetchInternships"
             />
           </div>
@@ -199,11 +199,11 @@ onMounted(() => {
           <table class="w-full text-left border-collapse">
             <thead>
               <tr class="bg-slate-50/50 dark:bg-slate-900/50 border-b border-slate-100 dark:border-slate-800">
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">{{ t('admin.internships.col_internship') }}</th>
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">{{ t('admin.internships.col_company') }}</th>
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium text-center">{{ t('admin.internships.col_status') }}</th>
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">{{ t('admin.internships.col_posted') }}</th>
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium text-right">{{ t('admin.internships.col_actions') }}</th>
+                <th class="px-8 py-5 text-xs font-bold text-slate-400 font-medium">{{ t('admin.internships.col_internship') }}</th>
+                <th class="px-8 py-5 text-xs font-bold text-slate-400 font-medium">{{ t('admin.internships.col_company') }}</th>
+                <th class="px-8 py-5 text-xs font-bold text-slate-400 font-medium text-center">{{ t('admin.internships.col_status') }}</th>
+                <th class="px-8 py-5 text-xs font-bold text-slate-400 font-medium">{{ t('admin.internships.col_posted') }}</th>
+                <th class="px-8 py-5 text-xs font-bold text-slate-400 font-medium text-right">{{ t('admin.internships.col_actions') }}</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-slate-50 dark:divide-slate-800/50">
@@ -212,7 +212,7 @@ onMounted(() => {
                   <div class="flex items-center gap-2 flex-wrap">
                     <p class="font-bold text-slate-900 dark:text-white">{{ job.title }}</p>
                     <span 
-                      class="px-2 py-0.5 rounded-full text-[9px] font-semibold text-xs tracking-wide border shrink-0" 
+                      class="px-2 py-0.5 rounded-full text-xs font-semibold text-xs tracking-wide border shrink-0" 
                       :class="[analyzeSpamRisk(job).colorClass]"
                       :title="analyzeSpamRisk(job).reasons.join(', ')"
                     >
@@ -239,19 +239,19 @@ onMounted(() => {
                    <div class="flex items-center justify-end gap-2">
                       <!-- Quick Action Drawer Trigger -->
                       <button 
-                         class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all shrink-0 active-press"
+                         class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors shrink-0 active-press"
                          title="Tinjau Cepat (Quick Drawer)"
                          @click="openReviewDrawer(job)"
                       >
                          <Sparkles class="w-4 h-4 text-indigo-500 " />
                       </button>
 
-                      <Link :href="'/internships/' + job.slug" target="_blank" class="p-2 text-slate-400 hover:text-primary-600 transition-all" :title="t('common.view')">
+                      <Link :href="'/internships/' + job.slug" target="_blank" class="p-2 text-slate-400 hover:text-primary-600 transition-colors" :title="t('common.view')">
                          <Eye class="w-4 h-4" />
                       </Link>
                       <button 
                         v-if="job.status !== 'published'"
-                        class="p-2 text-slate-400 hover:text-green-600 transition-all"
+                        class="p-2 text-slate-400 hover:text-green-600 transition-colors"
                         :title="t('admin.internships.publish_tooltip')"
                         @click="updateStatus(job.id, 'published')"
                       >
@@ -259,7 +259,7 @@ onMounted(() => {
                       </button>
                       <button 
                         v-if="job.status !== 'flagged'"
-                        class="p-2 text-slate-400 hover:text-orange-600 transition-all"
+                        class="p-2 text-slate-400 hover:text-orange-600 transition-colors"
                         :title="t('admin.internships.flag_tooltip')"
                         @click="updateStatus(job.id, 'flagged')"
                       >
@@ -267,7 +267,7 @@ onMounted(() => {
                       </button>
                       <button 
                         v-if="job.status !== 'archived'"
-                        class="p-2 text-slate-400 hover:text-red-600 transition-all"
+                        class="p-2 text-slate-400 hover:text-red-600 transition-colors"
                         :title="t('admin.internships.archive_tooltip')"
                         @click="updateStatus(job.id, 'archived')"
                       >
@@ -316,11 +316,11 @@ onMounted(() => {
               </div>
               <div>
                 <h3 class="text-sm font-bold text-slate-900 dark:text-white font-medium">Moderasi Cepat AI</h3>
-                <p class="text-[10px] text-slate-500 font-medium">Asisten Tinjau Otomatis InternHub</p>
+                <p class="text-xs text-slate-500 font-medium">Asisten Tinjau Otomatis InternHub</p>
               </div>
             </div>
             <button 
-              class="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all active-press" 
+              class="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-colors active-press" 
               @click="closeReviewDrawer"
             >
               <X class="w-5 h-5" />
@@ -332,7 +332,7 @@ onMounted(() => {
             
             <!-- Company & Basic Job Header -->
             <div class="p-5 bg-slate-50 dark:bg-slate-950/50 rounded-2xl border border-slate-100 dark:border-slate-800">
-              <span class="px-2 py-0.5 bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[9px] font-semibold text-xs tracking-wide rounded-lg">Lowongan Magang</span>
+              <span class="px-2 py-0.5 bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-xs font-semibold text-xs tracking-wide rounded-lg">Lowongan Magang</span>
               <h2 class="text-lg font-extrabold text-slate-900 dark:text-white mt-2 leading-snug">{{ selectedJobForReview.title }}</h2>
               <div class="flex items-center gap-2 text-xs text-slate-500 font-medium mt-1">
                 <span>{{ selectedJobForReview.company?.name }}</span>
@@ -342,7 +342,7 @@ onMounted(() => {
             </div>
 
             <!-- Spam Audit Analysis -->
-            <div class="p-6 rounded-2xl border transition-all duration-300" :class="[analyzeSpamRisk(selectedJobForReview).colorClass]">
+            <div class="p-6 rounded-2xl border transition-colors duration-300" :class="[analyzeSpamRisk(selectedJobForReview).colorClass]">
               <div class="flex items-start gap-3">
                 <div class="shrink-0 mt-0.5">
                   <ShieldAlert v-if="analyzeSpamRisk(selectedJobForReview).level === 'high'" class="w-5 h-5 animate-bounce" />
@@ -366,7 +366,7 @@ onMounted(() => {
 
             <!-- Job Description Detail -->
             <div class="space-y-3">
-              <label class="text-[10px] font-bold text-slate-400 font-medium ml-1">Deskripsi Posisi</label>
+              <label class="text-xs font-bold text-slate-400 font-medium ml-1">Deskripsi Posisi</label>
               <div class="p-5 bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800 rounded-2xl text-xs leading-relaxed text-slate-700 dark:text-slate-350 shadow-inner whitespace-pre-wrap max-h-48 overflow-y-auto">
                 {{ selectedJobForReview.description || 'Tidak ada deskripsi.' }}
               </div>
@@ -374,7 +374,7 @@ onMounted(() => {
 
             <!-- Requirements Detail -->
             <div class="space-y-3">
-              <label class="text-[10px] font-bold text-slate-400 font-medium ml-1">Persyaratan & Keahlian</label>
+              <label class="text-xs font-bold text-slate-400 font-medium ml-1">Persyaratan & Keahlian</label>
               <div class="p-5 bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800 rounded-2xl text-xs leading-relaxed text-slate-700 dark:text-slate-350 shadow-inner max-h-48 overflow-y-auto">
                 <ul v-if="selectedJobForReview.requirements && selectedJobForReview.requirements.length > 0" class="list-disc pl-4 space-y-1">
                   <li v-for="(req, reqIdx) in selectedJobForReview.requirements" :key="reqIdx">
@@ -398,7 +398,7 @@ onMounted(() => {
             <button 
               v-if="selectedJobForReview.status !== 'archived'"
               :disabled="processing"
-              class="flex-1 py-3 border border-rose-200 dark:border-rose-900/30 text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/20 text-xs font-bold rounded-xl transition-all active-press flex items-center justify-center gap-2"
+              class="flex-1 py-3 border border-rose-200 dark:border-rose-900/30 text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/20 text-xs font-bold rounded-xl transition-colors active-press flex items-center justify-center gap-2"
               @click="updateStatusDirectly(selectedJobForReview.id, 'archived')"
             >
               <X class="w-4 h-4" />
@@ -408,7 +408,7 @@ onMounted(() => {
             <button 
               v-if="selectedJobForReview.status !== 'flagged'"
               :disabled="processing"
-              class="flex-1 py-3 border border-amber-200 dark:border-amber-900/30 text-amber-600 dark:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-950/20 text-xs font-bold rounded-xl transition-all active-press flex items-center justify-center gap-2"
+              class="flex-1 py-3 border border-amber-200 dark:border-amber-900/30 text-amber-600 dark:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-950/20 text-xs font-bold rounded-xl transition-colors active-press flex items-center justify-center gap-2"
               @click="updateStatusDirectly(selectedJobForReview.id, 'flagged')"
             >
               <Flag class="w-4 h-4" />
@@ -418,7 +418,7 @@ onMounted(() => {
             <button 
               v-if="selectedJobForReview.status !== 'published'"
               :disabled="processing"
-              class="flex-1 py-3 bg-green-600 hover:bg-green-700 text-white text-xs font-bold rounded-xl shadow-lg shadow-green-500/10 transition-all active-press flex items-center justify-center gap-2"
+              class="flex-1 py-3 bg-green-600 hover:bg-green-700 text-white text-xs font-bold rounded-xl shadow-lg shadow-green-500/10 transition-colors active-press flex items-center justify-center gap-2"
               @click="updateStatusDirectly(selectedJobForReview.id, 'published')"
             >
               <Check class="w-4 h-4" />

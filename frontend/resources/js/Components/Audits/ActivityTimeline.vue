@@ -43,12 +43,12 @@ const getIcon = (action: string) => {
             </div>
             
             <!-- Content -->
-            <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm transition-all hover:shadow-md">
+            <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm transition-colors hover:shadow-md">
                 <div class="flex items-center justify-between space-x-2 mb-2">
-                    <div class="font-bold text-slate-800 dark:text-slate-100 uppercase text-[10px] tracking-widest">
+                    <div class="font-bold text-slate-800 dark:text-slate-100 uppercase text-xs tracking-widest">
                         {{ activity.action.replace('_', ' ') }}
                     </div>
-                    <div class="flex items-center gap-1.5 text-[10px] font-bold text-slate-400">
+                    <div class="flex items-center gap-1.5 text-xs font-bold text-slate-400">
                         <Clock class="w-3 h-3 text-primary-500" />
                         {{ activity.created_at_human }}
                     </div>
@@ -60,16 +60,16 @@ const getIcon = (action: string) => {
                     <div class="flex items-center gap-2">
                         <div v-if="activity.user" class="flex items-center gap-1.5 px-2 py-1 bg-slate-50 dark:bg-slate-800 rounded-lg">
                             <User class="w-3 h-3 text-slate-400" />
-                            <span class="text-[10px] font-bold text-slate-600 dark:text-slate-400">{{ activity.user.name }}</span>
+                            <span class="text-xs font-bold text-slate-600 dark:text-slate-400">{{ activity.user.name }}</span>
                         </div>
                     </div>
                     <div class="flex items-center gap-2">
-                        <span class="text-[9px] font-mono text-slate-300 dark:text-slate-600">
+                        <span class="text-xs font-mono text-slate-300 dark:text-slate-600">
                             {{ activity.ip_address }}
                         </span>
                         <div v-if="activity.region" class="flex items-center gap-1 text-slate-400">
                             <MapPin class="w-2.5 h-2.5" />
-                            <span class="text-[9px] font-bold uppercase tracking-tighter">{{ activity.region }}</span>
+                            <span class="text-xs font-bold uppercase tracking-tighter">{{ activity.region }}</span>
                         </div>
                     </div>
                 </div>

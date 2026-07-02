@@ -71,7 +71,7 @@ const getStatusColor = (status: string) => {
         <div class="max-w-4xl mx-auto space-y-10 pb-20">
             <!-- Header -->
             <div class="flex items-center gap-6 pb-8 border-b border-slate-100 dark:border-slate-800">
-                <Link :href="'/my-applications/' + application.id" class="p-3 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl hover:bg-slate-50 transition-all">
+                <Link :href="'/my-applications/' + application.id" class="p-3 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl hover:bg-slate-50 transition-colors">
                     <ChevronLeft class="w-5 h-5 text-slate-400" />
                 </Link>
                 <div>
@@ -83,7 +83,7 @@ const getStatusColor = (status: string) => {
             <!-- Premium Animated Warning/Info -->
             <div class="bg-gradient-to-r from-primary-600 to-primary-800 rounded-2xl p-10 text-white shadow-premium-xl relative overflow-hidden group animate-reveal">
                 <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent animate-gradient-x opacity-50 pointer-events-none"></div>
-                <Info class="w-32 h-32 absolute -right-6 -top-6 opacity-10 group-hover:scale-125 group-hover:rotate-12 transition-all duration-700 ease-out" />
+                <Info class="w-32 h-32 absolute -right-6 -top-6 opacity-10 group-hover:scale-125 group-hover:rotate-12 transition-colors duration-700 ease-out" />
                 <div class="relative z-10 space-y-4">
                     <h3 class="text-2xl font-bold tracking-tight">Informasi Penting</h3>
                     <p class="text-sm font-medium text-white/90 leading-relaxed max-w-2xl">
@@ -94,7 +94,7 @@ const getStatusColor = (status: string) => {
 
             <!-- Documents List -->
             <div class="grid grid-cols-1 gap-6 relative z-10">
-                <div v-for="(type, index) in documentTypes" :key="type.key" class="glass-premium rounded-2xl p-8 md:p-10 transition-all duration-500 hover:-translate-y-2 hover:shadow-premium-2xl group animate-reveal" :style="'animation-delay: ' + (index * 150) + 'ms'">
+                <div v-for="(type, index) in documentTypes" :key="type.key" class="glass-premium rounded-2xl p-8 md:p-10 transition-colors duration-500 hover:-translate-y-2 hover:shadow-premium-2xl group animate-reveal" :style="'animation-delay: ' + (index * 150) + 'ms'">
                     <div class="flex flex-col md:flex-row md:items-center justify-between gap-8">
                         <div class="flex gap-6">
                             <div class="w-16 h-16 bg-white dark:bg-neutral-800 rounded-2xl flex items-center justify-center shrink-0 shadow-premium-sm group-hover:scale-110 transition-transform duration-500 group-hover:shadow-premium-md border border-neutral-100 dark:border-neutral-700">
@@ -115,7 +115,7 @@ const getStatusColor = (status: string) => {
                                 
                                 <!-- Document Status Badge -->
                                 <div v-if="getDocument(type.key)" class="inline-flex mt-3">
-                                    <div :class="['px-3 py-1 rounded-full text-[10px] font-semibold text-xs tracking-wide border', getStatusColor(getDocument(type.key)?.status || 'pending')]">
+                                    <div :class="['px-3 py-1 rounded-full text-xs font-semibold text-xs tracking-wide border', getStatusColor(getDocument(type.key)?.status || 'pending')]">
                                         {{ getDocument(type.key)?.status }}
                                     </div>
                                 </div>
@@ -129,28 +129,28 @@ const getStatusColor = (status: string) => {
                                     <div class="flex gap-2">
                                         <a 
                                             :href="'/api/v1/onboarding-documents/' + getDocument(type.key)?.id + '/download'" 
-                                            class="p-3 bg-slate-50 dark:bg-slate-800 text-slate-500 rounded-xl hover:bg-primary-50 hover:text-primary-600 transition-all"
+                                            class="p-3 bg-slate-50 dark:bg-slate-800 text-slate-500 rounded-xl hover:bg-primary-50 hover:text-primary-600 transition-colors"
                                             title="Download"
                                         >
                                             <Download class="w-5 h-5" />
                                         </a>
                                         <label 
                                             v-if="getDocument(type.key)?.status !== 'verified'"
-                                            class="p-3 bg-slate-50 dark:bg-slate-800 text-slate-500 rounded-xl hover:bg-orange-50 hover:text-orange-600 transition-all cursor-pointer"
+                                            class="p-3 bg-slate-50 dark:bg-slate-800 text-slate-500 rounded-xl hover:bg-orange-50 hover:text-orange-600 transition-colors cursor-pointer"
                                             title="Re-upload"
                                         >
                                             <Upload class="w-5 h-5" />
                                             <input type="file" class="hidden" :disabled="!!uploading" @change="handleFileUpload($event, type.key)" />
                                         </label>
                                     </div>
-                                    <p v-if="getDocument(type.key)?.status === 'rejected'" class="text-[10px] font-bold text-rose-500 max-w-[200px] text-right italic">
+                                    <p v-if="getDocument(type.key)?.status === 'rejected'" class="text-xs font-bold text-rose-500 max-w-[200px] text-right italic">
                                         Alasan: {{ getDocument(type.key)?.notes }}
                                     </p>
                                 </div>
                             </template>
                             
                             <template v-else>
-                                <label class="relative bg-slate-900 dark:bg-neutral-100 text-white dark:text-slate-900 px-8 py-4 rounded-2xl font-bold text-sm hover:bg-primary-600 dark:hover:bg-primary-500 hover:text-white transition-all duration-300 shadow-premium-md hover:shadow-premium-lg cursor-pointer flex items-center gap-2 overflow-hidden overflow-group">
+                                <label class="relative bg-slate-900 dark:bg-neutral-100 text-white dark:text-slate-900 px-8 py-4 rounded-2xl font-bold text-sm hover:bg-primary-600 dark:hover:bg-primary-500 hover:text-white transition-colors duration-300 shadow-premium-md hover:shadow-premium-lg cursor-pointer flex items-center gap-2 overflow-hidden overflow-group">
                                     <div class="absolute inset-0 bg-white/20 group-hover:translate-x-full transition-transform duration-700 -skew-x-12 -translate-x-full"></div>
                                     <template v-if="uploading === type.key">
                                         <div class="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>

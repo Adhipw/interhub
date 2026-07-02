@@ -119,7 +119,7 @@ const handleConfirmedAction = async (companyId: number) => {
               v-model="filters.search" 
               type="text"
               placeholder="Cari perusahaan..."
-              class="pl-11 pr-6 py-3 bg-white dark:bg-slate-800 dark:text-white border border-slate-100 dark:border-slate-700 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all w-64" 
+              class="pl-11 pr-6 py-3 bg-white dark:bg-slate-800 dark:text-white border border-slate-100 dark:border-slate-700 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-colors w-64" 
               @keyup.enter="handleSearch"
             />
           </div>
@@ -135,12 +135,12 @@ const handleConfirmedAction = async (companyId: number) => {
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <Card v-for="company in companies.data" :key="company.id" class="p-8 border-none shadow-sm flex flex-col h-full group">
             <div class="flex items-start justify-between mb-6">
-              <div class="w-16 h-16 bg-slate-50 dark:bg-slate-900 rounded-2xl flex items-center justify-center text-slate-300 group-hover:bg-primary-600 group-hover:text-white transition-all overflow-hidden border border-slate-50 dark:border-slate-800">
+              <div class="w-16 h-16 bg-slate-50 dark:bg-slate-900 rounded-2xl flex items-center justify-center text-slate-300 group-hover:bg-primary-600 group-hover:text-white transition-colors overflow-hidden border border-slate-50 dark:border-slate-800">
                  <img v-if="company.logo_url" loading="lazy" decoding="async" :src="company.logo_url" class="w-full h-full object-cover" />
                  <Building2 v-else class="w-8 h-8" />
               </div>
               <div 
-                class="px-3 py-1 rounded-full text-[10px] font-bold font-medium flex items-center gap-1"
+                class="px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1"
                 :class="company.is_verified ? 'bg-green-50 text-green-600' : 'bg-orange-50 text-orange-600'"
               >
                 <CheckCircle2 v-if="company.is_verified" class="w-3 h-3" />
@@ -171,7 +171,7 @@ const handleConfirmedAction = async (companyId: number) => {
                      v-if="!company.is_verified"
                      :disabled="processing"
                      type="button"
-                     class="flex-1 py-3 bg-primary-600 text-white rounded-xl text-xs font-bold hover:bg-primary-700 shadow-lg shadow-primary-500/20 dark:shadow-none transition-all active:scale-95"
+                     class="flex-1 py-3 bg-primary-600 text-white rounded-xl text-xs font-bold hover:bg-primary-700 shadow-lg shadow-primary-500/20 dark:shadow-none transition-colors active:scale-95"
                      @click.stop="startConfirm(company.id, 'verify')"
                   >
                      Verifikasi
@@ -180,12 +180,12 @@ const handleConfirmedAction = async (companyId: number) => {
                      v-else
                      :disabled="processing"
                      type="button"
-                     class="flex-1 py-3 bg-slate-100 dark:bg-slate-900 text-red-600 rounded-xl text-xs font-bold hover:bg-red-50 transition-all active:scale-95"
+                     class="flex-1 py-3 bg-slate-100 dark:bg-slate-900 text-red-600 rounded-xl text-xs font-bold hover:bg-red-50 transition-colors active:scale-95"
                      @click.stop="startConfirm(company.id, 'unverify')"
                   >
                      Cabut Verifikasi
                   </button>
-                  <Link :href="route('companies.show', { slug: company.slug })" target="_blank" class="p-3 bg-slate-50 dark:bg-slate-900 text-slate-400 hover:text-primary-600 rounded-xl transition-all" @click.stop>
+                  <Link :href="route('companies.show', { slug: company.slug })" target="_blank" class="p-3 bg-slate-50 dark:bg-slate-900 text-slate-400 hover:text-primary-600 rounded-xl transition-colors" @click.stop>
                      <ExternalLink class="w-4 h-4" />
                   </Link>
                </template>
@@ -193,18 +193,18 @@ const handleConfirmedAction = async (companyId: number) => {
                <!-- Confirm State (Inline) -->
                <template v-else>
                   <div class="flex-1 flex items-center justify-between bg-slate-50 dark:bg-slate-800/50 p-1.5 rounded-xl border border-primary-100 dark:border-primary-900/30">
-                     <span class="text-[10px] font-bold text-primary-600 px-2 uppercase tracking-tight">Yakin?</span>
+                     <span class="text-xs font-bold text-primary-600 px-2 uppercase tracking-tight">Yakin?</span>
                      <div class="flex gap-1.5">
                         <button 
                            :disabled="processing"
-                           class="px-3 py-1.5 text-[10px] font-bold text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-white transition-colors"
+                           class="px-3 py-1.5 text-xs font-bold text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-white transition-colors"
                            @click.stop="cancelConfirm"
                         >
                            Batal
                         </button>
                         <button 
                            :disabled="processing"
-                           class="px-4 py-1.5 bg-primary-600 text-white text-[10px] font-bold rounded-lg shadow-md shadow-primary-500/20 active:scale-95 transition-all"
+                           class="px-4 py-1.5 bg-primary-600 text-white text-xs font-bold rounded-lg shadow-md shadow-primary-500/20 active:scale-95 transition-colors"
                            @click.stop="handleConfirmedAction(company.id)"
                         >
                            Ya

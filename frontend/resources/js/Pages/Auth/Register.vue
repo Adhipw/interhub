@@ -9,6 +9,7 @@ import PasswordField from '@/Components/PasswordField.vue';
 import PasswordStrengthMeter from '@/Components/PasswordStrengthMeter.vue';
 import LoadingButton from '@/Components/LoadingButton.vue';
 import AuthLink from '@/Components/AuthLink.vue';
+import Input from '@/Components/Input.vue';
 import FormError from '@/Components/FormError.vue';
 import Captcha from '@/Components/Captcha.vue';
 import { GraduationCap, Building2 } from 'lucide-vue-next';
@@ -105,47 +106,35 @@ const submit = async () => {
                 </button>
             </div>
 
-            <div>
-                <label for="name" class="block text-sm font-semibold text-slate-700 mb-2">{{ t('auth.full_name') }}</label>
-                <input
-                    id="name"
-                    v-model="form.name"
-                    type="text"
-                    class="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-50"
-                    :class="{ 'border-red-500 focus:border-red-500 focus:ring-red-50': form.errors.name }"
-                    :placeholder="t('auth.full_name_placeholder')"
-                    required
-                />
-                <FormError :message="form.errors.name" />
-            </div>
+            <Input
+                id="name"
+                v-model="form.name"
+                type="text"
+                :label="t('auth.full_name')"
+                :error="form.errors.name"
+                :placeholder="t('auth.full_name_placeholder')"
+                required
+            />
 
-            <div>
-                <label for="email" class="block text-sm font-semibold text-slate-700 mb-2">{{ t('auth.email') }}</label>
-                <input
-                    id="email"
-                    v-model="form.email"
-                    type="email"
-                    class="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-50"
-                    :class="{ 'border-red-500 focus:border-red-500 focus:ring-red-50': form.errors.email }"
-                    :placeholder="t('auth.email_placeholder')"
-                    required
-                />
-                <FormError :message="form.errors.email" />
-            </div>
+            <Input
+                id="email"
+                v-model="form.email"
+                type="email"
+                :label="t('auth.email')"
+                :error="form.errors.email"
+                :placeholder="t('auth.email_placeholder')"
+                required
+            />
 
-            <div>
-                <label for="phone" class="block text-sm font-semibold text-slate-700 mb-2">{{ t('auth.whatsapp_number') }}</label>
-                <input
-                    id="phone"
-                    v-model="form.phone_number"
-                    type="tel"
-                    class="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-50"
-                    :class="{ 'border-red-500 focus:border-red-500 focus:ring-red-50': form.errors.phone_number }"
-                    placeholder="08xxxxxxxxxx"
-                    required
-                />
-                <FormError :message="form.errors.phone_number" />
-            </div>
+            <Input
+                id="phone"
+                v-model="form.phone_number"
+                type="tel"
+                :label="t('auth.whatsapp_number')"
+                :error="form.errors.phone_number"
+                placeholder="08xxxxxxxxxx"
+                required
+            />
 
             <div class="space-y-1">
                 <PasswordField

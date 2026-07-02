@@ -50,7 +50,7 @@ const submit = () => {
             <!-- Header -->
             <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 animate-fade-in">
                 <div class="space-y-4">
-                    <div class="inline-flex items-center gap-2 px-3 py-1 bg-primary-50 dark:bg-primary-900/30 text-primary-600 rounded-full text-[10px] font-semibold text-xs tracking-wide">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 bg-primary-50 dark:bg-primary-900/30 text-primary-600 rounded-full text-xs font-semibold text-xs tracking-wide">
                         <Building2 class="w-3.5 h-3.5" />
                         Manajemen Perusahaan
                     </div>
@@ -60,7 +60,7 @@ const submit = () => {
                 
                 <button 
                     :disabled="processing || loading"
-                    class="bg-primary-600 text-white px-10 py-4 rounded-2xl font-bold text-sm hover:bg-primary-700 disabled:opacity-50 transition-all shadow-xl shadow-primary-900/20 flex items-center gap-3 active-press"
+                    class="bg-primary-600 text-white px-10 py-4 rounded-2xl font-bold text-sm hover:bg-primary-700 disabled:opacity-50 transition-colors shadow-xl shadow-primary-900/20 flex items-center gap-3 active-press"
                     @click="submit"
                 >
                     <Loader2 v-if="processing" class="w-5 h-5 animate-spin" />
@@ -160,7 +160,7 @@ const submit = () => {
                             </h3>
                             
                             <div class="space-y-3">
-                                <label class="text-[10px] font-bold text-slate-500 dark:text-slate-400 font-medium ml-1">Deskripsi Publik</label>
+                                <label class="text-xs font-bold text-slate-500 dark:text-slate-400 font-medium ml-1">Deskripsi Publik</label>
                                 <textarea 
                                     v-model="form.description" 
                                     rows="15" 

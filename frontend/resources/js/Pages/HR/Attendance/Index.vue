@@ -64,7 +64,7 @@ const getLiveLoc = (userId: number) => liveLocations.value[userId] || null;
                     <input 
                         v-model="filters.date" 
                         type="date"
-                        class="rounded-xl border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-sm focus:ring-primary-500 transition-all"
+                        class="rounded-xl border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-sm focus:ring-primary-500 transition-colors"
                     />
                     <Button variant="ghost" class="border border-slate-200 dark:border-slate-700">
                         <Download class="w-4 h-4 mr-2" /> Export
@@ -81,7 +81,7 @@ const getLiveLoc = (userId: number) => liveLocations.value[userId] || null;
                         <Users class="w-6 h-6" />
                     </div>
                     <div>
-                        <p class="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 font-medium">Hadir Hari Ini</p>
+                        <p class="text-xs font-bold text-emerald-600 dark:text-emerald-400 font-medium">Hadir Hari Ini</p>
                         <p class="text-2xl font-bold text-slate-900 dark:text-white leading-none mt-1">{{ stats.total_present }}</p>
                     </div>
                 </Card>
@@ -91,7 +91,7 @@ const getLiveLoc = (userId: number) => liveLocations.value[userId] || null;
                         <Activity class="w-6 h-6" />
                     </div>
                     <div>
-                        <p class="text-[10px] font-bold text-blue-600 dark:text-blue-400 font-medium">Sesi Aktif (Live)</p>
+                        <p class="text-xs font-bold text-blue-600 dark:text-blue-400 font-medium">Sesi Aktif (Live)</p>
                         <p class="text-2xl font-bold text-slate-900 dark:text-white leading-none mt-1">{{ stats.currently_active }}</p>
                     </div>
                 </Card>
@@ -110,7 +110,7 @@ const getLiveLoc = (userId: number) => liveLocations.value[userId] || null;
                             v-model="filters.search"
                             type="text"
                             placeholder="Cari nama peserta..." 
-                            class="w-full pl-10 pr-4 py-2 rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm focus:ring-primary-500 transition-all"
+                            class="w-full pl-10 pr-4 py-2 rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm focus:ring-primary-500 transition-colors"
                             @keyup.enter="handleSearch"
                         />
                     </div>
@@ -123,7 +123,7 @@ const getLiveLoc = (userId: number) => liveLocations.value[userId] || null;
                 <div v-else class="overflow-x-auto">
                     <table class="w-full text-left">
                         <thead>
-                            <tr class="bg-slate-50/50 dark:bg-slate-800/50 text-[10px] text-slate-400 uppercase font-bold tracking-widest">
+                            <tr class="bg-slate-50/50 dark:bg-slate-800/50 text-xs text-slate-400 uppercase font-bold tracking-widest">
                                 <th class="px-6 py-4">Peserta Magang</th>
                                 <th class="px-6 py-4">Sesi Waktu</th>
                                 <th class="px-6 py-4 text-center">Status Lokasi</th>
@@ -140,19 +140,19 @@ const getLiveLoc = (userId: number) => liveLocations.value[userId] || null;
                                         </div>
                                         <div>
                                             <p class="font-bold text-slate-900 dark:text-white">{{ item.user.name }}</p>
-                                            <p class="text-[10px] text-slate-500 font-medium uppercase tracking-tight">{{ item.application.internship.title }}</p>
+                                            <p class="text-xs text-slate-500 font-medium uppercase tracking-tight">{{ item.application.internship.title }}</p>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="px-6 py-5">
                                     <div class="flex items-center gap-4 text-xs font-mono">
                                         <div class="flex flex-col">
-                                            <span class="text-[9px] text-slate-400 font-sans uppercase font-bold">In</span>
+                                            <span class="text-xs text-slate-400 font-sans uppercase font-bold">In</span>
                                             <span class="font-bold text-slate-700 dark:text-slate-300">{{ format(new Date(item.check_in_at), 'HH:mm:ss') }}</span>
                                         </div>
                                         <div class="text-slate-200">|</div>
                                         <div class="flex flex-col">
-                                            <span class="text-[9px] text-slate-400 font-sans uppercase font-bold">Out</span>
+                                            <span class="text-xs text-slate-400 font-sans uppercase font-bold">Out</span>
                                             <span :class="item.check_out_at ? 'font-bold text-slate-700 dark:text-slate-300' : 'text-slate-400 italic'">
                                                 {{ item.check_out_at ? format(new Date(item.check_out_at), 'HH:mm:ss') : 'Active' }}
                                             </span>
@@ -162,9 +162,9 @@ const getLiveLoc = (userId: number) => liveLocations.value[userId] || null;
                                 <td class="px-6 py-5 text-center">
                                     <div v-if="getLiveLoc(item.user_id)" class="inline-flex items-center gap-2 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 px-3 py-1.5 rounded-full border border-emerald-100 dark:border-emerald-800/50">
                                         <div class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></div>
-                                        <span class="text-[10px] font-semibold text-xs tracking-wide">Live Now</span>
+                                        <span class="text-xs font-semibold text-xs tracking-wide">Live Now</span>
                                     </div>
-                                    <span v-else class="text-[10px] font-bold text-slate-400 font-medium">Offline</span>
+                                    <span v-else class="text-xs font-bold text-slate-400 font-medium">Offline</span>
                                 </td>
                                 <td class="px-6 py-5">
                                     <Badge :variant="item.status === 'present' ? 'success' : 'warning'" class="px-3 py-1 rounded-lg">
@@ -177,7 +177,7 @@ const getLiveLoc = (userId: number) => liveLocations.value[userId] || null;
                                             v-if="getLiveLoc(item.user_id)"
                                             :href="`https://www.google.com/maps?q=${getLiveLoc(item.user_id).lat},${getLiveLoc(item.user_id).lng}`" 
                                             target="_blank"
-                                            class="p-2 text-primary-600 hover:bg-primary-50 dark:hover:bg-primary-900/20 rounded-lg transition-all"
+                                            class="p-2 text-primary-600 hover:bg-primary-50 dark:hover:bg-primary-900/20 rounded-lg transition-colors"
                                             title="Buka di Google Maps"
                                         >
                                             <MapPin class="w-4 h-4" />

@@ -16,7 +16,7 @@ const t = (key: string) => langStore.t(key);
                 <Link href="/admin/dashboard" class="inline-flex items-center gap-2 text-sm font-bold text-slate-500 hover:text-primary-600 transition-colors">
                     &larr; Kembali ke Dashboard
                 </Link>
-                <div class="inline-flex items-center gap-2 px-3 py-1 bg-red-50 dark:bg-red-900/20 text-red-600 rounded-full text-[10px] font-semibold text-xs tracking-wide border border-red-100 dark:border-red-900/30">
+                <div class="inline-flex items-center gap-2 px-3 py-1 bg-red-50 dark:bg-red-900/20 text-red-600 rounded-full text-xs font-semibold text-xs tracking-wide border border-red-100 dark:border-red-900/30">
                     <ShieldAlert class="w-3 h-3" />
                     Security Guideline
                 </div>
@@ -128,7 +128,7 @@ const t = (key: string) => langStore.t(key);
                     <p class="text-primary-200 max-w-xl mx-auto">
                         Terdapat antrean perusahaan yang sedang menunggu persetujuan Anda. Mari wujudkan ekosistem magang yang aman bagi mahasiswa.
                     </p>
-                    <Link href="/admin/companies" class="inline-block bg-white text-primary-900 px-8 py-4 rounded-2xl font-semibold text-xs tracking-wide text-sm hover:bg-primary-50 transition-all hover:scale-105 active:scale-95 shadow-xl">
+                    <Link href="/admin/companies" class="inline-block bg-white text-primary-900 px-8 py-4 rounded-2xl font-semibold text-xs tracking-wide text-sm hover:bg-primary-50 transition-colors hover:scale-105 active:scale-95 shadow-xl">
                         Ke Halaman Moderasi
                     </Link>
                 </div>

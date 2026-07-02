@@ -83,7 +83,7 @@ watch(statusFilter, () => {
             <div class="w-full md:w-64">
               <select 
                 v-model="statusFilter"
-                class="w-full rounded-xl border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 dark:text-white text-sm focus:ring-primary-500 focus:border-primary-500 transition-all"
+                class="w-full rounded-xl border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 dark:text-white text-sm focus:ring-primary-500 focus:border-primary-500 transition-colors"
               >
                 <option value="">{{ t('hr.applications.filter_all') }}</option>
                 <option value="pending">{{ t('hr.applications.status_pending') }}</option>
@@ -113,15 +113,15 @@ watch(statusFilter, () => {
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
-              <tr v-for="app in applications.data" :key="app.id" class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-all duration-300 group cursor-pointer" @click="inertiaRouter.visit('/hr/applications/' + app.id)">
+              <tr v-for="app in applications.data" :key="app.id" class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors duration-300 group cursor-pointer" @click="inertiaRouter.visit('/hr/applications/' + app.id)">
                 <td class="px-8 py-6">
                   <div class="flex items-center">
-                    <div class="h-12 w-12 flex-shrink-0 rounded-2xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400 font-bold group-hover:bg-primary-600 group-hover:text-white transition-all shadow-sm">
+                    <div class="h-12 w-12 flex-shrink-0 rounded-2xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400 font-bold group-hover:bg-primary-600 group-hover:text-white transition-colors shadow-sm">
                       {{ app.user.name.charAt(0) }}
                     </div>
                     <div class="ml-5">
                       <div class="text-sm font-bold text-slate-900 dark:text-white">{{ app.user.name }}</div>
-                      <div class="text-[10px] font-bold text-slate-400 font-medium mt-0.5">{{ app.user.email }}</div>
+                      <div class="text-xs font-bold text-slate-400 font-medium mt-0.5">{{ app.user.email }}</div>
                     </div>
                   </div>
                 </td>
@@ -129,13 +129,13 @@ watch(statusFilter, () => {
                   <div class="text-sm text-slate-900 dark:text-white font-bold">{{ app.internship.title }}</div>
                 </td>
                 <td class="px-8 py-6">
-                  <div class="text-[10px] font-bold text-slate-400 font-medium">{{ app.created_at_human }}</div>
+                  <div class="text-xs font-bold text-slate-400 font-medium">{{ app.created_at_human }}</div>
                 </td>
                 <td class="px-8 py-6">
                   <StatusBadge :status="app.status" />
                 </td>
                 <td class="px-8 py-6 text-right">
-                  <div class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-slate-50 dark:bg-slate-800 text-slate-400 group-hover:bg-primary-600 group-hover:text-white transition-all">
+                  <div class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-slate-50 dark:bg-slate-800 text-slate-400 group-hover:bg-primary-600 group-hover:text-white transition-colors">
                     <ChevronRightIcon class="w-5 h-5" />
                   </div>
                 </td>

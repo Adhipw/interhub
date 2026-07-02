@@ -42,7 +42,7 @@ const updateTaskStatus = (taskId: number, currentStatus: string) => {
             <input 
               type="text" 
               placeholder="Cari tugas..." 
-              class="pl-11 pr-6 py-3 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all w-64"
+              class="pl-11 pr-6 py-3 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-colors w-64"
             />
           </div>
         </div>
@@ -53,14 +53,14 @@ const updateTaskStatus = (taskId: number, currentStatus: string) => {
           <Card v-for="(task, index) in tasks.data" :key="task.id" class="p-6 border-none shadow-sm flex flex-col group hover:-translate-y-1 transition-transform">
             <div class="flex items-start justify-between mb-4">
                 <button 
-                    class="mt-1 w-8 h-8 rounded-2xl border-2 flex items-center justify-center transition-all shrink-0"
+                    class="mt-1 w-8 h-8 rounded-2xl border-2 flex items-center justify-center transition-colors shrink-0"
                     :class="task.status === 'completed' ? 'bg-green-500 border-green-500 text-white shadow-lg shadow-green-500/20' : 'border-slate-200 dark:border-slate-700 hover:border-primary-500'"
                     @click="updateTaskStatus(task.id, task.status)"
                 >
                     <CheckCircle2 v-if="task.status === 'completed'" class="w-5 h-5" />
                     <div v-else class="w-2 h-2 rounded-full bg-slate-200 dark:bg-slate-700 group-hover:bg-primary-500 transition-colors"></div>
                 </button>
-                <span :class="['px-3 py-1 rounded-full text-[9px] font-semibold text-xs tracking-wide', getPriorityLabel(task.priority).class]">
+                <span :class="['px-3 py-1 rounded-full text-xs font-semibold text-xs tracking-wide', getPriorityLabel(task.priority).class]">
                     {{ getPriorityLabel(task.priority).label }}
                 </span>
             </div>
@@ -70,14 +70,14 @@ const updateTaskStatus = (taskId: number, currentStatus: string) => {
                 <p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 leading-relaxed mb-4" :class="{'opacity-50': task.status === 'completed'}">{{ task.description }}</p>
                 
                 <div class="p-3 bg-slate-50 dark:bg-slate-900/50 rounded-xl mb-4 border border-slate-100 dark:border-slate-800">
-                    <p class="text-[10px] font-bold text-slate-400 font-medium mb-1">Ditugaskan Kepada</p>
+                    <p class="text-xs font-bold text-slate-400 font-medium mb-1">Ditugaskan Kepada</p>
                     <p class="text-xs font-bold text-slate-900 dark:text-white">{{ task.application?.user?.name }}</p>
-                    <p class="text-[10px] text-slate-500 mt-0.5">{{ task.application?.internship?.title }}</p>
+                    <p class="text-xs text-slate-500 mt-0.5">{{ task.application?.internship?.title }}</p>
                 </div>
             </div>
 
             <div class="mt-auto pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
-                <div class="flex items-center gap-2 text-[10px] font-semibold text-xs tracking-wide" :class="task.status === 'completed' ? 'text-green-500' : 'text-slate-400'">
+                <div class="flex items-center gap-2 text-xs font-semibold text-xs tracking-wide" :class="task.status === 'completed' ? 'text-green-500' : 'text-slate-400'">
                     <Clock class="w-3.5 h-3.5" />
                     <span>{{ task.status === 'completed' ? 'Selesai' : 'Batas: ' + formatDate(task.due_at || task.created_at, { day: 'numeric', month: 'short' }) }}</span>
                 </div>

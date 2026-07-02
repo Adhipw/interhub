@@ -141,7 +141,7 @@ updateSeo();
                                             </div>
                                         </div>
                                     </div>
-                                    <button class="w-10 h-10 border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 rounded-lg flex items-center justify-center text-neutral-500 hover:text-primary-600 transition-all shadow-sm">
+                                    <button class="w-10 h-10 border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 rounded-lg flex items-center justify-center text-neutral-500 hover:text-primary-600 transition-colors shadow-sm">
                                         <Share2 class="w-4 h-4" />
                                     </button>
                                 </div>
@@ -153,19 +153,19 @@ updateSeo();
 
                                 <div class="grid grid-cols-2 md:grid-cols-4 gap-6 pt-8 border-t border-neutral-100 dark:border-neutral-800">
                                     <div>
-                                        <p class="text-[11px] font-semibold text-neutral-500 font-medium mb-1.5">{{ t('job.stipend') }}</p>
+                                        <p class="text-xs font-semibold text-neutral-500 font-medium mb-1.5">{{ t('job.stipend') }}</p>
                                         <p class="text-sm font-semibold text-neutral-900 dark:text-white">{{ internship.stipend || t('job.stipend_default') }}</p>
                                     </div>
                                     <div>
-                                        <p class="text-[11px] font-semibold text-neutral-500 font-medium mb-1.5">{{ t('filters.location_label') }}</p>
+                                        <p class="text-xs font-semibold text-neutral-500 font-medium mb-1.5">{{ t('filters.location_label') }}</p>
                                         <p class="text-sm font-semibold text-neutral-900 dark:text-white">{{ internship.location }}</p>
                                     </div>
                                     <div>
-                                        <p class="text-[11px] font-semibold text-neutral-500 font-medium mb-1.5">{{ t('job.deadline_label') }}</p>
+                                        <p class="text-xs font-semibold text-neutral-500 font-medium mb-1.5">{{ t('job.deadline_label') }}</p>
                                         <p class="text-sm font-semibold text-rose-600">{{ internship.deadline_at_human || t('job.deadline_urgent') }}</p>
                                     </div>
                                     <div>
-                                        <p class="text-[11px] font-semibold text-neutral-500 font-medium mb-1.5">{{ t('job.published_at') }}</p>
+                                        <p class="text-xs font-semibold text-neutral-500 font-medium mb-1.5">{{ t('job.published_at') }}</p>
                                         <p class="text-sm font-semibold text-neutral-900 dark:text-white">{{ internship.created_at_human }}</p>
                                     </div>
                                 </div>
@@ -213,7 +213,7 @@ updateSeo();
                     <!-- Sidebar: Action & Info -->
                     <aside class="space-y-6 lg:sticky lg:top-24 animate-reveal delay-200 opacity-0">
                         <!-- Action Card -->
-                        <div class="bg-white dark:bg-neutral-900 p-8 rounded-2xl shadow-sm hover:shadow-md hover:border-primary-200/50 transition-all duration-300 border border-neutral-200/60 dark:border-neutral-800 relative overflow-hidden group">
+                        <div class="bg-white dark:bg-neutral-900 p-8 rounded-2xl shadow-sm hover:shadow-md hover:border-primary-200/50 transition-colors duration-300 border border-neutral-200/60 dark:border-neutral-800 relative overflow-hidden group">
                             <div class="relative z-10">
                                 <h3 class="text-lg font-bold text-neutral-900 dark:text-white mb-2">{{ t('job.apply_card_title') }}</h3>
                                 <p class="text-sm text-neutral-500 dark:text-neutral-400 mb-6 leading-relaxed">{{ t('job.apply_card_desc') }}</p>
@@ -230,7 +230,7 @@ updateSeo();
 
                         <!-- Company Card -->
                         <div class="bg-white dark:bg-neutral-900 p-6 rounded-2xl border border-neutral-200/60 dark:border-neutral-800 shadow-sm space-y-6">
-                            <h3 class="text-[11px] font-semibold font-medium text-neutral-500">{{ t('company.about') }}</h3>
+                            <h3 class="text-xs font-semibold font-medium text-neutral-500">{{ t('company.about') }}</h3>
                             <div class="flex items-center gap-4">
                                 <div class="w-12 h-12 bg-white dark:bg-neutral-950 rounded-lg flex items-center justify-center border border-neutral-200/60 dark:border-neutral-800 shadow-sm shrink-0 overflow-hidden">
                                     <img v-if="internship.company?.logo_url" loading="lazy" decoding="async" :src="internship.company.logo_url" class="w-full h-full object-contain p-2" />
@@ -261,7 +261,7 @@ updateSeo();
                             <ShieldCheck class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
                             <div>
                                 <p class="text-xs font-semibold text-emerald-700 dark:text-emerald-400 mb-0.5">{{ t('company.verified_badge_title') }}</p>
-                                <p class="text-[11px] text-neutral-500">{{ t('company.verified_badge_desc') }}</p>
+                                <p class="text-xs text-neutral-500">{{ t('company.verified_badge_desc') }}</p>
                             </div>
                         </div>
                     </aside>
@@ -295,7 +295,7 @@ updateSeo();
                     <textarea 
                         v-model="coverLetter"
                         rows="4"
-                        class="w-full px-4 py-3 bg-white dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 rounded-xl focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500 transition-all text-sm leading-relaxed dark:text-white resize-none"
+                        class="w-full px-4 py-3 bg-white dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 rounded-xl focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500 transition-colors text-sm leading-relaxed dark:text-white resize-none"
                         placeholder="Tuliskan mengapa Anda tertarik dengan posisi ini..."
                     ></textarea>
                 </div>

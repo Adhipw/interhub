@@ -37,7 +37,7 @@ const cobalt = computed(() => props.isDarkMode ? '#60A5FA' : '#0056B3'); // Coba
 <template>
     <div 
         :class="[
-            'flex items-center transition-all duration-300',
+            'flex items-center transition-colors duration-300',
             sizeClasses.gap,
             className
         ]"
@@ -87,7 +87,7 @@ const cobalt = computed(() => props.isDarkMode ? '#60A5FA' : '#0056B3'); // Coba
                 class="ml-3 px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm"
             >
                 <span 
-                    class="text-[9px] font-semibold text-xs tracking-wide text-slate-500 dark:text-slate-400"
+                    class="text-xs font-semibold text-xs tracking-wide text-slate-500 dark:text-slate-400"
                 >
                     {{ roleLabel }}
                 </span>

@@ -172,7 +172,7 @@ const verifyDocument = async (id: number, status: string) => {
     <template v-if="application" #header>
         <div class="flex items-center justify-between pb-6 border-b border-gray-100 dark:border-gray-800">
           <div class="flex items-center">
-            <Link href="/hr/applications" class="mr-6 p-2.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-xl transition-all">
+            <Link href="/hr/applications" class="mr-6 p-2.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-xl transition-colors">
               <ArrowLeftIcon class="w-5 h-5" />
             </Link>
             <div>
@@ -211,7 +211,7 @@ const verifyDocument = async (id: number, status: string) => {
           <div class="p-6 bg-slate-50 dark:bg-slate-900/50 rounded-2xl border border-slate-100 dark:border-slate-800">
             <div class="flex items-center text-slate-400 mb-3">
               <AcademicCapIcon class="w-4 h-4 mr-2" />
-              <span class="text-[10px] font-bold font-medium">Pendidikan Terakhir</span>
+              <span class="text-xs font-medium">Pendidikan Terakhir</span>
             </div>
             <p class="text-sm font-bold text-slate-900 dark:text-white truncate">
               {{ application.user.detail?.education?.[0]?.institution || 'N/A' }}
@@ -220,7 +220,7 @@ const verifyDocument = async (id: number, status: string) => {
           <div class="p-6 bg-slate-50 dark:bg-slate-900/50 rounded-2xl border border-slate-100 dark:border-slate-800">
             <div class="flex items-center text-slate-400 mb-3">
               <SparklesIcon class="w-4 h-4 mr-2" />
-              <span class="text-[10px] font-bold font-medium">Top Skill</span>
+              <span class="text-xs font-medium">Top Skill</span>
             </div>
             <p class="text-sm font-bold text-slate-900 dark:text-white truncate">
               {{ application.user.detail?.skills?.[0] || 'N/A' }}
@@ -229,7 +229,7 @@ const verifyDocument = async (id: number, status: string) => {
           <div class="p-6 bg-slate-50 dark:bg-slate-900/50 rounded-2xl border border-slate-100 dark:border-slate-800">
             <div class="flex items-center text-slate-400 mb-3">
               <IdentificationIcon class="w-4 h-4 mr-2" />
-              <span class="text-[10px] font-bold font-medium">Kontak</span>
+              <span class="text-xs font-medium">Kontak</span>
             </div>
             <p class="text-sm font-bold text-slate-900 dark:text-white truncate">
               {{ application.user.detail?.phone_number || 'N/A' }}
@@ -251,12 +251,12 @@ const verifyDocument = async (id: number, status: string) => {
                 </div>
                 <div>
                   <h3 class="text-xs font-bold text-slate-900 dark:text-white font-medium">AI Candidate Smart Summary</h3>
-                  <p class="text-[10px] text-slate-500 dark:text-neutral-400 font-medium">Analisis Resume & Portofolio Otomatis</p>
+                  <p class="text-xs text-slate-500 dark:text-neutral-400 font-medium">Analisis Resume & Portofolio Otomatis</p>
                 </div>
               </div>
               <button 
                 :disabled="aiSummaryLoading" 
-                class="px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:border-primary-200 text-xs font-bold rounded-xl transition-all shadow-sm flex items-center gap-2"
+                class="px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:border-primary-200 text-xs font-bold rounded-xl transition-colors shadow-sm flex items-center gap-2"
                 @click="generateAiSummary"
               >
                 <span v-if="aiSummaryLoading" class="animate-spin rounded-full h-3.5 w-3.5 border-b-2 border-primary-600 shrink-0"></span>
@@ -295,7 +295,7 @@ const verifyDocument = async (id: number, status: string) => {
         <section>
           <h3 class="text-xs font-bold text-slate-400 font-medium mb-4">Dokumen Pendukung</h3>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <a v-if="application.cv_snapshot" :href="'/storage-private/cvs/' + (application.cv_snapshot?.split('/').pop() || '')" target="_blank" class="flex items-center p-5 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl hover:border-primary-500 hover:shadow-md transition-all group">
+            <a v-if="application.cv_snapshot" :href="'/storage-private/cvs/' + (application.cv_snapshot?.split('/').pop() || '')" target="_blank" class="flex items-center p-5 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl hover:border-primary-500 hover:shadow-md transition-colors group">
               <div class="p-3 bg-slate-50 dark:bg-slate-900 rounded-xl group-hover:bg-primary-50 dark:group-hover:bg-primary-900/30 transition-colors">
                 <DocumentArrowDownIcon class="w-6 h-6 text-slate-400 group-hover:text-primary-600" />
               </div>
@@ -304,7 +304,7 @@ const verifyDocument = async (id: number, status: string) => {
                 <p class="text-xs text-slate-500">Buka dalam tab baru</p>
               </div>
             </a>
-            <a v-if="application.portfolio_snapshot" :href="'/storage-private/portfolios/' + (application.portfolio_snapshot?.split('/').pop() || '')" target="_blank" class="flex items-center p-5 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl hover:border-primary-500 hover:shadow-md transition-all group">
+            <a v-if="application.portfolio_snapshot" :href="'/storage-private/portfolios/' + (application.portfolio_snapshot?.split('/').pop() || '')" target="_blank" class="flex items-center p-5 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl hover:border-primary-500 hover:shadow-md transition-colors group">
               <div class="p-3 bg-slate-50 dark:bg-slate-900 rounded-xl group-hover:bg-primary-50 dark:group-hover:bg-primary-900/30 transition-colors">
                 <DocumentArrowDownIcon class="w-6 h-6 text-slate-400 group-hover:text-primary-600" />
               </div>
@@ -320,7 +320,7 @@ const verifyDocument = async (id: number, status: string) => {
         <section v-if="application.status === 'accepted' || application.status === 'onboarding'">
           <div class="flex items-center justify-between mb-6">
             <h3 class="text-xs font-bold text-slate-400 font-medium">Dokumen Onboarding (Verifikasi)</h3>
-            <span class="px-2 py-0.5 bg-primary-50 text-primary-600 text-[10px] font-bold rounded-lg">PROSES ONBOARDING</span>
+            <span class="px-2 py-0.5 bg-primary-50 text-primary-600 text-xs font-bold rounded-lg">PROSES ONBOARDING</span>
           </div>
 
           <div class="grid grid-cols-1 gap-4">
@@ -334,20 +334,20 @@ const verifyDocument = async (id: number, status: string) => {
                             <p class="text-sm font-bold text-slate-900 dark:text-white capitalize">{{ doc.type.replace('_', ' ') }}</p>
                             <div class="flex items-center gap-2 mt-1">
                                 <StatusBadge :status="doc.status || 'pending'" size="xs" />
-                                <span class="text-[10px] text-slate-400 font-medium">Diunggah {{ doc.created_at_human }}</span>
+                                <span class="text-xs text-slate-400 font-medium">Diunggah {{ doc.created_at_human }}</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="flex items-center gap-2">
-                        <a :href="'/api/v1/onboarding-documents/' + doc.id + '/download'" target="_blank" class="p-2.5 bg-slate-50 dark:bg-slate-900 text-slate-400 hover:text-primary-600 rounded-xl transition-all">
+                        <a :href="'/api/v1/onboarding-documents/' + doc.id + '/download'" target="_blank" class="p-2.5 bg-slate-50 dark:bg-slate-900 text-slate-400 hover:text-primary-600 rounded-xl transition-colors">
                             <DocumentArrowDownIcon class="w-5 h-5" />
                         </a>
                         <template v-if="doc.status === 'pending'">
-                            <button class="p-2.5 bg-emerald-50 text-emerald-600 hover:bg-emerald-600 hover:text-white rounded-xl transition-all shadow-sm" @click="verifyDocument(doc.id, 'verified')">
+                            <button class="p-2.5 bg-emerald-50 text-emerald-600 hover:bg-emerald-600 hover:text-white rounded-xl transition-colors shadow-sm" @click="verifyDocument(doc.id, 'verified')">
                                 <CheckCircleIcon class="w-5 h-5" />
                             </button>
-                            <button class="p-2.5 bg-rose-50 text-rose-600 hover:bg-rose-600 hover:text-white rounded-xl transition-all shadow-sm" @click="verifyDocument(doc.id, 'rejected')">
+                            <button class="p-2.5 bg-rose-50 text-rose-600 hover:bg-rose-600 hover:text-white rounded-xl transition-colors shadow-sm" @click="verifyDocument(doc.id, 'rejected')">
                                 <XCircleIcon class="w-5 h-5" />
                             </button>
                         </template>
@@ -394,7 +394,7 @@ const verifyDocument = async (id: number, status: string) => {
                 <div class="w-1.5 h-1.5 rounded-full bg-slate-300"></div>
               </div>
               <p class="text-sm font-bold text-slate-900 dark:text-white">{{ event.label }}</p>
-              <p class="text-[10px] font-medium text-slate-400 uppercase mt-0.5">{{ formatEventDate(event.date) }}</p>
+              <p class="text-xs font-medium text-slate-400 uppercase mt-0.5">{{ formatEventDate(event.date) }}</p>
               <p class="mt-2 text-xs text-slate-500 leading-relaxed">{{ event.description }}</p>
             </div>
           </div>
@@ -412,7 +412,7 @@ const verifyDocument = async (id: number, status: string) => {
             <XCircleIcon v-else class="w-8 h-8" />
           </div>
           <div class="space-y-1">
-            <p class="text-[10px] font-bold text-slate-400 font-medium">Keputusan untuk</p>
+            <p class="text-xs font-bold text-slate-400 font-medium">Keputusan untuk</p>
             <h4 class="text-xl font-bold text-slate-900 dark:text-white">{{ application.user.name }}</h4>
             <p class="text-sm text-slate-500 font-medium">Posisi: {{ application.internship.title }}</p>
           </div>
@@ -425,7 +425,7 @@ const verifyDocument = async (id: number, status: string) => {
               v-for="reason in rejectionReasons" 
               :key="reason.id"
               type="button"
-              :class="['text-left px-5 py-3 rounded-xl text-sm font-medium transition-all border', statusForm.notes === reason.label ? 'bg-primary-50 border-primary-200 text-primary-700' : 'bg-white dark:bg-slate-800 border-slate-100 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:border-primary-200']"
+              :class="['text-left px-5 py-3 rounded-xl text-sm font-medium transition-colors border', statusForm.notes === reason.label ? 'bg-primary-50 border-primary-200 text-primary-700' : 'bg-white dark:bg-slate-800 border-slate-100 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:border-primary-200']"
               @click="statusForm.notes = reason.label"
             >
               {{ reason.label }}
@@ -440,10 +440,10 @@ const verifyDocument = async (id: number, status: string) => {
           <textarea 
             v-model="statusForm.notes"
             rows="5"
-            class="w-full rounded-2xl border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-sm focus:ring-primary-500 focus:border-primary-500 transition-all shadow-sm"
+            class="w-full rounded-2xl border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-sm focus:ring-primary-500 focus:border-primary-500 transition-colors shadow-sm"
             :placeholder="selectedStatus === 'accepted' ? 'Selamat! Kamu terpilih...' : 'Tulis catatan tambahan di sini...'"
           ></textarea>
-          <p class="text-[10px] text-slate-400 font-medium">
+          <p class="text-xs text-slate-400 font-medium">
             <template v-if="selectedStatus === 'accepted'">Pesan ini akan ditampilkan kepada kandidat di dashboard mereka.</template>
             <template v-else>Pesan ini akan dikirimkan sebagai bagian dari email penolakan yang hangat.</template>
           </p>
@@ -469,7 +469,7 @@ const verifyDocument = async (id: number, status: string) => {
           />
           <div>
             <label class="block text-xs font-bold text-slate-400 font-medium mb-2">Tipe Wawancara</label>
-            <select v-model="interviewForm.type" class="w-full rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-sm focus:ring-primary-500 focus:border-primary-500 transition-all h-[42px]">
+            <select v-model="interviewForm.type" class="w-full rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-sm focus:ring-primary-500 focus:border-primary-500 transition-colors h-[42px]">
               <option value="online">Online (Video Call)</option>
               <option value="offline">Offline (Tatap Muka)</option>
             </select>
@@ -502,7 +502,7 @@ const verifyDocument = async (id: number, status: string) => {
       <form class="p-8 space-y-8" @submit.prevent="submitMentor">
         <div>
           <label class="block text-xs font-bold text-slate-400 font-medium mb-2">Pilih Mentor Aktif</label>
-          <select v-model="mentorForm.mentor_user_id" class="w-full rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-sm focus:ring-primary-500 focus:border-primary-500 transition-all h-[42px]">
+          <select v-model="mentorForm.mentor_user_id" class="w-full rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-sm focus:ring-primary-500 focus:border-primary-500 transition-colors h-[42px]">
             <option value="" disabled>Pilih mentor dari daftar...</option>
             <option v-for="mentor in mentors" :key="mentor.id" :value="mentor.user_id">
               {{ mentor.user.name }} ({{ mentor.user.role }})

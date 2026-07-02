@@ -73,12 +73,12 @@ onUnmounted(() => {
       <!-- Premium Header Section -->
       <header class="flex flex-col lg:flex-row lg:items-center justify-between gap-10 pb-10 border-b border-slate-100 dark:border-white/5">
         <div class="space-y-4 animate-slide-up" style="--delay: 0.1s">
-          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-primary-600 dark:text-primary-400 text-[10px] font-semibold text-sm tracking-[0.25em]">
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/20 text-xs font-semibold tracking-[0.25em] uppercase">
               <Sparkles class="w-3.5 h-3.5" />
               {{ __('Mentor Navigation Center') }}
           </div>
-          <h1 class="text-4xl md:text-6xl font-bold text-slate-900 dark:text-white leading-[1.1] tracking-tight">
-            {{ t('Selamat Datang Kembali,') }} <span class="text-gradient">{{ authStore.user?.name?.split(' ')[0] }}</span> 👋
+          <h1 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white leading-[1.1] tracking-tight">
+            {{ t('Selamat Datang Kembali,') }} <span class="text-blue-600">{{ authStore.user?.name?.split(' ')[0] }}</span>
           </h1>
           <p class="text-xl text-slate-500 dark:text-slate-400 font-medium max-w-2xl leading-relaxed">
             {{ __('Pantau perkembangan mentee Anda dan berikan bimbingan terbaik untuk masa depan mereka hari ini.') }}
@@ -88,12 +88,12 @@ onUnmounted(() => {
         <!-- Premium Stats Widgets -->
         <div class="flex flex-wrap items-center gap-6 animate-slide-up" style="--delay: 0.2s">
             <!-- Mentee Count Card -->
-           <div class="glass p-8 rounded-2xl border border-white/50 dark:border-white/5 shadow-soft flex items-center gap-6 group hover:scale-105 transition-all duration-500">
-              <div class="w-16 h-16 rounded-2xl bg-primary-500/10 flex items-center justify-center text-primary-600 transition-all duration-500 group-hover:rotate-12 group-hover:scale-110">
+           <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm flex items-center gap-6 group hover:shadow-md transition-[box-shadow] duration-300">
+              <div class="w-16 h-16 rounded-2xl bg-primary-500/10 flex items-center justify-center text-primary-600 transition-transform duration-500 group-hover:rotate-12 group-hover:scale-110">
                 <Users class="w-8 h-8" />
               </div>
               <div>
-                <p class="text-[11px] font-bold text-slate-400 uppercase tracking-normal mb-1">{{ __('Total Mentee') }}</p>
+                <p class="text-xs font-bold text-slate-400 uppercase tracking-normal mb-1">{{ __('Total Mentee') }}</p>
                 <p class="text-4xl font-bold text-slate-900 dark:text-white tracking-tighter">
                    <template v-if="loading">--</template>
                    <template v-else>{{ stats.total_mentees }}</template>
@@ -102,12 +102,12 @@ onUnmounted(() => {
            </div>
            
            <!-- Pending Tasks Card -->
-           <div class="glass p-8 rounded-2xl border border-white/50 dark:border-white/5 shadow-soft flex items-center gap-6 group hover:scale-105 transition-all duration-500">
-              <div class="w-16 h-16 rounded-2xl bg-orange-500/10 flex items-center justify-center text-orange-600 transition-all duration-500 group-hover:rotate-12 group-hover:scale-110">
+           <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm flex items-center gap-6 group hover:shadow-md transition-[box-shadow] duration-300">
+              <div class="w-16 h-16 rounded-2xl bg-orange-500/10 flex items-center justify-center text-orange-600 transition-transform duration-500 group-hover:rotate-12 group-hover:scale-110">
                 <Clock class="w-8 h-8" />
               </div>
               <div>
-                <p class="text-[11px] font-bold text-slate-400 uppercase tracking-normal mb-1">{{ __('Tugas Pending') }}</p>
+                <p class="text-xs font-bold text-slate-400 uppercase tracking-normal mb-1">{{ __('Tugas Pending') }}</p>
                 <p class="text-4xl font-bold text-slate-900 dark:text-white tracking-tighter">
                    <template v-if="loading">--</template>
                    <template v-else>{{ stats.pending_tasks }}</template>
@@ -147,10 +147,10 @@ v-for="(mentee, index) in activeMentees" :key="mentee.id"
                     hoverable>
                 <Link :href="'/mentor/mentees/' + mentee.id">
                   <div class="flex items-start justify-between mb-8">
-                    <div class="w-16 h-16 bg-slate-50 dark:bg-slate-900 rounded-[1.25rem] flex items-center justify-center text-slate-400 group-hover:bg-primary-600 group-hover:text-white group-hover:rotate-6 transition-all duration-500">
+                    <div class="w-16 h-16 bg-slate-50 dark:bg-slate-900 rounded-[1.25rem] flex items-center justify-center text-slate-400 group-hover:bg-primary-600 group-hover:text-white group-hover:rotate-6 transition-[background-color,color,transform] duration-500">
                       <Users class="w-8 h-8 stroke-[1.5]" />
                     </div>
-                    <div class="px-4 py-1.5 rounded-full bg-primary-50 dark:bg-primary-500/10 text-[10px] font-semibold text-sm tracking-wide text-primary-600 dark:text-primary-400">
+                    <div class="px-4 py-1.5 rounded-full bg-primary-50 dark:bg-primary-500/10 text-xs font-semibold tracking-wide text-primary-600 dark:text-primary-400">
                       {{ mentee.status }}
                     </div>
                   </div>
@@ -164,11 +164,11 @@ v-for="(mentee, index) in activeMentees" :key="mentee.id"
                   </div>
 
                   <div class="mt-8 pt-8 border-t border-slate-100 dark:border-white/5 flex items-center justify-between">
-                    <div class="flex items-center gap-2 text-[10px] font-bold text-slate-400 font-medium">
+                    <div class="flex items-center gap-2 text-xs font-medium text-slate-400">
                        <Clock class="w-3.5 h-3.5" />
                        {{ __('Bergabung') }} {{ formatDate(mentee.created_at, { month: 'short', year: 'numeric' }) }}
                     </div>
-                    <div class="w-10 h-10 rounded-full bg-slate-50 dark:bg-slate-900 flex items-center justify-center group-hover:bg-primary-600 group-hover:text-white transition-all duration-500">
+                    <div class="w-10 h-10 rounded-full bg-slate-50 dark:bg-slate-900 flex items-center justify-center group-hover:bg-primary-600 group-hover:text-white transition-colors duration-500">
                         <ArrowRight class="w-5 h-5" />
                     </div>
                   </div>
@@ -201,7 +201,7 @@ v-for="(mentee, index) in activeMentees" :key="mentee.id"
                           {{ __('Berikan feedback yang konstruktif dan bimbingan berkala untuk membantu mentee Anda mencapai potensi maksimal mereka di program magang ini.') }}
                         </p>
                     </div>
-                    <button class="px-8 py-4 bg-white text-slate-900 rounded-2xl font-bold text-sm hover:scale-105 active:scale-95 transition-all">
+                    <button class="px-6 py-3 bg-white text-slate-900 rounded-xl font-bold text-sm active:scale-[0.98] transition-transform shadow-sm hover:bg-slate-50 cursor-pointer">
                         {{ __('Pelajari Teknik Coaching') }}
                     </button>
                 </div>
@@ -235,7 +235,7 @@ v-for="(mentee, index) in activeMentees" :key="mentee.id"
             <div v-else class="space-y-4">
                <div
 v-for="(fb, index) in recentFeedbacks" :key="fb.id" 
-                    class="bg-white dark:bg-slate-800 p-6 rounded-[2rem] border border-slate-100 dark:border-slate-700 shadow-soft hover:shadow-lg transition-all duration-500 animate-slide-up"
+                    class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-[box-shadow] duration-300 animate-slide-up"
                     :style="`--delay: ${0.7 + (index * 0.1)}s`">
                   <div class="flex items-center gap-4 mb-4">
                      <div class="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-slate-900 flex items-center justify-center text-sm font-bold text-slate-500 border border-slate-100 dark:border-white/5">
@@ -243,7 +243,7 @@ v-for="(fb, index) in recentFeedbacks" :key="fb.id"
                      </div>
                      <div>
                         <p class="text-sm font-bold text-slate-900 dark:text-white line-clamp-1">{{ fb.application.user.name }}</p>
-                        <p class="text-[10px] text-slate-400 font-semibold text-sm tracking-[0.15em]">{{ formatDate(fb.created_at) }}</p>
+                        <p class="text-xs text-slate-400 font-semibold tracking-[0.15em]">{{ formatDate(fb.created_at) }}</p>
                      </div>
                   </div>
                   <p class="text-sm text-slate-600 dark:text-slate-400 italic font-medium leading-relaxed line-clamp-3 bg-slate-50 dark:bg-slate-900/50 p-4 rounded-2xl">
@@ -258,23 +258,23 @@ v-for="(fb, index) in recentFeedbacks" :key="fb.id"
           </section>
 
           <!-- System Overview Widget -->
-          <div class="bg-white dark:bg-slate-800 p-10 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-soft space-y-8 relative overflow-hidden">
+          <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-8 relative overflow-hidden">
             <div class="absolute top-0 right-0 p-4 opacity-5">
                 <TrendingUp class="w-20 h-20" />
             </div>
 
             <div class="space-y-2 relative z-10">
-                <h3 class="text-[10px] font-bold text-primary-600 uppercase tracking-[0.25em]">{{ __('Ringkasan Sistem') }}</h3>
+                <h3 class="text-xs font-bold text-primary-600 uppercase tracking-[0.25em]">{{ __('Ringkasan Sistem') }}</h3>
                 <h4 class="text-lg font-bold text-slate-900 dark:text-white">{{ __('Status Aktivitas') }}</h4>
             </div>
 
             <div class="space-y-5 relative z-10">
                <div class="flex items-center justify-between p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-white/5">
-                  <span class="text-sm text-slate-500 font-bold font-medium text-[9px]">{{ __('Evaluasi Selesai') }}</span>
+                  <span class="text-xs text-slate-500 font-bold">{{ __('Evaluasi Selesai') }}</span>
                   <span class="text-xl font-bold text-slate-900 dark:text-white">{{ stats.completed_evaluations }}</span>
                </div>
                <div class="flex items-center justify-between p-4 rounded-2xl bg-green-50 dark:bg-green-500/10 border border-green-100 dark:border-green-500/20">
-                  <span class="text-sm text-green-700 dark:text-green-400 font-bold font-medium text-[9px]">{{ __('Status Akun') }}</span>
+                  <span class="text-xs text-green-700 dark:text-green-400 font-bold">{{ __('Status Akun') }}</span>
                   <span class="text-xs font-bold text-green-700 dark:text-green-400 flex items-center gap-1.5 bg-white dark:bg-green-900/30 px-3 py-1 rounded-full shadow-sm">
                       <UserCheck class="w-3.5 h-3.5" />
                       {{ __('AKTIF') }}
@@ -282,7 +282,7 @@ v-for="(fb, index) in recentFeedbacks" :key="fb.id"
                </div>
             </div>
 
-            <Link href="/mentor/mentees" class="flex items-center justify-center gap-2 w-full bg-slate-900 dark:bg-primary-600 text-white py-5 rounded-2xl font-bold text-sm hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xl shadow-slate-900/10 dark:shadow-primary-600/20">
+            <Link href="/mentor/mentees" class="flex items-center justify-center gap-2 w-full bg-slate-900 dark:bg-primary-600 text-white py-3 rounded-xl font-bold text-sm active:scale-[0.98] transition-colors hover:bg-slate-800 dark:hover:bg-primary-700 shadow-sm">
                 {{ __('Mulai Review Mentee') }}
                 <ArrowRight class="w-4 h-4" />
             </Link>
@@ -294,25 +294,6 @@ v-for="(fb, index) in recentFeedbacks" :key="fb.id"
 </template>
 
 <style scoped>
-.text-gradient {
-  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.glass {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(10px);
-}
-
-.dark .glass {
-  background: rgba(15, 23, 42, 0.6);
-  backdrop-filter: blur(10px);
-}
-
-.shadow-soft {
-  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.05);
-}
 
 @keyframes slide-up {
   from {

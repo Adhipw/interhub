@@ -43,24 +43,24 @@ const trendClass = computed(() => {
 
     <div class="card-premium p-10 !rounded-2xl relative overflow-hidden h-full flex flex-col justify-between">
       <!-- Background Abstract Pattern -->
-      <div class="absolute -right-10 -bottom-10 w-40 h-40 opacity-[0.03] group-hover:opacity-[0.08] group-hover:scale-125 transition-all duration-700">
+      <div class="absolute -right-10 -bottom-10 w-40 h-40 opacity-[0.03] group-hover:opacity-[0.08] group-hover:scale-125 transition-colors duration-700">
         <component :is="icon" class="w-full h-full rotate-12" />
       </div>
 
       <div class="relative z-10">
-        <div :class="['w-16 h-16 rounded-[1.75rem] flex items-center justify-center mb-8 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 shadow-sm', colorClasses[color as keyof typeof colorClasses]]">
+        <div :class="['w-16 h-16 rounded-[1.75rem] flex items-center justify-center mb-8 transition-colors duration-500 group-hover:scale-110 group-hover:rotate-6 shadow-sm', colorClasses[color as keyof typeof colorClasses]]">
           <component :is="icon" class="w-8 h-8" />
         </div>
 
         <div class="space-y-1">
-          <p class="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-[0.25em]">{{ label }}</p>
+          <p class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-[0.25em]">{{ label }}</p>
           <div class="flex items-end gap-3">
             <h3 class="text-5xl font-bold text-slate-900 dark:text-white tracking-tighter leading-none">
               <template v-if="loading">---</template>
               <template v-else>{{ value }}</template>
             </h3>
             
-            <div v-if="trend && !loading" :class="['px-2.5 py-1 rounded-full text-[10px] font-bold flex items-center gap-1 mb-1', trendClass]">
+            <div v-if="trend && !loading" :class="['px-2.5 py-1 rounded-full text-xs font-bold flex items-center gap-1 mb-1', trendClass]">
               <span v-if="trend.isUp">↑</span>
               <span v-else>↓</span>
               {{ trend.value }}
@@ -72,7 +72,7 @@ const trendClass = computed(() => {
       <!-- Action Indicator (Subtle) -->
       <div class="mt-8 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
         <div class="w-1.5 h-1.5 rounded-full bg-primary-600"></div>
-        <span class="text-[10px] font-bold text-slate-400 font-medium">Detail Insight</span>
+        <span class="text-xs font-bold text-slate-400 font-medium">Detail Insight</span>
       </div>
     </div>
   </div>
@@ -82,6 +82,6 @@ const trendClass = computed(() => {
 @reference "../../css/app.css";
 
 .card-premium {
-  @apply bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 shadow-premium-sm hover:shadow-premium-lg transition-all duration-500;
+  @apply bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 shadow-premium-sm hover:shadow-premium-lg transition-colors duration-500;
 }
 </style>

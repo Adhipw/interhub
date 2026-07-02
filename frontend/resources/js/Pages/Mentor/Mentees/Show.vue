@@ -239,14 +239,14 @@ const tabs = [
     <div class="max-w-7xl mx-auto space-y-8 pb-20 animate-in fade-in duration-700">
       <!-- Breadcrumbs & Status -->
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <Link href="/mentor/mentees" class="group inline-flex items-center gap-2 text-sm font-bold text-slate-500 hover:text-primary-600 transition-all">
+        <Link href="/mentor/mentees" class="group inline-flex items-center gap-2 text-sm font-bold text-slate-500 hover:text-primary-600 transition-colors">
           <div class="w-8 h-8 rounded-full bg-white dark:bg-slate-800 shadow-sm flex items-center justify-center group-hover:bg-primary-50 transition-colors">
             <ChevronLeft class="w-4 h-4" />
           </div>
           Kembali ke Daftar Mentee
         </Link>
         <div class="flex items-center gap-3 bg-white dark:bg-slate-800 px-4 py-2 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800">
-           <span class="text-[10px] font-bold text-slate-400 font-medium">Status Magang</span>
+           <span class="text-xs font-bold text-slate-400 font-medium">Status Magang</span>
            <StatusBadge :status="application.status" />
         </div>
       </div>
@@ -294,11 +294,11 @@ const tabs = [
             <!-- Stats Grid for Left Column -->
             <div class="grid grid-cols-2 gap-4">
                 <div class="bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800">
-                    <p class="text-[10px] font-bold text-slate-400 font-medium mb-1">Tugas Selesai</p>
+                    <p class="text-xs font-bold text-slate-400 font-medium mb-1">Tugas Selesai</p>
                     <p class="text-2xl font-bold text-slate-900 dark:text-white">{{ tasks.filter(t => t.status === 'completed').length }}<span class="text-xs text-slate-400 font-bold ml-1">/ {{ tasks.length }}</span></p>
                 </div>
                 <div class="bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800">
-                    <p class="text-[10px] font-bold text-slate-400 font-medium mb-1">Sesi Bimbingan</p>
+                    <p class="text-xs font-bold text-slate-400 font-medium mb-1">Sesi Bimbingan</p>
                     <p class="text-2xl font-bold text-slate-900 dark:text-white">{{ sessions.length }}</p>
                 </div>
             </div>
@@ -311,7 +311,7 @@ const tabs = [
                <button 
                   v-for="tab in tabs" 
                   :key="tab.id"
-                  class="flex items-center gap-2 px-6 py-3 rounded-2xl text-sm font-bold transition-all whitespace-nowrap active-press"
+                  class="flex items-center gap-2 px-6 py-3 rounded-2xl text-sm font-bold transition-colors whitespace-nowrap active-press"
                   :class="activeTab === tab.id ? 'bg-primary-600 text-white shadow-lg shadow-primary-500/20' : 'text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800'"
                   @click="activeTab = tab.id"
                >
@@ -373,11 +373,11 @@ const tabs = [
                         
                         <div class="relative space-y-10 before:absolute before:inset-0 before:ml-5 before:-translate-x-px before:h-full before:w-0.5 before:bg-slate-100 dark:before:bg-slate-800">
                             <div v-for="(event, index) in timelineEvents" :key="index" class="relative flex items-start gap-6 group animate-in fade-in slide-in-from-left-4 duration-500" :style="{ 'animation-delay': (index * 100) + 'ms' }">
-                                <div class="absolute left-0 w-10 h-10 rounded-2xl flex items-center justify-center shadow-lg transition-all group-hover:scale-110 group-hover:rotate-6 z-10" :class="[event.color]">
+                                <div class="absolute left-0 w-10 h-10 rounded-2xl flex items-center justify-center shadow-lg transition-colors group-hover:scale-110 group-hover:rotate-6 z-10" :class="[event.color]">
                                     <component :is="event.icon" class="w-5 h-5 text-white" />
                                 </div>
                                 <div class="ml-14 pt-0.5">
-                                    <time class="text-[10px] font-bold text-primary-500 font-medium">{{ formatDate(event.date, { day: 'numeric', month: 'short' }) }}</time>
+                                    <time class="text-xs font-bold text-primary-500 font-medium">{{ formatDate(event.date, { day: 'numeric', month: 'short' }) }}</time>
                                     <h4 class="text-sm font-bold text-slate-900 dark:text-white mt-0.5">{{ event.title }}</h4>
                                     <p class="text-xs text-slate-500 mt-1 leading-relaxed">{{ event.description }}</p>
                                 </div>
@@ -407,7 +407,7 @@ const tabs = [
                       <div class="lg:col-span-2 space-y-4">
                          <div v-for="(task, index) in tasks" :key="task.id" class="bg-white dark:bg-slate-800 p-6 rounded-[2rem] border border-slate-100 dark:border-slate-800 shadow-sm flex items-start gap-5 group hover-lift animate-in fade-in slide-in-from-bottom-2" :style="{ 'animation-delay': (index * 100) + 'ms' }">
                             <button 
-                               class="mt-1 w-8 h-8 rounded-2xl border-2 flex items-center justify-center transition-all shrink-0 active-press"
+                               class="mt-1 w-8 h-8 rounded-2xl border-2 flex items-center justify-center transition-colors shrink-0 active-press"
                                :class="task.status === 'completed' ? 'bg-green-500 border-green-500 text-white shadow-lg shadow-green-500/20' : 'border-slate-200 dark:border-slate-700 hover:border-primary-500'"
                                @click="updateTaskStatus(task.id, task.status === 'completed' ? 'todo' : 'completed')"
                             >
@@ -418,20 +418,20 @@ const tabs = [
                             <div class="flex-1 min-w-0">
                                <div class="flex flex-wrap items-center gap-2 mb-2">
                                   <h4 class="font-extrabold text-slate-900 dark:text-white truncate text-lg" :class="{'line-through text-slate-400 opacity-60': task.status === 'completed'}">{{ task.title }}</h4>
-                                  <span :class="['px-3 py-1 rounded-full text-[9px] font-semibold text-xs tracking-wide', getPriorityLabel(task.priority).class]">
+                                  <span :class="['px-3 py-1 rounded-full text-xs font-semibold text-xs tracking-wide', getPriorityLabel(task.priority).class]">
                                      {{ getPriorityLabel(task.priority).label }}
                                   </span>
                                </div>
                                <p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 leading-relaxed" :class="{'opacity-50': task.status === 'completed'}">{{ task.description }}</p>
                                <div class="mt-6 flex flex-wrap items-center gap-6">
-                                  <div class="flex items-center gap-2 text-[10px] font-semibold text-xs tracking-wide" :class="task.status === 'completed' ? 'text-green-500' : 'text-slate-400'">
+                                  <div class="flex items-center gap-2 text-xs font-semibold text-xs tracking-wide" :class="task.status === 'completed' ? 'text-green-500' : 'text-slate-400'">
                                      <Clock class="w-3.5 h-3.5" />
                                      <span>{{ task.status === 'completed' ? 'Selesai' : 'Batas: ' + formatDate(task.due_date, { day: 'numeric', month: 'short' }) }}</span>
                                   </div>
                                </div>
                             </div>
     
-                            <button class="opacity-0 group-hover:opacity-100 p-2.5 text-slate-300 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl transition-all active-press" @click="deleteTask(task.id)">
+                            <button class="opacity-0 group-hover:opacity-100 p-2.5 text-slate-300 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl transition-colors active-press" @click="deleteTask(task.id)">
                                <Trash2 class="w-5 h-5" />
                             </button>
                          </div>
@@ -457,20 +457,20 @@ const tabs = [
                            
                            <form class="space-y-5" @submit.prevent="submitTask">
                               <div class="space-y-2">
-                                 <label class="text-[10px] font-bold text-slate-400 font-medium ml-1">Judul Penugasan</label>
-                                 <input v-model="taskForm.title" type="text" placeholder="Misal: Riset Kompetitor" class="w-full bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl text-sm p-4 focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500 transition-all outline-none" required />
+                                 <label class="text-xs font-bold text-slate-400 font-medium ml-1">Judul Penugasan</label>
+                                 <input v-model="taskForm.title" type="text" placeholder="Misal: Riset Kompetitor" class="w-full bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl text-sm p-4 focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500 transition-colors outline-none" required />
                               </div>
                               <div class="space-y-2">
-                                 <label class="text-[10px] font-bold text-slate-400 font-medium ml-1">Instruksi Singkat</label>
-                                 <textarea v-model="taskForm.description" rows="4" placeholder="Apa yang harus dikerjakan mentee?" class="w-full bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl text-sm p-4 focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500 transition-all outline-none"></textarea>
+                                 <label class="text-xs font-bold text-slate-400 font-medium ml-1">Instruksi Singkat</label>
+                                 <textarea v-model="taskForm.description" rows="4" placeholder="Apa yang harus dikerjakan mentee?" class="w-full bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl text-sm p-4 focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500 transition-colors outline-none"></textarea>
                               </div>
                               <div class="grid grid-cols-2 gap-4">
                                 <div class="space-y-2">
-                                   <label class="text-[10px] font-bold text-slate-400 font-medium ml-1">Deadline</label>
+                                   <label class="text-xs font-bold text-slate-400 font-medium ml-1">Deadline</label>
                                    <input v-model="taskForm.due_date" type="date" class="w-full bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl text-xs p-4 focus:ring-4 focus:ring-primary-500/10 outline-none" />
                                 </div>
                                 <div class="space-y-2">
-                                   <label class="text-[10px] font-bold text-slate-400 font-medium ml-1">Prioritas</label>
+                                   <label class="text-xs font-bold text-slate-400 font-medium ml-1">Prioritas</label>
                                    <select v-model="taskForm.priority" class="w-full bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl text-xs p-4 focus:ring-4 focus:ring-primary-500/10 outline-none">
                                       <option :value="1">Rendah</option>
                                       <option :value="2">Sedang</option>
@@ -478,7 +478,7 @@ const tabs = [
                                    </select>
                                 </div>
                               </div>
-                              <button type="submit" :disabled="taskForm.processing" class="w-full py-4 bg-primary-600 text-white rounded-2xl text-sm font-bold hover:bg-primary-700 shadow-lg shadow-primary-500/20 transition-all active-press mt-4 flex items-center justify-center gap-2">
+                              <button type="submit" :disabled="taskForm.processing" class="w-full py-4 bg-primary-600 text-white rounded-2xl text-sm font-bold hover:bg-primary-700 shadow-lg shadow-primary-500/20 transition-colors active-press mt-4 flex items-center justify-center gap-2">
                                  <span v-if="taskForm.processing" class="w-4 h-4 border-2 border-white/30 border-t-white animate-spin rounded-full"></span>
                                  {{ taskForm.processing ? 'Menyimpan...' : 'Berikan Tugas' }}
                               </button>
@@ -511,7 +511,7 @@ const tabs = [
                                     </div>
                                 </div>
                                 <span
-class="px-4 py-1.5 rounded-full text-[9px] font-semibold text-xs tracking-wide border" :class="{
+class="px-4 py-1.5 rounded-full text-xs font-semibold text-xs tracking-wide border" :class="{
                                     'bg-blue-50 text-blue-600 border-blue-100': session.status === 'planned',
                                     'bg-green-50 text-green-600 border-green-100': session.status === 'completed',
                                     'bg-red-50 text-red-600 border-red-100': session.status === 'cancelled',
@@ -523,15 +523,15 @@ class="px-4 py-1.5 rounded-full text-[9px] font-semibold text-xs tracking-wide b
                             <p class="text-sm text-slate-600 dark:text-slate-400 mb-8 leading-relaxed">{{ session.description || 'Tidak ada deskripsi tambahan untuk sesi ini.' }}</p>
     
                             <div class="flex items-center justify-between pt-8 border-t border-slate-50 dark:border-slate-700/50">
-                                <a v-if="session.meeting_link" :href="session.meeting_link" target="_blank" class="px-5 py-2.5 bg-slate-900 dark:bg-white dark:text-slate-900 text-white rounded-xl text-xs font-bold hover:scale-105 transition-all flex items-center gap-2 active-press">
+                                <a v-if="session.meeting_link" :href="session.meeting_link" target="_blank" class="px-5 py-2.5 bg-slate-900 dark:bg-white dark:text-slate-900 text-white rounded-xl text-xs font-bold hover:scale-105 transition-colors flex items-center gap-2 active-press">
                                     <Monitor class="w-4 h-4" />
                                     Gabung Meeting
                                 </a>
                                 <div v-else class="text-xs font-bold text-slate-400 italic">Link belum tersedia</div>
     
                                 <div v-if="session.status === 'planned'" class="flex items-center gap-2">
-                                    <button class="px-5 py-2.5 bg-green-500 text-white rounded-xl text-xs font-bold hover:bg-green-600 transition-all shadow-lg shadow-green-500/10 active-press" @click="updateSessionStatus(session.id, 'completed')">Selesai</button>
-                                    <button class="px-5 py-2.5 bg-slate-100 dark:bg-slate-700 text-slate-500 rounded-xl text-xs font-bold hover:bg-red-50 hover:text-red-500 transition-all active-press" @click="updateSessionStatus(session.id, 'cancelled')">Batal</button>
+                                    <button class="px-5 py-2.5 bg-green-500 text-white rounded-xl text-xs font-bold hover:bg-green-600 transition-colors shadow-lg shadow-green-500/10 active-press" @click="updateSessionStatus(session.id, 'completed')">Selesai</button>
+                                    <button class="px-5 py-2.5 bg-slate-100 dark:bg-slate-700 text-slate-500 rounded-xl text-xs font-bold hover:bg-red-50 hover:text-red-500 transition-colors active-press" @click="updateSessionStatus(session.id, 'cancelled')">Batal</button>
                                 </div>
                             </div>
                          </Card>
@@ -556,22 +556,22 @@ class="px-4 py-1.5 rounded-full text-[9px] font-semibold text-xs tracking-wide b
                          
                          <form class="space-y-5" @submit.prevent="submitSession">
                             <div class="space-y-2">
-                               <label class="text-[10px] font-bold text-slate-400 font-medium ml-1">Topik Bimbingan</label>
-                               <input v-model="sessionForm.title" type="text" class="w-full bg-slate-50 dark:bg-slate-900 border-none rounded-2xl text-sm p-4 focus:ring-4 focus:ring-purple-500/10 transition-all outline-none" placeholder="Misal: Review Sprint 1" required />
+                               <label class="text-xs font-bold text-slate-400 font-medium ml-1">Topik Bimbingan</label>
+                               <input v-model="sessionForm.title" type="text" class="w-full bg-slate-50 dark:bg-slate-900 border-none rounded-2xl text-sm p-4 focus:ring-4 focus:ring-purple-500/10 transition-colors outline-none" placeholder="Misal: Review Sprint 1" required />
                             </div>
                             <div class="space-y-2">
-                               <label class="text-[10px] font-bold text-slate-400 font-medium ml-1">Waktu Sesi</label>
+                               <label class="text-xs font-bold text-slate-400 font-medium ml-1">Waktu Sesi</label>
                                <input v-model="sessionForm.scheduled_at" type="datetime-local" class="w-full bg-slate-50 dark:bg-slate-900 border-none rounded-2xl text-sm p-4 focus:ring-4 focus:ring-purple-500/10 outline-none" required />
                             </div>
                             <div class="space-y-2">
-                               <label class="text-[10px] font-bold text-slate-400 font-medium ml-1">Durasi Estimasi (Menit)</label>
+                               <label class="text-xs font-bold text-slate-400 font-medium ml-1">Durasi Estimasi (Menit)</label>
                                <input v-model="sessionForm.duration_minutes" type="number" class="w-full bg-slate-50 dark:bg-slate-900 border-none rounded-2xl text-sm p-4 focus:ring-4 focus:ring-purple-500/10 outline-none" required />
                             </div>
                             <div class="space-y-2">
-                               <label class="text-[10px] font-bold text-slate-400 font-medium ml-1">Link Meeting</label>
+                               <label class="text-xs font-bold text-slate-400 font-medium ml-1">Link Meeting</label>
                                <input v-model="sessionForm.meeting_link" type="url" class="w-full bg-slate-50 dark:bg-slate-900 border-none rounded-2xl text-sm p-4 focus:ring-4 focus:ring-purple-500/10 outline-none" placeholder="Google Meet / Zoom" />
                             </div>
-                            <button type="submit" :disabled="sessionForm.processing" class="w-full py-4 bg-purple-600 text-white rounded-2xl text-sm font-bold hover:bg-purple-700 shadow-lg shadow-purple-500/20 transition-all active-press mt-4">
+                            <button type="submit" :disabled="sessionForm.processing" class="w-full py-4 bg-purple-600 text-white rounded-2xl text-sm font-bold hover:bg-purple-700 shadow-lg shadow-purple-500/20 transition-colors active-press mt-4">
                                {{ sessionForm.processing ? 'Menyimpan...' : 'Jadwalkan Sesi' }}
                             </button>
                          </form>
@@ -590,7 +590,7 @@ class="px-4 py-1.5 rounded-full text-[9px] font-semibold text-xs tracking-wide b
                                </div>
                                <div>
                                   <p class="text-base font-extrabold text-slate-900 dark:text-white leading-tight">{{ fb.mentor.name }}</p>
-                                  <p class="text-[10px] text-primary-500 font-semibold text-xs tracking-wide mt-0.5">{{ formatDate(fb.created_at) }}</p>
+                                  <p class="text-xs text-primary-500 font-semibold text-xs tracking-wide mt-0.5">{{ formatDate(fb.created_at) }}</p>
                                </div>
                             </div>
                             <div class="bg-slate-50 dark:bg-slate-900/50 p-6 rounded-2xl mb-8 border border-slate-100 dark:border-slate-800 shadow-inner">
@@ -599,7 +599,7 @@ class="px-4 py-1.5 rounded-full text-[9px] font-semibold text-xs tracking-wide b
                             
                             <div v-if="fb.assessment" class="flex flex-wrap gap-4">
                                <div v-for="(val, key) in fb.assessment" :key="key" class="px-4 py-2 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-800 rounded-2xl shadow-sm flex items-center gap-3">
-                                  <span class="text-[9px] font-bold text-slate-400 font-medium">{{ String(key).replace('_', ' ') }}</span>
+                                  <span class="text-xs font-bold text-slate-400 font-medium">{{ String(key).replace('_', ' ') }}</span>
                                   <div class="flex gap-0.5">
                                      <Star v-for="i in 5" :key="i" class="w-3 h-3" :class="i <= val ? 'fill-yellow-400 text-yellow-400' : 'text-slate-200 dark:text-slate-700'" />
                                   </div>
@@ -626,23 +626,23 @@ class="px-4 py-1.5 rounded-full text-[9px] font-semibold text-xs tracking-wide b
                            </div>
                            <form class="space-y-8" @submit.prevent="submitFeedback">
                               <div class="space-y-2">
-                                 <label class="text-[10px] font-bold text-slate-400 font-medium ml-1">Pesan Feedback</label>
-                                 <textarea v-model="feedbackForm.content" rows="6" class="w-full bg-slate-50 dark:bg-slate-900 border-none rounded-2xl text-sm p-5 focus:ring-4 focus:ring-pink-500/10 transition-all outline-none" placeholder="Tuliskan apresiasi atau poin pengembangan..." required></textarea>
+                                 <label class="text-xs font-bold text-slate-400 font-medium ml-1">Pesan Feedback</label>
+                                 <textarea v-model="feedbackForm.content" rows="6" class="w-full bg-slate-50 dark:bg-slate-900 border-none rounded-2xl text-sm p-5 focus:ring-4 focus:ring-pink-500/10 transition-colors outline-none" placeholder="Tuliskan apresiasi atau poin pengembangan..." required></textarea>
                               </div>
                               
                               <div class="space-y-5">
-                                 <p class="text-[10px] font-bold text-slate-400 font-medium ml-1">Penilaian Objektif</p>
+                                 <p class="text-xs font-bold text-slate-400 font-medium ml-1">Penilaian Objektif</p>
                                  <div v-for="(val, key) in feedbackForm.assessment" :key="key" class="flex items-center justify-between bg-slate-50 dark:bg-slate-900 p-3 rounded-2xl">
                                     <span class="text-xs font-bold text-slate-600 dark:text-slate-400 capitalize ml-1">{{ String(key).replace('_', ' ') }}</span>
                                     <div class="flex gap-1.5">
-                                       <button v-for="i in 5" :key="i" type="button" class="transition-all hover:scale-125 active-press" @click="feedbackForm.assessment[key] = i">
+                                       <button v-for="i in 5" :key="i" type="button" class="transition-colors hover:scale-125 active-press" @click="feedbackForm.assessment[key] = i">
                                           <Star class="w-5 h-5" :class="i <= val ? 'fill-yellow-400 text-yellow-400' : 'text-slate-200 dark:text-slate-800'" />
                                        </button>
                                     </div>
                                  </div>
                               </div>
     
-                              <button type="submit" :disabled="feedbackForm.processing || !feedbackForm.content.trim()" class="w-full py-4 bg-primary-600 text-white rounded-2xl text-sm font-bold hover:bg-primary-700 shadow-lg shadow-primary-500/20 transition-all active-press">
+                              <button type="submit" :disabled="feedbackForm.processing || !feedbackForm.content.trim()" class="w-full py-4 bg-primary-600 text-white rounded-2xl text-sm font-bold hover:bg-primary-700 shadow-lg shadow-primary-500/20 transition-colors active-press">
                                  {{ feedbackForm.processing ? 'Mengirim...' : 'Kirim Catatan' }}
                               </button>
                            </form>
@@ -668,7 +668,7 @@ class="px-4 py-1.5 rounded-full text-[9px] font-semibold text-xs tracking-wide b
                             </div>
                             <h3 class="text-3xl font-bold text-slate-900 dark:text-white">{{ evaluation.title }}</h3>
                          </div>
-                         <p class="text-[10px] text-slate-400 font-semibold text-xs tracking-wide mb-12 ml-16 italic">Disusun Oleh {{ evaluation.mentor.name }} • {{ formatDate(evaluation.created_at, { day: 'numeric', month: 'long', year: 'numeric' }) }}</p>
+                         <p class="text-xs text-slate-400 font-semibold text-xs tracking-wide mb-12 ml-16 italic">Disusun Oleh {{ evaluation.mentor.name }} • {{ formatDate(evaluation.created_at, { day: 'numeric', month: 'long', year: 'numeric' }) }}</p>
                          
                          <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-12">
                             <div class="space-y-6">
@@ -690,7 +690,7 @@ class="px-4 py-1.5 rounded-full text-[9px] font-semibold text-xs tracking-wide b
                                         <span class="font-bold text-primary-600">{{ val }}<span class="text-slate-400 text-xs">/5</span></span>
                                      </div>
                                      <div class="h-3 w-full bg-slate-100 dark:bg-slate-900 rounded-full overflow-hidden p-0.5 border border-slate-50 dark:border-slate-800">
-                                        <div class="h-full bg-gradient-to-r from-primary-500 to-primary-600 rounded-full shadow-lg shadow-primary-500/30 transition-all duration-1000" :style="{ width: (val * 20) + '%' }"></div>
+                                        <div class="h-full bg-gradient-to-r from-primary-500 to-primary-600 rounded-full shadow-lg shadow-primary-500/30 transition-colors duration-1000" :style="{ width: (val * 20) + '%' }"></div>
                                      </div>
                                   </div>
                                </div>
@@ -699,7 +699,7 @@ class="px-4 py-1.5 rounded-full text-[9px] font-semibold text-xs tracking-wide b
                          
                          <div class="p-8 bg-slate-50 dark:bg-slate-900/50 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-inner relative overflow-hidden group">
                             <div class="absolute top-0 left-0 w-2 h-full bg-primary-600 opacity-20 group-hover:opacity-100 transition-opacity"></div>
-                            <h4 class="text-[10px] font-bold text-primary-500 font-medium mb-3">Rekomendasi Karir & Langkah Strategis</h4>
+                            <h4 class="text-xs font-bold text-primary-500 font-medium mb-3">Rekomendasi Karir & Langkah Strategis</h4>
                             <p class="text-lg text-slate-800 dark:text-slate-200 font-extrabold leading-snug">{{ evaluation.recommendation }}</p>
                          </div>
                       </Card>
@@ -721,26 +721,26 @@ class="px-4 py-1.5 rounded-full text-[9px] font-semibold text-xs tracking-wide b
                          <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
                             <div class="space-y-8">
                                <div class="space-y-2.5">
-                                  <label class="text-[10px] font-bold text-slate-400 font-medium ml-1">Nama Laporan Evaluasi</label>
-                                  <input v-model="evaluationForm.title" type="text" class="w-full bg-slate-50 dark:bg-slate-900 border-none rounded-2xl text-sm p-5 focus:ring-4 focus:ring-primary-500/10 transition-all outline-none" required />
+                                  <label class="text-xs font-bold text-slate-400 font-medium ml-1">Nama Laporan Evaluasi</label>
+                                  <input v-model="evaluationForm.title" type="text" class="w-full bg-slate-50 dark:bg-slate-900 border-none rounded-2xl text-sm p-5 focus:ring-4 focus:ring-primary-500/10 transition-colors outline-none" required />
                                </div>
                                <div class="space-y-2.5">
-                                  <label class="text-[10px] font-bold text-slate-400 font-medium ml-1">Analisis Performa (Ringkasan)</label>
-                                  <textarea v-model="evaluationForm.summary" rows="7" class="w-full bg-slate-50 dark:bg-slate-900 border-none rounded-2xl text-sm p-6 focus:ring-4 focus:ring-primary-500/10 transition-all outline-none" placeholder="Ceritakan bagaimana perkembangan mentee selama 3 bulan terakhir..." required></textarea>
+                                  <label class="text-xs font-bold text-slate-400 font-medium ml-1">Analisis Performa (Ringkasan)</label>
+                                  <textarea v-model="evaluationForm.summary" rows="7" class="w-full bg-slate-50 dark:bg-slate-900 border-none rounded-2xl text-sm p-6 focus:ring-4 focus:ring-primary-500/10 transition-colors outline-none" placeholder="Ceritakan bagaimana perkembangan mentee selama 3 bulan terakhir..." required></textarea>
                                </div>
                             </div>
     
                             <div class="space-y-10">
-                               <p class="text-[10px] font-bold text-slate-400 font-medium ml-1">Rating Kompetensi (1-5)</p>
-                               <div v-for="(val, key) in evaluationForm.metrics" :key="key" class="space-y-5 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 p-6 rounded-2xl transition-all duration-300 hover:shadow-xl relative overflow-hidden group">
+                               <p class="text-xs font-bold text-slate-400 font-medium ml-1">Rating Kompetensi (1-5)</p>
+                               <div v-for="(val, key) in evaluationForm.metrics" :key="key" class="space-y-5 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 p-6 rounded-2xl transition-colors duration-300 hover:shadow-xl relative overflow-hidden group">
                                   <!-- Decorative blurred backdrop orb that changes color dynamically based on rating -->
                                   
 
                                   <div class="flex items-center justify-between relative z-10">
                                      <span class="text-xs font-bold text-slate-400 font-medium capitalize">{{ String(key).replace('_', ' ') }}</span>
-                                     <div class="flex items-center gap-2 px-3 py-1 rounded-full border transition-all duration-500 font-bold" :class="[getMetricDisplay(val).colorClass]">
+                                     <div class="flex items-center gap-2 px-3 py-1 rounded-full border transition-colors duration-500 font-bold" :class="[getMetricDisplay(val).colorClass]">
                                         <span class="text-base animate-bounce">{{ getMetricDisplay(val).emoji }}</span>
-                                        <span class="text-[10px] font-semibold text-sm tracking-wider">{{ getMetricDisplay(val).label }}</span>
+                                        <span class="text-xs font-semibold text-sm tracking-wider">{{ getMetricDisplay(val).label }}</span>
                                         <span class="text-xs font-bold">({{ val }} / 5)</span>
                                      </div>
                                   </div>
@@ -749,7 +749,7 @@ class="px-4 py-1.5 rounded-full text-[9px] font-semibold text-xs tracking-wide b
                                      <!-- Premium styled progress track background -->
                                      <div class="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-2.5 bg-slate-100 dark:bg-slate-800 rounded-full"></div>
                                      <!-- Premium styled dynamic gradient filling -->
-                                     <div class="absolute left-0 top-1/2 -translate-y-1/2 h-2.5 rounded-full transition-all duration-300 shadow-md" :class="[getMetricDisplay(val).gradientClass]" :style="{ width: ((val - 1) * 25) + '%' }"></div>
+                                     <div class="absolute left-0 top-1/2 -translate-y-1/2 h-2.5 rounded-full transition-colors duration-300 shadow-md" :class="[getMetricDisplay(val).gradientClass]" :style="{ width: ((val - 1) * 25) + '%' }"></div>
 
                                      <!-- The native slider invisible overlay but active -->
                                      <input 
@@ -763,7 +763,7 @@ class="px-4 py-1.5 rounded-full text-[9px] font-semibold text-xs tracking-wide b
 
                                      <!-- Visual Floating Bubble Thumb indicator -->
                                      <div 
-                                        class="absolute top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-white border-2 dark:bg-slate-900 border-white dark:border-slate-800 shadow-[0_4px_12px_rgba(0,0,0,0.15)] flex items-center justify-center pointer-events-none transition-all duration-300 scale-110 group-hover:scale-125"
+                                        class="absolute top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-white border-2 dark:bg-slate-900 border-white dark:border-slate-800 shadow-[0_4px_12px_rgba(0,0,0,0.15)] flex items-center justify-center pointer-events-none transition-colors duration-300 scale-110 group-hover:scale-125"
                                         :style="{ left: 'calc(' + ((val - 1) * 25) + '% - 14px)' }"
                                      >
                                         <div class="w-2.5 h-2.5 rounded-full" :class="[getMetricDisplay(val).gradientClass]"></div>
@@ -771,7 +771,7 @@ class="px-4 py-1.5 rounded-full text-[9px] font-semibold text-xs tracking-wide b
                                   </div>
                                   
                                   <!-- Level scale markers -->
-                                  <div class="flex justify-between px-1 text-[9px] font-bold text-slate-400 dark:text-neutral-500 font-medium select-none">
+                                  <div class="flex justify-between px-1 text-xs font-bold text-slate-400 dark:text-neutral-500 font-medium select-none">
                                      <span>Sangat Kurang</span>
                                      <span>Kurang</span>
                                      <span>Cukup</span>
@@ -783,15 +783,15 @@ class="px-4 py-1.5 rounded-full text-[9px] font-semibold text-xs tracking-wide b
                          </div>
     
                          <div class="space-y-2.5">
-                            <label class="text-[10px] font-bold text-slate-400 font-medium ml-1">Rekomendasi Karir & Saran Strategis</label>
-                            <textarea v-model="evaluationForm.recommendation" rows="4" class="w-full bg-slate-50 dark:bg-slate-900 border-none rounded-2xl text-lg font-bold p-6 focus:ring-4 focus:ring-primary-500/10 transition-all outline-none shadow-inner" placeholder="Tuliskan saran konkret untuk masa depan mentee..."></textarea>
+                            <label class="text-xs font-bold text-slate-400 font-medium ml-1">Rekomendasi Karir & Saran Strategis</label>
+                            <textarea v-model="evaluationForm.recommendation" rows="4" class="w-full bg-slate-50 dark:bg-slate-900 border-none rounded-2xl text-lg font-bold p-6 focus:ring-4 focus:ring-primary-500/10 transition-colors outline-none shadow-inner" placeholder="Tuliskan saran konkret untuk masa depan mentee..."></textarea>
                          </div>
     
                          <div class="pt-10 border-t border-slate-100 dark:border-slate-800 flex flex-col md:flex-row items-center justify-between gap-8">
                             <div class="flex items-center gap-3 bg-slate-100 dark:bg-slate-900 p-2.5 rounded-2xl shadow-inner">
                                <button 
                                   type="button" 
-                                  class="px-8 py-4 rounded-2xl text-xs font-bold transition-all active-press"
+                                  class="px-8 py-4 rounded-2xl text-xs font-bold transition-colors active-press"
                                   :class="evaluationForm.final_status === 'recommend' ? 'bg-white dark:bg-slate-800 text-green-600 shadow-xl' : 'text-slate-500 opacity-60 hover:opacity-100'"
                                   @click="evaluationForm.final_status = 'recommend'"
                                >
@@ -799,14 +799,14 @@ class="px-4 py-1.5 rounded-full text-[9px] font-semibold text-xs tracking-wide b
                                </button>
                                <button 
                                   type="button" 
-                                  class="px-8 py-4 rounded-2xl text-xs font-bold transition-all active-press"
+                                  class="px-8 py-4 rounded-2xl text-xs font-bold transition-colors active-press"
                                   :class="evaluationForm.final_status === 'not_recommend' ? 'bg-white dark:bg-slate-800 text-red-600 shadow-xl' : 'text-slate-500 opacity-60 hover:opacity-100'"
                                   @click="evaluationForm.final_status = 'not_recommend'"
                                >
                                   Tinjau Ulang
                                </button>
                             </div>
-                            <button type="submit" :disabled="evaluationForm.processing" class="w-full md:w-auto bg-slate-900 dark:bg-white dark:text-slate-900 text-white px-16 py-5 rounded-[2rem] text-sm font-bold hover:scale-105 shadow-2xl transition-all active-press flex items-center justify-center gap-3">
+                            <button type="submit" :disabled="evaluationForm.processing" class="w-full md:w-auto bg-slate-900 dark:bg-white dark:text-slate-900 text-white px-16 py-5 rounded-[2rem] text-sm font-bold hover:scale-105 shadow-2xl transition-colors active-press flex items-center justify-center gap-3">
                                <span v-if="evaluationForm.processing" class="w-5 h-5 border-2 border-white/30 border-t-white animate-spin rounded-full"></span>
                                {{ evaluationForm.processing ? 'Menyimpan...' : 'Kirim Evaluasi Akhir' }}
                             </button>

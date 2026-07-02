@@ -81,7 +81,7 @@ const withdraw = async () => {
                     <!-- Connective Horizontal line (Desktop only) -->
                     <div class="hidden md:block absolute left-12 right-12 top-10 h-1 bg-slate-100 dark:bg-neutral-800 z-0">
                         <div 
-                            class="h-full bg-primary-600 transition-all duration-500" 
+                            class="h-full bg-primary-600 transition-colors duration-500" 
                             :style="{ width: isRejected || isWithdrawn ? '0%' : (currentStepIndex / 3 * 100) + '%' }"
                         ></div>
                     </div>
@@ -93,7 +93,7 @@ const withdraw = async () => {
                     >
                         <!-- Step Icon/Indicator -->
                         <div 
-                            class="w-12 h-12 rounded-full flex items-center justify-center shrink-0 border-4 transition-all duration-300 font-bold text-sm shadow-sm"
+                            class="w-12 h-12 rounded-full flex items-center justify-center shrink-0 border-4 transition-colors duration-300 font-bold text-sm shadow-sm"
                             :class="[
                                 isRejected || isWithdrawn
                                     ? 'bg-slate-100 dark:bg-neutral-800 border-white dark:border-neutral-900 text-slate-400 dark:text-neutral-600'
@@ -175,7 +175,7 @@ const withdraw = async () => {
                                 <Link 
                                     v-if="application.status === 'accepted'"
                                     :href="'/my-applications/' + application.id + '/onboarding'"
-                                    class="flex-1 bg-primary-600 text-white px-8 py-4 rounded-2xl font-bold text-sm hover:bg-primary-700 transition-all shadow-lg shadow-primary-900/20 text-center flex items-center justify-center gap-2"
+                                    class="flex-1 bg-primary-600 text-white px-8 py-4 rounded-2xl font-bold text-sm hover:bg-primary-700 transition-colors shadow-lg shadow-primary-900/20 text-center flex items-center justify-center gap-2"
                                 >
                                     <ClipboardCheck class="w-5 h-5" />
                                     Lengkapi Onboarding
@@ -185,7 +185,7 @@ const withdraw = async () => {
                                     v-if="application.status === 'completed'"
                                     :href="'/api/v1/applications/' + application.id + '/certificate?download=1'"
                                     target="_blank"
-                                    class="flex-1 bg-emerald-600 text-white px-8 py-4 rounded-2xl font-bold text-sm hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-900/20 text-center flex items-center justify-center gap-2"
+                                    class="flex-1 bg-emerald-600 text-white px-8 py-4 rounded-2xl font-bold text-sm hover:bg-emerald-700 transition-colors shadow-lg shadow-emerald-900/20 text-center flex items-center justify-center gap-2"
                                 >
                                     <Award class="w-5 h-5" />
                                     Download Sertifikat
@@ -208,14 +208,14 @@ const withdraw = async () => {
                                         v-if="application.cv_snapshot"
                                         :href="'/storage-private/cvs/' + application.cv_snapshot.split('/').pop()" 
                                         target="_blank"
-                                        class="flex items-center gap-4 p-4 rounded-2xl border border-slate-100 hover:border-primary-200 hover:bg-primary-50/30 transition-all group"
+                                        class="flex items-center gap-4 p-4 rounded-2xl border border-slate-100 hover:border-primary-200 hover:bg-primary-50/30 transition-colors group"
                                     >
-                                        <div class="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center text-primary-600 group-hover:bg-primary-600 group-hover:text-white transition-all">
+                                        <div class="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center text-primary-600 group-hover:bg-primary-600 group-hover:text-white transition-colors">
                                             <Download class="w-5 h-5" />
                                         </div>
                                         <div class="flex-1 min-w-0">
                                             <p class="text-xs font-bold text-slate-900 truncate">Curriculum Vitae (CV)</p>
-                                            <p class="text-[10px] text-slate-500 font-medium">Snapshot PDF</p>
+                                            <p class="text-xs text-slate-500 font-medium">Snapshot PDF</p>
                                         </div>
                                     </a>
 
@@ -223,14 +223,14 @@ const withdraw = async () => {
                                         v-if="application.portfolio_snapshot"
                                         :href="'/storage-private/portfolios/' + application.portfolio_snapshot.split('/').pop()" 
                                         target="_blank"
-                                        class="flex items-center gap-4 p-4 rounded-2xl border border-slate-100 hover:border-primary-200 hover:bg-primary-50/30 transition-all group"
+                                        class="flex items-center gap-4 p-4 rounded-2xl border border-slate-100 hover:border-primary-200 hover:bg-primary-50/30 transition-colors group"
                                     >
-                                        <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-all">
+                                        <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors">
                                             <ExternalLink class="w-5 h-5" />
                                         </div>
                                         <div class="flex-1 min-w-0">
                                             <p class="text-xs font-bold text-slate-900 truncate">Portofolio Kerja</p>
-                                            <p class="text-[10px] text-slate-500 font-medium">Dokumen Pendukung</p>
+                                            <p class="text-xs text-slate-500 font-medium">Dokumen Pendukung</p>
                                         </div>
                                     </a>
                                 </div>
@@ -242,21 +242,21 @@ const withdraw = async () => {
                     <div v-if="application.evaluations && application.evaluations.length > 0" class="space-y-6">
                         <div v-for="evaluation in application.evaluations" :key="evaluation.id" class="bg-white rounded-2xl p-10 border border-slate-100 shadow-sm relative overflow-hidden">
                             <div class="absolute top-0 right-0 p-8">
-                                <div :class="['px-4 py-2 rounded-2xl text-xs font-bold font-medium', evaluation.final_status === 'completed' ? 'bg-green-50 text-green-600' : 'bg-red-50 text-red-600']">
+                                <div :class="['px-4 py-2 rounded-2xl text-xs font-medium', evaluation.final_status === 'completed' ? 'bg-green-50 text-green-600' : 'bg-red-50 text-red-600']">
                                     {{ evaluation.final_status === 'completed' ? 'Magang Lolos' : 'Magang Selesai' }}
                                 </div>
                             </div>
                             
                             <h2 class="text-2xl font-bold text-slate-900 mb-2">{{ evaluation.title }}</h2>
-                            <p class="text-xs text-slate-400 font-bold font-medium mb-8">Evaluasi Oleh {{ evaluation.mentor.name }}</p>
+                            <p class="text-xs text-slate-400 font-medium mb-8">Evaluasi Oleh {{ evaluation.mentor.name }}</p>
                             
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-10">
                                 <div>
-                                    <h4 class="text-[10px] font-bold text-slate-400 font-medium mb-4">Ringkasan Performa</h4>
+                                    <h4 class="text-xs font-bold text-slate-400 font-medium mb-4">Ringkasan Performa</h4>
                                     <p class="text-sm text-slate-600 leading-relaxed italic">"{{ evaluation.summary }}"</p>
                                 </div>
                                 <div>
-                                    <h4 class="text-[10px] font-bold text-slate-400 font-medium mb-4">Hasil Penilaian</h4>
+                                    <h4 class="text-xs font-bold text-slate-400 font-medium mb-4">Hasil Penilaian</h4>
                                     <div class="space-y-4">
                                         <div v-for="(val, key) in evaluation.metrics" :key="key">
                                             <div class="flex items-center justify-between text-xs mb-1.5">
@@ -272,7 +272,7 @@ const withdraw = async () => {
                             </div>
                             
                             <div v-if="evaluation.recommendation" class="p-6 bg-primary-50 rounded-2xl border border-primary-100">
-                                <h4 class="text-[10px] font-bold text-primary-400 font-medium mb-2">Rekomendasi Mentor</h4>
+                                <h4 class="text-xs font-bold text-primary-400 font-medium mb-2">Rekomendasi Mentor</h4>
                                 <p class="text-sm text-primary-900 font-medium">{{ evaluation.recommendation }}</p>
                             </div>
                         </div>
@@ -330,7 +330,7 @@ const withdraw = async () => {
                             <div class="space-y-1">
                                 <p class="text-sm font-bold text-slate-900">{{ event.label }}</p>
                                 <p class="text-xs text-slate-500 leading-relaxed">{{ event.description }}</p>
-                                <p class="text-[10px] text-slate-400 font-bold font-medium pt-2">
+                                <p class="text-xs text-slate-400 font-medium pt-2">
                                     {{ new Date(event.date.includes('T') ? event.date : event.date.replace(' ', 'T') + 'Z').toLocaleDateString('id-ID', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) }}
                                 </p>
                             </div>
@@ -341,14 +341,14 @@ const withdraw = async () => {
                         <Info class="w-5 h-5 text-primary-600 shrink-0 mt-0.5" />
                         <div class="space-y-1">
                             <p class="text-xs font-bold text-primary-900">Tips Untukmu</p>
-                            <p class="text-[11px] text-primary-700 leading-relaxed">Pastikan nomor WhatsApp aktif untuk memudahkan perusahaan menghubungimu jika terpilih untuk tahap selanjutnya.</p>
+                            <p class="text-xs text-primary-700 leading-relaxed">Pastikan nomor WhatsApp aktif untuk memudahkan perusahaan menghubungimu jika terpilih untuk tahap selanjutnya.</p>
                         </div>
                     </div>
 
                     <!-- Withdraw Action -->
                     <div v-if="application.status === 'pending'" class="pt-6 border-t border-slate-50">
                         <button 
-                            class="w-full py-4 text-xs font-bold text-red-500 hover:bg-red-50 rounded-2xl transition-all font-medium flex items-center justify-center gap-2"
+                            class="w-full py-4 text-xs font-bold text-red-500 hover:bg-red-50 rounded-2xl transition-colors font-medium flex items-center justify-center gap-2"
                             @click="withdraw"
                         >
                             <X class="w-4 h-4" />

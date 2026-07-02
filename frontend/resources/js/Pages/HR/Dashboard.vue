@@ -116,7 +116,7 @@ const pendingApplications = computed(() =>
         <div class="space-y-10 pb-20">
             <div class="flex items-center justify-between pb-4 border-b border-gray-100 dark:border-gray-800">
                 <div>
-                    <h2 class="text-3xl font-display font-bold text-gray-900 dark:text-white tracking-tight">
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white tracking-tight">
                         {{ company.name || 'Dashboard HR' }}
                     </h2>
                     <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
@@ -124,10 +124,7 @@ const pendingApplications = computed(() =>
                     </p>
                 </div>
 
-                <Link
-                    href="/hr/internships/create"
-                    class="inline-flex items-center px-5 py-2.5 bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-gray-100 dark:text-slate-900 text-white text-sm font-bold rounded-xl transition-all shadow-sm"
-                >
+                    class="inline-flex items-center px-6 py-3 bg-slate-900 hover:bg-slate-800 active:scale-[0.98] dark:bg-white dark:hover:bg-gray-100 dark:text-slate-900 text-white text-sm font-bold rounded-xl transition-colors shadow-sm"
                     <Briefcase class="w-4 h-4 mr-2" />
                     {{ t('hr.dashboard.post_job') }}
                 </Link>
@@ -149,8 +146,8 @@ const pendingApplications = computed(() =>
                         class="group p-6 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl shadow-sm"
                     >
                         <component :is="stat.icon" class="w-7 h-7 text-primary-600 mb-5" />
-                        <p class="text-xs font-bold text-slate-400 font-medium">{{ stat.label }}</p>
-                        <p class="mt-2 text-4xl font-display font-bold text-slate-900 dark:text-white group-hover:text-primary-600 transition-colors">
+                        <p class="text-xs font-medium text-slate-400">{{ stat.label }}</p>
+                        <p class="mt-2 text-4xl font-bold text-slate-900 dark:text-white group-hover:text-primary-600 transition-colors">
                             {{ stat.value }}
                         </p>
                     </div>
@@ -161,7 +158,7 @@ const pendingApplications = computed(() =>
                         <section>
                             <div class="flex items-center justify-between mb-6">
                                 <h3 class="text-xl font-bold text-slate-900 dark:text-white">{{ t('hr.dashboard.action_needed') }}</h3>
-                                <span v-if="stats.pending_review > 0" class="px-2 py-1 bg-amber-100 text-amber-700 text-[10px] font-bold rounded-md uppercase">
+                                <span v-if="stats.pending_review > 0" class="px-2 py-1 bg-amber-100 text-amber-700 text-xs font-bold rounded-md uppercase">
                                     {{ t('hr.dashboard.priority') }}
                                 </span>
                             </div>
@@ -170,7 +167,7 @@ const pendingApplications = computed(() =>
                                 <div
                                     v-for="application in pendingApplications"
                                     :key="application.id"
-                                    class="flex items-center p-5 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl hover:shadow-md transition-all"
+                                    class="flex items-center p-5 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl hover:shadow-md transition-[box-shadow]"
                                 >
                                     <div class="h-12 w-12 rounded-full bg-slate-50 dark:bg-slate-900 flex items-center justify-center text-slate-400 font-bold border border-slate-100 dark:border-slate-700">
                                         {{ application.user?.name?.charAt(0) || '?' }}
@@ -183,13 +180,13 @@ const pendingApplications = computed(() =>
                                         </p>
                                     </div>
                                     <div class="flex items-center space-x-3">
-                                        <span class="text-[10px] font-medium text-slate-400 flex items-center">
+                                        <span class="text-xs font-medium text-slate-400 flex items-center">
                                             <Clock class="w-3 h-3 mr-1" />
                                             {{ application.created_at_human || '-' }}
                                         </span>
                                         <Link
                                             :href="`/hr/applications/${application.id}`"
-                                            class="px-4 py-2 bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-300 text-xs font-bold rounded-lg hover:bg-primary-600 hover:text-white transition-all"
+                                            class="px-5 py-2.5 bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-300 text-xs font-bold rounded-xl hover:bg-blue-600 hover:text-white active:scale-[0.98] transition-colors"
                                         >
                                             {{ t('hr.dashboard.review') }}
                                         </Link>
@@ -213,10 +210,10 @@ const pendingApplications = computed(() =>
                                 <table class="w-full text-left">
                                     <thead class="bg-slate-50 dark:bg-slate-900/50">
                                         <tr>
-                                            <th class="px-6 py-4 text-[10px] font-bold text-slate-400 font-medium">{{ t('hr.dashboard.col_candidate') }}</th>
-                                            <th class="px-6 py-4 text-[10px] font-bold text-slate-400 font-medium">{{ t('hr.dashboard.col_position') }}</th>
-                                            <th class="px-6 py-4 text-[10px] font-bold text-slate-400 font-medium">{{ t('hr.dashboard.col_status') }}</th>
-                                            <th class="px-6 py-4 text-[10px] font-bold text-slate-400 font-medium text-right">{{ t('hr.dashboard.col_time') }}</th>
+                                            <th class="px-6 py-4 text-xs font-medium text-slate-400">{{ t('hr.dashboard.col_candidate') }}</th>
+                                            <th class="px-6 py-4 text-xs font-medium text-slate-400">{{ t('hr.dashboard.col_position') }}</th>
+                                            <th class="px-6 py-4 text-xs font-medium text-slate-400">{{ t('hr.dashboard.col_status') }}</th>
+                                            <th class="px-6 py-4 text-xs font-medium text-slate-400 text-right">{{ t('hr.dashboard.col_time') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody class="divide-y divide-slate-50 dark:divide-slate-700">
@@ -245,13 +242,13 @@ const pendingApplications = computed(() =>
                     </div>
 
                     <div class="lg:col-span-4 space-y-10">
-                        <div class="p-8 bg-white dark:bg-slate-800 rounded-2xl text-slate-900 dark:text-white shadow-xl relative overflow-hidden group border border-slate-100 dark:border-slate-700">
+                        <div class="p-8 bg-white dark:bg-slate-800 rounded-2xl text-slate-900 dark:text-white shadow-sm relative overflow-hidden group border border-slate-200 dark:border-slate-700">
                             <div class="relative z-10">
                                 <h4 class="text-lg font-bold mb-2">{{ t('hr.dashboard.public_profile') }}</h4>
                                 <p class="text-slate-500 dark:text-slate-400 text-xs leading-relaxed mb-8">{{ t('hr.dashboard.public_profile_desc') }}</p>
                                 <Link
                                     :href="company.slug ? `/companies/${company.slug}` : '/companies'"
-                                    class="inline-flex items-center text-sm font-bold text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 transition-colors group"
+                                    class="inline-flex items-center text-sm font-bold text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 transition-colors group"
                                 >
                                     {{ t('hr.dashboard.open_profile') }}
                                     <ArrowRight class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -261,15 +258,15 @@ const pendingApplications = computed(() =>
                         </div>
 
                         <section>
-                            <h4 class="text-xs font-bold text-slate-400 font-medium mb-6">{{ t('hr.dashboard.quick_navigation') }}</h4>
+                            <h4 class="text-xs font-medium text-slate-400 mb-6">{{ t('hr.dashboard.quick_navigation') }}</h4>
                             <div class="grid grid-cols-1 gap-3">
                                 <Link
                                     v-for="link in quickLinks"
                                     :key="link.name"
                                     :href="link.href"
-                                    class="flex items-center p-4 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl hover:border-primary-500 hover:ring-1 hover:ring-primary-500 transition-all group"
+                                    class="flex items-center p-4 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl hover:border-blue-500 hover:ring-1 hover:ring-blue-500 transition-[border-color,ring-color] group"
                                 >
-                                    <component :is="link.icon" class="w-5 h-5 text-slate-400 group-hover:text-primary-600 transition-colors" />
+                                    <component :is="link.icon" class="w-5 h-5 text-slate-400 group-hover:text-blue-600 transition-colors" />
                                     <span class="ml-4 text-sm font-bold text-slate-700 dark:text-slate-300">{{ link.name }}</span>
                                 </Link>
                             </div>

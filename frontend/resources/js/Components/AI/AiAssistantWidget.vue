@@ -103,7 +103,7 @@ const runFeature = async (payload = {}) => {
     <div class="fixed bottom-6 right-6 z-50">
         <!-- Floating Button -->
         <button 
-            class="bg-indigo-600 hover:bg-indigo-700 text-white p-4 rounded-full shadow-2xl transition-all hover:scale-110 active:scale-95 group"
+            class="bg-indigo-600 hover:bg-indigo-700 text-white p-4 rounded-full shadow-2xl transition-colors hover:scale-110 active:scale-95 group"
             @click="togglePanel"
         >
             <Sparkles v-if="!isOpen" class="w-6 h-6" />
@@ -127,7 +127,7 @@ const runFeature = async (payload = {}) => {
                 <button 
                     v-for="feature in features" 
                     :key="feature.id"
-                    class="flex items-center p-3 rounded-xl border border-gray-100 hover:border-indigo-200 hover:bg-indigo-50 transition-all text-left group"
+                    class="flex items-center p-3 rounded-xl border border-gray-100 hover:border-indigo-200 hover:bg-indigo-50 transition-colors text-left group"
                     @click="selectFeature(feature)"
                 >
                     <div class="bg-gray-50 group-hover:bg-white p-2 rounded-lg shadow-sm mr-3 transition-colors">
@@ -135,7 +135,7 @@ const runFeature = async (payload = {}) => {
                     </div>
                     <div>
                         <div class="text-sm font-semibold text-gray-900">{{ feature.name }}</div>
-                        <div class="text-[10px] text-gray-400 font-medium">AI Tool</div>
+                        <div class="text-xs text-gray-400 font-medium">AI Tool</div>
                     </div>
                 </button>
             </div>
@@ -166,7 +166,7 @@ const runFeature = async (payload = {}) => {
                     
                     <button 
                         :disabled="!userQuestion || isLoading"
-                        class="w-full bg-indigo-600 text-white py-3 rounded-xl font-bold hover:bg-indigo-700 disabled:opacity-50 transition-all shadow-lg shadow-indigo-100"
+                        class="w-full bg-indigo-600 text-white py-3 rounded-xl font-bold hover:bg-indigo-700 disabled:opacity-50 transition-colors shadow-lg shadow-indigo-100"
                         @click="runFeature"
                     >
                         Tanya AI
@@ -190,7 +190,7 @@ const runFeature = async (payload = {}) => {
 
                     <button 
                         :disabled="!cvText || !hasConsent || isLoading"
-                        class="w-full bg-indigo-600 text-white py-3 rounded-xl font-bold hover:bg-indigo-700 disabled:opacity-50 transition-all shadow-lg shadow-indigo-100"
+                        class="w-full bg-indigo-600 text-white py-3 rounded-xl font-bold hover:bg-indigo-700 disabled:opacity-50 transition-colors shadow-lg shadow-indigo-100"
                         @click="runFeature"
                     >
                         Analyze CV
@@ -201,7 +201,7 @@ const runFeature = async (payload = {}) => {
                 <div v-else-if="activeFeature.method === 'post' && activeFeature.id !== 'cv' && activeFeature.id !== 'support'" class="text-center py-4">
                     <button 
                         :disabled="isLoading"
-                        class="px-8 bg-indigo-600 text-white py-3 rounded-xl font-bold hover:bg-indigo-700 disabled:opacity-50 transition-all shadow-lg shadow-indigo-100"
+                        class="px-8 bg-indigo-600 text-white py-3 rounded-xl font-bold hover:bg-indigo-700 disabled:opacity-50 transition-colors shadow-lg shadow-indigo-100"
                         @click="runFeature"
                     >
                         Run Analysis
@@ -216,7 +216,7 @@ const runFeature = async (payload = {}) => {
                 <div v-if="result" class="bg-indigo-50/50 rounded-2xl p-4 border border-indigo-100 animate-in fade-in slide-in-from-bottom-2 duration-300">
                     <div class="flex items-center space-x-2 mb-3">
                         <Sparkles class="w-4 h-4 text-indigo-600" />
-                        <span class="text-[10px] font-bold text-indigo-600 font-medium">AI Result</span>
+                        <span class="text-xs font-bold text-indigo-600 font-medium">AI Result</span>
                     </div>
                     <div class="prose prose-sm text-gray-700 whitespace-pre-wrap leading-relaxed">
                         {{ result }}

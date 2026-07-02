@@ -114,7 +114,7 @@ onUnmounted(() => {
               v-model="activeFilters.search" 
               type="text"
               :placeholder="t('admin.user_mgmt.search_placeholder')"
-              class="pl-11 pr-6 py-3 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all w-64" 
+              class="pl-11 pr-6 py-3 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-colors w-64" 
               @keyup.enter="handleSearch"
             />
           </div>
@@ -131,11 +131,11 @@ onUnmounted(() => {
           <table class="w-full text-left border-collapse">
             <thead>
               <tr class="bg-slate-50/50 dark:bg-slate-900/50 border-b border-slate-100 dark:border-slate-800">
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">{{ t('admin.user_mgmt.col_user') }}</th>
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium text-center">{{ t('admin.user_mgmt.col_role') }}</th>
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium text-center">{{ t('admin.user_mgmt.col_status') }}</th>
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">{{ t('admin.user_mgmt.col_joined') }}</th>
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium text-right">{{ t('admin.user_mgmt.col_actions') }}</th>
+                <th class="px-8 py-5 text-xs font-bold text-slate-400 font-medium">{{ t('admin.user_mgmt.col_user') }}</th>
+                <th class="px-8 py-5 text-xs font-bold text-slate-400 font-medium text-center">{{ t('admin.user_mgmt.col_role') }}</th>
+                <th class="px-8 py-5 text-xs font-bold text-slate-400 font-medium text-center">{{ t('admin.user_mgmt.col_status') }}</th>
+                <th class="px-8 py-5 text-xs font-bold text-slate-400 font-medium">{{ t('admin.user_mgmt.col_joined') }}</th>
+                <th class="px-8 py-5 text-xs font-bold text-slate-400 font-medium text-right">{{ t('admin.user_mgmt.col_actions') }}</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-slate-50 dark:divide-slate-800/50">
@@ -159,7 +159,7 @@ onUnmounted(() => {
                     <span 
                       v-for="roleName in (user.all_roles || [user.role])"
                       :key="roleName"
-                      class="px-3 py-1 rounded-lg text-[10px] font-bold font-medium inline-flex items-center gap-1.5"
+                      class="px-3 py-1 rounded-lg text-xs font-medium inline-flex items-center gap-1.5"
                       :class="{
                         'bg-red-50 text-red-600 border border-red-100': roleName === 'super_admin',
                         'bg-orange-50 text-orange-600 border border-orange-100': roleName === 'admin',
@@ -182,7 +182,7 @@ onUnmounted(() => {
                 <td class="px-8 py-6 text-center">
                   <div class="flex items-center justify-center">
                     <div 
-                      class="flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold font-medium"
+                      class="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium"
                       :class="user.is_active ? 'bg-green-50 text-green-600' : 'bg-slate-100 text-slate-400'"
                     >
                       <div class="w-1.5 h-1.5 rounded-full" :class="user.is_active ? 'bg-green-500' : 'bg-slate-300'"></div>
@@ -197,7 +197,7 @@ onUnmounted(() => {
                   <div v-if="!user.roles?.some((r: Role) => r.name === 'super_admin')" class="flex items-center justify-end gap-2">
                     <button 
                       :disabled="processing"
-                      class="p-2 rounded-xl transition-all"
+                      class="p-2 rounded-xl transition-colors"
                       :class="user.is_active ? 'text-slate-400 hover:bg-orange-50 hover:text-orange-600' : 'text-slate-400 hover:bg-green-50 hover:text-green-600'"
                       :title="t('admin.user_mgmt.toggle_tooltip')"
                       @click="toggleStatus(user.id)"
@@ -207,7 +207,7 @@ onUnmounted(() => {
                     </button>
                     <button 
                       :disabled="processing"
-                      class="p-2 text-slate-400 hover:bg-red-50 hover:text-red-600 rounded-xl transition-all"
+                      class="p-2 text-slate-400 hover:bg-red-50 hover:text-red-600 rounded-xl transition-colors"
                       :title="t('admin.user_mgmt.delete_tooltip')"
                       @click="deleteUser(user.id)"
                     >

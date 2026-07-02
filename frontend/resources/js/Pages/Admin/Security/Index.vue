@@ -80,7 +80,7 @@ const getSeverityClass = (severity: string) => {
             <input 
               type="text" 
               placeholder="Cari event..." 
-              class="pl-11 pr-6 py-3 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all w-64"
+              class="pl-11 pr-6 py-3 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-colors w-64"
             />
           </div>
         </div>
@@ -98,10 +98,10 @@ const getSeverityClass = (severity: string) => {
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         
         <!-- Server Health Dials Card -->
-        <Card class="p-6 border-none shadow-sm relative overflow-hidden group bg-gradient-to-br from-white to-slate-50/50 dark:from-slate-800 dark:to-slate-900/50 transition-all duration-300 hover:shadow-lg">
+        <Card class="p-6 border-none shadow-sm relative overflow-hidden group bg-gradient-to-br from-white to-slate-50/50 dark:from-slate-800 dark:to-slate-900/50 transition-colors duration-300 hover:shadow-lg">
           
           
-          <h3 class="text-[10px] font-bold text-slate-450 dark:text-slate-400 font-medium mb-4 flex items-center gap-2">
+          <h3 class="text-xs font-bold text-slate-450 dark:text-slate-400 font-medium mb-4 flex items-center gap-2">
             <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
             Kesehatan Server (Telemetri Live)
           </h3>
@@ -113,11 +113,11 @@ const getSeverityClass = (severity: string) => {
                 <!-- Outer Ring -->
                 <svg class="w-full h-full transform -rotate-90">
                   <circle cx="48" cy="48" r="40" stroke="currentColor" stroke-width="6" class="text-slate-100 dark:text-slate-800" fill="transparent" />
-                  <circle cx="48" cy="48" r="40" stroke="currentColor" stroke-width="6" :stroke-dasharray="251.2" :stroke-dashoffset="251.2 - (251.2 * cpuLoad) / 100" :class="[cpuLoad > 80 ? 'text-rose-500' : 'text-indigo-600']" fill="transparent" class="transition-all duration-1000" />
+                  <circle cx="48" cy="48" r="40" stroke="currentColor" stroke-width="6" :stroke-dasharray="251.2" :stroke-dashoffset="251.2 - (251.2 * cpuLoad) / 100" :class="[cpuLoad > 80 ? 'text-rose-500' : 'text-indigo-600']" fill="transparent" class="transition-colors duration-1000" />
                 </svg>
                 <div class="absolute inset-0 flex flex-col items-center justify-center">
                   <span class="text-lg font-bold text-slate-800 dark:text-white">{{ cpuLoad }}%</span>
-                  <span class="text-[8px] font-semibold text-sm text-slate-450">vCPU</span>
+                  <span class="text-xs font-semibold text-sm text-slate-450">vCPU</span>
                 </div>
               </div>
             </div>
@@ -128,17 +128,17 @@ const getSeverityClass = (severity: string) => {
                 <!-- Outer Ring -->
                 <svg class="w-full h-full transform -rotate-90">
                   <circle cx="48" cy="48" r="40" stroke="currentColor" stroke-width="6" class="text-slate-100 dark:text-slate-800" fill="transparent" />
-                  <circle cx="48" cy="48" r="40" stroke="currentColor" stroke-width="6" :stroke-dasharray="251.2" :stroke-dashoffset="251.2 - (251.2 * ramLoad) / 100" class="text-emerald-500 transition-all duration-1000" fill="transparent" />
+                  <circle cx="48" cy="48" r="40" stroke="currentColor" stroke-width="6" :stroke-dasharray="251.2" :stroke-dashoffset="251.2 - (251.2 * ramLoad) / 100" class="text-emerald-500 transition-colors duration-1000" fill="transparent" />
                 </svg>
                 <div class="absolute inset-0 flex flex-col items-center justify-center">
                   <span class="text-lg font-bold text-slate-800 dark:text-white">{{ ramLoad }}%</span>
-                  <span class="text-[8px] font-semibold text-sm text-slate-450">RAM</span>
+                  <span class="text-xs font-semibold text-sm text-slate-450">RAM</span>
                 </div>
               </div>
             </div>
           </div>
           
-          <div class="mt-4 flex items-center justify-between text-[10px] font-bold text-slate-400">
+          <div class="mt-4 flex items-center justify-between text-xs font-bold text-slate-400">
             <span>Uptime: 14d 8h 21m</span>
             <span :class="[cpuLoad > 80 ? 'text-rose-500 ' : 'text-emerald-500']" class="font-semibold text-sm">
               ● {{ cpuLoad > 80 ? 'Server Sibuk' : 'Normal' }}
@@ -147,10 +147,10 @@ const getSeverityClass = (severity: string) => {
         </Card>
 
         <!-- Gemini AI API Quota Card -->
-        <Card class="p-6 border-none shadow-sm relative overflow-hidden group bg-gradient-to-br from-white to-slate-50/50 dark:from-slate-800 dark:to-slate-900/50 transition-all duration-300 hover:shadow-lg">
+        <Card class="p-6 border-none shadow-sm relative overflow-hidden group bg-gradient-to-br from-white to-slate-50/50 dark:from-slate-800 dark:to-slate-900/50 transition-colors duration-300 hover:shadow-lg">
           
 
-          <h3 class="text-[10px] font-bold text-slate-450 dark:text-slate-400 font-medium mb-4 flex items-center gap-2">
+          <h3 class="text-xs font-bold text-slate-450 dark:text-slate-400 font-medium mb-4 flex items-center gap-2">
             <Sparkles class="w-3.5 h-3.5 text-violet-500 " />
             Penggunaan Kuota Gemini AI
           </h3>
@@ -159,9 +159,9 @@ const getSeverityClass = (severity: string) => {
             <div class="flex justify-between items-end">
               <div>
                 <p class="text-2xl font-bold text-slate-800 dark:text-white">8,421 <span class="text-xs text-slate-400 font-bold">/ 15,000</span></p>
-                <p class="text-[10px] text-slate-400 font-medium">Permintaan API Hari Ini</p>
+                <p class="text-xs text-slate-400 font-medium">Permintaan API Hari Ini</p>
               </div>
-              <span class="px-2 py-0.5 bg-violet-50 text-violet-600 border border-violet-100 rounded-lg text-[9px] font-bold dark:bg-violet-950/20 dark:text-violet-400 dark:border-violet-900/30">
+              <span class="px-2 py-0.5 bg-violet-50 text-violet-600 border border-violet-100 rounded-lg text-xs font-bold dark:bg-violet-950/20 dark:text-violet-400 dark:border-violet-900/30">
                 56.1% Terpakai
               </span>
             </div>
@@ -171,17 +171,17 @@ const getSeverityClass = (severity: string) => {
               <div class="absolute left-0 top-0 h-full bg-gradient-to-r from-violet-500 to-indigo-600 rounded-full " style="width: 56.1%"></div>
             </div>
             
-            <p class="text-[9px] text-slate-400 leading-relaxed">
+            <p class="text-xs text-slate-400 leading-relaxed">
               Limit akan di-reset otomatis pada pukul 00:00 UTC. Rata-rata response time: **240ms**.
             </p>
           </div>
         </Card>
 
         <!-- Blocked Attacks Graph Card -->
-        <Card class="p-6 border-none shadow-sm relative overflow-hidden group bg-gradient-to-br from-white to-slate-50/50 dark:from-slate-800 dark:to-slate-900/50 transition-all duration-300 hover:shadow-lg">
+        <Card class="p-6 border-none shadow-sm relative overflow-hidden group bg-gradient-to-br from-white to-slate-50/50 dark:from-slate-800 dark:to-slate-900/50 transition-colors duration-300 hover:shadow-lg">
           
 
-          <h3 class="text-[10px] font-bold text-slate-450 dark:text-slate-400 font-medium mb-4 flex items-center gap-2">
+          <h3 class="text-xs font-bold text-slate-450 dark:text-slate-400 font-medium mb-4 flex items-center gap-2">
             <ShieldAlert class="w-3.5 h-3.5 text-rose-500" />
             Ancaman Keamanan Dicegah (7 Hari Terakhir)
           </h3>
@@ -193,12 +193,12 @@ const getSeverityClass = (severity: string) => {
 
             <!-- Bars -->
             <div v-for="(val, idx) in attackTrends" :key="idx" class="flex flex-col items-center flex-1 group/bar z-10 cursor-pointer">
-              <span class="text-[8px] font-bold text-rose-600 dark:text-rose-450 opacity-0 group-hover/bar:opacity-100 transition-opacity mb-1">{{ val.count }}</span>
+              <span class="text-xs font-bold text-rose-600 dark:text-rose-450 opacity-0 group-hover/bar:opacity-100 transition-opacity mb-1">{{ val.count }}</span>
               <div 
-                class="w-4 bg-gradient-to-t from-rose-500 to-pink-500 rounded-t-lg transition-all duration-1000 shadow-md shadow-rose-500/10 group-hover/bar:from-rose-600 group-hover/bar:to-pink-600"
+                class="w-4 bg-gradient-to-t from-rose-500 to-pink-500 rounded-t-lg transition-colors duration-1000 shadow-md shadow-rose-500/10 group-hover/bar:from-rose-600 group-hover/bar:to-pink-600"
                 :style="{ height: (val.count * 6) + 'px' }"
               ></div>
-              <span class="text-[8px] font-bold text-slate-400 mt-2 uppercase">{{ val.day }}</span>
+              <span class="text-xs font-bold text-slate-400 mt-2 uppercase">{{ val.day }}</span>
             </div>
           </div>
         </Card>
@@ -211,11 +211,11 @@ const getSeverityClass = (severity: string) => {
           <table class="w-full text-left border-collapse">
             <thead>
               <tr class="bg-slate-50/50 dark:bg-slate-900/50 border-b border-slate-100 dark:border-slate-800">
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">Waktu</th>
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">Event</th>
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">Pengguna</th>
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium text-center">Severity</th>
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">Region</th>
+                <th class="px-8 py-5 text-xs font-bold text-slate-400 font-medium">Waktu</th>
+                <th class="px-8 py-5 text-xs font-bold text-slate-400 font-medium">Event</th>
+                <th class="px-8 py-5 text-xs font-bold text-slate-400 font-medium">Pengguna</th>
+                <th class="px-8 py-5 text-xs font-bold text-slate-400 font-medium text-center">Severity</th>
+                <th class="px-8 py-5 text-xs font-bold text-slate-400 font-medium">Region</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-slate-50 dark:divide-slate-800/50">
@@ -234,7 +234,7 @@ const getSeverityClass = (severity: string) => {
                 </td>
                 <td class="px-8 py-6">
                   <div v-if="event.user" class="flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-[10px] font-bold text-slate-500">
+                    <div class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-xs font-bold text-slate-500">
                       {{ event.user.name.charAt(0) }}
                     </div>
                     <span class="text-xs font-bold text-slate-900 dark:text-white">{{ event.user.name }}</span>
@@ -242,7 +242,7 @@ const getSeverityClass = (severity: string) => {
                   <span v-else class="text-xs text-slate-400 italic">Guest / System</span>
                 </td>
                 <td class="px-8 py-6 text-center">
-                  <span :class="['px-3 py-1 rounded-full text-[10px] font-bold font-medium border', getSeverityClass(event.severity)]">
+                  <span :class="['px-3 py-1 rounded-full text-xs font-medium border', getSeverityClass(event.severity)]">
                     {{ event.severity }}
                   </span>
                 </td>

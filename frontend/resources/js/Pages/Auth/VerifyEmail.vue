@@ -41,7 +41,7 @@ const resendOtp = () => {
         </template>
 
         <div v-if="devOtp" class="mb-6 rounded-xl border border-blue-100 bg-blue-50 px-4 py-3 text-center">
-            <p class="text-[11px] font-semibold text-xs tracking-wide text-blue-500">Local OTP</p>
+            <p class="text-xs font-semibold text-xs tracking-wide text-blue-500">Local OTP</p>
             <p class="mt-1 text-2xl font-bold tracking-[0.4em] text-blue-700">{{ devOtp }}</p>
         </div>
 
@@ -54,7 +54,7 @@ const resendOtp = () => {
                 <input
                     v-model="form.otp"
                     type="text"
-                    class="w-full text-center tracking-[1em] text-2xl font-bold rounded-xl border border-slate-200 bg-white px-4 py-4 transition-all focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-50"
+                    class="w-full text-center tracking-[1em] text-2xl font-bold rounded-xl border border-slate-200 bg-white px-4 py-4 transition-colors focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-50"
                     :class="{ 'border-red-500 focus:border-red-500 focus:ring-red-50': form.errors.otp }"
                     placeholder="000000"
                     maxlength="6"

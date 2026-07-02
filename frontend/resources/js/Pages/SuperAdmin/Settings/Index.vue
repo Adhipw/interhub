@@ -82,7 +82,7 @@ const toggleFeature = async (flag: any) => {
                <div>
                   <h4 class="font-bold text-slate-900 dark:text-white mb-1">{{ flag.name }}</h4>
                   <p class="text-xs text-slate-500">{{ flag.description }}</p>
-                  <p class="text-[10px] font-mono text-slate-400 mt-2">{{ flag.key }}</p>
+                  <p class="text-xs font-mono text-slate-400 mt-2">{{ flag.key }}</p>
                </div>
                <button 
                   class="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-offset-2"
@@ -115,16 +115,16 @@ const toggleFeature = async (flag: any) => {
                         {{ setting.key.replace(/_/g, ' ').toUpperCase() }}
                         <Lock v-if="setting.is_sensitive" class="w-3.5 h-3.5 text-orange-500" />
                      </h4>
-                     <p class="text-[10px] text-slate-500">{{ setting.description }}</p>
+                     <p class="text-xs text-slate-500">{{ setting.description }}</p>
                   </div>
-                  <span class="px-2 py-1 bg-slate-50 dark:bg-slate-900 rounded text-[10px] font-bold text-slate-400 font-medium">
+                  <span class="px-2 py-1 bg-slate-50 dark:bg-slate-900 rounded text-xs font-bold text-slate-400 font-medium">
                      {{ setting.group }}
                   </span>
                </div>
 
                <div class="flex items-end gap-3">
                   <div class="flex-1 space-y-1">
-                     <label class="text-[10px] font-bold text-slate-400 font-medium">Value</label>
+                     <label class="text-xs font-bold text-slate-400 font-medium">Value</label>
                      <input 
                         v-model="setting.value"
                         :type="setting.is_sensitive ? 'password' : 'text'"
@@ -133,7 +133,7 @@ const toggleFeature = async (flag: any) => {
                   </div>
                   <button 
                     :disabled="processing === setting.id"
-                    class="p-4 bg-primary-600 text-white rounded-xl hover:bg-primary-700 transition-all active-press disabled:opacity-50"
+                    class="p-4 bg-primary-600 text-white rounded-xl hover:bg-primary-700 transition-colors active-press disabled:opacity-50"
                     @click="updateSetting(setting)"
                   >
                      <Loader2 v-if="processing === setting.id" class="w-5 h-5 animate-spin" />

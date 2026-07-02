@@ -56,7 +56,7 @@ const t = (key: string) => langStore.t(key);
                     <span class="w-1 h-1 bg-slate-200 dark:bg-neutral-800 rounded-full"></span>
                     <Link href="/terms" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">{{ t('info.terms') }}</Link>
                 </div>
-                <p class="text-slate-400 dark:text-neutral-500 text-[10px] font-medium opacity-60">
+                <p class="text-slate-400 dark:text-neutral-500 text-xs font-medium opacity-60">
                     &copy; 2026 InternHub Platform Ecosystem
                 </p>
             </footer>

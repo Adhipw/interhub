@@ -137,12 +137,12 @@ const togglePermission = (name: string) => {
             v-model="newRole.name"
             type="text" 
             :placeholder="t('admin.roles.new_placeholder') || 'Nama role baru...'" 
-            class="px-6 py-4 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl text-sm font-bold focus:outline-none focus:ring-4 focus:ring-primary-500/10 w-64 transition-all"
+            class="px-6 py-4 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl text-sm font-bold focus:outline-none focus:ring-4 focus:ring-primary-500/10 w-64 transition-colors"
           />
           <button 
             type="submit"
             :disabled="newRole.processing"
-            class="flex items-center gap-2 px-8 py-4 bg-primary-600 text-white rounded-2xl text-sm font-bold hover:bg-primary-700 transition-all shadow-lg shadow-primary-500/20 active:scale-95 disabled:opacity-50"
+            class="flex items-center gap-2 px-8 py-4 bg-primary-600 text-white rounded-2xl text-sm font-bold hover:bg-primary-700 transition-colors shadow-lg shadow-primary-500/20 active:scale-95 disabled:opacity-50"
           >
             <Plus v-if="!newRole.processing" class="w-5 h-5" />
             <Loader2 v-else class="w-5 h-5 animate-spin" />
@@ -154,7 +154,7 @@ const togglePermission = (name: string) => {
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
         <!-- Roles List -->
         <div class="lg:col-span-4 space-y-6">
-           <h3 class="text-[10px] font-bold text-slate-400 uppercase tracking-normal px-4">{{ t('admin.roles.list_title') || 'Daftar Role' }}</h3>
+           <h3 class="text-xs font-bold text-slate-400 uppercase tracking-normal px-4">{{ t('admin.roles.list_title') || 'Daftar Role' }}</h3>
            <div class="space-y-3">
               <div 
                 v-for="role in roles" 
@@ -163,7 +163,7 @@ const togglePermission = (name: string) => {
               >
                 <button 
                   :class="[
-                    'w-full text-left px-8 py-6 rounded-[2rem] transition-all flex items-center justify-between group overflow-hidden relative',
+                    'w-full text-left px-8 py-6 rounded-[2rem] transition-colors flex items-center justify-between group overflow-hidden relative',
                     selectedRole === role.id 
                       ? 'bg-slate-900 text-white shadow-2xl shadow-slate-900/20 dark:bg-primary-600' 
                       : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 border border-slate-100 dark:border-slate-800'
@@ -185,7 +185,7 @@ const togglePermission = (name: string) => {
                 </button>
                 <button 
                   v-if="role.name !== 'super_admin'"
-                  class="absolute right-6 top-1/2 -translate-y-1/2 p-3 text-rose-500 opacity-0 group-hover:opacity-100 transition-all hover:bg-rose-50 dark:hover:bg-rose-900/20 rounded-2xl"
+                  class="absolute right-6 top-1/2 -translate-y-1/2 p-3 text-rose-500 opacity-0 group-hover:opacity-100 transition-colors hover:bg-rose-50 dark:hover:bg-rose-900/20 rounded-2xl"
                   @click.stop="deleteRole(role.id)"
                 >
                   <Trash2 class="w-5 h-5" />
@@ -209,7 +209,7 @@ const togglePermission = (name: string) => {
                  </div>
                  <button 
                    :disabled="permissionForm.processing"
-                   class="flex items-center gap-3 px-10 py-5 bg-slate-900 dark:bg-primary-600 text-white rounded-[1.5rem] text-sm font-bold hover:bg-slate-800 transition-all shadow-xl shadow-slate-900/20 active:scale-95 disabled:opacity-50"
+                   class="flex items-center gap-3 px-10 py-5 bg-slate-900 dark:bg-primary-600 text-white rounded-[1.5rem] text-sm font-bold hover:bg-slate-800 transition-colors shadow-xl shadow-slate-900/20 active:scale-95 disabled:opacity-50"
                    @click="syncPermissions"
                  >
                     <Save v-if="!permissionForm.processing" class="w-5 h-5" />
@@ -222,12 +222,12 @@ const togglePermission = (name: string) => {
                  <div 
                    v-for="permission in permissions" 
                    :key="permission.id"
-                   class="flex items-center gap-4 p-5 rounded-[1.5rem] border border-slate-50 dark:border-slate-800 hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-all cursor-pointer group relative"
+                   class="flex items-center gap-4 p-5 rounded-[1.5rem] border border-slate-50 dark:border-slate-800 hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors cursor-pointer group relative"
                    @click="togglePermission(permission.name)"
                  >
                     <div 
                       :class="[
-                        'w-6 h-6 rounded-lg border-2 flex items-center justify-center transition-all duration-300',
+                        'w-6 h-6 rounded-lg border-2 flex items-center justify-center transition-colors duration-300',
                         permissionForm.permissions.includes(permission.name)
                           ? 'bg-primary-600 border-primary-600 scale-110 shadow-lg shadow-primary-500/30'
                           : 'border-slate-200 dark:border-slate-700'
@@ -237,7 +237,7 @@ const togglePermission = (name: string) => {
                     </div>
                     <div>
                        <p class="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-tight">{{ permission.name.replace(/_/g, ' ') }}</p>
-                       <p class="text-[9px] font-bold text-slate-400 font-mono mt-0.5">{{ permission.name }}</p>
+                       <p class="text-xs font-bold text-slate-400 font-mono mt-0.5">{{ permission.name }}</p>
                     </div>
                  </div>
               </div>

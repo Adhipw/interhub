@@ -16,7 +16,7 @@ defineProps<Props>();
                     <th 
                         v-for="header in headers" 
                         :key="header.key"
-                        class="px-8 py-6 text-[10px] font-semibold text-sm tracking-wide text-neutral-400 dark:text-neutral-500"
+                        class="px-8 py-6 text-xs font-semibold text-sm tracking-wide text-neutral-400 dark:text-neutral-500"
                         :class="[`text-${header.align || 'left'}`]"
                     >
                         {{ header.label }}
@@ -49,7 +49,7 @@ defineProps<Props>();
                 <tr v-if="!loading && items.length === 0">
                     <td :colspan="headers.length" class="px-8 py-20 text-center">
                         <slot name="empty">
-                            <p class="text-neutral-400 font-bold font-medium">Tidak ada data ditemukan</p>
+                            <p class="text-neutral-400 font-medium">Tidak ada data ditemukan</p>
                         </slot>
                     </td>
                 </tr>

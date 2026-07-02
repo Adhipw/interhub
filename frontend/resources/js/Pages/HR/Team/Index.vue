@@ -133,7 +133,7 @@ const deleteMember = (id: number) => {
     <div class="mt-8">
       <!-- Members Grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div v-for="member in members" :key="member.id" class="bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all group relative overflow-hidden">
+        <div v-for="member in members" :key="member.id" class="bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl p-6 shadow-sm hover:shadow-md transition-colors group relative overflow-hidden">
           <!-- Active Status Indicator -->
           <div :class="member.is_active ? 'bg-green-500' : 'bg-slate-300'" class="absolute top-0 right-0 w-2 h-2 rounded-bl-xl"></div>
           
@@ -157,10 +157,10 @@ const deleteMember = (id: number) => {
           </div>
 
           <div class="mt-6 flex items-center justify-between">
-            <span class="px-2.5 py-1 bg-slate-50 dark:bg-slate-900 text-slate-600 dark:text-slate-400 text-[10px] font-semibold text-xs tracking-wide rounded-lg border border-slate-100 dark:border-slate-700">
+            <span class="px-2.5 py-1 bg-slate-50 dark:bg-slate-900 text-slate-600 dark:text-slate-400 text-xs font-semibold text-xs tracking-wide rounded-lg border border-slate-100 dark:border-slate-700">
               {{ member.role }}
             </span>
-            <div v-if="!member.is_active" class="px-2 py-0.5 bg-red-50 text-red-600 text-[10px] font-bold rounded-md">
+            <div v-if="!member.is_active" class="px-2 py-0.5 bg-red-50 text-red-600 text-xs font-bold rounded-md">
               Nonaktif
             </div>
           </div>
@@ -207,7 +207,7 @@ const deleteMember = (id: number) => {
 
         <div>
           <label class="block text-xs font-bold text-slate-400 font-medium mb-2">Role Anggota</label>
-          <select v-model="addForm.role" class="w-full rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-sm focus:ring-primary-500 focus:border-primary-500 transition-all h-[42px]">
+          <select v-model="addForm.role" class="w-full rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-sm focus:ring-primary-500 focus:border-primary-500 transition-colors h-[42px]">
             <option v-for="role in roles" :key="role.value" :value="role.value">
               {{ role.label }}
             </option>
@@ -227,7 +227,7 @@ const deleteMember = (id: number) => {
       <form class="p-8 space-y-6" @submit.prevent="submitEdit">
         <div>
           <label class="block text-xs font-bold text-slate-400 font-medium mb-2">Role Anggota</label>
-          <select v-model="editForm.role" class="w-full rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-sm focus:ring-primary-500 focus:border-primary-500 transition-all h-[42px]">
+          <select v-model="editForm.role" class="w-full rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-sm focus:ring-primary-500 focus:border-primary-500 transition-colors h-[42px]">
             <option v-for="role in roles" :key="role.value" :value="role.value">
               {{ role.label }}
             </option>

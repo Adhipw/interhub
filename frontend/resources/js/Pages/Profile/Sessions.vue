@@ -64,10 +64,10 @@ const formatDate = (timestamp: number) => {
                         <div class="flex-1">
                             <div class="flex items-center gap-2">
                                 <span class="font-bold text-slate-900">{{ session.ip_address }}</span>
-                                <span v-if="session.id === currentSessionId" class="px-2 py-0.5 bg-green-100 text-green-700 text-[10px] font-bold rounded uppercase tracking-tighter">Perangkat Ini</span>
+                                <span v-if="session.id === currentSessionId" class="px-2 py-0.5 bg-green-100 text-green-700 text-xs font-bold rounded uppercase tracking-tighter">Perangkat Ini</span>
                             </div>
                             <div class="text-xs text-slate-500 mt-1 line-clamp-1">{{ session.user_agent }}</div>
-                            <div class="text-[10px] text-slate-400 mt-2">Aktivitas Terakhir: {{ formatDate(session.last_activity) }}</div>
+                            <div class="text-xs text-slate-400 mt-2">Aktivitas Terakhir: {{ formatDate(session.last_activity) }}</div>
                         </div>
                     </div>
                 </div>

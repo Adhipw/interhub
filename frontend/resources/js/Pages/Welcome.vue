@@ -70,9 +70,9 @@ const submitAiMatcher = async () => {
         const errCode = errorData?.error;
         const status = (err as any)?.response?.status;
         if (errCode === 'RATE_LIMIT_EXCEEDED' || status === 429) {
-            aiError.value = '⏳ Mesin AI sedang sibuk. Batas penggunaan tercapai. Silakan coba lagi dalam 1 jam.';
+            aiError.value = 'Mesin AI sedang sibuk. Batas penggunaan tercapai. Silakan coba lagi dalam 1 jam.';
         } else if (!(err as any)?.response || status >= 500) {
-            aiError.value = '🔧 Server AI sedang tidak tersedia. Silakan coba beberapa saat lagi.';
+            aiError.value = 'Server AI sedang tidak tersedia. Silakan coba beberapa saat lagi.';
         } else {
             aiError.value = errorData?.message || errorData?.error || 'Gagal terhubung dengan mesin AI. Silakan coba beberapa saat lagi.';
         }
@@ -189,7 +189,9 @@ const formatNumber = (num: number) => {
 
 const vReveal = {
     mounted: (el: HTMLElement) => {
-        el.classList.add('opacity-0', 'translate-y-8', 'transition-all', 'duration-1000', 'ease-out');
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (prefersReducedMotion) return;
+        el.classList.add('opacity-0', 'translate-y-4', 'transition-[opacity,transform]', 'duration-700', 'ease-out');
         const observer = new IntersectionObserver((entries) => {
             if (entries[0].isIntersecting) {
                 el.classList.remove('opacity-0', 'translate-y-8');
@@ -226,14 +228,13 @@ const faqs = computed(() => [
         <Head :title="t('hero.title') + ' - InternHub'" />
 
         <!-- 1. Hero Section -->
-        <section class="relative pt-16 pb-24 lg:pt-24 lg:pb-32 overflow-hidden transition-colors duration-500" :class="isDarkMode ? 'bg-slate-950' : 'bg-white'">
-            <div class="absolute inset-0 -z-10 opacity-30" :class="isDarkMode ? 'bg-[radial-gradient(circle_at_top_right,rgba(37,99,235,0.1),transparent)]' : 'bg-[radial-gradient(circle_at_top_right,rgba(37,99,235,0.05),transparent)]'"></div>
+        <section class="relative pt-16 pb-24 lg:pt-24 lg:pb-32 overflow-hidden transition-colors duration-500 border-b" :class="isDarkMode ? 'bg-slate-950 border-slate-800' : 'bg-white border-slate-100'">
             
             <div class="max-w-5xl mx-auto px-6 text-center">
                 <!-- Badge -->
                 <div v-reveal class="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 transition-colors" :class="isDarkMode ? 'bg-blue-900/30 text-blue-400' : 'bg-blue-50 text-blue-600'">
                     <span class="flex h-2 w-2 rounded-full bg-blue-600 "></span>
-                    <span class="text-xs font-semibold text-xs tracking-wide">{{ t('hero.badge') }}</span>
+                    <span class="text-xs font-semibold tracking-wide">{{ t('hero.badge') }}</span>
                 </div>
 
                 <!-- Title & Subtitle -->
@@ -246,38 +247,41 @@ const faqs = computed(() => [
                 </p>
 
                 <!-- Professional Search Box (Centered) -->
-                <div v-reveal class="p-2 rounded-2xl shadow-sm hover:shadow-md border transition-all duration-300 group focus-within:ring-4 focus-within:ring-blue-600/10 mb-12 max-w-4xl mx-auto delay-300" :class="isDarkMode ? 'bg-slate-900 border-slate-800 shadow-slate-950' : 'bg-white border-slate-200 shadow-slate-200/50'">
-                    <form class="flex flex-col md:flex-row items-center gap-2" @submit.prevent="submitSearch">
-                        <div class="flex-1 w-full flex items-center gap-3 px-6 py-4 border-b md:border-b-0 md:border-r" :class="isDarkMode ? 'border-slate-800' : 'border-slate-100'">
+                <div v-reveal class="p-2 rounded-2xl mb-12 max-w-4xl mx-auto delay-300 border shadow-sm transition-colors" :class="isDarkMode ? 'bg-slate-900/80 border-slate-800' : 'bg-white border-slate-200'">
+                    <form class="flex flex-col md:flex-row items-center" @submit.prevent="submitSearch">
+                        <div class="flex-1 w-full flex items-center gap-3 px-6 py-4 border-b md:border-b-0 md:border-r transition-colors" :class="isDarkMode ? 'border-slate-700/50 focus-within:bg-slate-800/50 md:rounded-l-full' : 'border-slate-100 focus-within:bg-slate-50 md:rounded-l-full'">
                             <Icon name="search" class-name="w-5 h-5 text-blue-600" />
                             <input 
                                 v-model="searchQuery"
                                 type="text" 
                                 :placeholder="t('hero.search_pos')"
-                                class="w-full border-none focus:ring-0 bg-transparent text-sm font-bold placeholder:text-slate-400"
-                                :class="isDarkMode ? 'text-white' : 'text-slate-950'"
+                                autocomplete="off"
+                                class="w-full border-none focus:ring-0 bg-transparent text-sm font-semibold placeholder:text-slate-400 outline-none"
+                                :class="isDarkMode ? 'text-white' : 'text-slate-900'"
                             />
                         </div>
-                        <div class="flex-1 w-full flex items-center gap-3 px-6 py-4">
+                        <div class="flex-1 w-full flex items-center gap-3 px-6 py-4 transition-colors" :class="isDarkMode ? 'focus-within:bg-slate-800/50' : 'focus-within:bg-slate-50'">
                             <Icon name="map" class-name="w-5 h-5 text-blue-600" />
                             <input 
                                 v-model="locationQuery"
                                 type="text" 
                                 :placeholder="t('hero.search_loc')"
-                                class="w-full border-none focus:ring-0 bg-transparent text-sm font-bold placeholder:text-slate-400"
-                                :class="isDarkMode ? 'text-white' : 'text-slate-950'"
+                                autocomplete="off"
+                                class="w-full border-none focus:ring-0 bg-transparent text-sm font-semibold placeholder:text-slate-400 outline-none"
+                                :class="isDarkMode ? 'text-white' : 'text-slate-900'"
                             />
                         </div>
-                        <button type="submit" class="w-full md:w-auto bg-slate-900 text-white px-12 py-4 rounded-2xl font-bold text-sm font-medium hover:bg-slate-800 hover:scale-[1.02] active:scale-95 transition-all shadow-sm hover:shadow-md">
+                        <button type="submit" class="w-full md:w-auto bg-blue-600 text-white px-8 py-3.5 md:rounded-xl rounded-xl font-bold text-sm hover:bg-blue-700 active:scale-[0.98] transition-colors cursor-pointer flex items-center justify-center gap-2 m-1 md:m-0">
                             {{ t('hero.btn_search') }}
+                            <Icon name="chevron" class-name="w-4 h-4" />
                         </button>
                     </form>
                 </div>
 
                 <!-- Quick Chips (Centered) -->
                 <div class="flex flex-wrap items-center justify-center gap-3 mb-16">
-                    <span class="text-[10px] font-semibold text-sm mr-2" :class="isDarkMode ? 'text-slate-500' : 'text-slate-400'">{{ t('hero.popular') }}:</span>
-                    <button v-for="tag in ['Remote', 'Jakarta', 'UI/UX', 'Frontend', 'Data', 'Marketing']" :key="tag" class="px-5 py-2 rounded-full text-xs font-bold transition-all border" :class="isDarkMode ? 'bg-slate-900 border-slate-800 text-slate-400 hover:border-blue-600 hover:text-blue-500' : 'bg-slate-50 border-slate-200 text-slate-600 hover:border-blue-600 hover:text-blue-600'" @click="searchQuery = tag; submitSearch()">
+                    <span class="text-xs font-medium mr-2" :class="isDarkMode ? 'text-slate-500' : 'text-slate-400'">{{ t('hero.popular') }}:</span>
+                    <button v-for="tag in ['Remote', 'Jakarta', 'UI/UX', 'Frontend', 'Data', 'Marketing']" :key="tag" class="px-5 py-2 rounded-full text-xs font-semibold transition-colors cursor-pointer border" :class="isDarkMode ? 'bg-slate-900 border-slate-800 text-slate-400 hover:border-blue-600 hover:text-blue-500' : 'bg-slate-50 border-slate-200 text-slate-600 hover:border-blue-600 hover:text-blue-600'" @click="searchQuery = tag; submitSearch()">
                         {{ tag }}
                     </button>
                 </div>
@@ -288,7 +292,7 @@ const faqs = computed(() => [
                         <div class="w-8 h-8 rounded-full flex items-center justify-center bg-emerald-500/10 border border-emerald-500/20">
                             <Icon name="check" class-name="w-4 h-4 text-emerald-500" />
                         </div>
-                        <span class="text-[10px] font-semibold text-xs tracking-wide" :class="isDarkMode ? 'text-slate-400' : 'text-slate-500'">{{ t('hero.' + point) }}</span>
+                        <span class="text-xs font-medium" :class="isDarkMode ? 'text-slate-400' : 'text-slate-500'">{{ t('hero.' + point) }}</span>
                     </div>
                 </div>
             </div>
@@ -307,13 +311,13 @@ v-for="(item, index) in [
                         { label: t('stats.companies'), val: stats.total_companies, icon: 'building', color: 'text-emerald-500' },
                         { label: t('stats.students'), val: stats.total_students, icon: 'users', color: 'text-amber-500' },
                         { label: t('stats.applications'), val: stats.total_placements, icon: 'send', color: 'text-purple-500' }
-                    ]" :key="item.label" class="flex flex-col md:flex-row items-center gap-4 text-center md:text-left p-6 rounded-[2rem] transition-all hover:scale-105" :class="isDarkMode ? 'bg-slate-900/50' : 'bg-white shadow-sm border border-slate-100'">
+                    ]" :key="item.label" class="flex flex-col md:flex-row items-center gap-4 text-center md:text-left p-6 rounded-2xl transition-all hover:border-blue-200 hover:shadow-sm" :class="isDarkMode ? 'bg-slate-900/50 border border-slate-800' : 'bg-white border border-slate-200'">
                         <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shadow-inner" :class="[isDarkMode ? 'bg-slate-800' : 'bg-slate-50', item.color]">
                             <Icon :name="item.icon" class-name="w-6 h-6" />
                         </div>
                         <div>
-                            <div class="text-2xl font-bold leading-none mb-1">{{ formatNumber(item.val) }}</div>
-                            <div class="text-[10px] font-semibold text-xs tracking-wide" :class="isDarkMode ? 'text-slate-500' : 'text-slate-400'">{{ item.label }}</div>
+                            <div class="text-2xl font-bold leading-none mb-1" style="font-variant-numeric: tabular-nums">{{ formatNumber(item.val) }}</div>
+                            <div class="text-xs font-medium" :class="isDarkMode ? 'text-slate-500' : 'text-slate-400'">{{ item.label }}</div>
                         </div>
                     </div>
                 </div>
@@ -331,7 +335,7 @@ v-for="(item, index) in [
                         <h2 class="text-3xl lg:text-5xl font-bold mb-4 tracking-tight" :class="isDarkMode ? 'text-white' : 'text-slate-950'">{{ t('jobs.title') }}</h2>
                         <p class="text-lg font-medium" :class="isDarkMode ? 'text-slate-400' : 'text-slate-600'">{{ t('jobs.subtitle') }}</p>
                     </div>
-                    <Link :href="route('internships.index')" class="group flex items-center justify-center md:justify-start gap-3 px-8 py-4 rounded-2xl font-bold text-xs font-medium transition-all shadow-xl hover:scale-105 active:scale-95" :class="isDarkMode ? 'bg-slate-900 text-blue-400 shadow-slate-950' : 'bg-slate-900 text-white shadow-blue-600/20'">
+                    <Link :href="route('internships.index')" class="group flex items-center justify-center md:justify-start gap-3 px-6 py-3 rounded-xl font-bold text-sm transition-colors shadow-sm hover:bg-slate-800 active:scale-[0.98]" :class="isDarkMode ? 'bg-slate-800 text-white border border-slate-700' : 'bg-slate-900 text-white'">
                         {{ t('jobs.btn_all') }}
                         <Icon name="chevron" class-name="w-4 h-4 transition-transform group-hover:translate-x-1" />
                     </Link>
@@ -343,13 +347,13 @@ v-for="(item, index) in [
                 </div>
                 
                 <div v-else-if="featuredInternships.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div v-reveal :style="`transition-delay: ${index * 100}ms`" v-for="(job, index) in featuredInternships" :key="job.id" class="group relative p-6 md:p-8 rounded-2xl border transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 flex flex-col" :class="isDarkMode ? 'bg-slate-900 border-slate-800 hover:border-blue-900 shadow-slate-950' : 'bg-white border-slate-200 hover:border-blue-100 shadow-slate-100'">
+                    <div v-reveal :style="`transition-delay: ${index * 100}ms`" v-for="(job, index) in featuredInternships" :key="job.id" class="group relative p-6 md:p-8 rounded-2xl border transition-[border-color,box-shadow] duration-200 hover:shadow-md flex flex-col" :class="isDarkMode ? 'bg-slate-900 border-slate-800 hover:border-slate-700' : 'bg-white border-slate-200 hover:border-slate-300'">
                         <div class="flex items-start justify-between mb-8">
                              <div class="w-14 h-14 rounded-2xl flex items-center justify-center border font-bold text-xl overflow-hidden shadow-sm" :class="isDarkMode ? 'bg-slate-800 border-slate-700 text-blue-500' : 'bg-blue-50 border-blue-50 text-blue-600'">
                                 <img v-if="job.company?.logo_url" loading="lazy" decoding="async" :src="job.company.logo_url" class="w-full h-full object-cover p-2" />
                                 <span v-else>{{ job.company?.name?.charAt(0) }}</span>
                             </div>
-                            <span class="px-3 py-1.5 rounded-full text-[9px] font-semibold text-xs tracking-wide" :class="isDarkMode ? 'bg-blue-900/40 text-blue-400' : 'bg-blue-50 text-blue-600'">{{ job.working_type || job.type }}</span>
+                            <span class="px-3 py-1.5 rounded-full text-xs font-semibold" :class="isDarkMode ? 'bg-blue-900/40 text-blue-400' : 'bg-blue-50 text-blue-600'">{{ job.working_type || job.type }}</span>
                         </div>
 
                         <Link :href="route('internships.show', { slug: job.slug })" class="block mb-2 group-hover:text-blue-600 transition-colors">
@@ -361,7 +365,7 @@ v-for="(item, index) in [
                             <Icon v-if="job.company?.is_verified" name="shield" class-name="w-3.5 h-3.5 text-emerald-500" />
                         </div>
 
-                        <div class="space-y-4 mb-8 text-[11px] font-bold" :class="isDarkMode ? 'text-slate-500' : 'text-slate-500'">
+                        <div class="space-y-4 mb-8 text-xs font-medium" :class="isDarkMode ? 'text-slate-500' : 'text-slate-500'">
                             <div class="flex items-center gap-3">
                                 <Icon name="map" class-name="w-4 h-4 text-blue-500" />
                                 <span>{{ job.location }}</span>
@@ -374,10 +378,10 @@ v-for="(item, index) in [
 
                         <div class="pt-6 border-t flex items-center justify-between mt-auto" :class="isDarkMode ? 'border-slate-800' : 'border-slate-100'">
                             <div class="flex flex-col">
-                                <span class="text-[9px] font-semibold text-xs tracking-wide text-slate-500 mb-1">{{ t('job.stipend') }}</span>
+                                <span class="text-xs font-medium text-slate-500 mb-1 uppercase tracking-wide">{{ t('job.stipend') }}</span>
                                 <span class="text-base font-bold" :class="isDarkMode ? 'text-blue-400' : 'text-blue-600'">{{ job.stipend || t('job.stipend_default') }}</span>
                             </div>
-                            <Link :href="route('internships.show', { slug: job.slug })" class="w-10 h-10 rounded-xl bg-slate-900 text-white flex items-center justify-center transition-all hover:scale-110 active:scale-95 shadow-sm hover:shadow-md">
+                            <Link :href="route('internships.show', { slug: job.slug })" aria-label="View internship details" class="w-10 h-10 rounded-full bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white flex items-center justify-center transition-colors cursor-pointer shadow-sm dark:bg-blue-900/30 dark:text-blue-400 dark:hover:bg-blue-600 dark:hover:text-white">
                                 <Icon name="chevron" class-name="w-4 h-4" />
                             </Link>
                         </div>
@@ -400,17 +404,17 @@ v-for="(item, index) in [
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <button v-reveal :style="`transition-delay: ${index * 75}ms`" v-for="(cat, index) in categories" :key="cat.id" class="p-8 rounded-2xl border transition-all duration-300 group text-left" :class="isDarkMode ? 'bg-slate-950 border-slate-800 hover:border-blue-900' : 'bg-white border-slate-200 hover:border-blue-200 hover:shadow-xl'" @click="searchQuery = cat.label; submitSearch()">
-                        <div class="w-12 h-12 rounded-2xl flex items-center justify-center mb-6 transition-transform group-hover:scale-110 group-hover:rotate-6" :class="isDarkMode ? 'bg-slate-900 text-blue-500 shadow-inner shadow-slate-950' : 'bg-blue-50 text-blue-600 shadow-inner shadow-blue-100/50'">
+                    <button v-reveal :style="`transition-delay: ${index * 75}ms`" v-for="(cat, index) in categories" :key="cat.id" class="p-8 rounded-2xl border transition-[border-color,box-shadow] duration-200 group text-left cursor-pointer" :class="isDarkMode ? 'bg-slate-950 border-slate-800 hover:border-blue-900' : 'bg-white border-slate-200 hover:border-blue-200 hover:shadow-md'" @click="searchQuery = cat.label; submitSearch()">
+                        <div class="w-12 h-12 rounded-2xl flex items-center justify-center mb-6" :class="isDarkMode ? 'bg-slate-900 text-blue-500' : 'bg-blue-50 text-blue-600'">
                             <Icon :name="cat.icon" class-name="w-6 h-6" />
                         </div>
                         <h3 class="text-lg font-bold mb-1" :class="isDarkMode ? 'text-white' : 'text-slate-950'">{{ cat.label }}</h3>
-                        <p class="text-xs font-bold mb-6" :class="isDarkMode ? 'text-slate-500' : 'text-slate-400'">{{ cat.desc }}</p>
+                        <p class="text-xs font-medium mb-6" :class="isDarkMode ? 'text-slate-500' : 'text-slate-400'">{{ cat.desc }}</p>
                         <!-- Realtime count would go here if supported -->
-                        <div class="flex items-center gap-2 text-[10px] font-semibold text-xs tracking-wide text-blue-600">
-                            {{ t('cat.explore') }}
-                            <Icon name="chevron" class-name="w-3 h-3" />
-                        </div>
+                        <Link href="/register" class="inline-flex items-center gap-2 bg-blue-600 text-white px-10 py-4 rounded-xl font-bold text-sm hover:bg-blue-700 active:scale-[0.98] transition-colors">
+                        {{ t('cta.btn_register') }}
+                        <Icon name="chevron" class-name="w-4 h-4" />
+                    </Link>    </div>
                     </button>
                 </div>
             </div>
@@ -429,13 +433,13 @@ v-for="(item, index) in [
                 </div>
                 <div v-else-if="companiesRes.length > 0" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
                     <div v-reveal :style="`transition-delay: ${index * 50}ms`" v-for="(comp, index) in companiesRes" :key="comp.id" class="p-6 rounded-2xl border transition-all duration-300 flex flex-col items-center gap-4 group" :class="isDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-100 shadow-sm'">
-                        <div class="w-16 h-16 rounded-2xl flex items-center justify-center border font-bold text-xl overflow-hidden grayscale group-hover:grayscale-0 transition-all group-hover:scale-110" :class="isDarkMode ? 'bg-slate-800 border-slate-700 text-blue-500' : 'bg-slate-50 border-slate-200 text-slate-400'">
+                        <div class="w-16 h-16 rounded-2xl flex items-center justify-center border font-bold text-xl overflow-hidden grayscale group-hover:grayscale-0 transition-[filter] duration-200" :class="isDarkMode ? 'bg-slate-800 border-slate-700 text-blue-500' : 'bg-slate-50 border-slate-200 text-slate-400'">
                             <img v-if="comp.logo_url" loading="lazy" decoding="async" :src="comp.logo_url" class="w-full h-full object-cover" />
                             <span v-else>{{ comp.name?.charAt(0) }}</span>
                         </div>
                         <div class="text-center">
                             <p class="text-xs font-bold line-clamp-1 mb-1" :class="isDarkMode ? 'text-white' : 'text-slate-950'">{{ comp.name }}</p>
-                            <div v-if="comp.is_verified" class="flex items-center justify-center gap-1 text-[8px] font-semibold text-xs tracking-wide text-emerald-600">
+                            <div v-if="comp.is_verified" class="flex items-center justify-center gap-1 text-xs font-semibold text-emerald-600">
                                 <Icon name="shield" class-name="w-2.5 h-2.5" />
                                 Verified
                             </div>
@@ -458,11 +462,11 @@ v-for="(item, index) in [
                     <div class="hidden md:block absolute top-12 left-0 w-full h-[2px] -z-0" :class="isDarkMode ? 'bg-slate-800' : 'bg-slate-200'"></div>
                     
                     <div v-reveal :style="`transition-delay: ${i * 100}ms`" v-for="(step, i) in ['register', 'profile', 'find', 'apply', 'monitor']" :key="step" class="relative z-10 flex flex-col items-center">
-                        <div class="w-24 h-24 rounded-full flex items-center justify-center border-4 mb-6 transition-all duration-500 hover:scale-110" :class="isDarkMode ? 'bg-slate-900 border-slate-800 text-blue-500' : 'bg-white border-white text-blue-600 shadow-xl'">
+                        <div class="w-24 h-24 rounded-full flex items-center justify-center border-4 mb-6 transition-colors" :class="isDarkMode ? 'bg-slate-900 border-slate-800 text-blue-500' : 'bg-white border-slate-100 text-blue-600'">
                             <span class="text-3xl font-bold">{{ i + 1 }}</span>
                         </div>
-                        <h4 class="text-sm font-semibold text-xs tracking-wide mb-2" :class="isDarkMode ? 'text-white' : 'text-slate-950'">{{ t('steps.step' + (i+1) + '_title') }}</h4>
-                        <p class="text-xs font-medium leading-relaxed max-w-[160px]" :class="isDarkMode ? 'text-slate-500' : 'text-slate-500'">{{ t('steps.step' + (i+1) + '_desc') }}</p>
+                        <h4 class="text-sm font-semibold mb-2" :class="isDarkMode ? 'text-white' : 'text-slate-950'">{{ t('steps.step' + (i+1) + '_title') }}</h4>
+                        <p class="text-xs font-medium leading-relaxed max-w-[160px]" :class="isDarkMode ? 'text-slate-400' : 'text-slate-500'">{{ t('steps.step' + (i+1) + '_desc') }}</p>
                     </div>
                 </div>
             </div>
@@ -484,7 +488,7 @@ v-for="(item, index) in [
                         { icon: 'send', title: t('advantages.v4_title'), desc: t('advantages.v4_desc') },
                         { icon: 'sparkles', title: t('advantages.v5_title'), desc: t('advantages.v5_desc') },
                         { icon: 'users', title: t('advantages.v6_title'), desc: t('advantages.v6_desc') }
-                    ]" :key="item.title" class="p-8 rounded-2xl border transition-all" :class="isDarkMode ? 'bg-slate-900 border-slate-800 hover:border-blue-900' : 'bg-slate-50 border-slate-100 hover:border-blue-200 hover:bg-white hover:shadow-xl'">
+                    ]" :key="item.title" class="p-8 rounded-2xl border transition-[border-color,box-shadow] duration-200 hover:shadow-md" :class="isDarkMode ? 'bg-slate-900 border-slate-800 hover:border-slate-700' : 'bg-white border-slate-200 hover:border-slate-300'">
                         <Icon :name="item.icon" class-name="w-10 h-10 text-blue-600 mb-6" />
                         <h3 class="text-lg font-bold mb-3" :class="isDarkMode ? 'text-white' : 'text-slate-950'">{{ item.title }}</h3>
                         <p class="text-sm font-medium leading-relaxed" :class="isDarkMode ? 'text-slate-400' : 'text-slate-500'">{{ item.desc }}</p>
@@ -494,16 +498,16 @@ v-for="(item, index) in [
         </section>
 
         <!-- 8. Rekomendasi AI -->
-        <section class="py-24 transition-colors duration-300" :class="isDarkMode ? 'bg-slate-950' : 'bg-white'">
+        <section class="py-24 transition-colors duration-300" :class="isDarkMode ? 'bg-slate-950' : 'bg-slate-50'">
             <div class="container mx-auto px-6">
-                <div v-reveal class="max-w-4xl mx-auto rounded-2xl p-12 lg:p-20 border transition-all duration-500 relative overflow-hidden text-center" :class="isDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-slate-50 border-slate-100 shadow-sm'">
+                <div v-reveal class="max-w-4xl mx-auto rounded-2xl p-12 lg:p-20 border transition-all duration-500 relative overflow-hidden text-center" :class="isDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200 shadow-sm'">
                     
                     <!-- Decorative Element -->
                     
                     
 
                     <div class="relative z-10">
-                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 font-bold text-[10px] font-medium transition-colors" :class="isDarkMode ? 'bg-blue-500/10 text-blue-400' : 'bg-blue-600/10 text-blue-600'">
+                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 text-xs font-semibold" :class="isDarkMode ? 'bg-blue-500/10 text-blue-400' : 'bg-blue-600/10 text-blue-600'">
                             <Icon name="sparkles" class-name="w-4 h-4" />
                             {{ t('ai.badge') }}
                         </div>
@@ -514,24 +518,24 @@ v-for="(item, index) in [
                             {{ t('ai.subtitle') }}
                         </p>
                         
-                        <div class="max-w-2xl mx-auto p-4 rounded-2xl border transition-all duration-300 focus-within:shadow-2xl focus-within:scale-[1.02]" :class="isDarkMode ? 'bg-slate-950 border-slate-800 shadow-slate-950' : 'bg-white border-slate-200 shadow-xl shadow-slate-200/50'">
+                        <div class="max-w-2xl mx-auto p-2 rounded-2xl border transition-all duration-300 focus-within:ring-2 focus-within:ring-blue-500/20" :class="isDarkMode ? 'bg-slate-950 border-slate-800' : 'bg-slate-50 border-slate-200'">
                             <textarea 
                                 v-model="aiPrompt"
                                 :placeholder="t('ai.placeholder')" 
-                                class="w-full border-none focus:ring-0 bg-transparent text-base font-bold resize-none h-32 px-6 py-4" 
-                                :class="isDarkMode ? 'text-white placeholder:text-slate-700' : 'text-slate-900 placeholder:text-slate-400'"
+                                class="w-full border-none focus:ring-0 bg-transparent text-base font-semibold resize-none h-28 px-6 py-4 outline-none" 
+                                :class="isDarkMode ? 'text-white placeholder:text-slate-600' : 'text-slate-900 placeholder:text-slate-400'"
                                 :disabled="aiLoading"
                                 @keydown="handleAiKeydown"
                             ></textarea>
                             
-                            <div class="flex items-center justify-between p-2">
-                                <div class="hidden sm:flex items-center gap-2 px-4 text-[10px] font-bold text-slate-400 font-medium">
-                                    <div class="w-2 h-2 rounded-full bg-emerald-500 "></div>
+                            <div class="flex items-center justify-between p-2 border-t" :class="isDarkMode ? 'border-slate-800/50' : 'border-slate-100'">
+                                <div class="hidden sm:flex items-center gap-2 px-4 text-xs font-medium text-slate-400">
+                                    <span class="inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                                     AI Engine Active
                                 </div>
                                 <button 
                                     :disabled="aiLoading || !aiPrompt.trim()"
-                                    class="w-full sm:w-auto bg-slate-900 text-white px-10 py-5 rounded-2xl font-bold text-xs font-medium hover:bg-slate-800 transition-all flex items-center justify-center gap-3 shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
+                                    class="w-full sm:w-auto bg-blue-600 text-white px-8 py-3 rounded-xl font-bold text-sm hover:bg-blue-700 active:scale-[0.98] transition-colors cursor-pointer flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                                     @click="submitAiMatcher"
                                 >
                                     <Icon :name="aiLoading ? 'loader' : 'bot'" class-name="w-5 h-5" :class="aiLoading ? 'animate-spin' : ''" />
@@ -542,11 +546,11 @@ v-for="(item, index) in [
 
                         <!-- AI Example Prompt Chips -->
                         <div v-if="!aiHasSearched" class="max-w-2xl mx-auto mt-6 flex flex-wrap justify-center gap-2">
-                            <span class="text-[10px] font-semibold text-xs tracking-wide text-slate-400 w-full text-center mb-1">Contoh:</span>
+                            <span class="text-xs font-medium text-slate-400 w-full text-center mb-1">Contoh:</span>
                             <button
                                 v-for="ex in aiExamples"
                                 :key="ex"
-                                class="px-4 py-2 rounded-full text-xs font-bold border transition-all hover:scale-105 active:scale-95"
+                                class="px-4 py-2 rounded-full text-xs font-semibold border transition-colors cursor-pointer"
                                 :class="isDarkMode ? 'bg-slate-900 border-slate-700 text-slate-400 hover:border-blue-600 hover:text-blue-400' : 'bg-slate-50 border-slate-200 text-slate-600 hover:border-blue-500 hover:text-blue-600'"
                                 @click="aiPrompt = ex; submitAiMatcher()"
                             >
@@ -568,7 +572,7 @@ v-for="(item, index) in [
                         </div>
 
                         <!-- AI Error Message -->
-                        <div v-if="aiError" class="max-w-2xl mx-auto mt-8 p-6 rounded-[2rem] border bg-red-500/10 border-red-500/20 text-red-500 text-sm font-bold text-center">
+                        <div v-if="aiError" class="max-w-2xl mx-auto mt-8 p-6 rounded-2xl border bg-red-500/10 border-red-500/20 text-red-500 text-sm font-semibold text-center">
                             {{ aiError }}
                         </div>
 
@@ -579,13 +583,13 @@ v-for="(item, index) in [
                                 Rekomendasi Magang Terbaik Untukmu
                             </h3>
                             
-                            <div v-for="match in aiMatches" :key="match.id" class="p-8 rounded-2xl border transition-all duration-300 hover:border-blue-500 flex flex-col md:flex-row items-start md:items-center justify-between gap-6" :class="isDarkMode ? 'bg-slate-950 border-slate-800' : 'bg-white border-slate-100 shadow-sm'">
+                            <div v-for="match in aiMatches" :key="match.id" class="p-8 rounded-2xl border transition-[border-color] duration-200 hover:border-blue-500 flex flex-col md:flex-row items-start md:items-center justify-between gap-6" :class="isDarkMode ? 'bg-slate-950 border-slate-800' : 'bg-white border-slate-100 shadow-sm'">
                                 <div class="flex-1 space-y-4">
                                     <div class="flex flex-wrap items-center gap-3">
-                                        <span class="px-4 py-1.5 rounded-full text-xs font-semibold text-xs tracking-wide text-emerald-600 bg-emerald-500/10">
+                                        <span class="px-4 py-1.5 rounded-full text-xs font-semibold text-emerald-600 bg-emerald-500/10">
                                             Match: {{ match.match_score }}%
                                         </span>
-                                        <span class="px-4 py-1.5 rounded-full text-xs font-semibold text-xs tracking-wide text-blue-600 bg-blue-500/10">
+                                        <span class="px-4 py-1.5 rounded-full text-xs font-semibold text-blue-600 bg-blue-500/10">
                                             {{ match.type }}
                                         </span>
                                     </div>
@@ -605,16 +609,17 @@ v-for="(item, index) in [
                                     
                                     <!-- AI Explanation Bubble -->
                                     <div class="p-5 rounded-2xl border text-sm font-semibold leading-relaxed" :class="isDarkMode ? 'bg-slate-900 border-slate-800 text-slate-300' : 'bg-slate-50 border-slate-100 text-slate-600'">
-                                        <span class="font-bold text-blue-600 block mb-1">💡 Mengapa ini cocok?</span>
+                                        <span class="font-bold text-blue-600 block mb-1">Mengapa ini cocok?</span>
                                         {{ match.explanation }}
                                     </div>
                                 </div>
                                 
                                 <button 
-                                    class="w-full md:w-auto shrink-0 bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold text-xs font-medium hover:bg-slate-800 hover:scale-[1.02] active:scale-95 transition-all shadow-sm hover:shadow-md"
+                                    class="w-full md:w-auto shrink-0 bg-blue-600 text-white px-6 py-3 rounded-xl font-bold text-sm hover:bg-blue-700 active:scale-[0.98] transition-colors cursor-pointer flex items-center justify-center gap-2"
                                     @click="inertiaRouter.visit(`/internships/${match.slug}`)"
                                 >
                                     Lihat Detail
+                                    <Icon name="chevron" class-name="w-4 h-4" />
                                 </button>
                             </div>
                         </div>
@@ -638,14 +643,14 @@ v-for="(item, index) in [
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div v-reveal :style="`transition-delay: ${index * 150}ms`" v-for="(t, index) in testimonials" :key="t.name" class="p-10 rounded-2xl border transition-all" :class="isDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-slate-50 border-slate-100 hover:bg-white hover:shadow-xl'">
+                    <div v-reveal :style="`transition-delay: ${index * 150}ms`" v-for="(t, index) in testimonials" :key="t.name" class="p-8 rounded-2xl border transition-all hover:shadow-sm" :class="isDarkMode ? 'bg-slate-900 border-slate-800 hover:border-slate-700' : 'bg-white border-slate-200 hover:border-slate-300'">
                         <div class="flex items-center gap-6 mb-8">
                             <div class="w-16 h-16 rounded-2xl flex items-center justify-center font-bold text-xl text-white shadow-xl bg-blue-600">
                                 {{ t.initials }}
                             </div>
                             <div>
                                 <h4 class="text-lg font-bold mb-1" :class="isDarkMode ? 'text-white' : 'text-slate-950'">{{ t.name }}</h4>
-                                <p class="text-[10px] font-semibold text-xs tracking-wide text-blue-600">{{ t.role }}</p>
+                                <p class="text-xs font-semibold text-blue-600">{{ t.role }}</p>
                             </div>
                         </div>
                         <p class="text-lg font-medium italic leading-relaxed" :class="isDarkMode ? 'text-slate-400' : 'text-slate-600'">"{{ t.text }}"</p>
@@ -662,7 +667,7 @@ v-for="(item, index) in [
                 </div>
                 
                 <div class="space-y-4">
-                    <details v-for="(f, i) in faqs" :key="i" class="group transition-all duration-300 rounded-[2rem] border overflow-hidden" :class="isDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200 open:shadow-xl'">
+                    <details v-for="(f, i) in faqs" :key="i" class="group rounded-2xl border overflow-hidden" :class="isDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'">
                         <summary class="flex items-center justify-between p-8 cursor-pointer list-none font-bold transition-colors" :class="isDarkMode ? 'text-white' : 'text-slate-950 group-open:text-blue-600'">
                             <h4 class="text-lg">{{ f.q }}</h4>
                             <Icon name="chevron" class-name="w-5 h-5 transition-transform group-open:rotate-90 text-slate-500" />
@@ -677,7 +682,7 @@ v-for="(item, index) in [
 
         <!-- 11. CTA Akhir -->
         <section class="py-24 lg:py-32 max-w-7xl mx-auto px-6">
-            <div v-reveal class="rounded-2xl p-16 lg:p-24 text-center border transition-all duration-500 relative overflow-hidden" :class="isDarkMode ? 'bg-slate-900 border-slate-800 shadow-slate-950' : 'bg-white border-slate-100 shadow-2xl shadow-slate-200/50'">
+            <div v-reveal class="rounded-2xl p-16 lg:p-24 text-center border transition-all duration-500 relative overflow-hidden" :class="isDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200 shadow-sm'">
                 <!-- Abstract Decor -->
                 
                 
@@ -689,10 +694,10 @@ v-for="(item, index) in [
                     </p>
                     
                     <div class="flex flex-col md:flex-row justify-center items-center gap-6 mb-20">
-                        <Link v-if="$page.props.feature_flags?.public_registration !== false" href="/register" class="w-full md:w-auto bg-slate-900 text-white px-16 py-6 rounded-full font-bold text-lg uppercase tracking-normal hover:bg-slate-800 hover:scale-105 transition-all shadow-sm hover:shadow-md">
+                        <Link v-if="$page.props.feature_flags?.public_registration !== false" href="/register" class="w-full md:w-auto bg-slate-900 text-white px-16 py-6 rounded-full font-bold text-lg uppercase tracking-wide hover:bg-slate-800 transition-colors shadow-sm">
                             {{ t('cta.btn_register') }}
                         </Link>
-                        <Link href="/internships" class="w-full md:w-auto px-16 py-6 rounded-full font-bold text-lg uppercase tracking-normal border-2 transition-all hover:bg-slate-50 dark:hover:bg-slate-800" :class="isDarkMode ? 'border-slate-800 text-white' : 'border-slate-200 text-slate-950'">
+                        <Link href="/internships" class="w-full md:w-auto px-16 py-6 rounded-full font-bold text-lg uppercase tracking-wide border-2 transition-colors hover:bg-slate-50 dark:hover:bg-slate-800" :class="isDarkMode ? 'border-slate-800 text-white' : 'border-slate-200 text-slate-950'">
                             {{ t('cta.btn_jobs') }}
                         </Link>
                     </div>
@@ -700,7 +705,7 @@ v-for="(item, index) in [
                     <div class="flex flex-wrap justify-center gap-12 opacity-60">
                         <div v-for="point in ['free_students', 'verified_companies', 'transparent_status']" :key="point" class="flex items-center gap-3">
                             <Icon name="check" class-name="w-5 h-5 text-emerald-500" />
-                            <span class="text-xs font-semibold text-xs tracking-wide">{{ t('hero.' + point) }}</span>
+                            <span class="text-xs font-medium">{{ t('hero.' + point) }}</span>
                         </div>
                     </div>
                 </div>
@@ -709,14 +714,5 @@ v-for="(item, index) in [
     </PublicLayout>
 </template>
 
-<style scoped>
-@keyframes pulse-slow {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 0.5; }
-}
 
-.-slow {
-    animation: pulse-slow 4s ease-in-out infinite;
-}
-</style>
 

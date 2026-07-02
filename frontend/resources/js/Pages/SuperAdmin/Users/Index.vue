@@ -296,21 +296,21 @@ const getObjectURL = (file: File | null) => {
         
         <div class="flex items-center gap-3">
           <button 
-            class="flex items-center justify-center gap-2 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 px-6 py-3.5 rounded-2xl font-bold transition-all border border-slate-200 dark:border-slate-700 active:scale-95 hover:bg-slate-200 dark:hover:bg-slate-700"
+            class="flex items-center justify-center gap-2 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 px-6 py-3.5 rounded-2xl font-bold transition-colors border border-slate-200 dark:border-slate-700 active:scale-95 hover:bg-slate-200 dark:hover:bg-slate-700"
             @click="exportUsers"
           >
             <Download class="w-5 h-5" />
             Export CSV
           </button>
           <button 
-            class="flex items-center justify-center gap-2 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 px-6 py-3.5 rounded-2xl font-bold transition-all border border-slate-200 dark:border-slate-700 active:scale-95 hover:bg-slate-50 dark:hover:bg-slate-700"
+            class="flex items-center justify-center gap-2 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 px-6 py-3.5 rounded-2xl font-bold transition-colors border border-slate-200 dark:border-slate-700 active:scale-95 hover:bg-slate-50 dark:hover:bg-slate-700"
             @click="showImportModal = true"
           >
             <Download class="w-5 h-5" />
             Import
           </button>
           <button 
-            class="flex items-center justify-center gap-2 bg-primary-600 hover:bg-primary-700 text-white px-6 py-3.5 rounded-2xl font-bold transition-all shadow-lg shadow-primary-500/20 active:scale-95"
+            class="flex items-center justify-center gap-2 bg-primary-600 hover:bg-primary-700 text-white px-6 py-3.5 rounded-2xl font-bold transition-colors shadow-lg shadow-primary-500/20 active:scale-95"
             @click="openCreateModal"
           >
             <Plus class="w-5 h-5" />
@@ -364,7 +364,7 @@ const getObjectURL = (file: File | null) => {
         <div class="overflow-x-auto">
           <table class="w-full text-left border-collapse">
             <thead>
-              <tr class="bg-slate-50/50 dark:bg-slate-900/50 border-b border-slate-100 dark:border-slate-800 text-[10px] font-bold text-slate-400 uppercase tracking-normal">
+              <tr class="bg-slate-50/50 dark:bg-slate-900/50 border-b border-slate-100 dark:border-slate-800 text-xs font-bold text-slate-400 uppercase tracking-normal">
                 <th class="px-8 py-6">{{ t('admin.user_mgmt.col_user') }}</th>
                 <th class="px-4 py-6 text-center">{{ t('admin.user_mgmt.col_role') }}</th>
                 <th class="px-4 py-6 text-center">{{ t('admin.user_mgmt.col_status') }}</th>
@@ -383,10 +383,10 @@ const getObjectURL = (file: File | null) => {
                     <div class="flex flex-col min-w-0">
                       <span class="font-bold text-slate-900 dark:text-white truncate">{{ user.name }}</span>
                       <div class="flex flex-col gap-0.5 mt-0.5">
-                        <span class="text-[10px] text-slate-400 font-medium flex items-center gap-1">
+                        <span class="text-xs text-slate-400 font-medium flex items-center gap-1">
                           <Mail class="w-3 h-3" /> {{ user.email }}
                         </span>
-                        <span v-if="user.phone_number" class="text-[10px] text-slate-400 font-medium flex items-center gap-1">
+                        <span v-if="user.phone_number" class="text-xs text-slate-400 font-medium flex items-center gap-1">
                           <Phone class="w-3 h-3" /> {{ user.phone_number }}
                         </span>
                       </div>
@@ -395,7 +395,7 @@ const getObjectURL = (file: File | null) => {
                 </td>
                 <td class="px-4 py-6 text-center">
                   <span 
-                    class="inline-flex px-2 py-0.5 rounded-full text-[9px] font-semibold text-xs tracking-wide border"
+                    class="inline-flex px-2 py-0.5 rounded-full text-xs font-semibold text-xs tracking-wide border"
                     :class="{
                       'bg-red-50 text-red-600 border-red-100': user.role === 'super_admin',
                       'bg-orange-50 text-orange-600 border-orange-100': user.role === 'admin',
@@ -409,25 +409,25 @@ const getObjectURL = (file: File | null) => {
                 </td>
                 <td class="px-4 py-6 text-center">
                   <div class="flex flex-col items-center gap-1">
-                    <span v-if="user.banned_at" class="inline-flex items-center gap-1 px-1.5 py-0.5 bg-red-100 text-red-700 rounded-md text-[9px] font-semibold text-sm tracking-wider">
+                    <span v-if="user.banned_at" class="inline-flex items-center gap-1 px-1.5 py-0.5 bg-red-100 text-red-700 rounded-md text-xs font-semibold text-sm tracking-wider">
                       <Ban class="w-2.5 h-2.5" /> Banned
                     </span>
-                    <span v-else-if="!user.is_active" class="inline-flex items-center gap-1 px-1.5 py-0.5 bg-amber-100 text-amber-700 rounded-md text-[9px] font-semibold text-sm tracking-wider">
+                    <span v-else-if="!user.is_active" class="inline-flex items-center gap-1 px-1.5 py-0.5 bg-amber-100 text-amber-700 rounded-md text-xs font-semibold text-sm tracking-wider">
                       <ShieldAlert class="w-2.5 h-2.5" /> Inactive
                     </span>
-                    <span v-else class="inline-flex items-center gap-1 px-1.5 py-0.5 bg-emerald-100 text-emerald-700 rounded-md text-[9px] font-semibold text-sm tracking-wider">
+                    <span v-else class="inline-flex items-center gap-1 px-1.5 py-0.5 bg-emerald-100 text-emerald-700 rounded-md text-xs font-semibold text-sm tracking-wider">
                       <CheckCircle2 class="w-2.5 h-2.5" /> Active
                     </span>
                   </div>
                 </td>
                 <td class="px-4 py-6 hidden md:table-cell">
-                  <span class="text-[10px] text-slate-500 font-medium">{{ formatDate(user.created_at) }}</span>
+                  <span class="text-xs text-slate-500 font-medium">{{ formatDate(user.created_at) }}</span>
                 </td>
                 <td class="px-8 py-6 text-right">
                   <div class="flex items-center justify-end gap-1">
                     <button 
                       type="button"
-                      class="p-2 text-slate-400 hover:text-primary-600 hover:bg-primary-50 dark:hover:bg-primary-900/30 rounded-xl transition-all active:scale-95" 
+                      class="p-2 text-slate-400 hover:text-primary-600 hover:bg-primary-50 dark:hover:bg-primary-900/30 rounded-xl transition-colors active:scale-95" 
                       title="Edit Data" 
                       @click="openEditModal(user)"
                     >
@@ -437,7 +437,7 @@ const getObjectURL = (file: File | null) => {
                     <button 
                       v-if="user.banned_at" 
                       type="button"
-                      class="p-2 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 rounded-xl transition-all active:scale-95" 
+                      class="p-2 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 rounded-xl transition-colors active:scale-95" 
                       title="Unban" 
                       @click="openConfirmModal('unban', user)"
                     >
@@ -447,7 +447,7 @@ const getObjectURL = (file: File | null) => {
                     <button 
                       v-else 
                       type="button"
-                      class="p-2 text-slate-400 hover:text-orange-600 hover:bg-orange-50 dark:hover:bg-orange-900/30 rounded-xl transition-all active:scale-95" 
+                      class="p-2 text-slate-400 hover:text-orange-600 hover:bg-orange-50 dark:hover:bg-orange-900/30 rounded-xl transition-colors active:scale-95" 
                       title="Ban" 
                       @click="openConfirmModal('ban', user)"
                     >
@@ -457,7 +457,7 @@ const getObjectURL = (file: File | null) => {
                     <button 
                       v-if="user.role !== 'super_admin'"
                       type="button"
-                      class="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/30 rounded-xl transition-all active:scale-95" 
+                      class="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/30 rounded-xl transition-colors active:scale-95" 
                       title="Delete" 
                       @click="openConfirmModal('delete', user)"
                     >
@@ -507,7 +507,7 @@ const getObjectURL = (file: File | null) => {
         </p>
 
         <div v-if="confirmActionType === 'ban'" class="mb-8 text-left space-y-2">
-            <label class="text-[10px] font-semibold text-xs tracking-wide text-slate-400 ml-1">Alasan Pemblokiran</label>
+            <label class="text-xs font-semibold text-xs tracking-wide text-slate-400 ml-1">Alasan Pemblokiran</label>
             <textarea 
                 v-model="banReason"
                 rows="3"
@@ -517,7 +517,7 @@ const getObjectURL = (file: File | null) => {
         </div>
 
         <div class="flex gap-4">
-          <button class="flex-1 px-6 py-4 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-2xl font-bold transition-all hover:bg-slate-200" @click="showConfirmModal = false">
+          <button class="flex-1 px-6 py-4 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-2xl font-bold transition-colors hover:bg-slate-200" @click="showConfirmModal = false">
             {{ t('admin.user_mgmt.cancel_btn') }}
           </button>
           <button 
@@ -527,7 +527,7 @@ const getObjectURL = (file: File | null) => {
               'bg-red-600 hover:bg-red-700 shadow-red-500/20': confirmActionType === 'delete',
               'bg-emerald-600 hover:bg-emerald-700 shadow-emerald-500/20': confirmActionType === 'unban'
             }"
-            class="flex-1 px-6 py-4 text-white rounded-2xl font-bold shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2"
+            class="flex-1 px-6 py-4 text-white rounded-2xl font-bold shadow-lg transition-colors active:scale-95 flex items-center justify-center gap-2"
             @click="handleConfirmedAction"
           >
             <Loader2 v-if="processing" class="w-4 h-4 animate-spin" />
@@ -559,10 +559,10 @@ const getObjectURL = (file: File | null) => {
                </div>
                <label class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
                   <input type="file" class="hidden" accept="image/*" @change="e => handleAvatarChange(e, 'create')" />
-                  <span class="text-white text-[10px] font-semibold text-sm tracking-tighter">Ganti Foto</span>
+                  <span class="text-white text-xs font-semibold text-sm tracking-tighter">Ganti Foto</span>
                </label>
             </div>
-            <p class="text-[10px] font-bold text-slate-400 font-medium">Foto Profil (Opsional)</p>
+            <p class="text-xs font-bold text-slate-400 font-medium">Foto Profil (Opsional)</p>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -640,18 +640,18 @@ const getObjectURL = (file: File | null) => {
             </div>
             <label class="relative inline-flex items-center cursor-pointer">
               <input v-model="createForm.is_active" type="checkbox" class="sr-only peer">
-              <div class="w-14 h-7 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-primary-600"></div>
+              <div class="w-14 h-7 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-colors peer-checked:bg-primary-600"></div>
             </label>
           </div>
 
           <div class="flex gap-4 pt-4">
-            <button type="button" class="flex-1 px-6 py-4 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-2xl font-bold transition-all" @click="showCreateModal = false">
+            <button type="button" class="flex-1 px-6 py-4 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-2xl font-bold transition-colors" @click="showCreateModal = false">
               Batal
             </button>
             <button 
               type="submit" 
               :disabled="processing"
-              class="flex-1 px-6 py-4 bg-primary-600 hover:bg-primary-700 text-white rounded-2xl font-bold shadow-lg shadow-primary-500/30 transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+              class="flex-1 px-6 py-4 bg-primary-600 hover:bg-primary-700 text-white rounded-2xl font-bold shadow-lg shadow-primary-500/30 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
             >
               <Loader2 v-if="processing" class="w-4 h-4 animate-spin" />
               {{ processing ? 'Menyimpan...' : 'Simpan Akun' }}
@@ -684,10 +684,10 @@ const getObjectURL = (file: File | null) => {
                </div>
                <label class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
                   <input type="file" class="hidden" accept="image/*" @change="e => handleAvatarChange(e, 'edit')" />
-                  <span class="text-white text-[10px] font-semibold text-sm tracking-tighter">Ganti Foto</span>
+                  <span class="text-white text-xs font-semibold text-sm tracking-tighter">Ganti Foto</span>
                </label>
             </div>
-            <p class="text-[10px] font-bold text-slate-400 font-medium">Update Foto Profil</p>
+            <p class="text-xs font-bold text-slate-400 font-medium">Update Foto Profil</p>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -745,18 +745,18 @@ const getObjectURL = (file: File | null) => {
              <span class="text-sm font-bold text-slate-700 dark:text-slate-300">Status Akun Aktif</span>
              <label class="relative inline-flex items-center cursor-pointer">
               <input v-model="editForm.is_active" type="checkbox" class="sr-only peer">
-              <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
+              <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-colors peer-checked:bg-primary-600"></div>
             </label>
           </div>
 
           <div class="flex gap-4">
-            <button type="button" class="flex-1 px-6 py-4 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-2xl font-bold transition-all" @click="showEditModal = false">
+            <button type="button" class="flex-1 px-6 py-4 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-2xl font-bold transition-colors" @click="showEditModal = false">
               Batal
             </button>
             <button 
               type="submit" 
               :disabled="processing"
-              class="flex-1 px-6 py-4 bg-primary-600 hover:bg-primary-700 text-white rounded-2xl font-bold shadow-lg shadow-primary-500/30 transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+              class="flex-1 px-6 py-4 bg-primary-600 hover:bg-primary-700 text-white rounded-2xl font-bold shadow-lg shadow-primary-500/30 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
             >
               <Loader2 v-if="processing" class="w-4 h-4 animate-spin" />
               {{ processing ? 'Menyimpan...' : 'Perbarui Akun' }}

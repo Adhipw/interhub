@@ -47,7 +47,7 @@ const t = (key: string) => key;
                     <div 
                         v-for="company in companies.data" 
                         :key="company.id"
-                        class="group bg-white dark:bg-neutral-900 rounded-2xl p-8 border border-neutral-100 dark:border-white/5 hover:border-primary-200 dark:hover:border-primary-900/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary-600/5 relative overflow-hidden"
+                        class="group bg-white dark:bg-neutral-900 rounded-2xl p-8 border border-neutral-100 dark:border-white/5 hover:border-primary-200 dark:hover:border-primary-900/30 transition-colors duration-500 hover:shadow-2xl hover:shadow-primary-600/5 relative overflow-hidden"
                     >
                         <!-- Hover Decoration -->
                         
@@ -57,7 +57,7 @@ const t = (key: string) => key;
                                 <img v-if="company.logo_url" loading="lazy" decoding="async" :src="company.logo_url" :alt="company.name" class="w-full h-full object-contain" />
                                 <Building2 v-else class="w-8 h-8 text-neutral-300" />
                             </div>
-                            <div v-if="company.is_verified" class="flex items-center gap-1.5 px-3 py-1.2 rounded-full bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 text-[10px] font-semibold text-xs tracking-wide border border-blue-100 dark:border-blue-900/30">
+                            <div v-if="company.is_verified" class="flex items-center gap-1.5 px-3 py-1.2 rounded-full bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 text-xs font-semibold text-xs tracking-wide border border-blue-100 dark:border-blue-900/30">
                                 <CheckCircle2 class="w-3 h-3" />
                                 Verified
                             </div>
@@ -84,7 +84,7 @@ const t = (key: string) => key;
 
                         <Link 
                             :href="'/companies/' + company.slug"
-                            class="inline-flex items-center gap-2 text-sm font-bold text-primary-600 hover:gap-3 transition-all"
+                            class="inline-flex items-center gap-2 text-sm font-bold text-primary-600 hover:gap-3 transition-colors"
                         >
                             Lihat Profil & Lowongan
                             <ArrowRight class="w-4 h-4" />
@@ -106,7 +106,7 @@ const t = (key: string) => key;
                     <button 
                         v-for="(link, k) in companies.links" 
                         :key="k"
-                        class="px-4 py-2 rounded-xl text-sm font-bold transition-all"
+                        class="px-4 py-2 rounded-xl text-sm font-bold transition-colors"
                         :class="[
                             link.active ? 'bg-primary-600 text-white shadow-lg shadow-primary-600/20' : 'bg-white dark:bg-neutral-900 text-neutral-500 hover:bg-primary-50 dark:hover:bg-primary-900/30',
                             !link.url ? 'opacity-50 cursor-not-allowed' : ''

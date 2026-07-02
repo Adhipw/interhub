@@ -113,7 +113,7 @@ onMounted(() => {
                     >
                         <div class="flex items-baseline gap-2 mx-1" :class="msg.user_id === currentUser?.id ? 'flex-row-reverse' : 'flex-row'">
                             <span class="text-xs font-bold text-slate-700 dark:text-slate-300">{{ msg.user?.name }}</span>
-                            <span class="text-[10px] text-slate-400">{{ msg.created_at_human }}</span>
+                            <span class="text-xs text-slate-400">{{ msg.created_at_human }}</span>
                         </div>
                         <div 
                             class="px-4 py-3 rounded-2xl text-sm leading-relaxed"
@@ -134,7 +134,7 @@ onMounted(() => {
                 <div class="flex-1">
                     <textarea 
                         v-model="newMessage"
-                        class="w-full resize-none bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl px-4 py-3 text-sm focus:ring-primary-500 focus:border-primary-500 transition-all max-h-[120px] min-h-[44px]"
+                        class="w-full resize-none bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl px-4 py-3 text-sm focus:ring-primary-500 focus:border-primary-500 transition-colors max-h-[120px] min-h-[44px]"
                         placeholder="Ketik pesan (Enter untuk kirim)..."
                         rows="1"
                         @keydown.enter.exact.prevent="postMessage"
@@ -143,7 +143,7 @@ onMounted(() => {
                 <button 
                     type="submit"
                     :disabled="!newMessage.trim() || posting"
-                    class="w-12 h-12 bg-primary-600 hover:bg-primary-700 disabled:bg-slate-200 disabled:cursor-not-allowed text-white rounded-2xl flex items-center justify-center shrink-0 transition-all shadow-sm"
+                    class="w-12 h-12 bg-primary-600 hover:bg-primary-700 disabled:bg-slate-200 disabled:cursor-not-allowed text-white rounded-2xl flex items-center justify-center shrink-0 transition-colors shadow-sm"
                 >
                     <Loader2 v-if="posting" class="w-5 h-5 animate-spin" />
                     <Send v-else class="w-5 h-5 ml-0.5" />

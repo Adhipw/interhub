@@ -29,7 +29,7 @@ const handleSubmit = () => {
                 </div>
                 <h3 class="font-bold text-slate-900">{{ title }}</h3>
             </div>
-            <button class="p-2 text-slate-400 hover:text-slate-600 rounded-lg hover:bg-white transition-all" @click="emit('close')">
+            <button class="p-2 text-slate-400 hover:text-slate-600 rounded-lg hover:bg-white transition-colors" @click="emit('close')">
                 <X class="w-5 h-5" />
             </button>
         </div>
@@ -51,14 +51,14 @@ const handleSubmit = () => {
                 ></textarea>
                 <button 
                     :disabled="loading || !input.trim()"
-                    class="absolute right-3 bottom-3 p-2 bg-slate-900 text-white rounded-xl hover:bg-slate-800 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                    class="absolute right-3 bottom-3 p-2 bg-slate-900 text-white rounded-xl hover:bg-slate-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     @click="handleSubmit"
                 >
                     <Loader2 v-if="loading" class="w-4 h-4 animate-spin" />
                     <Send v-else class="w-4 h-4" />
                 </button>
             </div>
-            <p class="mt-3 text-[10px] text-center text-slate-400 font-medium font-bold">
+            <p class="mt-3 text-xs text-center text-slate-400 font-medium">
                 AI assists, human decides
             </p>
         </div>

@@ -291,13 +291,13 @@ const navigation = computed(() => {
 
         <!-- Modern Sidebar -->
         <aside 
-            class="sidebar hidden lg:flex flex-col fixed inset-y-0 left-0 z-50 bg-white dark:bg-neutral-900 border-r border-neutral-100 dark:border-neutral-800 transition-all duration-500"
+            class="sidebar hidden lg:flex flex-col fixed inset-y-0 left-0 z-50 bg-white dark:bg-neutral-900 border-r border-neutral-100 dark:border-neutral-800 transition-colors duration-500"
             :class="[
                 isSidebarOpen ? 'w-80 translate-x-0' : 'w-80 -translate-x-full lg:w-24 lg:translate-x-0'
             ]"
         >
             <!-- Sidebar Header -->
-            <div class="h-24 flex items-center px-8 shrink-0 overflow-hidden">
+            <div class="h-20 flex items-center px-8 shrink-0 overflow-hidden">
                 <Link href="/" class="group" aria-label="InternHub Dashboard">
                     <AppLogo 
                         variant="compact" 
@@ -315,7 +315,7 @@ const navigation = computed(() => {
                     v-for="item in navigation" 
                     :key="item.name"
                     :href="item.href"
-                    class="flex items-center gap-4 px-4 py-4 rounded-2xl transition-all duration-300 group"
+                    class="flex items-center gap-4 px-4 py-4 rounded-2xl transition-[background-color,color] duration-300 group"
                     :class="[
                         currentPath === item.href
                         ? 'bg-primary-50 text-primary-600 dark:bg-primary-900/20 dark:text-primary-400' 
@@ -340,12 +340,12 @@ const navigation = computed(() => {
                     </div>
                     <div class="overflow-hidden">
                         <p class="text-xs font-bold text-neutral-900 dark:text-white truncate">{{ user.name }}</p>
-                        <p class="text-[10px] font-bold text-neutral-400 font-medium truncate">{{ roleLabel }}</p>
+                        <p class="text-xs font-medium text-neutral-400 truncate">{{ roleLabel }}</p>
                     </div>
                 </div>
                 
                 <button 
-                    class="w-full flex items-center gap-4 px-4 py-4 rounded-2xl text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-900/10 transition-all group disabled:opacity-60 disabled:cursor-wait"
+                    class="w-full flex items-center gap-4 px-4 py-4 rounded-2xl text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-900/10 transition-[background-color,color] group disabled:opacity-60 disabled:cursor-wait"
                     :disabled="authStore.loading"
                     @click="logout"
                 >
@@ -357,14 +357,15 @@ const navigation = computed(() => {
 
         <!-- Main Content Area -->
         <main 
-            class="flex-1 flex flex-col transition-all duration-500 pb-32 lg:pb-0"
+            class="flex-1 flex flex-col transition-colors duration-500 pb-32 lg:pb-0"
             :class="[isSidebarOpen ? 'lg:pl-80' : 'lg:pl-24']"
         >
             <!-- Modern Topbar -->
-            <header class="main-header h-24 flex items-center justify-between px-8 bg-white/80 dark:bg-neutral-950/80 backdrop-blur-md sticky top-0 z-40 border-b border-neutral-100 dark:border-neutral-800">
+            <header class="main-header h-20 flex items-center justify-between px-8 bg-white/80 dark:bg-neutral-950/80 backdrop-blur-md sticky top-0 z-40 border-b border-neutral-100 dark:border-neutral-800">
                 <div class="flex items-center gap-6">
                     <button 
                         class="hidden lg:flex w-10 h-10 items-center justify-center text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
+                        aria-label="Toggle Sidebar"
                         @click="toggleSidebar"
                     >
                         <Menu v-if="!isSidebarOpen" class="w-6 h-6" />
@@ -376,29 +377,31 @@ const navigation = computed(() => {
                     </div>
                     
                     <div class="relative group hidden md:block">
-                        <Search class="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400 group-focus-within:text-primary-600 transition-colors" />
+                        <Search class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400 group-focus-within:text-primary-600 transition-colors" />
                         <input 
                             v-model="searchQuery"
                             type="text" 
                             :placeholder="t('common.search_everything')"
-                            class="bg-neutral-50 dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-full py-3 pl-12 pr-6 text-xs font-bold focus:ring-4 focus:ring-primary-500/10 w-96 transition-all focus:bg-white dark:focus:bg-neutral-800"
+                            class="bg-neutral-50 dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-xl py-2.5 pl-11 pr-4 text-xs font-semibold focus:ring-4 focus:ring-primary-500/10 w-80 lg:w-96 transition-[background-color,box-shadow,width] focus:bg-white dark:focus:bg-neutral-800 outline-none"
                             @keyup.enter="handleSearch"
                         />
                     </div>
                 </div>
 
-                <div class="flex items-center gap-4">
+                <div class="flex items-center gap-3">
                     <!-- Language Switcher -->
-                    <div class="flex items-center bg-neutral-50 dark:bg-neutral-900 rounded-2xl p-1.5 border border-neutral-100 dark:border-neutral-800">
+                    <div class="flex items-center bg-neutral-50 dark:bg-neutral-900 rounded-xl p-1 border border-neutral-100 dark:border-neutral-800">
                         <button 
-                            class="px-3 py-2 rounded-xl text-[10px] font-bold transition-all"
+                            class="px-3 py-2 rounded-xl text-xs font-bold transition-colors"
+                            aria-label="Switch to Indonesian"
                             :class="[langStore.locale === 'id' ? 'bg-white dark:bg-neutral-800 text-primary-600 shadow-sm' : 'text-neutral-400 hover:text-neutral-600']"
                             @click="langStore.setLocale('id')"
                         >
                             ID
                         </button>
                         <button 
-                            class="px-3 py-2 rounded-xl text-[10px] font-bold transition-all"
+                            class="px-3 py-2 rounded-xl text-xs font-bold transition-colors"
+                            aria-label="Switch to English"
                             :class="[langStore.locale === 'en' ? 'bg-white dark:bg-neutral-800 text-primary-600 shadow-sm' : 'text-neutral-400 hover:text-neutral-600']"
                             @click="langStore.setLocale('en')"
                         >
@@ -408,35 +411,37 @@ const navigation = computed(() => {
 
                     <!-- Theme Toggle -->
                     <button 
-                        class="w-12 h-12 flex items-center justify-center text-neutral-400 hover:bg-neutral-50 dark:hover:bg-neutral-900 rounded-2xl transition-all border border-transparent hover:border-neutral-100 dark:hover:border-neutral-800"
+                        class="w-10 h-10 flex items-center justify-center text-neutral-400 hover:bg-neutral-50 dark:hover:bg-neutral-900 rounded-xl transition-colors border border-transparent hover:border-neutral-100 dark:hover:border-neutral-800"
+                        aria-label="Toggle Dark Mode"
                         @click="toggleDarkMode"
                     >
-                        <Sun v-if="isDarkMode" class="w-6 h-6" />
-                        <Moon v-else class="w-6 h-6" />
+                        <Sun v-if="isDarkMode" class="w-5 h-5" />
+                        <Moon v-else class="w-5 h-5" />
                     </button>
 
                     <!-- Notifications Dropdown -->
                     <div class="relative">
                         <button 
-                            class="w-12 h-12 flex items-center justify-center text-neutral-400 hover:bg-neutral-50 dark:hover:bg-neutral-900 rounded-2xl relative transition-all border border-transparent hover:border-neutral-100 dark:hover:border-neutral-800"
+                            class="w-10 h-10 flex items-center justify-center text-neutral-400 hover:bg-neutral-50 dark:hover:bg-neutral-900 rounded-xl relative transition-colors border border-transparent hover:border-neutral-100 dark:hover:border-neutral-800"
+                            aria-label="Toggle Notifications"
                             @click.stop="isNotificationsOpen = !isNotificationsOpen"
                         >
-                            <Bell class="w-6 h-6" />
-                            <span v-if="unreadCount > 0" class="absolute top-2.5 right-2.5 min-w-[18px] h-[18px] bg-rose-500 border-2 border-white dark:border-neutral-950 rounded-full flex items-center justify-center text-[8px] font-bold text-white px-1 shadow-sm">
+                            <Bell class="w-5 h-5" />
+                            <span v-if="unreadCount > 0" class="absolute top-1.5 right-1.5 min-w-[16px] h-[16px] bg-rose-500 border-2 border-white dark:border-neutral-950 rounded-full flex items-center justify-center text-xs font-bold text-white px-1 shadow-sm">
                                 {{ unreadCount }}
                             </span>
                         </button>
 
                         <div 
                             v-if="isNotificationsOpen" 
-                            class="absolute right-0 top-full mt-4 w-80 bg-white dark:bg-neutral-900 rounded-[2rem] shadow-2xl border border-neutral-100 dark:border-neutral-800 p-6 z-[9999] animate-reveal origin-top-right"
+                            class="absolute right-0 top-full mt-4 w-80 bg-white dark:bg-neutral-900 rounded-xl shadow-lg border border-neutral-100 dark:border-neutral-800 p-6 z-[9999] animate-reveal origin-top-right"
                             @click.stop
                         >
                             <div class="flex items-center justify-between mb-6 border-b border-neutral-50 dark:border-neutral-800 pb-4">
-                                <h4 class="text-xs font-bold text-neutral-900 dark:text-white font-medium">{{ t('sidebar.notifications') }}</h4>
+                                <h4 class="text-xs font-medium text-neutral-900 dark:text-white">{{ t('sidebar.notifications') }}</h4>
                                 <span 
                                     v-if="notifications.length > 0"
-                                    class="text-[10px] font-bold text-primary-600 font-medium cursor-pointer hover:underline"
+                                    class="text-xs font-medium text-primary-600 cursor-pointer hover:underline"
                                     @click="markAllAsRead"
                                 >
                                     {{ t('sidebar.mark_all_read') }}
@@ -454,10 +459,10 @@ const navigation = computed(() => {
                                     <p class="text-xs font-bold text-neutral-900 dark:text-white group-hover:text-primary-600 transition-colors">
                                     {{ note.data?.title || note.title || t('sidebar.notification_default_title') }}
                                 </p>
-                                <p class="text-[10px] font-medium text-neutral-500 mt-1">
+                                <p class="text-xs font-medium text-neutral-500 mt-1">
                                         {{ note.data?.message || note.message || t('sidebar.notification_default_message') }}
                                 </p>
-                                    <p class="text-[9px] font-bold text-neutral-400 mt-2 font-medium">
+                                    <p class="text-xs font-medium text-neutral-400 mt-2">
                                         {{ note.created_at_human || note.time }}
                                     </p>
                                 </div>
@@ -473,11 +478,11 @@ const navigation = computed(() => {
                     <Link :href="profileHref" class="flex items-center gap-3 pl-2 group">
                         <div class="text-right hidden sm:block">
                             <p class="text-xs font-bold text-neutral-900 dark:text-white truncate">{{ user.name }}</p>
-                            <p class="text-[9px] font-bold text-primary-600 font-medium truncate">{{ roleLabel }}</p>
+                            <p class="text-xs font-medium text-primary-600 truncate">{{ roleLabel }}</p>
                         </div>
-                        <div class="w-12 h-12 rounded-2xl bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 flex items-center justify-center group-hover:scale-105 transition-transform overflow-hidden">
+                        <div class="w-10 h-10 rounded-xl bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 flex items-center justify-center group-hover:scale-105 transition-transform overflow-hidden">
                             <img v-if="user.avatar_url" loading="lazy" decoding="async" :src="user.avatar_url" class="w-full h-full object-cover" />
-                            <User v-else class="w-6 h-6 text-neutral-400" />
+                            <User v-else class="w-5 h-5 text-neutral-400" />
                         </div>
                     </Link>
                 </div>
@@ -497,35 +502,36 @@ const navigation = computed(() => {
         </main>
 
         <!-- Mobile Bottom Nav -->
-        <nav class="fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] max-w-sm bg-white/80 dark:bg-neutral-900/80 backdrop-blur-xl rounded-2xl shadow-[0_20px_50px_rgba(8,112,184,0.15)] dark:shadow-2xl border border-white/50 dark:border-neutral-800/50 z-50 flex items-center justify-around p-2 lg:hidden">
+        <nav class="fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] max-w-sm bg-white/90 dark:bg-neutral-900/90 backdrop-blur-xl rounded-2xl shadow-lg border border-neutral-200 dark:border-neutral-800 z-50 flex items-center justify-around p-2 lg:hidden">
             <Link 
                 v-for="item in mobileNavItems" 
                 :key="item.name" 
                 :href="item.href"
-                class="flex flex-col items-center gap-1 p-2 rounded-2xl transition-all"
+                class="flex flex-col items-center gap-1 p-2 rounded-2xl transition-colors"
                 :class="[currentPath === item.href ? 'text-primary-600' : 'text-neutral-400 hover:text-neutral-900 dark:hover:text-white']"
             >
                 <div :class="[currentPath === item.href ? 'bg-primary-50 dark:bg-primary-900/20 p-2 rounded-xl' : '']">
                     <component :is="item.icon" class="w-6 h-6" />
                 </div>
-                <span v-if="currentPath === item.href" class="text-[9px] font-bold tracking-tight mt-1 truncate">{{ item.name }}</span>
+                <span v-if="currentPath === item.href" class="text-xs font-bold tracking-tight mt-1 truncate">{{ item.name }}</span>
             </Link>
             
             <button 
-                class="flex flex-col items-center gap-1 p-2 rounded-2xl transition-all text-neutral-400 hover:text-neutral-900 dark:hover:text-white"
+                class="flex flex-col items-center gap-1 p-2 rounded-2xl transition-colors text-neutral-400 hover:text-neutral-900 dark:hover:text-white"
+                aria-label="More Options"
                 @click="isMobileSheetOpen = true"
             >
                 <div :class="[isMobileSheetOpen ? 'bg-primary-50 dark:bg-primary-900/20 p-2 rounded-xl text-primary-600' : '']">
                     <Menu class="w-6 h-6" />
                 </div>
-                <span v-if="isMobileSheetOpen" class="text-[9px] font-bold tracking-tight mt-1 truncate text-primary-600">{{ t('nav.more') || 'Menu' }}</span>
+                <span v-if="isMobileSheetOpen" class="text-xs font-bold tracking-tight mt-1 truncate text-primary-600">{{ t('nav.more') || 'Menu' }}</span>
             </button>
         </nav>
 
         <!-- Mobile Bottom Sheet -->
         <div v-if="isMobileSheetOpen" class="fixed inset-0 z-[60] lg:hidden flex items-end">
             <div class="absolute inset-0 bg-neutral-900/60 backdrop-blur-sm transition-opacity" @click="isMobileSheetOpen = false"></div>
-            <div class="bg-white dark:bg-neutral-900 w-full rounded-t-[3rem] p-8 pb-32 shadow-2xl transform transition-transform border-t border-neutral-100 dark:border-neutral-800 relative z-10 animate-slide-up max-h-[85vh] overflow-y-auto custom-scrollbar">
+            <div class="bg-white dark:bg-neutral-900 w-full rounded-t-3xl p-8 pb-32 shadow-2xl transform transition-transform border-t border-neutral-100 dark:border-neutral-800 relative z-10 animate-slide-up max-h-[85vh] overflow-y-auto custom-scrollbar">
                 
                 <div class="w-16 h-1.5 bg-neutral-200 dark:bg-neutral-800 rounded-full mx-auto mb-8"></div>
                 
@@ -536,7 +542,7 @@ const navigation = computed(() => {
                     </div>
                     <div>
                         <h4 class="text-sm font-bold text-neutral-900 dark:text-white">{{ user.name }}</h4>
-                        <p class="text-[10px] font-bold text-primary-600 font-medium">{{ roleLabel }}</p>
+                        <p class="text-xs font-medium text-primary-600">{{ roleLabel }}</p>
                     </div>
                 </div>
 
@@ -559,14 +565,14 @@ const navigation = computed(() => {
                     <button class="p-4 rounded-2xl bg-neutral-50 dark:bg-neutral-800/50 flex flex-col items-center gap-3 text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors" @click="toggleDarkMode">
                         <Sun v-if="isDarkMode" class="w-6 h-6" />
                         <Moon v-else class="w-6 h-6" />
-                        <span class="text-[10px] font-bold font-medium">{{ isDarkMode ? 'Mode Terang' : 'Mode Gelap' }}</span>
+                        <span class="text-xs font-medium">{{ isDarkMode ? 'Mode Terang' : 'Mode Gelap' }}</span>
                     </button>
                     <div class="p-4 rounded-2xl bg-neutral-50 dark:bg-neutral-800/50 flex flex-col items-center justify-center gap-3">
                         <div class="flex gap-2 bg-white dark:bg-neutral-900 p-1 rounded-xl shadow-sm">
-                            <button class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all" :class="langStore.locale === 'id' ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-600' : 'text-neutral-400 hover:text-neutral-600'" @click="langStore.setLocale('id')">ID</button>
-                            <button class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all" :class="langStore.locale === 'en' ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-600' : 'text-neutral-400 hover:text-neutral-600'" @click="langStore.setLocale('en')">EN</button>
+                            <button class="px-3 py-1.5 rounded-lg text-xs font-bold transition-colors" :class="langStore.locale === 'id' ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-600' : 'text-neutral-400 hover:text-neutral-600'" @click="langStore.setLocale('id')">ID</button>
+                            <button class="px-3 py-1.5 rounded-lg text-xs font-bold transition-colors" :class="langStore.locale === 'en' ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-600' : 'text-neutral-400 hover:text-neutral-600'" @click="langStore.setLocale('en')">EN</button>
                         </div>
-                        <span class="text-[10px] font-bold text-neutral-500 dark:text-neutral-400 font-medium">Bahasa</span>
+                        <span class="text-xs font-medium text-neutral-500 dark:text-neutral-400">Bahasa</span>
                     </div>
                 </div>
 
@@ -584,16 +590,16 @@ const navigation = computed(() => {
                 <div 
                     v-for="toast in activeToasts" 
                     :key="toast.id"
-                    class="bg-white dark:bg-neutral-900 border border-slate-100 dark:border-neutral-800 shadow-[0_20px_50px_rgba(8,_112,_184,_0.08)] dark:shadow-2xl rounded-2xl p-5 flex items-start gap-4 pointer-events-auto border-l-4 border-l-primary-600 transition-all duration-300"
+                    class="bg-white dark:bg-neutral-900 border border-slate-200 dark:border-neutral-800 shadow-lg rounded-2xl p-5 flex items-start gap-4 pointer-events-auto border-l-4 border-l-primary-600 transition-colors duration-300"
                 >
-                    <div class="w-10 h-10 rounded-2xl bg-primary-50 dark:bg-primary-950/40 flex items-center justify-center shrink-0">
-                        <Bell class="w-5 h-5 text-primary-600 animate-bounce" />
+                    <div class="w-10 h-10 rounded-xl bg-primary-50 dark:bg-primary-950/40 flex items-center justify-center shrink-0">
+                        <Bell class="w-5 h-5 text-primary-600" />
                     </div>
                     <div class="space-y-1 overflow-hidden flex-1">
                         <p class="text-xs font-bold text-neutral-900 dark:text-white truncate">
                             {{ toast.title }}
                         </p>
-                        <p class="text-[10px] font-bold text-neutral-500 dark:text-neutral-400 leading-relaxed truncate">
+                        <p class="text-xs font-medium text-neutral-500 dark:text-neutral-400 leading-relaxed truncate">
                             {{ toast.message }}
                         </p>
                     </div>

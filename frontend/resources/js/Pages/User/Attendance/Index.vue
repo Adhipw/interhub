@@ -220,7 +220,7 @@ onUnmounted(() => {
                         <div v-if="history.data.length > 0" class="overflow-x-auto">
                             <table class="w-full text-left">
                                 <thead>
-                                    <tr class="bg-slate-50 dark:bg-slate-800/50 text-[10px] text-slate-400 uppercase font-bold tracking-normal">
+                                    <tr class="bg-slate-50 dark:bg-slate-800/50 text-xs text-slate-400 uppercase font-bold tracking-normal">
                                         <th class="px-6 py-5">Tanggal</th>
                                         <th class="px-6 py-5">Check-in</th>
                                         <th class="px-6 py-5">Check-out</th>
@@ -232,7 +232,7 @@ onUnmounted(() => {
                                     <tr v-for="item in history.data" :key="item.id" class="text-sm hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors group">
                                         <td class="px-6 py-5 whitespace-nowrap">
                                             <div class="font-bold text-slate-900 dark:text-white">{{ format(new Date(item.created_at), 'dd MMM yyyy') }}</div>
-                                            <div class="text-[10px] text-slate-400 uppercase font-bold">{{ format(new Date(item.created_at), 'EEEE') }}</div>
+                                            <div class="text-xs text-slate-400 uppercase font-bold">{{ format(new Date(item.created_at), 'EEEE') }}</div>
                                         </td>
                                         <td class="px-6 py-5 whitespace-nowrap font-mono font-bold text-slate-600 dark:text-slate-400">
                                             {{ item.check_in_at ? format(new Date(item.check_in_at), 'HH:mm') : '--:--' }}
@@ -246,7 +246,7 @@ onUnmounted(() => {
                                             </Badge>
                                         </td>
                                         <td class="px-6 py-5 text-right">
-                                            <div class="flex items-center justify-end gap-2 text-[10px] font-bold text-emerald-600 font-medium">
+                                            <div class="flex items-center justify-end gap-2 text-xs font-bold text-emerald-600 font-medium">
                                                 <CheckCircle2 class="w-4 h-4" /> Verified
                                             </div>
                                         </td>
@@ -272,7 +272,7 @@ onUnmounted(() => {
                 <p class="text-slate-500 max-w-md mx-auto mb-10">Anda tidak memiliki magang aktif yang memerlukan absensi saat ini.</p>
                 <Link 
                     href="/internships" 
-                    class="inline-flex items-center gap-2 bg-primary-600 text-white px-10 py-4 rounded-full font-bold text-sm hover:bg-primary-700 transition-all shadow-xl shadow-primary-100"
+                    class="inline-flex items-center gap-2 bg-primary-600 text-white px-10 py-4 rounded-full font-bold text-sm hover:bg-primary-700 transition-colors shadow-xl shadow-primary-100"
                 >
                     Cari Peluang Magang
                     <ArrowRight class="w-4 h-4" />

@@ -43,24 +43,24 @@ watch(() => form.value.date, submit);
     <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 mb-8">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6 items-end">
             <div class="md:col-span-2">
-                <label class="block text-[10px] font-bold text-slate-400 font-medium mb-3">{{ t('admin.audit.search_label') }}</label>
+                <label class="block text-xs font-bold text-slate-400 font-medium mb-3">{{ t('admin.audit.search_label') }}</label>
                 <div class="relative">
                     <Search class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                     <input 
                         v-model="form.search"
                         type="text"
                         :placeholder="t('admin.audit.search_placeholder')" 
-                        class="w-full pl-11 pr-4 py-2.5 bg-slate-50 dark:bg-slate-800 border-none rounded-xl text-sm focus:ring-2 focus:ring-primary-500/20 transition-all dark:text-white"
+                        class="w-full pl-11 pr-4 py-2.5 bg-slate-50 dark:bg-slate-800 border-none rounded-xl text-sm focus:ring-2 focus:ring-primary-500/20 transition-colors dark:text-white"
                         @keyup.enter="submit"
                     />
                 </div>
             </div>
 
             <div>
-                <label class="block text-[10px] font-bold text-slate-400 font-medium mb-3">{{ t('admin.audit.filter_type') }}</label>
+                <label class="block text-xs font-bold text-slate-400 font-medium mb-3">{{ t('admin.audit.filter_type') }}</label>
                 <select 
                     v-model="form.type"
-                    class="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border-none rounded-xl text-sm focus:ring-2 focus:ring-primary-500/20 transition-all dark:text-white"
+                    class="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border-none rounded-xl text-sm focus:ring-2 focus:ring-primary-500/20 transition-colors dark:text-white"
                 >
                     <option value="">{{ t('admin.audit.all_actions') }}</option>
                     <option value="profile_updated">Profile Updated</option>
@@ -71,11 +71,11 @@ watch(() => form.value.date, submit);
             </div>
 
             <div>
-                <label class="block text-[10px] font-bold text-slate-400 font-medium mb-3">{{ t('common.date') }}</label>
+                <label class="block text-xs font-bold text-slate-400 font-medium mb-3">{{ t('common.date') }}</label>
                 <input 
                     v-model="form.date"
                     type="date"
-                    class="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border-none rounded-xl text-sm focus:ring-2 focus:ring-primary-500/20 transition-all dark:text-white"
+                    class="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border-none rounded-xl text-sm focus:ring-2 focus:ring-primary-500/20 transition-colors dark:text-white"
                 />
             </div>
         </div>

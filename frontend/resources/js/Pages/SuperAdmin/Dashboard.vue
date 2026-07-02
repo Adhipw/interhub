@@ -154,7 +154,7 @@ onUnmounted(() => {
             <!-- Super Admin Header -->
             <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 animate-fade-in">
                 <div class="space-y-4">
-                    <div class="inline-flex items-center gap-2 px-3 py-1 bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 rounded-full text-[10px] font-semibold text-xs tracking-wide border border-indigo-100 dark:border-indigo-900/30">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 rounded-full text-xs font-semibold tracking-wide border border-indigo-100 dark:border-indigo-900/30">
                         <ShieldCheck class="w-3 h-3" />
                         {{ t('super_admin.dashboard.root_authority') }}
                     </div>
@@ -167,21 +167,22 @@ onUnmounted(() => {
                 <div class="flex gap-4">
                     <button 
                         :disabled="loading" 
-                        class="p-4 bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all active:scale-95 group"
+                        class="p-4 bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors active:scale-95 group cursor-pointer"
+                        aria-label="Refresh dashboard data"
                         @click="fetchData"
                     >
                         <RefreshCw :class="['w-5 h-5 text-slate-400 group-hover:text-indigo-500', loading ? 'animate-spin' : '']" />
                     </button>
-                    <Card glass class="!p-4 !rounded-2xl border-white/50 flex items-center gap-4">
-                        <div class="w-3 h-3 rounded-full bg-indigo-500 shadow-[0_0_15px_rgba(99,102,241,0.5)]"></div>
-                        <span class="text-xs font-bold text-slate-700 dark:text-slate-300 font-medium">{{ t('super_admin.dashboard.master_key_active') }}</span>
-                    </Card>
+                    <div class="px-6 py-4 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center gap-4 shadow-sm">
+                        <div class="w-3 h-3 rounded-full bg-indigo-500 shadow-sm"></div>
+                        <span class="text-sm font-bold text-slate-700 dark:text-slate-300">{{ t('super_admin.dashboard.master_key_active') }}</span>
+                    </div>
                 </div>
             </div>
 
             <!-- Global Infrastructure Stats -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <Card v-for="(stat, i) in globalStats" :key="i" premium hoverable class="!p-8 !rounded-2xl group overflow-hidden">
+                <Card v-for="(stat, i) in globalStats" :key="i" class="!p-8 !rounded-2xl group overflow-hidden border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-all">
                     <div v-if="loading && !stats.total_users" class="space-y-4">
                         <Skeleton width="3rem" height="3rem" class="rounded-2xl" />
                         <Skeleton width="60%" height="1rem" />
@@ -191,7 +192,7 @@ onUnmounted(() => {
                         <div :class="['w-14 h-14 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-all', stat.bg, stat.color]">
                             <component :is="stat.icon" class="w-6 h-6" />
                         </div>
-                        <p class="text-[10px] font-bold text-slate-400 font-medium mb-1">{{ stat.label }}</p>
+                        <p class="text-xs font-medium text-slate-400 mb-1">{{ stat.label }}</p>
                         <p class="text-4xl font-bold text-slate-900 dark:text-white">{{ stat.value }}</p>
                     </template>
                 </Card>
@@ -202,14 +203,14 @@ onUnmounted(() => {
                 <div class="lg:col-span-2 space-y-12">
                     
                     <!-- System Activity Chart -->
-                    <Card class="!p-8 !rounded-2xl border-slate-100 dark:border-white/5 shadow-premium">
+                    <Card class="!p-8 !rounded-2xl border-slate-200 dark:border-slate-700 shadow-sm">
                         <div class="flex items-center justify-between mb-8">
                             <div>
                                 <h2 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
                                     <Activity class="w-5 h-5 text-indigo-600" />
                                     System Activity Overview
                                 </h2>
-                                <p class="text-xs font-bold text-slate-500 mt-1">Growth & engagement over the last 7 days</p>
+                                <p class="text-xs font-medium text-slate-500 mt-1">Growth & engagement over the last 7 days</p>
                             </div>
                         </div>
                         <div class="h-[350px] w-full">
@@ -228,54 +229,54 @@ onUnmounted(() => {
                             <Activity class="w-6 h-6 text-indigo-600" />
                             {{ t('super_admin.dashboard.infra_health') || 'Infrastructure Health' }}
                         </h2>
-                        <div class="flex items-center gap-2 text-emerald-500 text-xs font-semibold text-xs tracking-wide">
+                        <div class="flex items-center gap-2 text-emerald-500 text-xs font-semibold tracking-wide">
                             <div class="w-2 h-2 rounded-full bg-emerald-500 "></div>
                             {{ systemHealth.status === 'healthy' ? (t('super_admin.dashboard.all_systems_operational') || 'All Systems Operational') : 'System Warning' }}
                         </div>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <Card glass class="!p-10 !rounded-2xl border-white/50 group">
+                        <Card class="!p-10 !rounded-2xl border-slate-200 dark:border-slate-700 shadow-sm group">
                             <div class="flex items-center justify-between mb-10">
                                 <div class="w-14 h-14 bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 rounded-[1.5rem] flex items-center justify-center group-hover:rotate-12 transition-transform">
                                     <Database class="w-8 h-8" />
                                 </div>
                                 <div class="text-right">
-                                    <p class="text-[10px] font-bold text-slate-400 font-medium mb-1">Disk Storage</p>
+                                    <p class="text-xs font-medium text-slate-400 mb-1">Disk Storage</p>
                                     <p class="text-xl font-bold text-slate-900 dark:text-white">{{ stats.storage_used }}% Used</p>
                                 </div>
                             </div>
                             <div class="h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden mb-4">
                                 <div class="h-full bg-indigo-500 transition-all duration-1000" :style="{ width: stats.storage_used + '%' }"></div>
                             </div>
-                            <p class="text-[10px] font-bold text-slate-500 font-medium">Status: {{ systemHealth.storage }}</p>
+                            <p class="text-xs font-medium text-slate-500">Status: {{ systemHealth.storage }}</p>
                         </Card>
 
-                        <Card glass class="!p-10 !rounded-2xl border-white/50 group">
+                        <Card class="!p-10 !rounded-2xl border-slate-200 dark:border-slate-700 shadow-sm group">
                             <div class="flex items-center justify-between mb-10">
                                 <div class="w-14 h-14 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 rounded-[1.5rem] flex items-center justify-center group-hover:rotate-12 transition-transform">
                                     <Zap class="w-8 h-8" />
                                 </div>
                                 <div class="text-right">
-                                    <p class="text-[10px] font-bold text-slate-400 font-medium mb-1">API Latency</p>
+                                    <p class="text-xs font-medium text-slate-400 mb-1">API Latency</p>
                                     <p class="text-xl font-bold text-slate-900 dark:text-white">{{ systemHealth.latency }}</p>
                                 </div>
                             </div>
                             <div class="h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden mb-4">
                                 <div class="h-full bg-emerald-500 w-[100%]"></div>
                             </div>
-                            <p class="text-[10px] font-bold text-slate-500 font-medium">Uptime: {{ systemHealth.uptime }}</p>
+                            <p class="text-xs font-medium text-slate-500">Uptime: {{ systemHealth.uptime }}</p>
                         </Card>
                     </div>
 
                     <!-- Global Security Events -->
-                    <Card class="!p-0 !rounded-2xl overflow-hidden border-slate-100 dark:border-white/5 shadow-premium">
+                    <Card class="!p-0 !rounded-2xl overflow-hidden border-slate-200 dark:border-slate-700 shadow-sm">
                         <div class="p-8 border-b border-slate-50 dark:border-white/5 flex items-center justify-between">
                             <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
                                 <Lock class="w-6 h-6 text-rose-500" />
                                 {{ t('admin.security.title') || 'Security Events' }}
                             </h3>
-                            <Link href="/super-admin/security-events" class="text-[10px] font-bold text-indigo-600 font-medium hover:underline">{{ t('super_admin.dashboard.view_all') || 'View All' }}</Link>
+                            <Link href="/super-admin/security-events" class="text-xs font-medium text-indigo-600 hover:underline">{{ t('super_admin.dashboard.view_all') || 'View All' }}</Link>
                         </div>
                         <div class="overflow-x-auto">
                             <table class="w-full text-left">
@@ -286,19 +287,19 @@ onUnmounted(() => {
                                                 <div class="w-2 h-2 rounded-full bg-rose-500"></div>
                                                 <div>
                                                     <p class="text-sm font-bold text-slate-900 dark:text-white">{{ event.event_type }}</p>
-                                                    <p class="text-[10px] font-bold text-slate-400">{{ event.ip_address }}</p>
+                                                    <p class="text-xs text-slate-400">{{ event.ip_address }}</p>
                                                 </div>
                                             </div>
                                         </td>
                                         <td class="px-8 py-6">
-                                            <p class="text-xs font-bold text-slate-500 leading-relaxed">{{ event.description }}</p>
+                                            <p class="text-xs font-medium text-slate-500 leading-relaxed">{{ event.description }}</p>
                                         </td>
                                         <td class="px-8 py-6 text-right">
-                                            <span class="text-[10px] font-bold text-slate-400 font-medium">{{ event.created_at_human }}</span>
+                                            <span class="text-xs font-medium text-slate-400">{{ event.created_at_human }}</span>
                                         </td>
                                     </tr>
                                     <tr v-if="recentSecurityEvents.length === 0">
-                                        <td colspan="3" class="px-8 py-20 text-center text-slate-400 font-bold italic">
+                                        <td colspan="3" class="px-8 py-20 text-center text-slate-400 font-medium italic">
                                             <ShieldCheck class="w-12 h-12 text-slate-100 mx-auto mb-4" />
                                             {{ t('admin.security.no_events') || 'No security threats detected.' }}
                                         </td>
@@ -312,7 +313,7 @@ onUnmounted(() => {
                 <!-- Super Admin Sidebar -->
                 <div class="space-y-12">
                     <!-- Master Control Center -->
-                    <Card class="!p-10 !rounded-2xl bg-white dark:!bg-slate-950 text-slate-900 dark:text-white border-none shadow-2xl relative overflow-hidden group">
+                    <Card class="!p-10 !rounded-2xl bg-white dark:!bg-slate-950 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 shadow-sm relative overflow-hidden group">
                         <Database class="w-24 h-24 absolute -right-6 -bottom-6 opacity-10 group-hover:scale-110 transition-transform" />
                         <h3 class="text-2xl font-bold mb-8 relative z-10 leading-tight">{{ t('sidebar.system_integration') || 'Control Center' }}</h3>
                         
@@ -323,9 +324,9 @@ v-for="link in [
                                 { label: t('sidebar.system_integration'), icon: Zap, to: '/super-admin/integrations' },
                                 { label: t('sidebar.global_users'), icon: Users, to: '/super-admin/users' },
                                 { label: t('sidebar.audit_logs'), icon: History, to: '/super-admin/audit-logs' }
-                            ]" :key="link.label" :href="link.to" class="bg-slate-50 hover:bg-slate-100 dark:bg-white/10 dark:hover:bg-white/20 p-6 rounded-2xl flex flex-col items-center gap-3 transition-all active-press">
+                            ]" :key="link.label" :href="link.to" class="bg-slate-50 hover:bg-slate-100 active:scale-[0.98] dark:bg-white/10 dark:hover:bg-white/20 p-6 rounded-2xl flex flex-col items-center gap-3 transition-colors cursor-pointer">
                                 <component :is="link.icon" class="w-6 h-6 text-indigo-500 dark:text-indigo-400" />
-                                <span class="text-[9px] font-semibold text-xs tracking-wide text-center">{{ link.label }}</span>
+                                <span class="font-bold text-xs tracking-wide text-center">{{ link.label }}</span>
                             </Link>
                         </div>
                     </Card>
@@ -340,8 +341,8 @@ v-for="link in [
                         <div class="bg-slate-50 dark:bg-slate-900 rounded-2xl p-8 space-y-6 max-h-[300px] overflow-y-auto custom-scrollbar border border-slate-200 dark:border-white/5 shadow-inner">
                             <template v-if="props?.audit_logs">
                                 <div v-for="log in props.audit_logs" :key="log.id" class="flex gap-4">
-                                    <div class="text-[10px] font-mono text-indigo-500 shrink-0">{{ new Date(log.created_at).toLocaleTimeString() }}</div>
-                                    <div class="text-[10px] font-mono text-slate-600 dark:text-slate-400 break-all leading-relaxed">
+                                    <div class="text-xs font-mono text-indigo-500 shrink-0">{{ new Date(log.created_at).toLocaleTimeString() }}</div>
+                                    <div class="text-xs font-mono text-slate-600 dark:text-slate-400 break-all leading-relaxed">
                                         <span class="text-emerald-500 dark:text-emerald-400">[{{ log.user?.name || 'System' }}]</span> {{ log.action }} : {{ log.description }}
                                     </div>
                                 </div>
@@ -353,7 +354,7 @@ v-for="link in [
                     </section>
 
                     <!-- System Info -->
-                    <Card class="!p-10 !rounded-2xl bg-white dark:bg-slate-900 border-none shadow-xl space-y-6">
+                    <Card class="!p-10 !rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-sm space-y-6">
                         <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
                             <Server class="w-5 h-5 text-indigo-500" />
                             System Environment
@@ -362,7 +363,7 @@ v-for="link in [
                         <div class="space-y-4">
                             <template v-if="props?.system_info">
                                 <div v-for="(value, key) in props.system_info" :key="key" class="flex items-center justify-between">
-                                    <span class="text-[10px] font-bold text-slate-400 font-medium">{{ String(key).replace(/_/g, ' ') }}</span>
+                                    <span class="text-xs font-medium text-slate-400">{{ String(key).replace(/_/g, ' ') }}</span>
                                     <span class="text-xs font-bold text-slate-700 dark:text-slate-300">{{ value }}</span>
                                 </div>
                             </template>
@@ -383,7 +384,7 @@ v-for="link in [
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
+    from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
 

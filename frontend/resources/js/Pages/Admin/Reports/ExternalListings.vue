@@ -57,7 +57,7 @@ const reject = (id: number) => {
             <input 
               type="text" 
               placeholder="Cari lowongan..." 
-              class="pl-11 pr-6 py-3 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all w-64"
+              class="pl-11 pr-6 py-3 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-colors w-64"
             />
           </div>
         </div>
@@ -77,10 +77,10 @@ const reject = (id: number) => {
           <table class="w-full text-left border-collapse">
             <thead>
               <tr class="bg-slate-50/50 dark:bg-slate-900/50 border-b border-slate-100 dark:border-slate-800">
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">Lowongan & Perusahaan</th>
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">Sumber</th>
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">Tipe & Lokasi</th>
-                <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium text-right">Aksi</th>
+                <th class="px-8 py-5 text-xs font-bold text-slate-400 font-medium">Lowongan & Perusahaan</th>
+                <th class="px-8 py-5 text-xs font-bold text-slate-400 font-medium">Sumber</th>
+                <th class="px-8 py-5 text-xs font-bold text-slate-400 font-medium">Tipe & Lokasi</th>
+                <th class="px-8 py-5 text-xs font-bold text-slate-400 font-medium text-right">Aksi</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-slate-50 dark:divide-slate-800/50">
@@ -97,14 +97,14 @@ const reject = (id: number) => {
                   </div>
                 </td>
                 <td class="px-8 py-6">
-                  <span class="px-2.5 py-1 bg-slate-100 dark:bg-slate-800 rounded-lg text-[10px] font-bold text-slate-500 font-medium border border-slate-200 dark:border-slate-700">
+                  <span class="px-2.5 py-1 bg-slate-100 dark:bg-slate-800 rounded-lg text-xs font-bold text-slate-500 font-medium border border-slate-200 dark:border-slate-700">
                     {{ listing.external_source }}
                   </span>
                 </td>
                 <td class="px-8 py-6">
                   <div class="flex flex-col gap-1">
                     <p class="text-xs font-bold text-slate-700 dark:text-slate-300">{{ listing.type }}</p>
-                    <p class="text-[10px] text-slate-500">{{ listing.location }}</p>
+                    <p class="text-xs text-slate-500">{{ listing.location }}</p>
                   </div>
                 </td>
                 <td class="px-8 py-6 text-right">
@@ -113,14 +113,14 @@ const reject = (id: number) => {
                       <ExternalLink class="w-4 h-4" />
                     </a>
                     <button 
-                      class="flex items-center gap-2 px-4 py-2 bg-green-50 text-green-600 rounded-xl text-xs font-bold hover:bg-green-600 hover:text-white transition-all"
+                      class="flex items-center gap-2 px-4 py-2 bg-green-50 text-green-600 rounded-xl text-xs font-bold hover:bg-green-600 hover:text-white transition-colors"
                       @click="approve(listing.id)"
                     >
                       <CheckCircle class="w-3.5 h-3.5" />
                       Approve
                     </button>
                     <button 
-                      class="flex items-center gap-2 px-4 py-2 bg-red-50 text-red-600 rounded-xl text-xs font-bold hover:bg-red-600 hover:text-white transition-all"
+                      class="flex items-center gap-2 px-4 py-2 bg-red-50 text-red-600 rounded-xl text-xs font-bold hover:bg-red-600 hover:text-white transition-colors"
                       @click="reject(listing.id)"
                     >
                       <XCircle class="w-3.5 h-3.5" />

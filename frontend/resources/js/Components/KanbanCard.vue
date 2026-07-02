@@ -35,7 +35,7 @@ const initials = computed(() => {
 
 <template>
   <div 
-    class="group relative p-6 rounded-2xl border transition-all duration-500 hover:shadow-premium-xl active-press"
+    class="group relative p-6 rounded-2xl border transition-colors duration-500 hover:shadow-premium-xl active-press"
     :class="statusBorderClass"
   >
     <div class="flex items-start gap-5">
@@ -58,7 +58,7 @@ const initials = computed(() => {
           <h4 class="text-base font-bold text-slate-900 dark:text-white truncate group-hover:text-primary-600 transition-colors">
             {{ title }}
           </h4>
-          <Link v-if="href" :href="href" class="p-2 rounded-full bg-slate-50 dark:bg-slate-800 text-slate-400 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all">
+          <Link v-if="href" :href="href" class="p-2 rounded-full bg-slate-50 dark:bg-slate-800 text-slate-400 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1 transition-colors">
             <ArrowUpRight class="w-4 h-4" />
           </Link>
         </div>
@@ -71,7 +71,7 @@ const initials = computed(() => {
         <div class="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-white/5">
           <div class="flex items-center gap-3">
              <StatusBadge :status="status" size="sm" />
-             <span class="text-[10px] font-bold text-slate-400 font-medium flex items-center gap-1">
+             <span class="text-xs font-bold text-slate-400 font-medium flex items-center gap-1">
                <Clock class="w-3 h-3" />
                {{ date }}
              </span>
@@ -88,7 +88,7 @@ const initials = computed(() => {
     </div>
 
     <!-- Hover Indicator Line -->
-    <div class="absolute left-1/2 -bottom-px -translate-x-1/2 w-0 h-1 bg-primary-600 rounded-full transition-all duration-500 group-hover:w-1/2"></div>
+    <div class="absolute left-1/2 -bottom-px -translate-x-1/2 w-0 h-1 bg-primary-600 rounded-full transition-colors duration-500 group-hover:w-1/2"></div>
   </div>
 </template>
 

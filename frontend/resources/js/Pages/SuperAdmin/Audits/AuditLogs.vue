@@ -79,7 +79,7 @@ onUnmounted(() => {
         </div>
         
         <button 
-          class="flex items-center gap-2 px-6 py-3 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-2xl text-sm font-bold hover:bg-slate-200 transition-all active-press"
+          class="flex items-center gap-2 px-6 py-3 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-2xl text-sm font-bold hover:bg-slate-200 transition-colors active-press"
           @click="exportLogs"
         >
           <Download class="w-4 h-4" />
@@ -92,7 +92,7 @@ onUnmounted(() => {
                 v-model="searchQuery"
                 type="text" 
                 :placeholder="t('admin.audit.search_placeholder') || 'Search logs...'" 
-                class="pl-11 pr-6 py-3 bg-white dark:bg-slate-800 border-none rounded-2xl text-sm w-64 shadow-sm focus:ring-2 focus:ring-primary-500/20 transition-all" 
+                class="pl-11 pr-6 py-3 bg-white dark:bg-slate-800 border-none rounded-2xl text-sm w-64 shadow-sm focus:ring-2 focus:ring-primary-500/20 transition-colors" 
              />
           </div>
         </div>
@@ -108,11 +108,11 @@ onUnmounted(() => {
             <table class="w-full text-left border-collapse">
                 <thead>
                 <tr class="bg-slate-50/50 dark:bg-slate-900/50 border-b border-slate-100 dark:border-slate-800">
-                    <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">{{ t('admin.audit.col_time') }}</th>
-                    <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">{{ t('admin.audit.col_actor') }}</th>
-                    <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">{{ t('admin.audit.col_action') }}</th>
-                    <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">{{ t('admin.audit.col_desc') }}</th>
-                    <th class="px-8 py-5 text-[10px] font-bold text-slate-400 font-medium">{{ t('admin.audit.col_ip') }}</th>
+                    <th class="px-8 py-5 text-xs font-bold text-slate-400 font-medium">{{ t('admin.audit.col_time') }}</th>
+                    <th class="px-8 py-5 text-xs font-bold text-slate-400 font-medium">{{ t('admin.audit.col_actor') }}</th>
+                    <th class="px-8 py-5 text-xs font-bold text-slate-400 font-medium">{{ t('admin.audit.col_action') }}</th>
+                    <th class="px-8 py-5 text-xs font-bold text-slate-400 font-medium">{{ t('admin.audit.col_desc') }}</th>
+                    <th class="px-8 py-5 text-xs font-bold text-slate-400 font-medium">{{ t('admin.audit.col_ip') }}</th>
                 </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-50 dark:divide-slate-800/50">
@@ -127,14 +127,14 @@ onUnmounted(() => {
                     </td>
                     <td class="px-8 py-6">
                     <div class="flex items-center gap-3">
-                        <div class="w-6 h-6 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-[10px] font-bold text-slate-500">
+                        <div class="w-6 h-6 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-xs font-bold text-slate-500">
                         {{ log.user?.name.charAt(0) || 'S' }}
                         </div>
                         <span class="text-xs font-bold text-slate-700 dark:text-slate-300">{{ log.user?.name || 'System' }}</span>
                     </div>
                     </td>
                     <td class="px-8 py-6">
-                    <span class="px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded text-[10px] font-bold font-medium text-slate-600 dark:text-slate-400">
+                    <span class="px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded text-xs font-medium text-slate-600 dark:text-slate-400">
                         {{ log.action }}
                     </span>
                     </td>
@@ -143,10 +143,10 @@ onUnmounted(() => {
                     </td>
                     <td class="px-8 py-6">
                     <div class="flex flex-col gap-1">
-                        <span class="text-[10px] font-mono text-slate-400 bg-slate-50 dark:bg-slate-900 px-2 py-1 rounded w-fit">
+                        <span class="text-xs font-mono text-slate-400 bg-slate-50 dark:bg-slate-900 px-2 py-1 rounded w-fit">
                             {{ log.ip_address }}
                         </span>
-                        <span v-if="log.region" class="text-[9px] font-bold text-slate-400 uppercase tracking-tighter">
+                        <span v-if="log.region" class="text-xs font-bold text-slate-400 uppercase tracking-tighter">
                             {{ log.region }}
                         </span>
                     </div>

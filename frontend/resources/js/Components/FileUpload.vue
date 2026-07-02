@@ -82,13 +82,13 @@ const clearFile = () => {
     <div class="space-y-4">
         <label v-if="label" class="text-sm font-bold text-slate-700 dark:text-slate-300 flex items-center gap-2">
             {{ label }}
-            <span v-if="currentFile && !selectedFile" class="text-[10px] bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 px-2 py-0.5 rounded-full font-medium font-bold">Tersedia</span>
-            <span v-if="selectedFile" class="text-[10px] bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-400 px-2 py-0.5 rounded-full font-medium font-bold">Baru</span>
+            <span v-if="currentFile && !selectedFile" class="text-xs bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 px-2 py-0.5 rounded-full font-medium">Tersedia</span>
+            <span v-if="selectedFile" class="text-xs bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-400 px-2 py-0.5 rounded-full font-medium">Baru</span>
         </label>
 
         <div 
             :class="[
-                'relative border-2 border-dashed rounded-2xl p-8 transition-all duration-300 flex flex-col items-center justify-center gap-4 cursor-pointer group',
+                'relative border-2 border-dashed rounded-2xl p-8 transition-colors duration-300 flex flex-col items-center justify-center gap-4 cursor-pointer group',
                 isDragging ? 'border-primary-500 bg-primary-50/80 dark:bg-primary-900/20 scale-[1.02] shadow-[0_0_40px_rgba(8,112,184,0.2)] ring-4 ring-primary-500/20' : 'border-slate-200 dark:border-slate-700 hover:border-primary-300 dark:hover:border-primary-700 hover:bg-slate-50/50 dark:hover:bg-slate-800/30'
             ]"
             @dragover.prevent="isDragging = true"
@@ -107,11 +107,11 @@ const clearFile = () => {
             <!-- Empty State / Drop Zone -->
             <div v-if="!selectedFile" class="text-center w-full flex flex-col items-center">
                 <div 
-                    class="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 transition-all duration-500 shadow-sm"
+                    class="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 transition-colors duration-500 shadow-sm"
                     :class="[isDragging ? 'bg-primary-500 shadow-lg shadow-primary-500/30 scale-110' : 'bg-white dark:bg-slate-800 group-hover:scale-105']"
                 >
                     <Upload 
-                        class="transition-all duration-500" 
+                        class="transition-colors duration-500" 
                         :class="[isDragging ? 'w-10 h-10 text-white animate-bounce' : 'w-8 h-8 text-slate-400 group-hover:text-primary-500 group-hover:-translate-y-1']" 
                     />
                 </div>
@@ -123,7 +123,7 @@ const clearFile = () => {
                     <span>Atau</span>
                     <span class="text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/20 px-3 py-1 rounded-lg cursor-pointer hover:bg-primary-100 transition-colors">Cari File</span>
                 </p>
-                <p class="text-[10px] text-slate-400 dark:text-slate-500 mt-4 opacity-80">
+                <p class="text-xs text-slate-400 dark:text-slate-500 mt-4 opacity-80">
                     {{ accept ? `Format Didukung: ${accept}` : 'Semua format didukung' }} 
                     <span v-if="maxSize" class="ml-1 px-1.5 py-0.5 bg-slate-100 dark:bg-slate-800 rounded">Maks {{ maxSize }}MB</span>
                 </p>
@@ -136,7 +136,7 @@ const clearFile = () => {
                     </div>
                     <div class="flex-1 min-w-0 text-left">
                         <p class="text-sm font-bold text-slate-900 dark:text-white truncate">Dokumen Tersimpan</p>
-                        <a :href="currentFile" target="_blank" class="text-[10px] text-primary-600 hover:text-primary-700 dark:text-primary-400 font-bold font-medium flex items-center gap-1 mt-1 z-10 w-max hover:underline bg-primary-50 dark:bg-primary-900/20 px-2 py-0.5 rounded">
+                        <a :href="currentFile" target="_blank" class="text-xs text-primary-600 hover:text-primary-700 dark:text-primary-400 font-medium flex items-center gap-1 mt-1 z-10 w-max hover:underline bg-primary-50 dark:bg-primary-900/20 px-2 py-0.5 rounded">
                             Lihat Dokumen <ExternalLink class="w-3 h-3" />
                         </a>
                     </div>
@@ -155,16 +155,16 @@ const clearFile = () => {
                 <div class="flex-1 min-w-0 text-left relative z-10">
                     <p class="text-sm font-bold text-slate-900 dark:text-white truncate" :title="selectedFile.name">{{ selectedFile.name }}</p>
                     <div class="flex items-center gap-3 mt-1.5">
-                        <p class="text-[10px] font-mono font-bold text-slate-500 bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded font-medium">
+                        <p class="text-xs font-mono font-bold text-slate-500 bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded font-medium">
                             {{ (selectedFile.size / 1024).toFixed(1) }} KB
                         </p>
-                        <p class="text-[10px] font-bold text-green-600 dark:text-green-400 flex items-center gap-1">
+                        <p class="text-xs font-bold text-green-600 dark:text-green-400 flex items-center gap-1">
                             <CheckCircle2 class="w-3 h-3" /> Siap diunggah
                         </p>
                     </div>
                 </div>
                 <button 
-                    class="p-3 bg-red-50 hover:bg-red-500 dark:bg-red-900/20 text-red-500 hover:text-white rounded-xl transition-all duration-300 shadow-sm hover:shadow-red-500/30 relative z-10 group/btn"
+                    class="p-3 bg-red-50 hover:bg-red-500 dark:bg-red-900/20 text-red-500 hover:text-white rounded-xl transition-colors duration-300 shadow-sm hover:shadow-red-500/30 relative z-10 group/btn"
                     @click.stop="clearFile"
                     title="Hapus file"
                 >

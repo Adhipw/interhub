@@ -43,12 +43,12 @@ const statusColors = {
                     <table class="w-full text-left">
                         <thead>
                             <tr class="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-100 dark:border-white/5">
-                                <th class="px-8 py-6 text-[10px] font-bold text-slate-400 font-medium">ID</th>
-                                <th class="px-8 py-6 text-[10px] font-bold text-slate-400 font-medium">Pelapor</th>
-                                <th class="px-8 py-6 text-[10px] font-bold text-slate-400 font-medium">Kategori</th>
-                                <th class="px-8 py-6 text-[10px] font-bold text-slate-400 font-medium">Status</th>
-                                <th class="px-8 py-6 text-[10px] font-bold text-slate-400 font-medium">Tanggal</th>
-                                <th class="px-8 py-6 text-[10px] font-bold text-slate-400 font-medium">Aksi</th>
+                                <th class="px-8 py-6 text-xs font-bold text-slate-400 font-medium">ID</th>
+                                <th class="px-8 py-6 text-xs font-bold text-slate-400 font-medium">Pelapor</th>
+                                <th class="px-8 py-6 text-xs font-bold text-slate-400 font-medium">Kategori</th>
+                                <th class="px-8 py-6 text-xs font-bold text-slate-400 font-medium">Status</th>
+                                <th class="px-8 py-6 text-xs font-bold text-slate-400 font-medium">Tanggal</th>
+                                <th class="px-8 py-6 text-xs font-bold text-slate-400 font-medium">Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-50 dark:divide-white/5">
@@ -64,7 +64,7 @@ const statusColors = {
                                     <span class="text-xs font-bold text-slate-600 dark:text-slate-300">{{ ticket.category }}</span>
                                 </td>
                                 <td class="px-8 py-6">
-                                    <span :class="['px-3 py-1 rounded-full text-[10px] font-semibold text-xs tracking-wide', statusColors[ticket.status as keyof typeof statusColors]]">
+                                    <span :class="['px-3 py-1 rounded-full text-xs font-semibold text-xs tracking-wide', statusColors[ticket.status as keyof typeof statusColors]]">
                                         {{ ticket.status }}
                                     </span>
                                 </td>

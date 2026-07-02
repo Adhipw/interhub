@@ -97,7 +97,7 @@ const submit = () => {
   <DashboardLayout>
     <template #header>
       <div class="flex items-center">
-        <Link href="/hr/internships" class="mr-6 p-2.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-xl transition-all">
+        <Link href="/hr/internships" class="mr-6 p-2.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-xl transition-colors">
           <ArrowLeftIcon class="w-5 h-5" />
         </Link>
         <div>
@@ -128,18 +128,18 @@ const submit = () => {
 
             <div>
               <label class="block text-xs font-bold text-slate-400 font-medium mb-2">Bidang Industri</label>
-              <select v-model="form.industry_id" class="w-full rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-sm focus:ring-primary-500 focus:border-primary-500 h-[48px] transition-all px-4 font-semibold" required>
+              <select v-model="form.industry_id" class="w-full rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-sm focus:ring-primary-500 focus:border-primary-500 h-[48px] transition-colors px-4 font-semibold" required>
                 <option value="">Pilih Industri</option>
                 <option v-for="industry in industries" :key="industry.id" :value="industry.id">
                   {{ industry.name }}
                 </option>
               </select>
-              <div v-if="form.errors.industry_id" class="mt-1 text-[11px] font-bold text-red-500 ml-1">{{ Array.isArray(form.errors.industry_id) ? form.errors.industry_id[0] : form.errors.industry_id }}</div>
+              <div v-if="form.errors.industry_id" class="mt-1 text-xs font-bold text-red-500 ml-1">{{ Array.isArray(form.errors.industry_id) ? form.errors.industry_id[0] : form.errors.industry_id }}</div>
             </div>
 
             <div>
               <label class="block text-xs font-bold text-slate-400 font-medium mb-2">Tipe Magang</label>
-              <select v-model="form.type" class="w-full rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-sm focus:ring-primary-500 focus:border-primary-500 h-[48px] transition-all px-4 font-semibold">
+              <select v-model="form.type" class="w-full rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-sm focus:ring-primary-500 focus:border-primary-500 h-[48px] transition-colors px-4 font-semibold">
                 <option value="Office">Office (WFO)</option>
                 <option value="WFH">Remote (WFH)</option>
                 <option value="Hybrid">Hybrid</option>
@@ -153,7 +153,7 @@ const submit = () => {
                   <button 
                     type="button"
                     :disabled="detecting"
-                    class="text-[10px] font-bold text-primary-600 font-medium flex items-center gap-1.5 hover:text-primary-700 transition-colors disabled:opacity-50"
+                    class="text-xs font-bold text-primary-600 font-medium flex items-center gap-1.5 hover:text-primary-700 transition-colors disabled:opacity-50"
                     @click="detectLocation"
                   >
                     <MapPinIcon v-if="!detecting" class="w-3.5 h-3.5" />
@@ -173,7 +173,7 @@ const submit = () => {
               <div class="pt-2">
                 <button 
                   type="button" 
-                  class="text-[10px] font-bold text-slate-400 font-medium flex items-center gap-2 hover:text-slate-600 transition-colors"
+                  class="text-xs font-bold text-slate-400 font-medium flex items-center gap-2 hover:text-slate-600 transition-colors"
                   @click="showCoordinates = !showCoordinates"
                 >
                   <span>{{ showCoordinates ? '− Sembunyikan Koordinat' : '+ Tambahkan Koordinat Map (Opsional)' }}</span>
@@ -196,7 +196,7 @@ const submit = () => {
                     step="any"
                     :error="form.errors.longitude"
                   />
-                  <p class="col-span-full text-[10px] text-slate-400 italic">
+                  <p class="col-span-full text-xs text-slate-400 italic">
                     Koordinat membantu mahasiswa menemukan lowongan terdekat dari lokasi mereka. 
                     <a href="https://www.google.com/maps" target="_blank" class="text-primary-600 underline">Cari di Google Maps</a>
                   </p>
@@ -218,7 +218,7 @@ const submit = () => {
               <textarea 
                 v-model="form.description"
                 rows="6"
-                class="w-full rounded-2xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-sm focus:ring-primary-500 focus:border-primary-500 transition-all p-4"
+                class="w-full rounded-2xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-sm focus:ring-primary-500 focus:border-primary-500 transition-colors p-4"
                 :placeholder="t('hr.internships.desc_placeholder')"
                 required
               ></textarea>
@@ -231,7 +231,7 @@ const submit = () => {
                 <textarea 
                   v-model="form.requirements"
                   rows="4"
-                  class="w-full rounded-2xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-sm focus:ring-primary-500 focus:border-primary-500 transition-all p-4"
+                  class="w-full rounded-2xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-sm focus:ring-primary-500 focus:border-primary-500 transition-colors p-4"
                   :placeholder="t('hr.internships.req_placeholder')"
                 ></textarea>
               </div>
@@ -240,7 +240,7 @@ const submit = () => {
                 <textarea 
                   v-model="form.benefits"
                   rows="4"
-                  class="w-full rounded-2xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-sm focus:ring-primary-500 focus:border-primary-500 transition-all p-4"
+                  class="w-full rounded-2xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-sm focus:ring-primary-500 focus:border-primary-500 transition-colors p-4"
                   :placeholder="t('hr.internships.benefits_placeholder')"
                 ></textarea>
               </div>
@@ -280,7 +280,7 @@ const submit = () => {
             />
             <div>
               <label class="block text-xs font-bold text-slate-400 font-medium mb-2">{{ t('hr.internships.pub_status') }}</label>
-              <select v-model="form.status" class="w-full rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-sm focus:ring-primary-500 focus:border-primary-500 h-[42px] transition-all">
+              <select v-model="form.status" class="w-full rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-sm focus:ring-primary-500 focus:border-primary-500 h-[42px] transition-colors">
                 <option value="published">{{ t('hr.internships.pub_now') }}</option>
                 <option value="draft">{{ t('common.save_as_draft') }}</option>
               </select>
